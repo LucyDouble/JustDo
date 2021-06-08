@@ -1,6 +1,9 @@
 # Created by https://www.gitignore.io/api/git,java,maven,windows,eclipse
 # Edit at https://www.gitignore.io/?templates=git,java,maven,windows,eclipse
 
+.MF
+.properties
+
 ### Eclipse ###
 .metadata
 bin/
@@ -14,6 +17,7 @@ local.properties
 .loadpath
 .recommenders
 .target/
+.class
 
 # ignore properties file
 config.properties
