@@ -4,4 +4,12 @@
 	<settings>
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
+	<typeAliases>
+		<typeAlias type="com.kh.jd.account.dto.StudentDTO" alias="StudentDTO"/>
+		<typeAlias type="com.kh.jd.account.dto.TeacherDTO" alias="TeacherDTO"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mappers/account/studentMapper.xml"/>		
+		<mapper resource="mappers/account/teacherMapper.xml"/>		
+	</mappers>
 </configuration>
