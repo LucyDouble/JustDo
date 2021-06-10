@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="Member">
-	<resultMap type="MemberVO" id="MemberMap">
+<mapper namespace="Teacher">
+	<resultMap type="TeacherDTO" id="TeacherMap">
 		<result column="teacher_num" property="teacher_number"/>
 		<result column="teacher_id" property="id"/>
 		<result column="teacher_pwd" property="password"/>
@@ -11,9 +11,7 @@
 		<result column="teacher_email" property="email"/>
 	</resultMap>
 	
-<!-- 	<resultMap type="MemberVO" id="MemberCount">
-		<result column="count" property="count"/>
-	</resultMap> -->
+
 
 	<select id="loginCheck" resultType="int">
 		SELECT COUNT(*) FROM TEACHER 
