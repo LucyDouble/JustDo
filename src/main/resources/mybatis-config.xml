@@ -7,9 +7,15 @@
 	<typeAliases>
 		<typeAlias type="com.kh.jd.account.dto.StudentDTO" alias="StudentDTO"/>
 		<typeAlias type="com.kh.jd.account.dto.TeacherDTO" alias="TeacherDTO"/>
+		<typeAlias type="com.kh.jd.exam.Exam" alias="Exam"/>
+		<typeAlias type="com.kh.jd.work.Work" alias="Work"/>
+		<typeAlias type="com.kh.jd.attend.Attend" alias="Attend"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/account/studentMapper.xml"/>		
 		<mapper resource="mappers/account/teacherMapper.xml"/>		
+		<mapper resource="mappers/attend/attendMapper.xml"/>		
+		<mapper resource="mappers/exam/examMapper.xml"/>		
+		<mapper resource="mappers/work/workMapper.xml"/>		
 	</mappers>
 </configuration>
