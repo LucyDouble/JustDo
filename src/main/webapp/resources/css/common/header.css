@@ -6,16 +6,21 @@
 }
 
 .wrapper{
-	min-height: 100% ;
-    position: relative;
-    width: 1440px;
-    margin: 0 auto;
+	/* min-height: 300px ; */
+   /*  position: relative; */
+    width: 100%;
+   /*  margin: 0 auto; */
     padding-top: 50px;
+    padding-bottom: 320px;
 }
 
-header {
+/* header {
 	padding: 50px;
 	margin: 0px 100px 0px 100px;
+} */
+header {
+	width:100%;
+	
 }
 
 ul {
@@ -29,7 +34,7 @@ a {
 
 .header {
 	width: 800px;
-	height: 95px;
+	height: 200px;
 	background-color: white;
 }
 
@@ -43,9 +48,10 @@ a {
 #top_menu {
 	position: relative;
 	float: right;
-	top: 40px;
+	top: 20px;
 	left: 10px;
 	font-weight: 700;
+	font-size:13px;
 }
 
 #top_menu>a {
@@ -59,7 +65,7 @@ a {
 nav {
 	position: relative;
 	float: left;
-	top: 120px;
+	top: 115px;
 	font-size: 18px;
 }
 

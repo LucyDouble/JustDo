@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <meta charset="UTF-8">
-<link rel="styl	esheet" href="C:\Users\khmin\OneDrive\바탕 화면\KH 교육\파이널PJ\header.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/common/header.css"/>"> 
 <header id="header">
-	<a href=""><img class="logo"
-		src="C:\Users\khmin\OneDrive\바탕 화면\KH 교육\파이널PJ\logo.png"></a>
+	<a href=""><img class="logo" src="resources/images/logo.png"></a>
 
 	<div id="top_menu">
 		<a href="#">이용안내</a> <a href="#">로그인</a> <a href="#">회원가입</a>
