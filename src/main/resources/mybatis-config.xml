@@ -10,12 +10,14 @@
 		<typeAlias type="com.kh.jd.exam.Exam" alias="Exam"/>
 		<typeAlias type="com.kh.jd.work.Work" alias="Work"/>
 		<typeAlias type="com.kh.jd.attend.Attend" alias="Attend"/>
+		<typeAlias type="com.kh.jd.lecture.Lecture" alias="Lecture"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/account/studentMapper.xml"/>		
 		<mapper resource="mappers/account/teacherMapper.xml"/>		
 		<mapper resource="mappers/attend/attendMapper.xml"/>		
 		<mapper resource="mappers/exam/examMapper.xml"/>		
-		<mapper resource="mappers/work/workMapper.xml"/>		
+		<mapper resource="mappers/work/workMapper.xml"/>
+		<mapper resource="mappers/lecture/lectureMapper.xml"/>		
 	</mappers>
 </configuration>

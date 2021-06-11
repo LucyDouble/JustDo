@@ -1,0 +1,98 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<section>
+		<article>
+			<ul>
+				<li>수강목록</li>
+				<li>수강신청</li>
+			</ul>
+		</article>
+		<article>
+			<form>
+				<table>
+					<thead>
+							<tr>
+								<th>NO</th>
+								<th>분반</th>
+								<th>강의명</th>
+								<th>수업시간</th>
+								<th>교직원</th>
+								<th>인원제한</th>
+								<th>수강인원</th>
+								<th>접수현황</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>32</td>
+								<td>아아아아아아아아</td>
+								<td>00:00:00 ~ 00:00:00</td>
+								<td>아아아</td>
+								<td>30</td>
+								<td>0</td>
+								<td><button>수강신청</button></td>
+							</tr>
+						</tbody>					
+				</table>
+			</form>
+		</article>
+		<article>
+			<p>캘린더</p>
+			<p>6월강사일정</p>
+		</article>
+		<article>
+			<p>안내문</p>
+			<p>ㅇㅁㄴㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ</p>
+		</article>
+		
+		<article>
+			<form>
+				<table>
+					<thead>
+							<tr>
+								<th>NO</th>
+								<th>분반</th>
+								<th>강의명</th>
+								<th>수업시간</th>
+								<th>교직원</th>
+								<th>인원제한</th>
+								<th>수강인원</th>
+								<th>접수현황</th>
+								<th>강의계획서</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>32</td>
+								<td>아아아아아아아아</td>
+								<td>00:00:00 ~ 00:00:00</td>
+								<td>아아아</td>
+								<td>30</td>
+								<td>0</td>
+								<td><button>신청</button></td>
+								<td><button>보기</button></td>
+							</tr>
+						</tbody>					
+				</table>
+			</form>
+		</article>
+		<article>
+			<p>캘린더</p>
+			<p>6월강사일정</p>
+		</article>
+		<article>
+			<p>안내문</p>
+			<p>ㅇㅁㄴㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ</p>
+		</article>
+	</section>	
+</body>
+</html>
