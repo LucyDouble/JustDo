@@ -17,6 +17,7 @@ local.properties
 .recommenders
 .target/
 .class
+.component
 
 # ignore properties file
 config.properties
