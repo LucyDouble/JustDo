@@ -24,12 +24,12 @@
     <br>
 <form action="" class="addForm">
     <div class="form-group">
-        <label class="label_sub" for="subject">&nbsp;&nbsp;제목</label>
+        <label class="an_label" for="subject">&nbsp;&nbsp;제목</label>
         <input type="text" class="form-control" id="subject" name="subject" placeholder="제목을 입력하세요.">
     </div>
     <br>
     <div id="editor" class="form-group">
-      <label class="label_cont" for="content">&nbsp;&nbsp;내용</label>
+      <label class="an_label" for="content">&nbsp;&nbsp;내용</label>
       <%-- <textarea class="form-control2" id="content" name="content" rows="10"></textarea>
       <script src="${pageContext.request.contextPath}/resources/js/ckeditor.js"></script>
     	<script>
@@ -48,8 +48,8 @@
   </script>
     </div>
     <br>
-    <button type="submit" class="button"><span>목록</span></button>
-    <button type="submit" class="button"><span>등록</span></button>
+    <button type="submit" class="button" onclick="location.href='listNotice'"><span>목록</span></button>
+    <button type="submit" class="button" onclick="location.href='listNotice'"><span>등록</span></button>
   </form>
 </div>
 </body>

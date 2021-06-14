@@ -1,20 +1,20 @@
-package com.kh.jd.notice;
+package com.kh.jd.counseling;
 
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
-public class NoticeController {
 
-	@RequestMapping(value = "/listNotice", method = RequestMethod.GET)
-	public String listNotice(Locale locale, ModelAndView mv) {
+@Controller
+public class CounselingController {
+
+	@RequestMapping(value = "/listCS", method = RequestMethod.GET)
+	public String listCS(Locale locale, ModelAndView mv) {
 				
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -22,12 +22,12 @@ public class NoticeController {
 		String formattedDate = dateFormat.format(date);
 		
 		mv.addObject("serverTime", formattedDate );
-		
-		return "notice/listNotice";
+		/* counseling */
+		return "counseling/listCS";
 	}
 	
-	@RequestMapping(value = "/viewNotice", method = RequestMethod.GET)
-	public String viewNotice(Locale locale, ModelAndView mv) {
+	@RequestMapping(value = "/viewCS", method = RequestMethod.GET)
+	public String viewCS(Locale locale, ModelAndView mv) {
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -36,11 +36,11 @@ public class NoticeController {
 		
 		mv.addObject("serverTime", formattedDate );
 		
-		return "notice/viewNotice";
+		return "counseling/viewCS";
 	}
 	
-	@RequestMapping(value = "/addNotice", method = RequestMethod.GET)
-	public String addNotice(Locale locale, ModelAndView mv) {
+	@RequestMapping(value = "/addCS", method = RequestMethod.GET)
+	public String addCS(Locale locale, ModelAndView mv) {
 				
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -49,11 +49,11 @@ public class NoticeController {
 		
 		mv.addObject("serverTime", formattedDate );
 		
-		return "notice/addNotice";
+		return "counseling/addCS";
 	}
 		
-	@RequestMapping(value = "/editNotice", method = RequestMethod.GET)
-	public String editNotice(Locale locale, ModelAndView mv) {
+	@RequestMapping(value = "/editCS", method = RequestMethod.GET)
+	public String editCS(Locale locale, ModelAndView mv) {
 				
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -62,11 +62,11 @@ public class NoticeController {
 		
 		mv.addObject("serverTime", formattedDate );
 		
-		return "notice/editNotice";
+		return "counseling/editCS";
 	}
 		
-	@RequestMapping(value = "/removeNotice", method = RequestMethod.GET)
-	public String removeNotice(Locale locale, ModelAndView mv) {
+	@RequestMapping(value = "/removeCS", method = RequestMethod.GET)
+	public String removeCS(Locale locale, ModelAndView mv) {
 				
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -75,7 +75,7 @@ public class NoticeController {
 		
 		mv.addObject("serverTime", formattedDate );
 		
-		return "notice/removeNotice";
+		return "counseling/removeCS";
 	}
 	
 	
