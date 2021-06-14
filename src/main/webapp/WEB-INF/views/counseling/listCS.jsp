@@ -11,11 +11,31 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
+<style>
+	.search_bar{
+	 padding: 3px 0;
+     outline: 1;
+     border: 1px solid transparent;
+     border-bottom: 1px solid #575756;
+     border-radius: 0;
+}
+
+</style>
 <body>
 <div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div class="lc_page">
     <p class="lc_title">상담신청 게시판</p>
     <br>
+    
+    <!-- 서치바 -->
+	<div class="search">
+			<form class="search_form" action="#" method="get">
+				<input class="search_bar" type="text" name="keyword" placeholder="이름으로 검색">
+				<button class="search_btn" type="submit">검색</button>
+			</form>
+	</div>
+	
+    
     <form id="lc_form">
     <table class="table">
         <thead>

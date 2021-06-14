@@ -18,11 +18,6 @@ ul {
 	list-style: none;
 }
 
-.top_menu>a {
-	text-decoration: none;
-	color: #08182B;
-}
-
 #header {
     width: 100%; 
     top: 0; 
