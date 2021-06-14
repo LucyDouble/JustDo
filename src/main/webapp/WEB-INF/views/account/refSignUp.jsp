@@ -99,7 +99,8 @@
 
 
 
-    <script>
+    <script type = "text/javascript">
+    $(document).ready(function(e)){
         // 아이디 유효성 검사(1 = 중복 / 0 != 중복)
         $("#student_id").blur(function () {
             // id = "id_reg" / name = "studentId"
@@ -152,8 +153,10 @@
                     error: function () {
                         console.log("실패");
                     }
+            }
                 });
         });
+        
     </script>
 </body>
 

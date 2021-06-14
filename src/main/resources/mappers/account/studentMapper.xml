@@ -14,7 +14,7 @@
 			SELECT count(*) FROM STUDENT
 			WHERE ID = #{student_id} AND PASSWORD = #{student_password}
 	</select>
-	<select id="idCheck" resultType="int">
+	<select id="idCheck"  resultType="int">
 			SELECT count(*) FROM STUDENT
 			WHERE ID = #{student_id}
 	</select>

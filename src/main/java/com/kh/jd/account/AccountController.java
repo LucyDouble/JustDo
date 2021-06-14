@@ -24,12 +24,12 @@ public class AccountController {
 		service.signUp(dto);	
 		return "login";
 	}
-@RequestMapping(value="idCheck", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+@RequestMapping(value="/Student/idCheck", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 @ResponseBody
 	public String idCheck(HttpServletRequest request) {
-	String student_id = request.getParameter("student_id");
-	int result = service.idCheck(student_id);
-	return Integer.toString(result);
+		String student_id = request.getParameter("student_id");
+		int result=service.idCheck(student_id);
+		return Integer.toString(result);
 }
 	
 }
