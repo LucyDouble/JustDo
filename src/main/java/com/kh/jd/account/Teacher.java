@@ -1,6 +1,6 @@
 package com.kh.jd.account;
 
-public class TeacherDTO {
+public class Teacher {
 private int teacher_number;
 private String teacher_id;
 private String teacher_password;

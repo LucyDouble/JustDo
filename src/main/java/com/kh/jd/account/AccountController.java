@@ -20,7 +20,7 @@ public class AccountController {
 		return "signUp";
 	}
 		@RequestMapping(value = "/signUp.do")
-		public String signUp(StudentDTO dto) {
+		public String signUp(Student dto) {
 		service.signUp(dto);	
 		return "login";
 	}

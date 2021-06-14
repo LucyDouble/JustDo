@@ -17,7 +17,7 @@ public class TeacherDAO {
 		return result;
 	}
 //회원 가입
-	public void signup(TeacherDTO dto) {
+	public void signup(Teacher dto) {
 		System.out.println("signup");
 		sqlsession.insert("teacherMapper.signup", dto);
 	}

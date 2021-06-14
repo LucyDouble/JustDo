@@ -16,7 +16,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public void signUp(StudentDTO dto) {
+	public void signUp(Student dto) {
 		// TODO Auto-generated method stub
 		
 	}

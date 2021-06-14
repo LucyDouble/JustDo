@@ -17,7 +17,7 @@ public class StudentDAO {
 		return result;
 	}
 	// 회원 가입
-	public void signUp(StudentDTO dto) {
+	public void signUp(Student dto) {
 		sqlSession.insert("studentMapper.signUp", dto);
 		
 	}
