@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Teacher">
-	<resultMap type="TeacherDTO" id="TeacherMap">
+	<resultMap type="Teacher" id="TeacherMap">
 		<result column="teacher_num" property="teacher_number"/>
 		<result column="teacher_id" property="id"/>
 		<result column="teacher_pwd" property="password"/>
