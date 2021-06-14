@@ -1,4 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Lecture">
+	<resultMap type="Lecture" id="lectureResult">
+		<id column="lecture_no" property="lecture_no"/>
+		<result column="teacher_number" property="teacher_number"/>
+		<result column="lecture_class" property="lecture_class"/>
+		<result column="lecture_title" property="lecture_title"/>
+		<result column="lecture_limit" property="lecture_limit"/>
+		<result column="lecture_major" property="lecture_major"/>
+		<result column="lecture_day" property="lecture_day"/>
+		<result column="lecture_reference" property="lecture_reference"/>
+		<result column="lecture_target" property="lecture_target"/>
+		<result column="lecture_start" property="lecture_start"/>
+		<result column="lecture_end" property="lecture_end"/>
+		<result column="lecture_state" property="lecture_state"/>
+		<result column="lecture_starttime" property="lecture_starttime"/>
+		<result column="lecture_endtime" property="lecture_endtime"/>
+	</resultMap>
+	
+	<select id="listLecture" resultType="arraylist" resultMap="lectureResult">
+		SELECT * FROM LECTURE
+	</select>
+	
+	<insert id="addLecture" parameterType="Lecture" statementType="PREPARED">
+		INSERT INTO LECTURE VALUES(
+			SEQ_LECTURE.NEXTVAL, #{teacher_number}, #{lecture_class}, #{lecture_title}, #{lecture_limit},
+			#{lecture_major}, #{lecture_day}, #{lecture_reference}, #{lecture_target}, #{lecture_start},
+			#{lecture_end}, 0, #{lecture_starttime}, #{lecture_endtime}
+		) 
+	</insert>
 </mapper>

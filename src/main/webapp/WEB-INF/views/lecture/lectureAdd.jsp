@@ -7,6 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <style>
 @font-face {
@@ -22,61 +23,120 @@
     }
 </style>
 <body>
-<div>
-	<section>
-		<div class="cont">
-			<article class="content1">
-				<h2>강의등록</h2>
-			</article>
-		</div>
-		<div>
-			<article>
-				<form>
+
+
+	
+		
+				
+		
+		
+	
+			
+				<form id="frmAdd" method="POST" action="lectureAdd">
 					<table class="table">
 							<tr>
 								<th>NO</th>
-								<td>3434</td>
+								<td><input type="hidden" name="teacher_number" value="66"></td>
 								<th>분반</th>
-								<td>4545</td>
+								<td><input type="text" name="lecture_class"></td>
 							</tr>
 							<tr>
 								<th>강의명</th>
-								<td>아ㅣ아아아ㅏㅇ</td>
+								<td><input type="text" name="lecture_title"></td>
 								<th>전공</th>
-								<td>컴공과</td>
+								<td><input type="text" name="lecture_major"></td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<th>교직원</th>
-								<td>아아앙</td>
+								<td><input type="text" value=""></td>
 								<th>E-mail</th>
-								<td>51@aa.com</td>
+								<td><input type="text" value=""></td>
 							</tr>
 							<tr>
-								<th>수업시간</th>
-								<td>00:00:00 ~ 00:00:00</td>
 								<th>강의시간</th>
-								<td>월,화,수</td>
+								<td><input type="time" name="lecture_starttime"> ~ <input type="time" name="lecture_endtime"></td>
+								<th>강의날짜</th>
+								<td><input type="text" name="lecture_day"></td>
 							</tr>
 							<tr>
 								<th>제한인원</th>
-								<td>30</td>
-								<th>&nbsp;&nbsp;</th>
-								<td>&nbsp;&nbsp;</td>
+								<td><input type="text" name="lecture_limit"></td>
+								<th>강의기간</th>
+								<td><input type="date" name="lecture_start"> ~ <input type="date" name="lecture_end"></td>
 							</tr>
 							<tr>
 								<th>교과목개요 및 학습목표</th>
-								<td colspan="3">sdaasdasdasdasdasdasdasdasdasd</td>
+								<td colspan="3"><input type="text" name="lecture_target"></td>
 							</tr>
 							<tr>
 								<th>교재 및 참고문헌</th>
-								<td colspan="3">asdasdasdasdasdasdasdasdasd</td>
+								<td colspan="3"><input type="text" name="lecture_reference"></td>
+							</tr>-->
+							<tr>
+							<td>
+								<!-- <input type="button" value="등록" id="btnAdd"> -->
+								<input type="submit" value="등록">
+							</td>	
 							</tr>
 					</table>
-					<input type="button" value="등록">
 				</form>
-			</article>
-		</div>
-	</section>
-</div>
+					<form method="POST" action="lectureAdd">
+							
+							<!-- 	<input type="hidden" name="teacher_number" value="66"> -->
+							
+						<!-- 		<input type="text" name="lecture_class">
+							
+								<input type="text" name="lecture_title">
+								
+								<input type="text" name="lecture_major"> -->
+							
+							<!-- <tr>
+								<th>교직원</th>
+								<td><input type="text" value=""></td>
+								<th>E-mail</th>
+								<td><input type="text" value=""></td>
+							</tr>
+							<tr>
+								<th>강의시간</th>
+								<td><input type="time" name="lecture_starttime"> ~ <input type="time" name="lecture_endtime"></td>
+								<th>강의날짜</th>
+								<td><input type="text" name="lecture_day"></td>
+							</tr>
+							<tr>
+								<th>제한인원</th>
+								<td><input type="text" name="lecture_limit"></td>
+								<th>강의기간</th>
+								<td><input type="date" name="lecture_start"> ~ <input type="date" name="lecture_end"></td>
+							</tr>
+							<tr>
+								<th>교과목개요 및 학습목표</th>
+								<td colspan="3"><input type="text" name="lecture_target"></td>
+							</tr>
+							<tr>
+								<th>교재 및 참고문헌</th>
+								<td colspan="3"><input type="text" name="lecture_reference"></td>
+							</tr>-->
+							
+								<!-- <input type="button" value="등록" id="btnAdd"> -->
+								
+						
+						<input type="submit" value="등록">
+					</form>
+			
+		
+	
+
+<script>
+	$("#btnAdd").click(function(){
+		var frm = document.getElementById("frmAdd");
+		console.log("1번");
+		frm.action="lectureAdd";
+		console.log("2번");
+		frm.method="POST";
+		console.log("3번");
+		frm.submit();
+		console.log("4번");
+	});
+</script>
 </body>
 </html>
