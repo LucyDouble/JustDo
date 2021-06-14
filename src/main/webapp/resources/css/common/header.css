@@ -18,7 +18,7 @@ ul {
 	list-style: none;
 }
 
-a {
+.top_menu>a {
 	text-decoration: none;
 	color: #08182B;
 }
@@ -45,6 +45,8 @@ a {
 
 #top_menu>a {
 	padding-right: 20px;
+	text-decoration: none;
+	color: #08182B;
 }
 
 #top_menu>a:hover {
@@ -70,6 +72,8 @@ nav li {
 
 nav li a {
 	font-weight: 700;
+	color: #08182B;
+	text-decoration: none;
 	color: #08182B;
 }
 
