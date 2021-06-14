@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="work">
+
+
+	<select id="listWork" resultType="Work">
+		<![CDATA[ 
+			SELECT w.*,l.lecture_class,l.lecture_title,to_char(w.work_start,'yyyymmdd') as startday,to_char(w.work_end,'yyyymmdd') as endday 
+			FROM WORKS w join lecture l 
+			on w.lecture_no = l.lecture_no 
+			order by work_no desc 
+		]]>
+	</select>
+	<select id="getlistCount" resultType="int">
+		SELECT COUNT(*) FROM works
+	</select>
 </mapper>

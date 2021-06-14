@@ -19,27 +19,30 @@
         <thead>
             <tr>
                 
-                <th class="cont2">&nbsp;&nbsp;제목 테스트 입니다</th>
+                <th class="vn_cont">&nbsp;&nbsp;제목 테스트 입니다</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td class="cont2">&nbsp;&nbsp;운영자</td>
+                <td class="vn_cont">&nbsp;&nbsp;운영자</td>
             </tr>
             <tr>
-                <td class="cont2">&nbsp;&nbsp;2021-06-10</td>
+                <td class="vn_cont">&nbsp;&nbsp;2021-06-10</td>
             </tr>
             <tr class="cont3">
-                <td class="cont2">&nbsp;&nbsp;내용박스</td>
+                <td class="vn_cont">&nbsp;&nbsp;내용박스</td>
             </tr>
 			 <tr>
-                <td class="cont2">&nbsp;&nbsp;댓글박스</td>
+                <td class="vn_cont">&nbsp;&nbsp;댓글박스</td>
             </tr>
         </tbody>
     </table>
+    <button type="submit" class="button" onclick="location.href='listNotice'"><span>목록</span></button>
+    <button type="submit" class="button" onclick="location.href='editNotice'"><span>수정</span></button>
     <button type="submit" class="button"><span>삭제</span></button>
-    <button type="submit" class="button"><span>수정</span></button>
-    <button type="submit" class="button"><span>목록</span></button>
     </div>
+    <script>
+    </script>
 </body>
+    <%-- <jsp:include page="../common/footer.jsp"></jsp:include> --%>
 </html>

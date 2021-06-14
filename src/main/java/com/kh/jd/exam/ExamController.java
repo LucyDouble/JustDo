@@ -14,8 +14,11 @@ public class ExamController {
 	
 	@RequestMapping(value = "/listExam", method = RequestMethod.GET)
 	public String listExam(Locale locale, Model model) {
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
-	
+		String formattedDate = dateFormat.format(date);
+		model.addAttribute("time", formattedDate);
 		return "exam/listExam";
 	}
 }

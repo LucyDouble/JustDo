@@ -17,10 +17,10 @@
 	<div class="background">
 		<div class="popup">
 			<div class="cd-popup-container">
-				<p class="rn_p">게시글을 정말 삭제 하시겠습니까?</p>
+				<p class="rc_p">상담신청을 정말 삭제 하시겠습니까?</p>
 				<ul id="close" class="cd-buttons">
-					<li class="rn_li"><a class="rn_a" href="#0">삭제</a></li>
-					<li class="rn_li"><a class="rn_a" href="#0">취소</a></li>
+					<li class="rc_li"><a class="rc_a" href="#0">삭제</a></li>
+					<li class="rc_li"><a class="rc_a" href="#0">취소</a></li>
 				</ul>
 			</div>
 		</div>
