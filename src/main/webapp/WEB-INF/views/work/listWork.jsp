@@ -42,10 +42,14 @@ a {
 						<td class="cont2">${i.work_subject }</td>
 						<td>${i.lecture_class }</td>
 						<td>${i.work_start }~ ${i.work_end }</td>
-						<td><c:if test="${time<i.startday}">진행전</c:if> <c:if
-								test="${time>=i.startday && time<=i.endday}">진행중</c:if> <c:if
-								test="${time>i.endday}">완료</c:if></td>
-						<td><c:if test="${time>=i.startday}">보러가기</c:if></td>
+						<td>
+							<c:if test="${time<i.startday}">진행전</c:if> 
+							<c:if test="${time>=i.startday && time<=i.endday}">진행중</c:if> 
+							<c:if test="${time>i.endday}">완료</c:if>
+						</td>
+						<td>
+							<c:if test="${time>=i.startday}">보러가기</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 

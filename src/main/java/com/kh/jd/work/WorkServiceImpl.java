@@ -33,4 +33,9 @@ public class WorkServiceImpl implements WorkService{
 		return workDao.lecturechk(teacher_number);
 	}
 
+	@Override
+	public List<Work> classCheck(int lecture_no) {
+		return workDao.classCheck(lecture_no);
+	}
+
 }

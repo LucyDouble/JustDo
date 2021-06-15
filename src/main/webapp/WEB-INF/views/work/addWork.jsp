@@ -23,10 +23,9 @@
     <p class="an_title">과제 등록</p>
     <br>
 <form action="addWork" class="addForm" method="POST">
-	<input type="hidden" name="lecture_no">
     <div class="form-group">
         <label class="an_label" for="work_subject">&nbsp;&nbsp;제목</label>
-        <input type="text" class="form-control" id="subject" name="subject" placeholder="제목을 입력하세요.">
+        <input type="text" class="form-control" id="subject" name="work_subject" placeholder="제목을 입력하세요.">
     </div>
     <br>
     <div>
@@ -38,19 +37,15 @@
     		</c:forEach>
     	</select>
     </div>
-    <div>
-    	class 선택:
-    	<select name="work_class" id="work_class">
-    		<option value="back" >class를 선택하세요</option>
-    		<c:forEach items="${lecturechk }" var="i">
-    		<option value="${i.lecture_no }">${i.lecture_title }</option>
-    		</c:forEach>
-    	</select>
-    </div>
+          과제 시작
+	<input type="date" name="work_start" > 
+	<br>
+	과제 끝
+	<input type="date" name="work_end">
     <br>
     <div id="editor" class="form-group">
       <label class="an_label" for="work_content">&nbsp;&nbsp;내용</label>
-    	<textarea cols="10" id="work_content" name="work_content" rows="10"></textarea>
+    <textarea cols="10" id="work_content" name="work_content" rows="10"></textarea>
     	
     	
    <script>
@@ -59,6 +54,23 @@
       editorplaceholder: '내용을 입력하세요.'
     });
 
+    
+    
+/*     $("#student_id").blur(function() {
+		var lecture_no = $("#lecture_no").val();
+		$.ajax({
+			url:"addWork"
+			,data:{
+				lecture_no:lecture_no
+			}
+		,type : "post"
+	    ,success : function(data){	
+			
+		});
+				
+				
+		} */
+    
   </script>
     </div>
     <br>

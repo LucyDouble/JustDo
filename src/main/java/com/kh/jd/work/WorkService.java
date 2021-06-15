@@ -9,4 +9,5 @@ public interface WorkService {
 	public int getListCount();
 	public int addWork(Work vo) ;
 	public List<Lecture> lecturechk(int teacher_number);
+	public List<Work> classCheck(int lecture_no) ;
 }

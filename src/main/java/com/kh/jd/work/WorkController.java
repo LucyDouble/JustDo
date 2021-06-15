@@ -1,5 +1,7 @@
 package com.kh.jd.work;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jd.lecture.Lecture;
@@ -24,7 +28,7 @@ public class WorkController {
 
 	@Autowired
 	private WorkService workService;
-	public static final int LIMIT = 2;
+	public static final int LIMIT = 10;
 	public static final int pageBlock = 5;
 	@RequestMapping(value = "/listWork", method = RequestMethod.GET)
 	public ModelAndView listExam(ModelAndView mv, @RequestParam(name = "page", defaultValue = "1") int page) {
@@ -77,12 +81,23 @@ public class WorkController {
 		return "work/addWork";
 	}
 	@RequestMapping(value = "/addWork", method = RequestMethod.POST)
-	public ModelAndView addWork(ModelAndView mv,Work vo,@RequestParam(name = "teacher_number") int teacher_number) {
-		System.out.println("들어옴");
-		
+	public String addWork(ModelAndView mv,Work vo)  {
+		System.out.println("insert들어옴");
+		System.out.println("ddd"+vo);
+//		System.out.println("ddd"+teacher_number);
+		System.out.println(vo.getWork_start());
 		workService.addWork(vo);
-		
-		mv.setViewName("work/listWork");
-		return mv;
+		return "redirect:/listWork";
 	}
+	@RequestMapping(value = "classCheck", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public void classCheck(@RequestParam(name = "lecture_no") int lecture_no
+			,HttpServletResponse response) throws IOException {
+		PrintWriter out = response.getWriter();
+		List<Work> list = workService.classCheck(lecture_no);
+		out.println(list);
+		out.flush();
+		out.close();
+	}
+	
 }
