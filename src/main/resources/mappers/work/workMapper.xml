@@ -5,13 +5,26 @@
 
 	<select id="listWork" resultType="Work">
 		<![CDATA[ 
-			SELECT w.*,l.lecture_class,l.lecture_title,to_char(w.work_start,'yyyymmdd') as startday,to_char(w.work_end,'yyyymmdd') as endday 
-			FROM WORKS w join lecture l 
-			on w.lecture_no = l.lecture_no 
-			order by work_no desc 
+			select * from (select rownum as rnum,w.*,l.lectureclass_class as lecture_class 
+			,l.lecture_title,to_char(w.work_start,'yyyymmdd') as startday
+			,to_char(w.work_end,'yyyymmdd') as endday  
+			from (SELECT * FROM WORKS order by work_no desc) w 
+			join (select * from lecture join lectureclass using(lecture_no)) l 
+			on w.lecture_no = l.lecture_no )
 		]]>
 	</select>
 	<select id="getlistCount" resultType="int">
 		SELECT COUNT(*) FROM works
+	</select>
+	<insert id="addWork" parameterType="Work" >
+		insert into works values(
+		SEQ_work.nextval,#{lecture_no},#{work_subject}
+		,to_date(#{work_start},'yyyy-mm-dd')
+		,to_date(#{work_end},'yyyy-mm-dd')
+		,#{work_content},#{work_answer}
+		)
+	</insert>
+	<select id="lecturechk" resultType="lecture" parameterType="int">
+		select lecture_no,lecture_class,lecture_title from lecture where teacher_number = #{teacher_number}
 	</select>
 </mapper>

@@ -1,7 +1,9 @@
 package com.kh.jd.work;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.kh.jd.lecture.Lecture;
 
 @Controller
 public class WorkController {
@@ -61,6 +65,23 @@ public class WorkController {
 		System.out.println(listWork);
 
 		mv.addObject("listWork", listWork);
+		mv.setViewName("work/listWork");
+		return mv;
+	}
+	@RequestMapping(value = "/addWorkFrom", method = RequestMethod.POST)
+	public String addWorkFrom(Model model,@RequestParam(name = "teacher_number") int teacher_number) {
+		System.out.println("들어옴");
+		List<Lecture> list = workService.lecturechk(teacher_number);
+		System.out.println(list);
+		model.addAttribute("lecturechk", list);
+		return "work/addWork";
+	}
+	@RequestMapping(value = "/addWork", method = RequestMethod.POST)
+	public ModelAndView addWork(ModelAndView mv,Work vo,@RequestParam(name = "teacher_number") int teacher_number) {
+		System.out.println("들어옴");
+		
+		workService.addWork(vo);
+		
 		mv.setViewName("work/listWork");
 		return mv;
 	}

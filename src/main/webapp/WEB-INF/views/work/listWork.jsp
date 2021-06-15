@@ -9,6 +9,12 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
+<style>
+a {
+	text-decoration: none;
+	color: #08182B;
+}
+</style>
 </head>
 <body>
 	
@@ -45,11 +51,17 @@
 
 			</tbody>
 		</table>
-		<form>
+		<form action="addWorkFrom" method="post">
+			<input type="hidden" name="teacher_number" value="100001">
 			<button class="button">
 				<span>과제등록</span>
 			</button>
 		</form>
+
+
+	<br><br><br>
+
+
 
 	<c:if test="${startPage != 1 }">
 	   <a

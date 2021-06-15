@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.jd.lecture.Lecture;
+
 @Repository("workDao")
 public class WorkDao {
 
@@ -23,5 +25,11 @@ public class WorkDao {
 
 	public int getListCount() {
 		return sqlSession.selectOne("work.getlistCount");
+	}
+	public int addWork(Work vo) {
+		return sqlSession.insert("work.addWork",vo);
+	}
+	public List<Lecture> lecturechk(int teacher_number){
+		return sqlSession.selectList("work.lecturechk",teacher_number);
 	}
 }

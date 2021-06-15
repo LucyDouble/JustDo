@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.jd.lecture.Lecture;
+
 @Service("workService")
 public class WorkServiceImpl implements WorkService{
 
@@ -19,6 +21,16 @@ public class WorkServiceImpl implements WorkService{
 	@Override
 	public int getListCount() {
 		return workDao.getListCount();
+	}
+
+	@Override
+	public int addWork(Work vo) {
+		return workDao.addWork(vo);
+	}
+
+	@Override
+	public List<Lecture> lecturechk(int teacher_number) {
+		return workDao.lecturechk(teacher_number);
 	}
 
 }
