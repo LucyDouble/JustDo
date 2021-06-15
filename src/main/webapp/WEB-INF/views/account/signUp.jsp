@@ -5,7 +5,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 가입</title>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 .form {
@@ -24,14 +24,8 @@ label {
 
 <body>
 
+	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<form method="POST" class="form">
-		<c:if test="${!empty whatid}">
-			<input type="hidden" name="whatid" value="${whatid}" />
-		</c:if>
-		<!-- 세션에 저장한 소셜 구분을 가져옴 -->
-		<c:if test="${!empty divide}">
-			<input type="hidden" name="divide" value="${divide}" />
-		</c:if>
 		<!-- 아이디 -->
 		<div class="form-group">
 			<label for="student_id">아이디</label> <br> <input type="text"
@@ -89,8 +83,9 @@ label {
 			<div class="check_font" id="phone_check"></div>
 		</div>
 		<div class="form-group">
-			<input type="radio" name="select" checked="checked" value="student">수강생
-			<input type="radio" name="select" value="teacher">교직원
+			<label for="category">구분</label><br> <input type="radio"
+				name="select" checked="checked" value="student">수강생 <input
+				type="radio" name="select" value="teacher">교직원
 		</div>
 		<div class="reg_button">
 
@@ -113,7 +108,7 @@ label {
 		//아이디 정규식
 		var idJ = /^[A-Za-z0-9]{6,12}$/;
 		// 비밀번호 정규식
-		var pwJ = /^[A-Za-z0-9]{4,12}$/;
+		var pwJ = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/;
 		// 이름 정규식
 		var nameJ = /^[가-힣]{2,6}$/;
 		// 이메일 검사 정규식
@@ -122,51 +117,102 @@ label {
 		var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 
 		// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
-		$("#student_id").blur(function() {
-			var student_id = $('#student_id').val();
-			$.ajax({
-				url :  '${pageContext.request.contextPath}/Student/idCheck?student_id='+ student_id,
-				type : 'GET',
-				success : function(data) {
-					console.log("1 = 중복o / 0 = 중복x : " + data);
-					console.log(student_id);
+		$("#student_id")
+				.blur(
+						function() {
+							var student_id = $('#student_id').val();
+							$
+									.ajax({
+										url : '${pageContext.request.contextPath}/Student/idCheck?student_id='
+												+ student_id,
+										type : 'GET',
+										success : function(data) {
+											console.log("1 = 중복o / 0 = 중복x : "
+													+ data);
+											console.log(student_id);
 
-					if (data == 1) {
-						// 1 : 아이디가 중복되는 문구
-						$("#id_check").text("사용중인 아이디입니다 :(");
-						$("#id_check").css("color", "red");
-						$("#id_check").css("font-size", "5px");
-						$("#reg_submit").attr("disabled", true);
-					} else {
+											if (data == 1) {
+												// 1 : 아이디가 중복되는 문구
+												$("#id_check").text(
+														"사용중인 아이디입니다 :(");
+												$("#id_check").css("color",
+														"red");
+												$("#id_check").css("font-size",
+														"5px");
+												$("#reg_submit").attr(
+														"disabled", true);
+											} else {
 
-						if (idJ.test(student_id)) {
-							// 0 : 아이디 길이 / 문자열 검사
-							$("#id_check").text("사용 가능한 아이디입니다 :)");
-							$("#id_check").css("color", "blue");
-							$("#id_check").css("font-size", "5px");
-							$("#reg_submit").attr("disabled", false);
+												if (idJ.test(student_id)) {
+													// 0 : 아이디 길이 / 문자열 검사
+													$("#id_check").text(
+															"사용 가능한 아이디입니다 :)");
+													$("#id_check").css("color",
+															"blue");
+													$("#id_check").css(
+															"font-size", "5px");
+													$("#reg_submit").attr(
+															"disabled", false);
 
-						} else if (student_id == "") {
+												} else if (student_id == "") {
 
-							$('#id_check').text('아이디를 입력해주세요');
-							$('#id_check').css('color', 'red');
-							$("#id_check").css("font-size", "5px");
-							$("#reg_submit").attr("disabled", true);
+													$('#id_check').text(
+															'아이디를 입력해주세요');
+													$('#id_check').css('color',
+															'red');
+													$("#id_check").css(
+															"font-size", "5px");
+													$("#reg_submit").attr(
+															"disabled", true);
 
-						} else {
+												} else {
 
-							$('#id_check').text("아이디는 영어와 숫자 6~12자리만 가능합니다");
-							$('#id_check').css('color', 'red');
-							$('#id_check').css('font-size', '5px')
-							$("#reg_submit").attr("disabled", true);
-						}
+													$('#id_check')
+															.text(
+																	"아이디는 영어와 숫자 6~12자리만 가능합니다.");
+													$('#id_check').css('color',
+															'red');
+													$('#id_check').css(
+															'font-size', '5px')
+													$("#reg_submit").attr(
+															"disabled", true);
+												}
 
-					}
-				},
-				error : function() {
-					console.log("실패");
-				}
-			});
+											}
+										},
+										error : function() {
+											console.log("실패");
+										}
+									});
+						});
+
+		// 비밀번호 유효성 검사
+		$("#student_pw").blur(function() {
+			if (pwJ.test($('#student_pw').val())) {
+				console.log('true');
+				$('#pw_check').text('');
+			} else {
+				console.log('false');
+				$('#pw_check').text('비밀번호는 숫자, 문자, 특수문자 조합 8~15자리만 가능합니다. :(')
+				$('#pw_check').css('color', 'red');
+				$('#pw_check').css('font-size', '5px')
+
+			}
+		});
+
+		// 비밀번호 일치 확인
+		$("#student_pw2").blur(function() {
+			if ($('#student_pw').val() != $(this).val()) {
+				$('#pw2_check').text('비밀번호가 일치하지 않습니다 :(');
+				$('#pw2_check').css('color', 'red');
+				$('#pw2_check').css('font-size', '5px')
+
+			} else {
+				$('#pw2_check').text('비밀번호가 일치합니다. :)');
+				$('#pw2_check').css('color', 'blue');
+				$('#pw2_check').css('font-size', '5px')
+
+			}
 		});
 	</script>
 </body>

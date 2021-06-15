@@ -1,7 +1,8 @@
 package com.kh.jd.account;
 
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,4 +14,9 @@ public interface StudentService {
 	//회원 가입
 	public void signUp(Student dto);
 	
+	//로그인 체크
+	public boolean loginCheck(Student dto, HttpSession session);
+	
+	//로그아웃
+	public void logout(HttpSession session);
 }
