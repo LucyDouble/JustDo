@@ -11,6 +11,11 @@
 		<typeAlias type="com.kh.jd.work.Work" alias="Work"/>
 		<typeAlias type="com.kh.jd.attend.Attend" alias="Attend"/>
 		<typeAlias type="com.kh.jd.lecture.Lecture" alias="Lecture"/>
+		<typeAlias type="com.kh.jd.calendar.Calendar" alias="Calendar"/>
+		<typeAlias type="com.kh.jd.lectureClass.LectureClass" alias="LectureClass"/>
+		<typeAlias type="com.kh.jd.progress.Progress" alias="Progress"/>
+		<typeAlias type="com.kh.jd.registration.Registration" alias="Registration"/>
+		<typeAlias type="com.kh.jd.video.Video" alias="Video"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/account/studentMapper.xml"/>		
@@ -18,6 +23,11 @@
 		<mapper resource="mappers/attend/attendMapper.xml"/>		
 		<mapper resource="mappers/exam/examMapper.xml"/>		
 		<mapper resource="mappers/work/workMapper.xml"/>
-		<mapper resource="mappers/lecture/lectureMapper.xml"/>		
+		<mapper resource="mappers/lecture/lectureMapper.xml"/>	
+		<mapper resource="mappers/calendar/calendarMapper.xml"/>	
+		<mapper resource="mappers/lectureClass/lectureClassMapper.xml"/>	
+		<mapper resource="mappers/progress/progerssMapper.xml"/>	
+		<mapper resource="mappers/registration/registrationMapper.xml"/>	
+		<mapper resource="mappers/video/videoMapper.xml"/>	
 	</mappers>
 </configuration>

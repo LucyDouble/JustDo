@@ -4,7 +4,6 @@
 	<resultMap type="Lecture" id="lectureResult">
 		<id column="lecture_no" property="lecture_no"/>
 		<result column="teacher_number" property="teacher_number"/>
-		<result column="lecture_class" property="lecture_class"/>
 		<result column="lecture_title" property="lecture_title"/>
 		<result column="lecture_limit" property="lecture_limit"/>
 		<result column="lecture_major" property="lecture_major"/>
@@ -14,19 +13,17 @@
 		<result column="lecture_start" property="lecture_start"/>
 		<result column="lecture_end" property="lecture_end"/>
 		<result column="lecture_state" property="lecture_state"/>
-		<result column="lecture_starttime" property="lecture_starttime"/>
-		<result column="lecture_endtime" property="lecture_endtime"/>
 	</resultMap>
 	
 	<select id="listLecture" resultType="arraylist" resultMap="lectureResult">
 		SELECT * FROM LECTURE
 	</select>
 	
-	<insert id="addLecture" parameterType="Lecture" statementType="PREPARED">
+	<insert id="addLecture" parameterType="Lecture" >
 		INSERT INTO LECTURE VALUES(
-			SEQ_LECTURE.NEXTVAL, #{teacher_number}, #{lecture_class}, #{lecture_title}, #{lecture_limit},
-			#{lecture_major}, #{lecture_day}, #{lecture_reference}, #{lecture_target}, #{lecture_start},
-			#{lecture_end}, 0, #{lecture_starttime}, #{lecture_endtime}
+			SEQ_LECTURE.NEXTVAL, #{teacher_number}, #{lecture_title}, #{lecture_limit},
+			#{lecture_major}, #{lecture_day}, #{lecture_reference}, #{lecture_target}, to_date(#{lecture_start},'YY-MM-DD'),
+			to_date(#{lecture_end},'YY-MM-DD'), 0 
 		) 
 	</insert>
 </mapper>
