@@ -2,28 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Teacher">
 	<resultMap type="Teacher" id="TeacherMap">
-		<result column="teacher_num" property="teacher_number"/>
-		<result column="teacher_id" property="id"/>
-		<result column="teacher_pwd" property="password"/>
-		<result column="teacher_name" property="name"/>
-		<result column="teacher_address" property="address"/>
-		<result column="teacher_phone" property="phone"/>
-		<result column="teacher_email" property="email"/>
+		<result property="teacher_number" column="TEACHER_NUMBER"/>
+		<result property="id" column="ID"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="teacher_name" column="NAME" />
+		<result property="teacher_address" column="ADDRESS" />
+		<result property="teacher_phone" column="PHONE" />
+		<result property="teacher_email" column="EMAIL" />
+		<result property="accept" column="ACCEPT"/>
+		
 	</resultMap>
 	
 
 
-	<select id="loginCheck" resultType="int">
+	<select id="loginCheck" resultType="String">
 		SELECT COUNT(*) FROM TEACHER 
-		WHERE teacher_num = #{teacher_number} AND teacher_pwd = #{password}
+		WHERE ID=#{id} AND PASSWORD = #{password}
 	</select>
 	<select id="idCheck" resultType="int">
 		SELECT COUNT(*) FROM TEACHER 
-		WHERE teacher_id = #{id} 
+		WHERE id = #{id} 
 	</select>
 	<select id="signUp">
-		insert into teacher(teacher_num, teacher_id, teacher_pwd, teacher_name, teacher_address, teacher_phone, teacher_email) 
-		values (#{teacher_number}, #{id}, #{password}, #{name}, #{address}, #{phone}, #{email})
+		insert into teacher(teacher_num, id, password, teacher_name, teacher_address, teacher_phone, teacher_email) 
+		values (#{teacher_num}, #{id}, #{password}, #{teacher_name}, #{teacher_address}, #{teacher_phone}, #{teacher_email}, #{accept})
+	</select>
+	<select id="infoTeacher" parameterType="Teacher" resultMap="TeacherMap">
+			SELECT * FROM TEACHER
+			WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>
 
 </mapper>

@@ -1,5 +1,8 @@
 package com.kh.jd.account;
 
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,6 +30,7 @@ public class StudentDAO {
 	public boolean loginCheck(Student dto) {
 		System.out.println("loginCheck");
 		String name = sqlSession.selectOne("Student.loginCheck", dto);
+		System.out.println(name);
 		return (Integer.parseInt(name)==0)?false:true;
 	}
 	
@@ -34,5 +38,11 @@ public class StudentDAO {
 	public void logout(HttpSession session) {
 		session.invalidate();
 	}
-
+	
+	//학생 정보
+		public Student infoStudent(Student dto) {
+			
+			Student result = sqlSession.selectOne("Student.infoStudent", dto);
+			return result;
+		}
 }

@@ -6,44 +6,42 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("sService")
-public class StudentServiceImpl implements StudentService {
+@Service("tService")
+public class TeacherServiceImpl implements TeacherService {
 	
 	@Autowired
-	StudentDAO dao;
-	
+	TeacherDAO dao;
+
 	@Override
-	public int idCheck(String student_id) {
-		int result = dao.idCheck(student_id);
+	public int idCheck(String teacher_id) {
+		int result = dao.idCheck(teacher_id);
 		return result;
 	}
 
 	@Override
-	public void signUp(Student dto) {
+	public void signUp(Teacher dto) {
 		dao.signUp(dto);
 	}
 
 	@Override
-	public boolean loginCheck(Student dto, HttpSession session) {
+	public boolean loginCheck(Teacher dto, HttpSession session) {
 		boolean result = dao.loginCheck(dto);
 		if(result == true) {
-			session.setAttribute("student_id", dto.getId());
+			session.setAttribute("teacher_id", dto.getId());
 		}
 		return result;
 	}
 
 	@Override
 	public void logout(HttpSession session) {
-			dao.logout(session);
+		dao.logout(session);
 	}
 
 	@Override
-	public Student infoStudent(Student dto) {
-		
-		
-		return dao.infoStudent(dto);
+	public Teacher infoTeacher(Teacher dto) {
+		return dao.infoTeacher(dto);
 	}
-
+	
 
 
 

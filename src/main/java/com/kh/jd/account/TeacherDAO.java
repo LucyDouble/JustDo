@@ -1,5 +1,10 @@
 package com.kh.jd.account;
 
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -8,17 +13,36 @@ import org.springframework.stereotype.Repository;
 public class TeacherDAO {
 
 	@Autowired
-	SqlSession sqlsession;
+	SqlSession sqlSession;
 
-//아이디 체크
-	public int idcheck(String teacherId) {
-		System.out.println("idcheck");
-		int result = sqlsession.selectOne("accountMapper.idCheck", teacherId);
+	//아이디 체크
+	public int idCheck(String teacher_id) {
+		System.out.println("idCheck");
+		int result = sqlSession.selectOne("Teacher.idCheck", teacher_id);
 		return result;
 	}
-//회원 가입
-	public void signup(Teacher dto) {
-		System.out.println("signup");
-		sqlsession.insert("teacherMapper.signup", dto);
+	// 회원 가입
+	public void signUp(Teacher dto) {
+		sqlSession.insert("Teacher.signUp", dto);
 	}
+		
+	// 로그인 체크
+	public boolean loginCheck(Teacher dto) {
+		System.out.println("loginCheck");
+		String name = sqlSession.selectOne("Teacher.loginCheck", dto);
+		System.out.println(name);
+		return (Integer.parseInt(name)==0)?false:true;
+	}
+	
+	//로그 아웃
+	public void logout(HttpSession session) {
+		session.invalidate();
+	}
+	
+	//교직원 정보
+		public Teacher infoTeacher(Teacher dto) {
+			
+			Teacher result = sqlSession.selectOne("Teacher.infoTeacher", dto);
+			return result;
+		}
 }

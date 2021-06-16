@@ -14,22 +14,22 @@
 	<h1>로그인 페이지</h1>
 	<hr />
 		<c:choose>
-			<c:when test="${empty sessionScope.student_id}">
+			<c:when test="${empty studentDTO.id && empty teacherDTO.id}">
 			<!-- 로그인이 안되어 있으면 -->
-				<form id="loginFrm" name="loginFrm" action="loginCheck">
+				<form id="loginFrm" action="loginCheck">
 				<div class="form-group">
-			<label for="category">구분</label><br> <input type="radio"
+			<label for="category"></label><br> <input type="radio"
 				name="select" checked="checked" value="student">수강생 <input
 				type="radio" name="select" value="teacher">교직원
 		</div>
 					<table>
 						<tr>
 							<td>아이디</td>
-							<td><input type="text" name="student_id" id="student_id" placeholder="Id"></td>
+							<td><input type="text" name="id" id="id" placeholder="Id"></td>
 						</tr>
 						<tr>
 							<td>패스워드</td>
-							<td><input type="password" name="student_password" id="student_password" placeholder="Password"></td>
+							<td><input type="password" name="password" id="password" placeholder="Password"></td>
 						</tr>
 						<c:if test="${msg == '실패'}">
 							<tr>
@@ -51,7 +51,14 @@
 				</form>
 			</c:when>
 			<c:otherwise>
-				<h3>${sessionScope.student_id}님 환영합니다.</h3>
+				<c:choose>
+				<c:when test = "${not empty studentDTO.id}">
+				<h3>${studentDTO.student_name}님 환영합니다.</h3>
+				</c:when>
+				<c:otherwise>
+					<h3>${teacherDTO.teacher_name}님 환영합니다</h3>
+				</c:otherwise>
+				</c:choose>
 				<a href="logout.do">로그아웃</a>
 			</c:otherwise>
 		</c:choose>
@@ -63,22 +70,30 @@
 		$('#login').click(function(){
 
 			// 입력 값 체크
-			if($.trim($('#student_id').val()) == ""){
-				alert("아이디를 입력해 주세요.");
-				$('#student_id').focus();
-				return;
-			}else if($.trim($('#student_password').val()) == ''){
-				alert("패스워드를 입력해 주세요.");
-				$('#passwd').focus();
-				return;
+		
+		/* 	if($('input[name="select"]:checked').val() == 'student'){
+				document.getElementsByName('id')[0] = 'student_id';
+				document.getElementsByName('password')[0] = 'student_password';
+				alert(document.getElementsByName('password')[0].value);
+			}else{
+				document.getElementsByName('id')[0] = 'teacher_id';
+				document.getElementsByName('password')[0] = 'teacher_password';
 			}
-			
+			if($.trim($('#id').val()) == ""){
+				alert("아이디를 입력해 주세요.");
+				$('#id').focus();
+				return;
+			}else if($.trim($('#password').val()) == ""){
+				alert("패스워드를 입력해 주세요.");
+				$('#password').focus();
+				return; 
+			}*/
 			//전송
 			$('#loginFrm').submit();
 		});
 		//회원가입 버튼
 		$('#signUp').click(function() {
-			location.href="signUpPage.do";
+			location.href="signUpPage";
 		});
 
 </script>

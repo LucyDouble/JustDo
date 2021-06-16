@@ -7,20 +7,20 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface StudentService {
+public interface TeacherService {
 
 	//아이디 중복 체크
-	public int idCheck(String student_id);
+	public int idCheck(String teacher_id);
 	
 	//회원 가입
-	public void signUp(Student dto);
+	public void signUp(Teacher dto);
 	
 	//로그인 체크
-	public boolean loginCheck(Student dto, HttpSession session);
+	public boolean loginCheck(Teacher dto, HttpSession session);
 	
 	//로그아웃
 	public void logout(HttpSession session);
 	
 	//학생 정보
-	public Student infoStudent(Student dto);
+	public Teacher infoTeacher(Teacher dto);
 }

@@ -3,8 +3,8 @@
 <mapper namespace="Student">
 	<resultMap type="Student" id="StudentMap">
 		<result property="student_number" column="STUDENT_NUMBER"/>
-		<result property="student_id" column="ID"/>
-		<result property="student_password" column="PASSWORD"/>
+		<result property="id" column="ID"/>
+		<result property="password" column="PASSWORD"/>
 		<result property="student_name" column="NAME" />
 		<result property="student_address" column="ADDRESS" />
 		<result property="student_phone" column="PHONE" />
@@ -12,17 +12,17 @@
 	</resultMap>
 	<select id="loginCheck" resultType="String">
 			SELECT count(*) FROM STUDENT
-			WHERE ID = #{student_id} AND PASSWORD = #{student_password}
+			WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>
 	<select id="idCheck"  resultType="int">
 			SELECT count(*) FROM STUDENT
-			WHERE ID = #{student_id}
+			WHERE ID = #{id}
 	</select>
 	<select id="signUp">
-		insert into student values (#{student_number}, #{student_id}, #{student_password}, #{student_name}, #{student_address}, #{student_phone}, #{student_email})
+		insert into student values (#{student_number}, #{id}, #{password}, #{student_name}, #{student_address}, #{student_phone}, #{student_email})
 	</select>
-	<select id="loginStudent" parameterType="Student" resultMap="StudentMap">
-		SELECT * FROM STUDENT WHERE ID=#{student_id} and MEMBER_PWD=#{memberPwd}
+		<select id="infoStudent" parameterType="Student" resultMap="StudentMap">
+			SELECT * FROM STUDENT
+			WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>
-	
 </mapper>

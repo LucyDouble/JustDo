@@ -12,7 +12,7 @@
             <a href="#">이용안내</a>
             
             <c:choose>
-            	<c:when test="${sessionScope.student_id == null }">
+            	<c:when test="${sessionScope.student_id == null && sessionScope.teacher_id ==null}">
              <a href="login">로그인</a> 
              	</c:when>
              	<c:otherwise>
