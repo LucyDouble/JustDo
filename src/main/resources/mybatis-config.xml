@@ -16,6 +16,9 @@
 		<typeAlias type="com.kh.jd.progress.Progress" alias="Progress"/>
 		<typeAlias type="com.kh.jd.registration.Registration" alias="Registration"/>
 		<typeAlias type="com.kh.jd.video.Video" alias="Video"/>
+	 	<typeAlias type="com.kh.jd.counseling.Counseling" alias="CS"/>
+		<typeAlias type="com.kh.jd.notice.Notice" alias="Notice"/>
+		
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/account/studentMapper.xml"/>		
@@ -29,5 +32,7 @@
 		<mapper resource="mappers/progress/progerssMapper.xml"/>	
 		<mapper resource="mappers/registration/registrationMapper.xml"/>	
 		<mapper resource="mappers/video/videoMapper.xml"/>	
+		<mapper resource="mappers/counseling/counselingMapper.xml"/>
+		<mapper resource="mappers/notice/noticeMapper.xml"/>	
 	</mappers>
 </configuration>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Notice">
+	<resultMap type="Notice" id="NoticeMap">
+		<result property="notice_no" column="NOTICE_NO"/>
+		<result property="notice_sub" column="NOTICE_SUB"/>
+		<result property="notice_con" column="NOTICE_CON"/>
+		<result property="notice_date" column="NOTICE_DATE"/>
+		<result property="notice_filepath" column="NOTICE_FILEPATH"/>
+		<result property="manager_num" column="MANAGER_NUMBER"/>
+		<result property="manager_name" column="MANAGER_NAME"/>
+		<result property="teacher_num" column="TEACHER_NUMBER"/>
+		<result property="teacher_name" column="TEACHER_NAME"/>
+	</resultMap>
+		
+		<!-- 목록조회 -->
+		<select id="listNotice" resultType="Notice">
+		<![CDATA[
+			select nm.*,t.name as teacher_name from (select n.*,m.name as manager_name from notice n left outer join managers m on n.manager_number = m.manager_number) nm left outer join teacher t on nm.teacher_number = t.teacher_number
+		]]>
+		</select>
+
+		<!-- 글조회 -->
+		<select id="viewNotice" resultType="Notice">
+		<![CDATA[
+			select nm.*,t.name as teacher_name from (select n.*,m.name as manager_name from notice n left outer join managers m on n.manager_number = m.manager_number) nm left outer join teacher t on nm.teacher_number = t.teacher_number
+			where notice_no = #{notice_no}
+		]]>
+		</select>
+
+		<!-- 글등록 -->
+		
+		<!-- 글수정 -->
+		<!-- 글삭제 -->
+</mapper>

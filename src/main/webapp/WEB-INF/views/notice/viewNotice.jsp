@@ -19,18 +19,20 @@
         <thead>
             <tr>
                 
-                <th class="vn_cont">&nbsp;&nbsp;제목 테스트 입니다</th>
+                <th class="vn_cont">&nbsp;&nbsp;${notice.notice_sub }</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td class="vn_cont">&nbsp;&nbsp;운영자</td>
+                <td class="vn_cont">&nbsp;&nbsp;<p class="vn_cont_p">작성자</p>&nbsp;&nbsp;&nbsp;<c:if test="${notice.manager_number >= 20000 }">운영자</c:if>
+                								<c:if test="${notice.teacher_number >= 100000 }">${notice.teacher_name }</c:if>
+                 </td>
             </tr>
             <tr>
-                <td class="vn_cont">&nbsp;&nbsp;2021-06-10</td>
+                <td class="vn_cont">&nbsp;&nbsp;<p class="vn_cont_p">작성일</p>&nbsp;&nbsp;&nbsp;${notice.notice_date }</td>
             </tr>
             <tr class="cont3">
-                <td class="vn_cont">&nbsp;&nbsp;내용박스</td>
+                <td class="vn_cont">&nbsp;&nbsp;${notice.notice_con }</td>
             </tr>
 			 <tr>
                 <td class="vn_cont">&nbsp;&nbsp;댓글박스</td>
@@ -43,6 +45,6 @@
     </div>
     <script>
     </script>
+    <jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
-    <%-- <jsp:include page="../common/footer.jsp"></jsp:include> --%>
 </html>

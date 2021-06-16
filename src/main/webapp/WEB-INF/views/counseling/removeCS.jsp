@@ -17,7 +17,10 @@
 	<div class="background">
 		<div class="popup">
 			<div class="cd-popup-container">
+				<div class="rc_cont">
+				<img class="rc_warning" src="resources/images/alert.png">
 				<p class="rc_p">상담신청을 정말 삭제 하시겠습니까?</p>
+				</div>
 				<ul id="close" class="cd-buttons">
 					<li class="rc_li"><a class="rc_a" href="#0">삭제</a></li>
 					<li class="rc_li"><a class="rc_a" href="#0">취소</a></li>

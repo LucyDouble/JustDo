@@ -17,7 +17,9 @@
 	<div class="background">
 		<div class="popup">
 			<div class="cd-popup-container">
+				<img class="rn_warning" src="resources/images/alert.png">
 				<p class="rn_p">게시글을 정말 삭제 하시겠습니까?</p>
+				</div>
 				<ul id="close" class="cd-buttons">
 					<li class="rn_li"><a class="rn_a" href="#0">삭제</a></li>
 					<li class="rn_li"><a class="rn_a" href="#0">취소</a></li>

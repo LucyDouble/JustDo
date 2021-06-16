@@ -30,13 +30,7 @@
     <br>
     <div id="editor" class="form-group">
       <label class="an_label" for="content">&nbsp;&nbsp;내용</label>
-      <%-- <textarea class="form-control2" id="content" name="content" rows="10"></textarea>
-      <script src="${pageContext.request.contextPath}/resources/js/ckeditor.js"></script>
-    	<script>
-    	CKEDITOR.replace('content')
-    	</script> --%>
     	<textarea cols="10" id="editor1" name="editor1" rows="10"></textarea>
-    	<%-- <script src="${pageContext.request.contextPath}/resources/js/ckeditor.js"></script> --%>
     	
     	
    <script>
@@ -52,5 +46,7 @@
     <button type="submit" class="button" onclick="location.href='listNotice'"><span>등록</span></button>
   </form>
 </div>
+
+<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

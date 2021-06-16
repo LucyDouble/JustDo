@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
+<link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
 <footer id="footer">
     <div id="footer_main">
-        <image src="resources/images/footer.png">
+        <img src="resources/images/footer.png">
     </div>
     <div id="footer_container">
         <section id="footer_menu1">
