@@ -25,54 +25,59 @@ label {
 <body>
 
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
-	<form method="POST" class="form">
+	<form method="GET" class="form">
+		<div class="signUp-group">
+			<label for="category">구분</label><br> <input type="radio"
+				name="signUpSelect" checked="checked" value="student">수강생 <input
+				type="radio" name="signUpSelect" value="teacher">교직원
+		</div>
+		<br>
 		<!-- 아이디 -->
 		<div class="form-group">
-			<label for="student_id">아이디</label> <br> <input type="text"
-				class="form-control" id="student_id" name="student_id"
-				placeholder="ID" required>
+			<label for="sign_id">아이디</label> <br> <input type="text"
+				class="form-control" id="sign_id" name="sign_id" placeholder="ID"
+				required>
 			<div class="check_font" id="id_check"></div>
 		</div>
 		<!-- 비밀번호 -->
 		<div class="form-group">
-			<label for="student_pw">비밀번호</label> <br> <input type="password"
-				class="form-control" id="student_pw" name="student_pw"
+			<label for="sign_pw">비밀번호</label> <br> <input type="password"
+				class="form-control" id="sign_pw" name="sign_pw"
 				placeholder="PASSWORD" required>
 			<div class="check_font" id="pw_check"></div>
 		</div>
 		<!-- 비밀번호 재확인 -->
 		<div class="form-group">
-			<label for="student_pw2">비밀번호 확인</label> <br> <input
-				type="password" class="form-control" id="student_pw2"
-				name="student_pw2" placeholder="Confirm Password" required>
+			<label for="sign_pw2">비밀번호 확인</label> <br> <input
+				type="password" class="form-control" id="sign_pw2" name="sign_pw2"
+				placeholder="Confirm Password" required>
 			<div class="check_font" id="pw2_check"></div>
 		</div>
 		<!-- 이름 -->
 		<div class="form-group">
-			<label for="student_name">이름</label><br> <input type="text"
-				class="form-control" id="student_name" name="student_name"
+			<label for="sign_name">이름</label><br> <input type="text"
+				class="form-control" id="sign_name" name="sign_name"
 				placeholder="Name" required>
 			<div class="check_font" id="name_check"></div>
 		</div>
-		<!-- 생년월일 -->
-		<div class="form-group required">
-			<label for="student_birth">생년월일</label><br> <input type="text"
-				class="form-control" id="student_birth" name="student_birth"
-				placeholder="ex) 19950625" required>
-			<div class="check_font" id="birth_check"></div>
-		</div>
+
 		<!-- 본인확인 이메일 -->
 		<div class="form-group">
 			<label for="student_email">이메일</label><br> <input type="text"
 				class="form-control" name="student_email" id="student_email"
 				placeholder="E-mail" required>
-			<!-- <input type="text" style="margin-top: 5px;"class="email_form" name="email_confirm" id="email_confirm" placeholder="인증번호를 입력해주세요!" required>
-                    <button type="button" class="btn btn-outline-danger btn-sm px-3" onclick="confirm_email()">
-                        <i class="fa fa-envelope"></i>&nbsp;인증
-                    </button>&nbsp;
-                    <button type="button" class="btn btn-outline-info btn-sm px-3">
-                        <i class="fa fa-envelope"></i>&nbsp;확인
-                    </button>&nbsp; -->
+			<button type="button" class="btn btn-outline-danger btn-sm px-3"
+				onclick="confirm_email()">
+				<i class="fa fa-envelope"></i>&nbsp;인증
+			</button>
+			&nbsp; <br> <input type="text" style="margin-top: 5px;"
+				class="email_form" name="email_confirm" id="email_confirm"
+				placeholder="인증번호를 입력해주세요!" required>
+
+			<button type="button" class="btn btn-outline-info btn-sm px-3">
+				<i class="fa fa-envelope"></i>&nbsp;확인
+			</button>
+			&nbsp;
 			<div class="check_font" id="email_check"></div>
 		</div>
 		<!-- 휴대전화 -->
@@ -82,11 +87,7 @@ label {
 				placeholder="Phone Number" required>
 			<div class="check_font" id="phone_check"></div>
 		</div>
-		<div class="form-group">
-			<label for="category">구분</label><br> <input type="radio"
-				name="signUpSelect" checked="checked" value="student">수강생 <input
-				type="radio" name="signUpSelect" value="teacher">교직원
-		</div>
+
 		<div class="reg_button">
 
 			<button class="btn btn-primary px-3" id="reg_submit">
@@ -104,32 +105,33 @@ label {
 
 	<script type="text/javascript">
 		//모든 공백 체크 정규식
-		var empJ = /\s/g;
+		var empCheck = /\s/g;
 		//아이디 정규식
-		var idJ = /^[A-Za-z0-9]{6,12}$/;
+		var idCheck = /^[A-Za-z0-9]{6,12}$/;
 		// 비밀번호 정규식
-		var pwJ = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/;
+		var pwCheck = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/;
 		// 이름 정규식
-		var nameJ = /^[가-힣]{2,6}$/;
+		var nameCheck = /^[가-힣]{2,6}$/;
 		// 이메일 검사 정규식
 		var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		// 휴대폰 번호 정규식
 		var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 
 		// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
-		$("#student_id")
+		$("#sign_id")
 				.blur(
 						function() {
-							var student_id = $('#student_id').val();
-							$
-									.ajax({
-										url : '${pageContext.request.contextPath}/idCheck?student_id='
-												+ student_id,
+							var sign_id = $('#sign_id').val();
+							var signUpSelect =$('input[name="signUpSelect"]:checked').val();
+							console.log(signUpSelect);
+									$.ajax({
+										url : '${pageContext.request.contextPath}/idCheck?sign_id='
+												+ sign_id + "&signUpSelect=" + signUpSelect,
 										type : 'GET',
 										success : function(data) {
 											console.log("1 = 중복o / 0 = 중복x : "
 													+ data);
-											console.log(student_id);
+											console.log(sign_id);
 
 											if (data == 1) {
 												// 1 : 아이디가 중복되는 문구
@@ -143,7 +145,7 @@ label {
 														"disabled", true);
 											} else {
 
-												if (idJ.test(student_id)) {
+												if (idCheck.test(sign_id)) {
 													// 0 : 아이디 길이 / 문자열 검사
 													$("#id_check").text(
 															"사용 가능한 아이디입니다 :)");
@@ -154,7 +156,7 @@ label {
 													$("#reg_submit").attr(
 															"disabled", false);
 
-												} else if (student_id == "") {
+												} else if (sign_id == "") {
 
 													$('#id_check').text(
 															'아이디를 입력해주세요');
@@ -184,13 +186,33 @@ label {
 											console.log("실패");
 										}
 									});
+									$("#sign_name").blur(function() {
+										if (nameCheck.test($(this).val())) {
+												console.log(nameCheck.test($(this).val()));
+												$("#name_check").text('');
+										} else {
+											$('#name_check').text('이름을 확인해주세요');
+											$('#name_check').css('color', 'red');
+											$('#name_check').css('font-size', '5px');
+										}
+									});
 						});
 
 		// 비밀번호 유효성 검사
-		$("#student_pw").blur(function() {
-			if (pwJ.test($('#student_pw').val())) {
+		$("#sign_pw").blur(function() {
+			var sign_pw = $('#sign_pw').val();
+
+			if (pwCheck.test($('#sign_pw').val())) {
 				console.log('true');
 				$('#pw_check').text('');
+			}else if(sign_pw ==""){
+				$('#pw_check').text(
+						'비밀번호를 입력해주세요');
+				$('#pw_check').css('color', 'red');
+				$("#pw_check").css('font-size', '5px');
+				$("#reg_submit").attr("disabled", true);				
+				
+				
 			} else {
 				console.log('false');
 				$('#pw_check').text('비밀번호는 숫자, 문자, 특수문자 조합 8~15자리만 가능합니다. :(')
@@ -201,17 +223,17 @@ label {
 		});
 
 		// 비밀번호 일치 확인
-		$("#student_pw2").blur(function() {
-			if ($('#student_pw').val() != $(this).val()) {
+		$("#sign_pw2").blur(function() {
+			var sign_pw2 = $('#sign_pw2').val();
+		
+			if ($('#sign_pw').val() != $(this).val()) {
 				$('#pw2_check').text('비밀번호가 일치하지 않습니다 :(');
 				$('#pw2_check').css('color', 'red');
 				$('#pw2_check').css('font-size', '5px')
+				console.log(sign_pw2);
 
 			} else {
-				$('#pw2_check').text('비밀번호가 일치합니다. :)');
-				$('#pw2_check').css('color', 'blue');
-				$('#pw2_check').css('font-size', '5px')
-
+				$('#pw2_check').text('');
 			}
 		});
 	</script>

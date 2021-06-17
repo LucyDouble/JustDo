@@ -5,6 +5,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!doctype HTML>
 <html>
+<link rel="stylesheet" href="<c:url value="/resources/css/account/login.css"/>"> 
 <head>
 	<meta charset="UTF-8">
 	<title>로그인</title>

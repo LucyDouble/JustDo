@@ -25,17 +25,18 @@ public class AccountController {
 		return "account/signUp";
 	}
 
-	@RequestMapping(value = "/idCheck", method = RequestMethod.GET, produces = "application/text; charset=utf8")
+	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
 	@ResponseBody
-	public String idCheck(HttpServletRequest request, HttpSession session,
-			@RequestParam(name = "signUpSelect") String check) {
+	public String idCheck(HttpServletRequest request, @RequestParam(name = "signUpSelect") String check) {
 		System.out.println(check);
 		if (check == "student" || check.equals("student")) {
-			String student_id = request.getParameter("id");
+			String student_id = request.getParameter("sign_id");
+			System.out.println(student_id);
 			int result = sService.idCheck(student_id);
 			return Integer.toString(result);
 		} else {
-			String teacher_id = request.getParameter("id");
+			String teacher_id = request.getParameter("sign_id");
+			System.out.println(teacher_id);
 			int result = tService.idCheck(teacher_id);
 			return Integer.toString(result);
 		}
