@@ -3,16 +3,23 @@
 <mapper namespace="work">
 
 
-	<select id="listWork" resultType="Work">
-		<![CDATA[ 
+	<select id="listWork" resultType="Work" parameterType="Map">
 			select * from (select rownum as rnum,work_no,work_start,work_end,lecture_no ,work_subject,work_content,lectureclass_class as lecture_class 
 			,lecture_title,to_char(work_start,'yyyymmdd') as startday
-			,to_char(work_end,'yyyymmdd') as endday  
-			from (SELECT * FROM works w join (select * from lecture join lectureclass using(lecture_no)) l using (lecture_no)order by work_no desc))
-		]]>
+			,to_char(work_end,'yyyymmdd') as endday  ,teacher_number
+			from (SELECT * FROM works w join (select * from lecture join lectureclass using(lecture_no)) l using (lecture_no)order by work_no desc)) 
+			where teacher_number=#{teacher_number}
+			<if test='keyword !=null || !keyword.equals("")'>
+			 and work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%'
+			</if>
 	</select>
-	<select id="getlistCount" resultType="int">
-		SELECT COUNT(*) FROM works w join (select * from lecture join lectureclass using(lecture_no)) l on w.lecture_no = l.lecture_no
+	<select id="getlistCount" resultType="int" parameterType="Map">
+		SELECT COUNT(*) 
+		FROM works w join (select * from lecture join lectureclass using(lecture_no)) l on w.lecture_no = l.lecture_no 
+		where teacher_number=#{teacher_number}
+		<if test='keyword !=null || !keyword.equals("")'>
+			 and work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%'
+		</if>
 	</select>
 	<insert id="addWork" parameterType="Work" >
 		insert into works values(
@@ -22,9 +29,54 @@
 		,#{work_content},#{work_answer}
 		)
 	</insert>
+	
+	<select id="viewWork" resultType="Work">
+		select w.*,to_char(work_start,'yyyymmdd') as startday
+			,to_char(work_end,'yyyymmdd') as endday ,lecture_title  
+		from works w join lecture l 
+		on w.lecture_no=l.lecture_no 
+		where work_no=#{work_no}
+	</select>
+	<delete id="removeWork">
+		DELETE from works where work_no=#{work_no}
+	</delete>
 	<select id="lecturechk" resultType="lecture" parameterType="int">
 		select lecture_no,lecture_title from lecture where teacher_number = #{teacher_number}
 	</select>
+	<update id="editWork" parameterType="Work">
+		update works 
+		set work_subject=#{work_subject}, work_content=#{work_content}, work_start=#{work_start}, work_end=#{work_end}, lecture_no=#{lecture_no}
+		where work_no=#{work_no}
+	</update>
+	<select id="listWorkResult" resultType="Work" parameterType="Map">
+		select rownum as rnum,name,work_answer
+		from (select wl.*,s.name as name 
+		        from (select w.*,l.student_number 
+		                from works w join works_list l 
+		                on w.work_no=l.work_no 
+		                where w.work_no=#{work_no}) wl join student s 
+		        on wl.student_number=s.student_number 
+		<if test='keyword !=null || !keyword.equals("")'>
+			 where name like '%'||#{keyword}||'%'
+		</if>
+		order by name)
+	</select>
+	<select id="getlistWorkResultCount" resultType="int" parameterType="Map">
+        SELECT COUNT(*) 
+        FROM (select rownum as rnum,wl.*,s.name as name 
+                from (select w.*,l.student_number 
+                        from works w join works_list l 
+                        on w.work_no=l.work_no 
+                        where w.work_no=#{work_no}) wl join student s 
+                on wl.student_number=s.student_number ) 
+		<if test='keyword !=null || !keyword.equals("")'>
+			 where name like '%'||#{keyword}||'%'
+		</if>
+	</select>
+	
+	
+	
+	
 	<select id="classCheck"  resultType="Work">
 			SELECT lectureclass_class FROM lectureclass
 			WHERE lecture_no = #{lecture_no}

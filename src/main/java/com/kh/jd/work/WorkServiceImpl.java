@@ -1,6 +1,8 @@
 package com.kh.jd.work;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,14 +15,16 @@ public class WorkServiceImpl implements WorkService{
 	@Autowired
 	private WorkDao workDao;
 	
+
+
 	@Override
-	public List<Work> listWork(int startPage, int limit) {
-		return workDao.listWork( startPage, limit);
+	public List<Work> listWork(int startPage, int limit, Map<String, Object> map) {
+		return workDao.listWork(startPage, limit, map);
 	}
 
 	@Override
-	public int getListCount() {
-		return workDao.getListCount();
+	public int getListCount(Map<String, Object> map) {
+		return workDao.getListCount(map);
 	}
 
 	@Override
@@ -37,5 +41,33 @@ public class WorkServiceImpl implements WorkService{
 	public List<Work> classCheck(int lecture_no) {
 		return workDao.classCheck(lecture_no);
 	}
+
+	@Override
+	public Work viewWork(int work_no) {
+		return workDao.viewWork(work_no);
+	}
+
+	@Override
+	public void removeWork(int work_no) {
+		workDao.removeWork(work_no);
+	}
+
+	@Override
+	public void editWork(Work vo) {
+		workDao.editWork(vo);
+		
+	}
+
+	@Override
+	public List<Work> listWorkResult(int startPage, int limit, Map<String, Object> map) {
+		return workDao.listWorkResult(startPage, limit, map);
+	}
+
+	@Override
+	public int getlistWorkResultCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return workDao.getlistWorkResultCount(map);
+	}
+
 
 }

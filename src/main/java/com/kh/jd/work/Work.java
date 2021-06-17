@@ -17,17 +17,45 @@ public class Work {
 	private String lecture_title;
 	private int startday;
 	private int endday;
+	private int teacher_number;
+	private String name;
+	private int rnum;
 	
 	
 	
 
 	
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
 	@Override
 	public String toString() {
 		return "Work [work_no=" + work_no + ", lecture_no=" + lecture_no + ", work_subject=" + work_subject
 				+ ", work_start=" + work_start + ", work_end=" + work_end + ", work_content=" + work_content
 				+ ", work_answer=" + work_answer + ", lecture_class=" + lecture_class + ", lecture_title="
-				+ lecture_title + ", startday=" + startday + ", endday=" + endday + "]";
+				+ lecture_title + ", startday=" + startday + ", endday=" + endday + ", teacher_number=" + teacher_number
+				+ ", name=" + name + "]";
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getTeacher_number() {
+		return teacher_number;
+	}
+
+	public void setTeacher_number(int teacher_number) {
+		this.teacher_number = teacher_number;
 	}
 
 	public int getStartday() {
