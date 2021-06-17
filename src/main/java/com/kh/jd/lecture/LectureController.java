@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.jd.lectureClass.LectureClass;
+import com.kh.jd.lectureClass.LectureClassService;
+
 @Controller
 public class LectureController {
 	@Autowired
 	private LectureService LService;
+	
 	@RequestMapping(value = "lecture", method = RequestMethod.GET)
 	public ModelAndView listLecture(ModelAndView mv) {
 		System.out.println(LService.listLecture());
@@ -58,6 +62,7 @@ public class LectureController {
 	@RequestMapping(value = "lectureEditForm", method = RequestMethod.GET)
 	public String editLecture(HttpServletRequest request) {
 		String num = request.getParameter("lectureNo");
+		
 		System.out.println(num);
 		return "redirect:/lecture";
 	}

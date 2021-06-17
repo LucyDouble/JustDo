@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="LectureClass">
+<resultMap type="LectureClass" id="LectureClassResult">
+	<result column="lecture_no" property="lecture_no"/>
+	<result column="lectureclass_class" property="lectureclass_class"/>
+	<result column="lectureclass_start" property="lectureclass_start"/>
+	<result column="lectureclass_end" property="lectureclass_end"/>
+</resultMap>
+
+<insert id="addLectureClass" parameterType="java.util.Map">
+	<foreach collection="list" item="i" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+	INTO LECTURECLASS
+		(lecture_no, lectureclass_class, lectureclass_start, lectureclass_end)
+	VALUES
+		(#{i.lecture_no}, #{i.lectureclass_class}, to_date(#{i.lectureclass_start},'hh24:mi'), to_date(#{i.lectureclass_end},'hh24:mi'))
+	</foreach>
+</insert>
+
+<select id="viewLectureClass" resultType="LectureClass" parameterType="string">
+	SELECT * FROM LECTURECLASS where lecture_no = #{lecture_no}
+</select>
 </mapper>

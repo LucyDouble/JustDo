@@ -22,8 +22,8 @@
 	<insert id="addLecture" parameterType="Lecture" >
 		INSERT INTO LECTURE VALUES(
 			SEQ_LECTURE.NEXTVAL, #{teacher_number}, #{lecture_title}, #{lecture_limit},
-			#{lecture_major}, #{lecture_day}, #{lecture_reference}, #{lecture_target}, to_date(#{lecture_start},'YY-MM-DD'),
-			to_date(#{lecture_end},'YY-MM-DD'), 0 
+			#{lecture_major}, #{lecture_day}, #{lecture_reference}, #{lecture_target}, #{lecture_start},
+			#{lecture_end}, 0 
 		) 
 	</insert>
 </mapper>

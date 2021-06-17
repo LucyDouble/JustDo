@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class LectureServiceImpl implements LectureService{
 	@Autowired
 	private LectureDao Ldao;
+	
 	@Override
 	public int addLecture(Lecture lecture) {
 		int result = 0;

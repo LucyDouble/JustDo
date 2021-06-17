@@ -33,7 +33,7 @@
 		</div>
 		<div>
 			<article>
-				<form id="frmAdd">
+				<form id="frmAdd" name="add">
 					<table class="table">
 							<tr>
 								<th>NO</th>
@@ -75,11 +75,28 @@
 	</section>
 </div>
 <script>
+	
     $("#btnAdd").click(function(){
-        var frm = document.getElementById("frmAdd");
+      	var frm = document.getElementById("frmAdd") 
+       /*  var dataString = $("#frmAdd").serialize(); */
+        
+        
         frm.action="lectureAdd";
         frm.method="POST";
         frm.submit();
+        
+       /*   $.ajax({
+        	url : "lectureAdd",
+        	method: "POST",
+        	data : dataString,
+        	success: function(data){
+        		
+        	},
+        	error : function(){
+        		
+        	}
+        	
+        }); */
     });
 </script>
 </body>

@@ -88,7 +88,7 @@
 							<c:forEach var="vo" items="${list}">	
 								<tr>
 									<td>${vo.lecture_no}</td>
-									<td>0101</td>
+									<td><a href="lectureClassAddForm?lecture_no=${vo.lecture_no}">설정</a></td>
 									<td>${vo.lecture_title}</td>
 									<td>수업시작 ~ 수업종료</td>
 									<td>교직원</td>
@@ -104,10 +104,8 @@
 				
 					
 				</form>
-                    <!-- <input type="submit" value="등록">
-					<input type="button" value="수정">
-					<input type="button" value="삭제"> -->
-					<button onclick="popupCenter();">등록</button>
+                    <iframe src="" name="iframe" id="popup"></iframe>
+					<button onclick="addForm();">등록</button>
 					<button id="btnEdit">수정</button>
 					<button>삭제</button>
 			</article>
@@ -116,19 +114,21 @@
 </div>
 <script>
 /* 새창으로 열기 */
-function popupCenter() {
+/* function popupCenter() {
 	var w = 1000;
 	var h = 700;
 	
 	var xPos = (document.body.offsetWidth/2) - (w/2); // 가운데 정렬
 	xPos += window.screenLeft; // 듀얼 모니터일 때
 	var yPos = (document.body.offsetHeight/2) - (h/2);
-	console.log(xPos);
-	console.log(yPos);
-	console.log(document.body.offsetWidth);
-	window.open("lectureAddForm", "pop_name", "width="+w+", height="+h+", left="+xPos+", top="+yPos);
-}
+	
+	window.open("lectureAddForm", "add", "width="+w+", height="+h+", left="+xPos+", top="+yPos);
+} */
 
+/* 등록 폼 이동 */
+function addForm(){
+	location.href="lectureAddForm";
+}
 /* 수정 버튼 클릭 시 */
 $("#btnEdit").click(function(){
 	var frm = document.getElementById("lecturefrm");
@@ -141,6 +141,7 @@ $("#btnEdit").click(function(){
 		alert("수정할려면 박스에 체크해주세요");
 	}
 });
+
 </script>
 </body>
 </html>

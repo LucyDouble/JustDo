@@ -14,7 +14,7 @@ public class LectureDao {
 		int result = 0;
 		try {
 			result = sqlSession.insert("Lecture.addLecture", lecture);
-			System.out.println("오류3");
+			System.out.println("인서트 들어옴");
 		} catch (Exception e) {
 			System.out.println("오류4");
 			e.printStackTrace();
