@@ -15,8 +15,10 @@
 		<result column="lecture_state" property="lecture_state"/>
 	</resultMap>
 	
-	<select id="listLecture" resultType="arraylist" resultMap="lectureResult">
-		SELECT * FROM LECTURE
+	<select id="listLecture" resultMap="lectureResult">
+		SELECT 
+			*
+		FROM LECTURE ORDER BY lecture_no ASC
 	</select>
 	
 	<insert id="addLecture" parameterType="Lecture" >
@@ -26,4 +28,8 @@
 			#{lecture_end}, 0 
 		) 
 	</insert>
+	
+	<delete id="removeLecture" parameterType="string">
+		DELETE FROM LECTURE WHERE lecture_no = #{lecture_no}
+	</delete>
 </mapper>

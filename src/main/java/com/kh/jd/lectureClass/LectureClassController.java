@@ -1,11 +1,14 @@
 package com.kh.jd.lectureClass;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +37,8 @@ public class LectureClassController {
 	
 	// 분반 등록
 	@RequestMapping(value="lectureClassAdd", method=RequestMethod.POST)
-	public String addLectureCl(HttpServletRequest request) {
+	public String addLectureCl(HttpServletRequest request, HttpServletResponse response) {
+		
 		int num = Integer.parseInt(request.getParameter("lecture_no"));
 		int num1 = Integer.parseInt(request.getParameter("lecture_no_1"));
 		int cl = Integer.parseInt(request.getParameter("lectureclass_class"));
@@ -61,7 +65,6 @@ public class LectureClassController {
 		list.add(lc2);
 		
 		LCService.addLectureClass(list);
-		
-		return "lecture/lectureList";
+		return "redirect:/lecture";
 	}
 }

@@ -24,4 +24,10 @@ public class LectureDao {
 	public List<Lecture> listLecture(){
 		return sqlSession.selectList("Lecture.listLecture");
 	}
+	public int removeLecture(String lecture_no) {
+		int result = 0;
+		result = sqlSession.delete("Lecture.removeLecture", lecture_no);
+		return result;
+	}
+	
 }

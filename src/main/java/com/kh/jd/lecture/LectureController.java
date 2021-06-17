@@ -3,6 +3,7 @@ package com.kh.jd.lecture;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +22,10 @@ public class LectureController {
 	private LectureService LService;
 	
 	@RequestMapping(value = "lecture", method = RequestMethod.GET)
-	public ModelAndView listLecture(ModelAndView mv) {
-		System.out.println(LService.listLecture());
-		mv.addObject("list", LService.listLecture());
-		mv.setViewName("lecture/lectureList");
+	public ModelAndView listLecture(ModelAndView mv, HttpServletRequest request, HttpSession session) {
+			System.out.println("@@@@@@@@여기@@@@@@@@");
+			mv.addObject("list", LService.listLecture());
+			mv.setViewName("lecture/lectureList");
 		return mv;
 	}
 	
@@ -63,6 +64,14 @@ public class LectureController {
 	public String editLecture(HttpServletRequest request) {
 		String num = request.getParameter("lectureNo");
 		
+		System.out.println(num);
+		return "redirect:/lecture";
+	}
+	
+	@RequestMapping(value = "lectureRemove", method = RequestMethod.GET)
+	public String removeLecture(HttpServletRequest request) {
+		String num = request.getParameter("lectureNo");
+		LService.removeLecture(num);
 		System.out.println(num);
 		return "redirect:/lecture";
 	}

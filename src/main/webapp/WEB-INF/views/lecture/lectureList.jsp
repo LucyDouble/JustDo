@@ -58,6 +58,10 @@
     h2 {
     	
     }
+    .lecNo{
+    	text-decoration: none;
+    	color: black;
+    }
 </style>
 </head>
 <body>
@@ -77,7 +81,7 @@
 								<th>NO</th>
 								<th>분반</th>
 								<th>강의명</th>
-								<th>강의시간</th>
+								<th>강의기간</th>
 								<th>교직원</th>
 								<th>인원제한</th>
 								<th>수강인원</th>
@@ -88,9 +92,9 @@
 							<c:forEach var="vo" items="${list}">	
 								<tr>
 									<td>${vo.lecture_no}</td>
-									<td><a href="lectureClassAddForm?lecture_no=${vo.lecture_no}">설정</a></td>
+									<td><a class="lecNo" href="lectureClassAddForm?lecture_no=${vo.lecture_no}">설정</a></td>
 									<td>${vo.lecture_title}</td>
-									<td>수업시작 ~ 수업종료</td>
+									<td>${vo.lecture_start} ~ ${vo.lecture_end}</td>
 									<td>교직원</td>
 									<td>${vo.lecture_limit}</td>
 									<td>0</td>
@@ -99,15 +103,10 @@
 							</c:forEach>	
 						</tbody>
 					</table>
-<!--                     <input type="button" value="등록" onclick="window.location='lectureAddForm'"> -->
-					<!-- <input type="button" value="등록" onclick="popupCenter();"> -->
-				
-					
 				</form>
-                    <iframe src="" name="iframe" id="popup"></iframe>
 					<button onclick="addForm();">등록</button>
 					<button id="btnEdit">수정</button>
-					<button>삭제</button>
+					<button id="btnRemove">삭제</button>
 			</article>
 		</div>
 	</section>
@@ -129,6 +128,7 @@
 function addForm(){
 	location.href="lectureAddForm";
 }
+
 /* 수정 버튼 클릭 시 */
 $("#btnEdit").click(function(){
 	var frm = document.getElementById("lecturefrm");
@@ -142,6 +142,8 @@ $("#btnEdit").click(function(){
 	}
 });
 
+
 </script>
+<jsp:include page="../lecture/lectureRemove.jsp"></jsp:include>
 </body>
 </html>

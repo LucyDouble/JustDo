@@ -14,8 +14,8 @@ public class Lecture {
 	private String lecture_day;
 	private String lecture_reference;
 	private String lecture_target;
-	private String lecture_start;
-	private String lecture_end;
+	private Date lecture_start;
+	private Date lecture_end;
 	private int lecture_state;
 	
 	@Override
@@ -91,19 +91,19 @@ public class Lecture {
 		this.lecture_target = lecture_target;
 	}
 
-	public String getLecture_start() {
+	public Date getLecture_start() {
 		return lecture_start;
 	}
 
-	public void setLecture_start(String lecture_start) {
+	public void setLecture_start(Date lecture_start) {
 		this.lecture_start = lecture_start;
 	}
 
-	public String getLecture_end() {
+	public Date getLecture_end() {
 		return lecture_end;
 	}
 
-	public void setLecture_end(String lecture_end) {
+	public void setLecture_end(Date lecture_end) {
 		this.lecture_end = lecture_end;
 	}
 

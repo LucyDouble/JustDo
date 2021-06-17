@@ -27,5 +27,12 @@ public class LectureServiceImpl implements LectureService{
 	public List<Lecture> listLecture() {
 		return Ldao.listLecture();
 	}
+	
+	@Override
+	public int removeLecture(String lecture_no) {
+		int result = 0;
+		result = Ldao.removeLecture(lecture_no);
+		return result;
+	}
 
 }
