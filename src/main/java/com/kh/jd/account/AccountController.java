@@ -1,6 +1,5 @@
 package com.kh.jd.account;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -28,16 +27,18 @@ public class AccountController {
 
 	@RequestMapping(value = "/idCheck", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
-	public String idCheck(HttpServletRequest request,@RequestParam(name = "select") String check) {
-		if(check =="student" || check.equals("student")) {
-		String student_id = request.getParameter("student_id");
-		int result = sService.idCheck(student_id);
-		return Integer.toString(result);
-	}else {
-		String teacher_id = request.getParameter("teacher_id");
-		int result = tService.idCheck(teacher_id);
-		return Integer.toString(result);
-	}
+	public String idCheck(HttpServletRequest request, HttpSession session,
+			@RequestParam(name = "signUpSelect") String check) {
+		System.out.println(check);
+		if (check == "student" || check.equals("student")) {
+			String student_id = request.getParameter("id");
+			int result = sService.idCheck(student_id);
+			return Integer.toString(result);
+		} else {
+			String teacher_id = request.getParameter("id");
+			int result = tService.idCheck(teacher_id);
+			return Integer.toString(result);
+		}
 	}
 
 	@RequestMapping("/login")
@@ -45,9 +46,9 @@ public class AccountController {
 		return "account/login";
 	}
 
-	@RequestMapping(value = "/loginCheck")
+	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
 	public String loginCheck(Student sDto, Teacher tDto, HttpSession session, HttpServletRequest request,
-			@RequestParam(name = "select") String check, Model model) {
+			@RequestParam(name = "loginSelect") String check, Model model) {
 		System.out.println(check);
 		boolean result = false;
 		if (check == "student" || check.equals("student")) {
@@ -59,11 +60,11 @@ public class AccountController {
 			model.addAttribute("msg", "성공");
 			session = request.getSession();
 			if (check == "student" || check.equals("student")) {
-			Student list = new Student();
-			list = sService.infoStudent(sDto);
-			System.out.println(list);
-			request.getSession().setAttribute("studentDTO", list);
-			}else {
+				Student list = new Student();
+				list = sService.infoStudent(sDto);
+				System.out.println(list);
+				request.getSession().setAttribute("studentDTO", list);
+			} else {
 				Teacher list = new Teacher();
 				list = tService.infoTeacher(tDto);
 				System.out.println(list);
@@ -72,14 +73,14 @@ public class AccountController {
 		} else {
 			model.addAttribute("msg", "실패");
 		}
-		return "account/login";
+		return "account/signUp";
 	}
 
 	@RequestMapping("logout")
 	public ModelAndView logout(HttpSession session) {
 		sService.logout(session);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("account/login");
+		mav.setViewName("account/signUp");
 		mav.addObject("msg", "logout");
 		return mav;
 	}

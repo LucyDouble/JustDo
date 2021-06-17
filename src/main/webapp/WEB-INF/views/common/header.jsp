@@ -9,17 +9,16 @@
         <a href=""><img class="logo" src="resources/images/logo.png"></a>
         
         <div id="top_menu">
-            <a href="#">이용안내</a>
-            
             <c:choose>
             	<c:when test="${sessionScope.student_id == null && sessionScope.teacher_id ==null}">
              <a href="login">로그인</a> 
              	</c:when>
              	<c:otherwise>
              	<a href="logout">로그아웃</a>
+             	<img class="person" src="resources/images/person.png" >
              	</c:otherwise>
              </c:choose>
-             <a href="signUpPage">회원가입</a>
+             <a href="signUpPage" id=signUpPage>회원가입</a>
         </div>
         
         <nav>
@@ -41,7 +40,8 @@
                 
                 <li class="aboutJD"><a href="#">마이페이지</a>
                     <div id="drop_content">
-                        <a href="">로그인</a>
+                        <a href="login" id="login">로그인</a>
+                        <a href="logout" id="logout">로그아웃</a>
                         <a href="signUpPage">회원가입</a> 
                         <a href="#">수강과목</a>
                     </div>
@@ -56,3 +56,13 @@
         </nav>
         <a href=""><img class="logo3"  src="resources/images/logo3.jpg"></a>
     </header>
+    <script>
+    	if(${sessionScope.student_id == null && sessionScope.teacher_id == null}){
+    		$('#signUpPage').show();
+    		$('#login').show();
+    	}else{
+    		$('#signUpPage').hide();
+    		$('login').hide();
+    		$('#logout').show();
+    	}
+    </script>

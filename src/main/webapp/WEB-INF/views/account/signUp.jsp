@@ -84,8 +84,8 @@ label {
 		</div>
 		<div class="form-group">
 			<label for="category">구분</label><br> <input type="radio"
-				name="select" checked="checked" value="student">수강생 <input
-				type="radio" name="select" value="teacher">교직원
+				name="signUpSelect" checked="checked" value="student">수강생 <input
+				type="radio" name="signUpSelect" value="teacher">교직원
 		</div>
 		<div class="reg_button">
 
@@ -123,7 +123,7 @@ label {
 							var student_id = $('#student_id').val();
 							$
 									.ajax({
-										url : '${pageContext.request.contextPath}/Student/idCheck?student_id='
+										url : '${pageContext.request.contextPath}/idCheck?student_id='
 												+ student_id,
 										type : 'GET',
 										success : function(data) {
