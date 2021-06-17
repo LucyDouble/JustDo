@@ -23,4 +23,7 @@ public interface StudentService {
 	
 	//학생 정보
 	public Student infoStudent(Student dto);
+	
+	//이메일 중복 체크
+	public int emailCheck(String student_email);
 }

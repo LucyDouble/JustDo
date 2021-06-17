@@ -20,8 +20,10 @@
 		WHERE ID=#{id} AND PASSWORD = #{password}
 	</select>
 	<select id="idCheck" resultType="int">
-		SELECT COUNT(*) FROM TEACHER 
-		WHERE id = #{id} 
+		SELECT count(*) from (SELECT ID FROM STUDENT WHERE ID=#{id}
+		union all
+		SELECT
+		ID FROM TEACHER WHERE ID = #{id})
 	</select>
 	<select id="signUp">
 		insert into teacher(teacher_num, id, password, teacher_name, teacher_address, teacher_phone, teacher_email) 
@@ -30,6 +32,13 @@
 	<select id="infoTeacher" parameterType="Teacher" resultMap="TeacherMap">
 			SELECT * FROM TEACHER
 			WHERE ID = #{id} AND PASSWORD = #{password}
+	</select>
+	<select id="emailCheck" resultType="int">
+		select count(*) from (SELECT
+		email FROM STUDENT WHERE EMAIL=#{student_email}
+		union all
+		SELECT email
+		FROM TEACHER WHERE EMAIL = #{student_email})
 	</select>
 
 </mapper>

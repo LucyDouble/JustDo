@@ -57,7 +57,8 @@ public class AccountController {
 		} else {
 			result = tService.loginCheck(tDto, session);
 		}
-		if (result) {
+		if (result == true) {
+			System.out.println(result);
 			model.addAttribute("msg", "성공");
 			session = request.getSession();
 			if (check == "student" || check.equals("student")) {
@@ -72,7 +73,9 @@ public class AccountController {
 				request.getSession().setAttribute("teacherDTO", list);
 			}
 		} else {
+			System.out.println(result);
 			model.addAttribute("msg", "실패");
+			return "account/login";
 		}
 		return "account/signUp";
 	}
@@ -84,5 +87,21 @@ public class AccountController {
 		mav.setViewName("account/signUp");
 		mav.addObject("msg", "logout");
 		return mav;
+	}
+	@RequestMapping(value = "/emailCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public String emailCheck(HttpServletRequest request, @RequestParam(name = "signUpSelect") String check) {
+		System.out.println(check);
+		if (check == "student" || check.equals("student")) {
+			String student_email = request.getParameter("sign_email");
+			System.out.println(student_email);
+			int result = sService.emailCheck(student_email);
+			return Integer.toString(result);
+		} else {
+			String teacher_email = request.getParameter("sign_email");
+			System.out.println(teacher_email);
+			int result = tService.emailCheck(teacher_email);
+			return Integer.toString(result);
+		}
 	}
 }

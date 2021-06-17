@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 가입</title>
-<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
 .form {
 	margin-top: 100px;
@@ -17,6 +17,38 @@
 label {
 	font-weight: bold;
 	font-size: 18px;
+}
+
+.btn {
+	display: inline-block;
+	border-radius: 7px;
+	background-color: #6A60A9;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 5px;
+	width: 50px;
+	height: 20px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	float: right;
+}
+
+.btn btn-primary px-3 {
+	display: inline-block;
+	border-radius: 7px;
+	background-color: #6A60A9;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 5px;
+	width: 150px;
+	height: 40px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	float: right;
 }
 </style>
 
@@ -63,21 +95,14 @@ label {
 
 		<!-- 본인확인 이메일 -->
 		<div class="form-group">
-			<label for="student_email">이메일</label><br> <input type="text"
-				class="form-control" name="student_email" id="student_email"
+			<label for="sign_email">이메일</label><br> <input type="text"
+				class="form-control" name="sign_email" id="sign_email"
 				placeholder="E-mail" required>
-			<button type="button" class="btn btn-outline-danger btn-sm px-3"
-				onclick="confirm_email()">
-				<i class="fa fa-envelope"></i>&nbsp;인증
-			</button>
-			&nbsp; <br> <input type="text" style="margin-top: 5px;"
+		<br>
+<input type="text" style="margin-top: 5px;"
 				class="email_form" name="email_confirm" id="email_confirm"
 				placeholder="인증번호를 입력해주세요!" required>
 
-			<button type="button" class="btn btn-outline-info btn-sm px-3">
-				<i class="fa fa-envelope"></i>&nbsp;확인
-			</button>
-			&nbsp;
 			<div class="check_font" id="email_check"></div>
 		</div>
 		<!-- 휴대전화 -->
@@ -87,7 +112,7 @@ label {
 				placeholder="Phone Number" required>
 			<div class="check_font" id="phone_check"></div>
 		</div>
-
+		<br>
 		<div class="reg_button">
 
 			<button class="btn btn-primary px-3" id="reg_submit">
@@ -107,11 +132,11 @@ label {
 		//모든 공백 체크 정규식
 		var empCheck = /\s/g;
 		//아이디 정규식
-		var idCheck = /^[A-Za-z0-9]{6,12}$/;
+		var idCheck = /^[A-Za-z0-9]{4,12}$/;
 		// 비밀번호 정규식
 		var pwCheck = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/;
 		// 이름 정규식
-		var nameCheck = /^[가-힣]{2,6}$/;
+		var nameCheck = /^[가-힣]$/;
 		// 이메일 검사 정규식
 		var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		// 휴대폰 번호 정규식
@@ -122,11 +147,15 @@ label {
 				.blur(
 						function() {
 							var sign_id = $('#sign_id').val();
-							var signUpSelect =$('input[name="signUpSelect"]:checked').val();
+							var signUpSelect = $(
+									'input[name="signUpSelect"]:checked').val();
 							console.log(signUpSelect);
-									$.ajax({
+							$
+									.ajax({
 										url : '${pageContext.request.contextPath}/idCheck?sign_id='
-												+ sign_id + "&signUpSelect=" + signUpSelect,
+												+ sign_id
+												+ "&signUpSelect="
+												+ signUpSelect,
 										type : 'GET',
 										success : function(data) {
 											console.log("1 = 중복o / 0 = 중복x : "
@@ -171,7 +200,7 @@ label {
 
 													$('#id_check')
 															.text(
-																	"아이디는 영어와 숫자 6~12자리만 가능합니다.");
+																	"아이디는 영어와 숫자 4~12자리만 가능합니다.");
 													$('#id_check').css('color',
 															'red');
 													$('#id_check').css(
@@ -186,16 +215,16 @@ label {
 											console.log("실패");
 										}
 									});
-									$("#sign_name").blur(function() {
-										if (nameCheck.test($(this).val())) {
-												console.log(nameCheck.test($(this).val()));
-												$("#name_check").text('');
-										} else {
-											$('#name_check').text('이름을 확인해주세요');
-											$('#name_check').css('color', 'red');
-											$('#name_check').css('font-size', '5px');
-										}
-									});
+							$("#sign_name").blur(function() {
+								if (nameCheck.test($(this).val())) {
+									console.log(nameCheck.test($(this).val()));
+									$("#name_check").text('');
+								} else {
+									$('#name_check').text('이름은 한글만 입력 가능합니다.');
+									$('#name_check').css('color', 'red');
+									$('#name_check').css('font-size', '5px');
+								}
+							});
 						});
 
 		// 비밀번호 유효성 검사
@@ -205,14 +234,12 @@ label {
 			if (pwCheck.test($('#sign_pw').val())) {
 				console.log('true');
 				$('#pw_check').text('');
-			}else if(sign_pw ==""){
-				$('#pw_check').text(
-						'비밀번호를 입력해주세요');
+			} else if (sign_pw == "") {
+				$('#pw_check').text('비밀번호를 입력해주세요');
 				$('#pw_check').css('color', 'red');
 				$("#pw_check").css('font-size', '5px');
-				$("#reg_submit").attr("disabled", true);				
-				
-				
+				$("#reg_submit").attr("disabled", true);
+
 			} else {
 				console.log('false');
 				$('#pw_check').text('비밀번호는 숫자, 문자, 특수문자 조합 8~15자리만 가능합니다. :(')
@@ -225,7 +252,7 @@ label {
 		// 비밀번호 일치 확인
 		$("#sign_pw2").blur(function() {
 			var sign_pw2 = $('#sign_pw2').val();
-		
+
 			if ($('#sign_pw').val() != $(this).val()) {
 				$('#pw2_check').text('비밀번호가 일치하지 않습니다 :(');
 				$('#pw2_check').css('color', 'red');
@@ -236,6 +263,64 @@ label {
 				$('#pw2_check').text('');
 			}
 		});
+
+		$('#sign_email')
+				.blur(
+						function() {
+							// id = "id_reg" / name = "userId"
+							var sign_email = $(this).val();
+							var signUpSelect = $(
+									'input[name="signUpSelect"]:checked').val();
+							console.log(signUpSelect);
+							$
+									.ajax({
+										url : '${pageContext.request.contextPath}/emailCheck?sign_email='
+												+ sign_email
+												+ "&signUpSelect="
+												+ signUpSelect,
+										type : 'get',
+										dataType : 'json',
+										success : function(data) {
+											console.log(data);
+
+											if (data == 1) {
+												// 1 : 아이디가 중복되는 문구
+												$("#email_check").text(
+														"이미 가입된 이메일입니다 :(");
+												$("#email_check").css("color",
+														"red");
+												$("#email_check").css('font-size', '5px');
+												$("#reg_submit").attr(
+														"disabled", true);
+											} else {
+												// 이메일
+												if (mailJ.test($('#sign_email')
+														.val())) {
+													console.log(mailJ.test($(
+															'#sign_email')
+															.val()));
+													$("#email_check").text('');
+													$("#reg_submit").attr(
+															"disabled", false);
+												} else {
+													$('#email_check').text(
+															'이메일을 확인해주세요 :)');
+													$('#email_check').css(
+															'color', 'red');
+													$("#email_check").css('font-size', '5px');
+													$("#reg_submit").attr(
+															"disabled", true);
+												}
+
+											}
+
+										},
+										error : function(error) {
+											console.log("실패");
+										}
+									});
+
+						});
 	</script>
 </body>
 

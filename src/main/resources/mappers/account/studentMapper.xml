@@ -2,27 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Student">
 	<resultMap type="Student" id="StudentMap">
-		<result property="student_number" column="STUDENT_NUMBER"/>
-		<result property="id" column="ID"/>
-		<result property="password" column="PASSWORD"/>
+		<result property="student_number" column="STUDENT_NUMBER" />
+		<result property="id" column="ID" />
+		<result property="password" column="PASSWORD" />
 		<result property="student_name" column="NAME" />
 		<result property="student_address" column="ADDRESS" />
 		<result property="student_phone" column="PHONE" />
 		<result property="student_email" column="EMAIL" />
 	</resultMap>
 	<select id="loginCheck" resultType="String">
-			SELECT count(*) FROM STUDENT
-			WHERE ID = #{id} AND PASSWORD = #{password}
+		SELECT count(*) FROM STUDENT
+		WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>
-	<select id="idCheck"  resultType="int">
-			SELECT count(*) FROM STUDENT
-			WHERE ID = #{id}
+	<select id="idCheck" resultType="int">
+		SELECT count(*) from (SELECT ID FROM STUDENT WHERE ID=#{id}
+		union all
+		SELECT
+		ID FROM TEACHER WHERE ID = #{id})
 	</select>
 	<select id="signUp">
-		insert into student values (#{student_number}, #{id}, #{password}, #{student_name}, #{student_address}, #{student_phone}, #{student_email})
+		insert into student values (#{student_number}, #{id},
+		#{password}, #{student_name}, #{student_address}, #{student_phone},
+		#{student_email})
 	</select>
-		<select id="infoStudent" parameterType="Student" resultMap="StudentMap">
-			SELECT * FROM STUDENT
-			WHERE ID = #{id} AND PASSWORD = #{password}
+	<select id="infoStudent" parameterType="Student"
+		resultMap="StudentMap">
+		SELECT * FROM STUDENT
+		WHERE ID = #{id} AND PASSWORD =
+		#{password}
+	</select>
+	<select id="emailCheck" resultType="int">
+		select count(*) from (SELECT
+		email FROM STUDENT WHERE EMAIL=#{student_email}
+		union all
+		SELECT email
+		FROM TEACHER WHERE EMAIL = #{student_email})
 	</select>
 </mapper>

@@ -41,6 +41,11 @@ public class TeacherServiceImpl implements TeacherService {
 	public Teacher infoTeacher(Teacher dto) {
 		return dao.infoTeacher(dto);
 	}
+
+	@Override
+	public int emailCheck(String teacher_email) {
+		return dao.emailCheck(teacher_email);
+	}
 	
 
 

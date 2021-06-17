@@ -23,4 +23,7 @@ public interface TeacherService {
 	
 	//학생 정보
 	public Teacher infoTeacher(Teacher dto);
-}
+	
+	public int emailCheck(String teacher_email);
+	}
+

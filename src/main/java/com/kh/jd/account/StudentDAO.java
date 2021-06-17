@@ -45,4 +45,11 @@ public class StudentDAO {
 			Student result = sqlSession.selectOne("Student.infoStudent", dto);
 			return result;
 		}
+		
+	//이메일 체크
+		public int emailCheck(String student_email) {
+			System.out.println("emailCheck");
+			int result = sqlSession.selectOne("Student.emailCheck", student_email);
+			return result;
+		}
 }

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<c:url value="/resources/css/common/header.css"/>"> 
 <script type="text/javascript" src="<c:url value="/resources/js/header.js"/>"></script>
-
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <header id="header">
         <a href=""><img class="logo" src="resources/images/logo.png"></a>
         

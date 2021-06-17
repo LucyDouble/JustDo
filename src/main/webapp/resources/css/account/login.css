@@ -180,3 +180,7 @@ footer .copyright-wrap span{
 	font-size: 13px;
 	line-height: 15px;
 }
+#loginFailText{
+	font-size:5px;
+	color : red;
+}

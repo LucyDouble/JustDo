@@ -44,6 +44,11 @@ public class StudentServiceImpl implements StudentService {
 		return dao.infoStudent(dto);
 	}
 
+	@Override
+	public int emailCheck(String student_email) {
+		return dao.emailCheck(student_email);
+	}
+
 
 
 
