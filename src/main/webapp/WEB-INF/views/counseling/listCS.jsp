@@ -10,77 +10,21 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://kit.fontawesome.com/afd6aa68df.js" crossorigin="anonymous"></script>
 </head>
-<style>
-
-.search_bar {
-	padding: 3px 0;
-	outline: 1;
-	border: 1px solid transparent;
-	border-bottom: 1px solid #575756;
-	border-radius: 0;
-}
-
-.search_btn {
-	display: inline-block;
-	border-radius: 7px;
-	background-color: #6A60A9;
-	border: none;
-	color: #FFFFFF;
-	text-align: center;
-	font-size: 15px;
-	width: 70px;
-	height: 35px;
-	transition: all 0.5s;
-	cursor: pointer;
-}
-
-.search_btn span {
-	cursor: pointer;
-	display: inline-block;
-	position: relative;
-	transition: 0.5s;
-}
-
-.search_btn span:after {
-	content: '*';
-	position: absolute;
-	opacity: 0;
-	top: -5px;
-	right: -10px;
-	transition: 0.2s;
-}
-
-.search_btn:hover span {
-	padding-right: 10px;
-}
-
-.search_btn:hover span:after {
-	opacity: 1;
-	right: 0;
-}
-
-.search {
-	float: right;
-	margin-bottom: 20px;
-	padding: 0;
-} 
-
-
-</style>
 <body>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div class="lc_page">
 		<p class="lc_title">상담신청 게시판</p>
 		<br>
 
-		<!-- 서치바 -->
-		<div class="search">
-			<form class="search_form" action="#" method="get">
-				<input class="search_bar" type="text" name="keyword" placeholder="이름으로 검색">
-				<button class="search_btn" type="submit"><span>검색</span></button>
-			</form>
-		</div>
+	<div class="lc_search_box">
+        <form name="lc_search">
+            <input type="text" class="lc_search_input" name="txt" placeholder="이름으로 검색"
+            onmouseout="document.search.txt.value = ''">
+        </form>
+            <i class="fas fa-search"></i>
+    </div>
 
 		<form id="lc_form">
 			<table class="table">
