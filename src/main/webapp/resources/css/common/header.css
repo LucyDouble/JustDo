@@ -22,6 +22,7 @@ ul {
     width: 100%; 
     top: 0; 
 	height: 200px;
+	position:relative;
 }
 
 .logo {
@@ -114,10 +115,13 @@ li.aboutJD {
 }
 
 .logo3 {
-    float: right;
+   /*  float: right;
     top: 30px;
-    left: 150px;
-    height: 130px;
+    left: 150px; */
+    width: 208px;
+    position:absolute;
+    bottom:38px;
+    right:160px;
 }
 .person{
 	top:100px;

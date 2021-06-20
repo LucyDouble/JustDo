@@ -1,6 +1,7 @@
 package com.kh.jd.notice;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,19 @@ public class NoticeDao {
 	}
 	
 	//글등록
-	
-	
-	//글수정
-	
+	public int addNotice(Map add) {
+		return sqlSession.insert("Notice.addNotice", add);
+	}
 	
 	//글삭제
-	
+	public int removeNotice(int notice_no) {
+		return sqlSession.delete("Notice.removeNotice", notice_no);
+		
+	}
+	//글수정
+	public int editNotice(Map edit) {
+		System.out.println("다오 map :"  + edit);
+		return sqlSession.update("Notice.editNotice", edit);
+	}
 	
 }

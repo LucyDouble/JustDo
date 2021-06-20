@@ -30,6 +30,7 @@ a:hover {
     width: 100%;
     background-color: #6A60A9;
     margin-bottom: 10px;
+    font-size:0;
 }
 
 #footer_main>span {

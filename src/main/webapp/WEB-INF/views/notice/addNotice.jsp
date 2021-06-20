@@ -16,21 +16,27 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
+<script>
+function addWirte(){
+	alert();
+	
+}
+</script>
 </head>
 <body>
 <div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 <div class="an_page">
     <p class="an_title">공지사항 작성</p>
     <br>
-<form action="" class="addForm">
+<form action="addNotice" class="addForm" method="POST">
     <div class="form-group">
-        <label class="an_label" for="subject">&nbsp;&nbsp;제목</label>
-        <input type="text" class="form-control" id="subject" name="subject" placeholder="제목을 입력하세요.">
+        <label class="an_label" for="notice_sub">제목</label>
+        <input type="text" class="form-control" id="subject" name="notice_sub" placeholder="제목을 입력하세요.">
     </div>
     <br>
     <div id="editor" class="form-group">
-      <label class="an_label" for="content">&nbsp;&nbsp;내용</label>
-    	<textarea cols="10" id="editor1" name="editor1" rows="10"></textarea>
+      <label class="an_label" for="content">내용</label>
+    	<textarea cols="10" id="editor1" name="notice_con" rows="10"></textarea>
     	
     	
    <script>
@@ -42,9 +48,9 @@
   </script>
     </div>
     <br>
-    <button type="submit" class="button" onclick="location.href='listNotice'"><span>목록</span></button>
-    <button type="submit" class="button" onclick="location.href='listNotice'"><span>등록</span></button>
+    <button type="submit" class="button" ><span>등록</span></button>
   </form>
+    <button class="button" onclick="location.href='listNotice'"><span>목록</span></button>
 </div>
 
 <jsp:include page="../common/footer.jsp"></jsp:include>
