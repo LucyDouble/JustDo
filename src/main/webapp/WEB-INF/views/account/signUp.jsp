@@ -50,6 +50,14 @@ label {
 	margin: 5px;
 	float: right;
 }
+
+#mail_check_input_box_false {
+	background-color: #ebebe4;
+}
+
+#mail_check_input_box_true {
+	background-color: white;
+}
 </style>
 
 </head>
@@ -65,28 +73,28 @@ label {
 		</div>
 		<br>
 		<!-- 아이디 -->
-		<div class="form-group">
+		<div class="id-group">
 			<label for="sign_id">아이디</label> <br> <input type="text"
 				class="form-control" id="sign_id" name="sign_id" placeholder="ID"
 				required>
 			<div class="check_font" id="id_check"></div>
 		</div>
 		<!-- 비밀번호 -->
-		<div class="form-group">
+		<div class="password-group">
 			<label for="sign_pw">비밀번호</label> <br> <input type="password"
 				class="form-control" id="sign_pw" name="sign_pw"
 				placeholder="PASSWORD" required>
 			<div class="check_font" id="pw_check"></div>
 		</div>
 		<!-- 비밀번호 재확인 -->
-		<div class="form-group">
+		<div class="passwordCheck-group">
 			<label for="sign_pw2">비밀번호 확인</label> <br> <input
 				type="password" class="form-control" id="sign_pw2" name="sign_pw2"
 				placeholder="Confirm Password" required>
 			<div class="check_font" id="pw2_check"></div>
 		</div>
 		<!-- 이름 -->
-		<div class="form-group">
+		<div class="name-group">
 			<label for="sign_name">이름</label><br> <input type="text"
 				class="form-control" id="sign_name" name="sign_name"
 				placeholder="Name" required>
@@ -94,19 +102,25 @@ label {
 		</div>
 
 		<!-- 본인확인 이메일 -->
-		<div class="form-group">
-			<label for="sign_email">이메일</label><br> <input type="text"
-				class="form-control" name="sign_email" id="sign_email"
-				placeholder="E-mail" required>
-		<br>
-<input type="text" style="margin-top: 5px;"
-				class="email_form" name="email_confirm" id="email_confirm"
-				placeholder="인증번호를 입력해주세요!" required>
-
-			<div class="check_font" id="email_check"></div>
+		<div class="mail-group">
+			<div class="mail_name">
+				<label for="sign_email">이메일</label>
+			</div>
+			<div class="mail_input_box" id="mail_check_input_box_false">
+				<input class="mail_input" name="memberMail">
+			</div>
+			<div class="mail_check_wrap">
+				<div class="mail_check_input_box">
+					<input class="mail_check_input" disabled="disabled">
+				</div>
+				<div class="mail_check_button">
+					<span>인증번호 전송</span>
+				</div>
+				<div class="clearfix"></div>
+			</div>
 		</div>
 		<!-- 휴대전화 -->
-		<div class="form-group">
+		<div class="phone-group">
 			<label for="student_phone">휴대전화</label><br> <input type="text"
 				class="form-control" id="student_phone" name="student_phone"
 				placeholder="Phone Number" required>
@@ -289,7 +303,8 @@ label {
 														"이미 가입된 이메일입니다 :(");
 												$("#email_check").css("color",
 														"red");
-												$("#email_check").css('font-size', '5px');
+												$("#email_check").css(
+														'font-size', '5px');
 												$("#reg_submit").attr(
 														"disabled", true);
 											} else {
@@ -307,7 +322,8 @@ label {
 															'이메일을 확인해주세요 :)');
 													$('#email_check').css(
 															'color', 'red');
-													$("#email_check").css('font-size', '5px');
+													$("#email_check").css(
+															'font-size', '5px');
 													$("#reg_submit").attr(
 															"disabled", true);
 												}
@@ -321,6 +337,16 @@ label {
 									});
 
 						});
+		
+		/* 인증번호 이메일 전송 */
+		$(".mail_check_button").click(function(){
+			var email = $(".mail_input").val();
+			
+			$.ajax({
+				type:"GET",
+				url:"mailCheck?email="+email
+			})
+		});
 	</script>
 </body>
 
