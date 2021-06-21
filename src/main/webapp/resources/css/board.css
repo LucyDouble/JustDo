@@ -36,6 +36,9 @@ body {
 	clear: both;
 	margin-bottom: 50px;
 }
+.ln_paging {
+	margin-top:25px;
+}
 
 .vn_title, .en_title, .an_title, .lc_title{
 	font-size: 25px;
@@ -49,19 +52,19 @@ body {
 	color: #fff;
 	line-height: 1.4;
 	background-color: #6A60A9;
-	padding-left:15px;
-	padding-right:15px;
+	padding-left:10px;
+	padding-right:10px;
 }
 
 .table td {
 	font-size: 15px;
 	color: black;
 	line-height: 1.4;
-	padding-left:15px;
-	padding-right:15px;
+	padding-left:10px;
+	padding-right:10px;
 }
 .cont3{
-	height:300px;
+	height:400px;
 }
 .table .table tr:nth-child(even) {
 	background-color: #f8f6ff;

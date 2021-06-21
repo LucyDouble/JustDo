@@ -21,10 +21,11 @@
 			<br>
 			<table class="table">
 				<colgroup>
-        			<col style="width: 10%;">
-        			<col style="width: 60%;">
-        			<col style="width: 15%">
-        			<col style="width: 15%;">
+        		 	<col style="width: 60px;">
+        			<col style="width: ;">
+        			<col style="width: 120px;">
+        			<col style="width: 100px;">
+        			<col style="width: 80px;">
     			</colgroup>
 				<thead>
 					<tr>
@@ -32,12 +33,13 @@
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성시간</th>
+						<th>조회수</th>
 					</tr>
 				</thead>
 				<tbody>
 				<c:forEach items="${listNotice }" var="list">
 					<tr>
-						<td>${list.notice_no}</td>
+						<td>${list.rnum}</td>
 						<td class="ln_cont"><a href="viewNotice?n_no=${list.notice_no}">${list.notice_sub }</a></td>
 						<td>
 							<c:if test="${list.manager_number >= 20000 }">운영자</c:if>
@@ -45,6 +47,7 @@
 							</td>
  							<td><fmt:parseDate value="${list.notice_date}" var="noticePostDate" pattern="yyyy-MM-dd"/>
 							<fmt:formatDate value="${noticePostDate}" pattern="yyyy.MM.dd"/></td>
+							<td>${list.hit }</td>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -52,8 +55,31 @@
 			<button class="button" onclick="location.href='addNoticeForm'">
 				<span>글쓰기</span>
 			</button>
-			<sciprt src="js/jqurey-3.1.1.js"></sciprt>
-			<sciprt src="js/bootstrap.js"></sciprt>
+
+		<div class="ln_paging">
+			<c:if test="${startPage != 1 }">
+				<a
+					href="<%=request.getContextPath() %>/listNotice?page=${startPage-1}&keyword=${keyword}">이전</a>
+			</c:if>
+			<c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
+				<c:if test="${p eq currentPage}">
+					<font color="#6A60A9" size="4"><b>[${p}]</b></font>
+				</c:if>
+				<c:if test="${p ne currentPage}">
+					<c:url var="listNoticeChk" value="listNotice?keyword=${keyword}">
+						<c:param name="page" value="${p}" />
+					</c:url>
+					<a href="${listNoticeChk}">${p}</a>
+				</c:if>
+			</c:forEach>
+			<c:if test="${endPage < pageCnt }">
+				<a
+					href="<%=request.getContextPath() %>/listNotice?page=${endPage+1}&keyword=${keyword}">다음</a>
+			</c:if>
+		</div>
+
+		<sciprt src="js/jqurey-3.1.1.js"></sciprt>
+		<sciprt src="js/bootstrap.js"></sciprt>
 		</div>
 </body>
 	<jsp:include page="../common/footer.jsp"></jsp:include>

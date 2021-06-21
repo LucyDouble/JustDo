@@ -7,6 +7,7 @@
 		<result property="notice_con" column="NOTICE_CON"/>
 		<result property="notice_date" column="NOTICE_DATE"/>
 		<result property="notice_filepath" column="NOTICE_FILEPATH"/>
+		<result property="hit" column="HIT"/>
 		<result property="manager_num" column="MANAGER_NUMBER"/>
 		<result property="manager_name" column="MANAGER_NAME"/>
 		<result property="teacher_num" column="TEACHER_NUMBER"/>
@@ -16,12 +17,17 @@
 		<!-- 목록조회 -->
 		<select id="listNotice" resultType="Notice">
 		<![CDATA[
-			select nm.*,t.name as teacher_name from (select n.*,m.name as manager_name from notice n left outer join managers m on n.manager_number = m.manager_number) nm left outer join teacher t on nm.teacher_number = t.teacher_number
-			order by notice_no desc
+			select * from (select  rownum rnum, nm.*,t.name as teacher_name from (select n.*,m.name as manager_name from notice n left outer join managers m on n.manager_number = m.manager_number order by notice_no asc) nm left outer join teacher t on nm.teacher_number = t.teacher_number
+			) order by rnum desc
 		]]>
 		</select>
-
-
+		
+		<!-- 페이징 -->
+		<select id="getlistCount" resultType="int" parameterType="Map">
+		SELECT COUNT(*)
+		from notice
+		</select>
+		
 		<!-- 글조회 -->
 		<select id="viewNotice" resultType="Notice">
 		<![CDATA[
@@ -29,26 +35,24 @@
 			where notice_no = #{notice_no}
 		]]>
 		</select>
-
+		
 		<!-- 글등록 -->
 		<insert id="addNotice" parameterType="Notice">
 			<selectKey keyProperty="numbc" resultType="integer" order="BEFORE" >
-		  select nvl(max(notice_no),0)+1 cnt from notice
-		</selectKey>
+		  		select nvl(max(notice_no),0)+1 cnt from notice
+			</selectKey>
 	        insert into notice values(	        
 	        	${numbc}, ${manager_number}, ${teacher_number}, #{notice_sub}, #{notice_con}, sysdate ,#{notice_filepath} )
 		</insert>
-
+		
 		<!-- 글수정 -->
 		<update id="editNotice" parameterType="Notice" >
 			update notice set notice_sub = #{notice_sub},
 							  notice_con = #{notice_con},
 							  notice_date = sysdate
-							  
 			where
 				notice_no = ${notice_no}
 		</update>
-		
 		
 		<!-- 글삭제 -->
 		<delete id="removeNotice" parameterType="Notice">
@@ -56,4 +60,10 @@
 			delete from notice where notice_no = #{notice_no}
 			]]>
 		</delete>
+		
+		<!--  조회수 -->
+		<update id="hit" parameterType="int">
+			update notice set hit = hit+1
+			where notice_no = #{notice_no}
+		</update>
 </mapper>

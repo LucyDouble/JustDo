@@ -15,12 +15,14 @@ public class Notice {
 	private String manager_name;
 	private int teacher_number;
 	private String teacher_name;
+	private int rnum;
+	private int hit;
 	@Override
 	public String toString() {
 		return "Notice [notice_no=" + notice_no + ", notice_sub=" + notice_sub + ", notice_con=" + notice_con
 				+ ", notice_date=" + notice_date + ", notice_filepath=" + notice_filepath + ", manager_number="
 				+ manager_number + ", manager_name=" + manager_name + ", teacher_number=" + teacher_number
-				+ ", teacher_name=" + teacher_name + "]";
+				+ ", teacher_name=" + teacher_name + ", rnum=" + rnum + ", hit=" + hit + "]";
 	}
 	public int getNotice_no() {
 		return notice_no;
@@ -76,6 +78,20 @@ public class Notice {
 	public void setTeacher_name(String teacher_name) {
 		this.teacher_name = teacher_name;
 	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	
+	
 	
 }
 	
