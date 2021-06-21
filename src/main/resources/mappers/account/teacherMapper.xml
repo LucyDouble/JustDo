@@ -40,5 +40,10 @@
 		SELECT email
 		FROM TEACHER WHERE EMAIL = #{student_email})
 	</select>
-
+	<select id="phoneCheck" resultType="int">
+		SELECT count(*) from (SELECT PHONE FROM STUDENT WHERE PHONE=#{teacher_phone}
+		union all
+		SELECT
+		PHONE FROM TEACHER WHERE PHONE = #{teacher_phone})
+	</select>
 </mapper>

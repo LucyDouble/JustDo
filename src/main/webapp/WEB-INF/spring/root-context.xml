@@ -8,12 +8,12 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- Spring MVC AOP 어노테이션 자동 등록 -->
 	<aop:aspectj-autoproxy />
-	
+
 	<!-- Multipart 파일 업로드 관련 bean 등록 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
-		
-		<!-- 서버기반 WAS, DBMS 의 설정 등록 -->
+
+	<!-- 서버기반 WAS, DBMS 의 설정 등록 -->
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName"
@@ -38,18 +38,23 @@
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 	<!-- gmail설정 -->
-<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
-     <property name="host" value="smtp.gmail.com" />
-     <property name="port" value="587" />
- <property name="username" value="rkdgns92@gmail.com"/> <!-- 자신의 이메일 아이디 -->
- <property name="password" value="kanghun9@"/> <!-- 자신의 비밀번호 -->
- <!-- 보안연결 TLS과 관련된 설정 -->
-     <property name="javaMailProperties">
-    <props>
-       <prop key="mail.smtp.auth">true</prop>
-       <prop key="mail.smtp.starttls.enable">true</prop>
-    </props>
-     </property>
-</bean>
-	
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="rkdgns92@gmail.com" /> <!-- 자신의 이메일 아이디 -->
+		<property name="password" value="kanghun9@" /> <!-- 자신의 비밀번호 -->
+		<!-- 보안연결 TLS과 관련된 설정 -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+			</props>
+		</property>
+	</bean>
+
 </beans>

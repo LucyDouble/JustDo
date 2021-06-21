@@ -45,9 +45,17 @@ public class TeacherDAO {
 			Teacher result = sqlSession.selectOne("Teacher.infoTeacher", dto);
 			return result;
 		}
+		
+	// 이메일 체크
 		public int emailCheck(String teacher_email) {
 			System.out.println("emailCheck");
 			int result = sqlSession.selectOne("Teacher.emailCheck", teacher_email);
+			return result;
+		}
+	//휴대폰 체크
+		public int phoneCheck(String teacher_phone) {
+			System.out.println("phoneCheck");
+			int result = sqlSession.selectOne("Teacher.phoneCheck", teacher_phone);
 			return result;
 		}
 }

@@ -152,4 +152,21 @@ public String mailCheckGet(String email) throws Exception{
 
 }
 
+@RequestMapping(value="/phoneCheck", method=RequestMethod.GET)
+@ResponseBody
+public String phoneCheck(HttpServletRequest request, @RequestParam(name = "signUpSelect") String check) {
+	System.out.println(check);
+	if (check == "student" || check.equals("student")) {
+		String student_phone = request.getParameter("sign_phone");
+		System.out.println(student_phone);
+		int result = sService.phoneCheck(student_phone);
+		return Integer.toString(result);
+	} else {
+		String teacher_phone = request.getParameter("sign_phone");
+		System.out.println(teacher_phone);
+		int result = tService.phoneCheck(teacher_phone);
+		return Integer.toString(result);
+	}
+}
+
 }

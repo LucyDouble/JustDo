@@ -34,6 +34,21 @@ label {
 	margin: 5px;
 	float: right;
 }
+#email_submit{
+	display: inline-block;
+	border-radius: 7px;
+	background-color: #6A60A9;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 5px;
+	width: 80px;
+	height: 20px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	float: right;
+}
 
 .btn btn-primary px-3 {
 	display: inline-block;
@@ -58,6 +73,10 @@ label {
 #mail_check_input_box_true {
 	background-color: white;
 }
+#email_check{
+	top:30px;
+}
+
 </style>
 
 </head>
@@ -106,23 +125,29 @@ label {
 			<div class="mail_name">
 				<label for="sign_email">이메일</label>
 			</div>
-			<div class="mail_input_box" id="mail_check_input_box_false">
-				<input class="mail_input" name="memberMail">
+			<div class="mail_input_box">
+				<input class="mail_input" name="memberMail" id = "sign_email">
 			</div>
+			<div class="check_font" id="email_check"></div>
+				<div class="mail_check_button" >
+					<button class="email_submit" id="email_submit">
+						인증번호전송
+					</button>
+					<div class="clearfix"></div>
+				</div>
 			<div class="mail_check_wrap">
 				<div class="mail_check_input_box">
 					<input class="mail_check_input" disabled="disabled">
 				</div>
-				<div class="mail_check_button">
-					<span>인증번호 전송</span>
-				</div>
 				<div class="clearfix"></div>
+				<span id="mail_check_input_box_warn"></span>
 			</div>
 		</div>
-		<!-- 휴대전화 -->
+		
+				<!-- 휴대전화 -->
 		<div class="phone-group">
-			<label for="student_phone">휴대전화</label><br> <input type="text"
-				class="form-control" id="student_phone" name="student_phone"
+			<label for="phone_name">휴대전화</label><br> <input type="text"
+				class="form-control" id="sign_phone" name="memberPhone"
 				placeholder="Phone Number" required>
 			<div class="check_font" id="phone_check"></div>
 		</div>
@@ -150,12 +175,15 @@ label {
 		// 비밀번호 정규식
 		var pwCheck = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/;
 		// 이름 정규식
-		var nameCheck = /^[가-힣]$/;
+		var nameCheck = /^[가-힣]{2,8}$/;
 		// 이메일 검사 정규식
-		var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		var mailCheck = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		// 휴대폰 번호 정규식
-		var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
-
+		var phoneCheck = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
+		//이메일 전송 인증번호 저장 코드
+		var code = ""; 
+		
+		
 		// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
 		$("#sign_id")
 				.blur(
@@ -234,7 +262,7 @@ label {
 									console.log(nameCheck.test($(this).val()));
 									$("#name_check").text('');
 								} else {
-									$('#name_check').text('이름은 한글만 입력 가능합니다.');
+									$('#name_check').text('이름은 한글 2~8자리만 입력 가능합니다.');
 									$('#name_check').css('color', 'red');
 									$('#name_check').css('font-size', '5px');
 								}
@@ -307,19 +335,21 @@ label {
 														'font-size', '5px');
 												$("#reg_submit").attr(
 														"disabled", true);
+												$("#")
 											} else {
 												// 이메일
-												if (mailJ.test($('#sign_email')
+												if (mailCheck.test($('#sign_email')
 														.val())) {
-													console.log(mailJ.test($(
-															'#sign_email')
-															.val()));
-													$("#email_check").text('');
+													$("#email_check").text('사용 가능한 이메일입니다. :)');
 													$("#reg_submit").attr(
 															"disabled", false);
+													$('#email_check').css(
+															'color', 'blue');
+													$("#email_check").css(
+															'font-size', '5px');
 												} else {
 													$('#email_check').text(
-															'이메일을 확인해주세요 :)');
+															'이메일을 확인해주세요 :()');
 													$('#email_check').css(
 															'color', 'red');
 													$("#email_check").css(
@@ -340,13 +370,103 @@ label {
 		
 		/* 인증번호 이메일 전송 */
 		$(".mail_check_button").click(function(){
-			var email = $(".mail_input").val();
-			
+			alert("인증번호를 발송했습니다.");
+			var email = $(".mail_input").val();       // 입력 이메일
+			var checkBox=$(".mail_check_input");  // 인증번호 입력란
+			var boxWrap=$(".mail_check_input_box"); // 인증번호 입력란 박스
 			$.ajax({
 				type:"GET",
-				url:"mailCheck?email="+email
+				url:"mailCheck?email="+email,
+				success:function(data){
+					checkBox.attr("disabled", false);
+					boxWrap.attr("id", "mail_check_input_box_true");
+					code = data;
+				}
 			})
 		});
+		
+		/* 인증번호 비교 */
+		$(".mail_check_input").blur(function(){
+			var inputCode = $(".mail_check_input").val();
+			var checkResult = $("#mail_check_input_box_warn");
+			
+			if(inputCode == code){
+				checkResult.html("인증번호가 일치합니다.");
+				checkResult.attr("class", "correct");
+				$(".correct").css(
+						'font-size', '5px');
+				$(".correct").css(
+						'color', 'blue');
+			}else{
+				checkResult.html("인증번호를 다시 확인해주세요.");
+				checkResult.attr("class", "incorrect");
+				$(".incorrect").css(
+						'font-size', '5px');
+				$(".incorrect").css(
+						'color', 'red');
+			}
+		});
+		
+		/* 휴대전화  */
+			$('#sign_phone')
+				.blur(
+						function() {
+							var sign_phone = $(this).val();
+							var signUpSelect = $(
+									'input[name="signUpSelect"]:checked').val();
+							console.log(signUpSelect);
+							$
+									.ajax({
+										url : '${pageContext.request.contextPath}/emailCheck?sign_phone='
+												+ sign_phone
+												+ "&signUpSelect="
+												+ signUpSelect,
+										type : 'get',
+										dataType : 'json',
+										success : function(data) {
+											console.log(data);
+
+											if (data == 1) {
+												// 1 : 아이디가 중복되는 문구
+												$("#phone_check").text(
+														"이미 등록된 번호입니다 :(");
+												$("#phone_check").css("color",
+														"red");
+												$("#phone_check").css(
+														'font-size', '5px');
+												$("#reg_submit").attr(
+														"disabled", true);
+											} else {
+												// 이메일
+												if (mailCheck.test($('#sign_phone')
+														.val())) {
+													$("#phone_check").text('사용 가능한 번호 입니다. :)');
+													$("#reg_submit").attr(
+															"disabled", false);
+													$('#phone_check').css(
+															'color', 'blue');
+													$("#phone_check").css(
+															'font-size', '5px');
+												} else {
+													$('#phone_check').text(
+															'비밀번호를 확인해주세요 :(');
+													$('#phone_check').css(
+															'color', 'red');
+													$("#phone_check").css(
+															'font-size', '5px');
+													$("#reg_submit").attr(
+															"disabled", true);
+												}
+
+											}
+
+										},
+										error : function(error) {
+											console.log("실패");
+										}
+									});
+
+						});
 	</script>
 </body>
 

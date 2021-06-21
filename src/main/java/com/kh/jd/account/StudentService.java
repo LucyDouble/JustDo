@@ -26,4 +26,7 @@ public interface StudentService {
 	
 	//이메일 중복 체크
 	public int emailCheck(String student_email);
+	
+	//휴대폰 중복 체크
+	public int phoneCheck(String student_phone);
 }

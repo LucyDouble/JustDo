@@ -52,4 +52,11 @@ public class StudentDAO {
 			int result = sqlSession.selectOne("Student.emailCheck", student_email);
 			return result;
 		}
+		
+	//휴대폰 체크
+		public int phoneCheck(String student_phone) {
+			System.out.println("phoneCheck");
+			int result = sqlSession.selectOne("Student.phoneCheck", student_phone);
+			return result;
+		}
 }

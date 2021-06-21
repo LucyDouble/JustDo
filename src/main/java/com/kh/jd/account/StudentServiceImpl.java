@@ -49,6 +49,11 @@ public class StudentServiceImpl implements StudentService {
 		return dao.emailCheck(student_email);
 	}
 
+	@Override
+	public int phoneCheck(String student_phone) {
+		return dao.phoneCheck(student_phone);
+	}
+
 
 
 
