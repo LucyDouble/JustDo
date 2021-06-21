@@ -22,5 +22,10 @@ public class LectureClassServiceImpl implements LectureClassService {
 		
 		return LCdao.addLectureClass(list);
 	}
+
+	@Override
+	public List<LectureClass> listLectureClass() {
+		return LCdao.listLectureClass();
+	}
 	
 }

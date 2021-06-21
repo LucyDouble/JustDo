@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LectureClass {
+	private int lectureclass_no;
 	private int lecture_no;
 	private int lectureclass_class;
 	private String lectureclass_start;
@@ -11,8 +12,17 @@ public class LectureClass {
 	
 	@Override
 	public String toString() {
-		return "LectureClass [lecture_no=" + lecture_no + ", lectureclass_class=" + lectureclass_class
-				+ ", lectureclass_start=" + lectureclass_start + ", lectureclass_end=" + lectureclass_end + "]";
+		return "LectureClass [lectureclass_no=" + lectureclass_no + ", lecture_no=" + lecture_no
+				+ ", lectureclass_class=" + lectureclass_class + ", lectureclass_start=" + lectureclass_start
+				+ ", lectureclass_end=" + lectureclass_end + "]";
+	}
+
+	public int getLectureclass_no() {
+		return lectureclass_no;
+	}
+
+	public void setLectureclass_no(int lectureclass_no) {
+		this.lectureclass_no = lectureclass_no;
 	}
 
 	public int getLecture_no() {
@@ -46,6 +56,7 @@ public class LectureClass {
 	public void setLectureclass_end(String lectureclass_end) {
 		this.lectureclass_end = lectureclass_end;
 	}
+	
 	
 	
 }

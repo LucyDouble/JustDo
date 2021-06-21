@@ -89,10 +89,17 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="vo" items="${list}">	
+							<c:forEach var="vo" items="${list}" varStatus="status">	
+							<c:set var="vo2" value="${list2[status.index]}"/>
 								<tr>
 									<td>${vo.lecture_no}</td>
+									<td>${vo2.lecture_no }</td>
+									<c:if test="${vo.lecture_no != vo2.lecture_no }">
 									<td><a class="lecNo" href="lectureClassAddForm?lecture_no=${vo.lecture_no}">설정</a></td>
+									</c:if>
+									<c:if test="${vo.lecture_no == vo2.lecture_no }">
+									<td>완료고고고</td>
+									</c:if>
 									<td>${vo.lecture_title}</td>
 									<td>${vo.lecture_start} ~ ${vo.lecture_end}</td>
 									<td>교직원</td>
@@ -100,7 +107,7 @@
 									<td>0</td>
 									<td><input type="radio" name="lectureNo" value="${vo.lecture_no}"></td>
 								</tr>
-							</c:forEach>	
+							</c:forEach>
 						</tbody>
 					</table>
 				</form>

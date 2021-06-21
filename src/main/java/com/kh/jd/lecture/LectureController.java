@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jd.lectureClass.LectureClass;
@@ -20,11 +21,14 @@ import com.kh.jd.lectureClass.LectureClassService;
 public class LectureController {
 	@Autowired
 	private LectureService LService;
+	@Autowired
+	private LectureClassService LCService;
 	
 	@RequestMapping(value = "lecture", method = RequestMethod.GET)
 	public ModelAndView listLecture(ModelAndView mv, HttpServletRequest request, HttpSession session) {
 			System.out.println("@@@@@@@@여기@@@@@@@@");
 			mv.addObject("list", LService.listLecture());
+			mv.addObject("list2",LCService.listLectureClass());
 			mv.setViewName("lecture/lectureList");
 		return mv;
 	}
@@ -35,39 +39,30 @@ public class LectureController {
 		return "lecture/lectureAdd";
 	}
 	
-	// 등록 기능
-//	@RequestMapping(value = "lectureAdd", method = RequestMethod.POST)
-//	public ModelAndView addLecture(
-//				Lecture lecture,
-//				ModelAndView mv
-//			) {
-//		System.out.println("ggg");
-//		if(lecture==null) {
-//			System.out.println("에러");
-//		}else {
-//			LService.addLecture(lecture);
-//			mv.setViewName("redirect:/lecture");
-//		}
-//		
-//		return mv;
-//	}
-	
-	
-	
+	// 등록
 	@RequestMapping(value = "lectureAdd", method = RequestMethod.POST)
 	public String addLecture(@ModelAttribute Lecture lecture) {
 		LService.addLecture(lecture);
 		return "redirect:/lecture";
 	}
 	
+	// 수정 폼
 	@RequestMapping(value = "lectureEditForm", method = RequestMethod.GET)
-	public String editLecture(HttpServletRequest request) {
+	public String editLecture(HttpServletRequest request, Model m) {
 		String num = request.getParameter("lectureNo");
-		
-		System.out.println(num);
+		m.addAttribute("view", LService.viewLecture(num));
+		return "/lecture/lectureEdit";
+	}
+	
+	// 수정
+	@RequestMapping(value = "lectureEdit", method = RequestMethod.POST)
+	public String editLecture(@ModelAttribute Lecture lecture) {
+		LService.editLecture(lecture);
+		System.out.println("수정들어옴");
 		return "redirect:/lecture";
 	}
 	
+	// 삭제
 	@RequestMapping(value = "lectureRemove", method = RequestMethod.GET)
 	public String removeLecture(HttpServletRequest request) {
 		String num = request.getParameter("lectureNo");

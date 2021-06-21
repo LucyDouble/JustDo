@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Registration">
+	<resultMap type="Registration" id="RegistrationResult">
+		<id column="registration_no" property="registration_no"/>
+		<result column="lectureclass_no" property="lectureclass_no"/>
+		<result column="student_number" property="student_number"/>
+	</resultMap>
 </mapper>

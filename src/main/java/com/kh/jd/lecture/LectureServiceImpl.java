@@ -34,5 +34,15 @@ public class LectureServiceImpl implements LectureService{
 		result = Ldao.removeLecture(lecture_no);
 		return result;
 	}
+	
+	@Override
+	public Lecture viewLecture(String lecture_no) {
+		return Ldao.viewLecture(lecture_no);
+	}
+	
+	@Override
+	public int editLecture(Lecture lecture) {
+		return Ldao.editLecture(lecture);
+	}
 
 }

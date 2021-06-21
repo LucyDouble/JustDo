@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 public class LectureDao {
 	@Autowired
 	private SqlSession sqlSession;
+	
 	public int addLecture(Lecture lecture) {
 		int result = 0;
 		try {
@@ -21,13 +22,23 @@ public class LectureDao {
 		}
 		return result;
 	}
+	
 	public List<Lecture> listLecture(){
 		return sqlSession.selectList("Lecture.listLecture");
 	}
+	
 	public int removeLecture(String lecture_no) {
 		int result = 0;
 		result = sqlSession.delete("Lecture.removeLecture", lecture_no);
 		return result;
+	}
+	
+	public Lecture viewLecture(String lecture_no) {
+		return sqlSession.selectOne("Lecture.viewLecture",lecture_no);
+	}
+	
+	public int editLecture(Lecture lecture) {
+		return sqlSession.update("Lecture.editLecture", lecture);
 	}
 	
 }

@@ -14,13 +14,20 @@
 		<result column="lecture_end" property="lecture_end"/>
 		<result column="lecture_state" property="lecture_state"/>
 	</resultMap>
+
+	<!-- 하나만 조회 -->
+	<select id="viewLecture" resultMap="lectureResult" parameterType="string">
+		SELECT * FROM LECTURE WHERE lecture_no = #{lecture_no}
+	</select>
 	
+	<!-- 목록조회 -->
 	<select id="listLecture" resultMap="lectureResult">
 		SELECT 
 			*
 		FROM LECTURE ORDER BY lecture_no ASC
 	</select>
 	
+	<!-- 강의등록 -->
 	<insert id="addLecture" parameterType="Lecture" >
 		INSERT INTO LECTURE VALUES(
 			SEQ_LECTURE.NEXTVAL, #{teacher_number}, #{lecture_title}, #{lecture_limit},
@@ -29,7 +36,16 @@
 		) 
 	</insert>
 	
+	<!-- 강의삭제 -->
 	<delete id="removeLecture" parameterType="string">
 		DELETE FROM LECTURE WHERE lecture_no = #{lecture_no}
 	</delete>
+	
+	<!-- 강의수정 -->
+	<update id="editLecture">
+		UPDATE LECTURE SET lecture_no = #{lecture_no}, teacher_number= #{teacher_number}, lecture_title= #{lecture_title}, lecture_limit= #{lecture_limit},
+		lecture_major= #{lecture_major}, lecture_day= #{lecture_day}, lecture_reference= #{lecture_reference}, 
+		lecture_target= #{lecture_target}, lecture_start= #{lecture_start}, lecture_end = #{lecture_end} WHERE lecture_no = #{lecture_no}
+		
+	</update>
 </mapper>

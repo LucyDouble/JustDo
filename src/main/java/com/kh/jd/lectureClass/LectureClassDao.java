@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.jd.lecture.Lecture;
+
 @Repository("LCdao")
 public class LectureClassDao {
 	@Autowired
@@ -20,5 +22,9 @@ public class LectureClassDao {
 	}
 	public LectureClass viewLectureClass(String num) {
 		return sqlSession.selectOne("LectureClass.viewLectureClass", num);
+	}
+	
+	public List<LectureClass> listLectureClass(){
+		return sqlSession.selectList("LectureClass.listLectureClass");
 	}
 }
