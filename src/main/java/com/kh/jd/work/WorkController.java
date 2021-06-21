@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +32,7 @@ public class WorkController {
 	@Autowired
 	private WorkService workService;
 	public static final int LIMIT = 10;
+	public static final int LIMIT2 = 10;
 	public static final int pageBlock = 5;
 	@RequestMapping(value = "/listWork", method = RequestMethod.GET)
 	public ModelAndView listWork(ModelAndView mv
@@ -95,8 +97,15 @@ public class WorkController {
 	}
 	@RequestMapping(value = "/addWork", method = RequestMethod.POST)
 	public String addWork(ModelAndView mv,Work vo)  {
+		System.out.println(vo.getLecture_no());
+		List<Work> aa =workService.registrationNo(vo.getLecture_no());
+		System.out.println(aa);
 		workService.addWork(vo);
+		for (Work work : aa) {
+			workService.addWorkResult( work.getRegistration_no());
+		}
 		return "redirect:/listWork";
+		
 	}
 	@RequestMapping(value = "classCheck", method = RequestMethod.GET, produces = "application/text; charset=utf8")
 	@ResponseBody
@@ -165,6 +174,16 @@ public class WorkController {
 			, @RequestParam(name = "keyword", defaultValue = "") String keyword)  {
 		System.out.println("결과목록으로 이동할껀데 잘 들어왔나"+vo);
 		
+		
+		double class1_mo= workService.getCountClass1(vo.getWork_no());
+		double class1_ch= workService.getCountWorkSubmit1(vo.getWork_no())*100;
+		double class2_mo= workService.getCountClass2(vo.getWork_no());
+		double class2_ch= workService.getCountWorkSubmit2(vo.getWork_no())*100;
+		System.out.println(class1_mo+"<분자"+class1_ch+"<분모"+class2_mo+"<분모"+class2_ch);
+		System.out.println(String.format("%.0f", class1_ch/class1_mo)+"어랍쇼?"+String.format("%.0f", class2_ch/class2_mo));
+		String classOne=String.format("%.0f", class1_ch/class1_mo);
+		String classTwo=String.format("%.0f", class2_ch/class2_mo);
+		String total =String.format("%.0f", (class2_ch+class1_ch)/(class2_mo+class1_mo));
 		//TODO
 		Map<String,Object>map = new HashMap<String,Object>();
 		map.put("keyword", keyword);
@@ -173,7 +192,7 @@ public class WorkController {
 		
 		int listCount = workService.getlistWorkResultCount(map);
 		
-		int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
+		int pageCnt = (listCount / LIMIT2) + (listCount % LIMIT2 == 0 ? 0 : 1);
 		int currentPage = page;
 		
 		int startPage = 1; 
@@ -189,7 +208,7 @@ public class WorkController {
 			endPage = pageCnt;
 		// 페이지 값 처리용
 		// 한 페이지당 출력할 목록 갯수
-		int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+		int maxPage = (int) ((double) listCount / LIMIT2 + 0.9);
 		mv.addObject("pageCnt", pageCnt);
 		mv.addObject("startPage", startPage);
 		mv.addObject("endPage", endPage);
@@ -203,8 +222,11 @@ public class WorkController {
 		mv.addObject("work_start",vo.getWork_start() );
 		mv.addObject("work_end",vo.getWork_end() );
 		mv.addObject("work_no", vo.getWork_no() );
+		mv.addObject("classOne", classOne);
+		mv.addObject("classTwo", classTwo);
+		mv.addObject("total", total);
 		
-		List<Work> listWork = workService.listWorkResult(currentPage, LIMIT,map);
+		List<Work> listWork = workService.listWorkResult(currentPage, LIMIT2,map);
 		System.out.println(listWork);
 
 		mv.addObject("listWork", listWork);

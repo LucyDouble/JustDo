@@ -12,7 +12,7 @@ public class Work {
 	private Date work_start;
 	private Date work_end;
 	private String work_content;
-	private String work_answer;
+	private String work_submit;
 	private String lecture_class;
 	private String lecture_title;
 	private int startday;
@@ -20,26 +20,35 @@ public class Work {
 	private int teacher_number;
 	private String name;
 	private int rnum;
+	private int registration_no;
 	
 	
 	
 
 	
+	@Override
+	public String toString() {
+		return "Work [work_no=" + work_no + ", lecture_no=" + lecture_no + ", work_subject=" + work_subject
+				+ ", work_start=" + work_start + ", work_end=" + work_end + ", work_content=" + work_content
+				+ ", work_submit=" + work_submit + ", lecture_class=" + lecture_class + ", lecture_title="
+				+ lecture_title + ", startday=" + startday + ", endday=" + endday + ", teacher_number=" + teacher_number
+				+ ", name=" + name + ", rnum=" + rnum + ", registration_no=" + registration_no + "]";
+	}
+
+	public int getRegistration_no() {
+		return registration_no;
+	}
+
+	public void setRegistration_no(int registration_no) {
+		this.registration_no = registration_no;
+	}
+
 	public int getRnum() {
 		return rnum;
 	}
 
 	public void setRnum(int rnum) {
 		this.rnum = rnum;
-	}
-
-	@Override
-	public String toString() {
-		return "Work [work_no=" + work_no + ", lecture_no=" + lecture_no + ", work_subject=" + work_subject
-				+ ", work_start=" + work_start + ", work_end=" + work_end + ", work_content=" + work_content
-				+ ", work_answer=" + work_answer + ", lecture_class=" + lecture_class + ", lecture_title="
-				+ lecture_title + ", startday=" + startday + ", endday=" + endday + ", teacher_number=" + teacher_number
-				+ ", name=" + name + "]";
 	}
 
 	public String getName() {
@@ -77,7 +86,7 @@ public class Work {
 	public String getLecture_class() {
 		return lecture_class;
 	}
-	public void setLecture_class(String lecture_class) {
+	public void setLecture_class(String lecture_class ) {
 		this.lecture_class = lecture_class;
 	}
 	public String getLecture_title() {
@@ -122,11 +131,11 @@ public class Work {
 	public void setWork_content(String work_content) {
 		this.work_content = work_content;
 	}
-	public String getWork_answer() {
-		return work_answer;
+	public String getWork_submit() {
+		return work_submit;
 	}
-	public void setWork_answer(String work_answer) {
-		this.work_answer = work_answer;
+	public void setWork_submit(String work_submit) {
+		this.work_submit = work_submit;
 	}
 
 	

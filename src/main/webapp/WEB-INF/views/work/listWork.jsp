@@ -40,7 +40,7 @@
 				<tbody>
 					<c:forEach items="${listWork }" var="i">
 						<tr>
-							<td>${i.work_no }</td>
+							<td>${i.rnum }</td>
 							<td >${i.lecture_title }</td>
 							<td class="ln_cont" onclick="location.href='viewWork?work_no=${i.work_no }'">${i.work_subject }</td>
 							<td>${i.lecture_class }</td>

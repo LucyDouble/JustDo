@@ -9,80 +9,38 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
-<style>
-a {
-	text-decoration: none;
-	color: #08182B;
-}
+<link rel="stylesheet" href="<c:url value="/resources/css/listWorkResult.css"/>">
+<script src="https://kit.fontawesome.com/afd6aa68df.js" crossorigin="anonymous"></script>
 
-
-.search_bar {
-	padding: 3px 0;
-	outline: 1;
-	border: 1px solid transparent;
-	border-bottom: 1px solid #575756;
-	border-radius: 0;
-}
-
-.search_btn {
-	display: inline-block;
-	border-radius: 7px;
-	background-color: #6A60A9;
-	border: none;
-	color: #FFFFFF;
-	text-align: center;
-	font-size: 15px;
-	width: 70px;
-	height: 35px;
-	transition: all 0.5s;
-	cursor: pointer;
-}
-
-.search_btn span {
-	cursor: pointer;
-	display: inline-block;
-	position: relative;
-	transition: 0.5s;
-}
-
-.search_btn span:after {
-	content: '*';
-	position: absolute;
-	opacity: 0;
-	top: -5px;
-	right: -10px;
-	transition: 0.2s;
-}
-
-.search_btn:hover span {
-	padding-right: 10px;
-}
-
-.search_btn:hover span:after {
-	opacity: 1;
-	right: 0;
-}
-
-.search {
-	float: right;
-	margin-bottom: 20px;
-	padding: 0;
-} 
-
-
-
-</style>
 </head>
 <body>
 	
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div class="ln_page">
 		<p class="ln_title">과제 리스트</p>
+
+		<table class="table">
+				<thead>
+					<tr>
+						<th>수업 명</th>
+						<th>과제 명</th>
+						<th>제출 기간</th>
+					</tr>
+				</thead>
+				<tbody>
+						<tr>
+							<td>${lecture_title}</td>
+							<td>${work_subject}</td>
+							<td> ${work_start}~${work_end }  </td>
+						</tr>
+				</tbody>
+			</table>
+			<br>
 		<!-- 서치바 -->
-		<div class="search">
-			<form class="search_form" action="listWorkResult" method="POST">
-				<input class="search_bar" type="text" name="keyword" placeholder="이름">
-				<button class="search_btn" type="submit"><span>검색</span></button>
+		<div class="lc_search_box_workResult lc_search_box">
+			<form class="lc_search" action="listWorkResult" method="POST">
+				<input class="lc_search_input" type="text" name="keyword" placeholder="학생이름"
+				onmouseout="document.search.keyword.value = ''">
 				<input type="hidden" name="work_no" value="${work_no }">
 				<input type="hidden" name="work_subject" value="${work_subject }">
 				<input type="hidden" name="lecture_class" value="${lecture_class }">
@@ -90,20 +48,15 @@ a {
 				<input type="hidden" name="work_start" value="${work_start }">
 				<input type="hidden" name="work_end" value="${work_end }">				
 			</form>
+			 <i class="fas fa-search i"></i>
 		</div>
-		수업명 : ${lecture_title}
-		<br>
-		과제명 : ${work_subject}
-		<br>
-		제출 기간 : ${work_start}~${work_end } 
-		<br>
-		class : ${lecture_class }
 		
-			<table class="table">
+			<table class="table_workResult table">
 				<thead>
 					<tr>
 						<th>No.</th>
 						<th>학생명</th>
+						<th>class</th>
 						<th>제출여부</th>
 					</tr>
 				</thead>
@@ -112,22 +65,41 @@ a {
 						<tr>
 							<td>${i.rnum }</td>
 							<td>${i.name }</td>
-							<td class="ln_cont" onclick="location.href=''">
-								<c:if test="${i.work_answer ==null }">x</c:if>
-								<c:if test="${i.work_answer !=null }">제출</c:if>
+							<td>${i.lecture_class} </td>
+							<td class="ln_cont ln_cont_workResult" onclick="location.href=''">
+								<c:if test="${i.work_submit ==null }">x</c:if>
+								<c:if test="${i.work_submit !=null }">제출</c:if>
 							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
+			
+			
+			
+	<div class="graph_title">평균 제출율</div>
+	<ul id="g1" class="graph">
+        <li class="graph_li">&nbsp;&nbsp;&nbsp;<span style="width: ${total}%" >전체<em>0%</em></span></li>
+        <br>
+        <li class="graph_li">&nbsp;&nbsp;&nbsp;<span style="width: ${classOne}%">1반<em>0%</em></span></li>
+        <br>
+        <li class="graph_li">&nbsp;&nbsp;&nbsp;<span style="width: ${classTwo}%">2반<em>0%</em></span></li>
+    </ul>
+			
+			
+			
+			<br>
 
-		<c:if test="${keyword !='' }">
+	<div class="pageNo" =>
+		<button style="clear:both;" class="button" onclick="location.href='listWork'">
+				<span>과제목록</span>
+		</button>
+<%-- 		<c:if test="${keyword !='' }">
 		<button class="button" onclick="location.href='listWork'">
 				<span>목록</span>
 		</button>
-		</c:if>
+		</c:if> --%>
 	<br><br><br>
-
 
 
 	<c:if test="${startPage != 1 }">
@@ -149,9 +121,54 @@ a {
 	   <a
 		  href="<%=request.getContextPath() %>/listWork?page=${endPage+1}&keyword=${keyword}">다음</a>
 	</c:if>
-		 
+	</div>	 
 		<sciprt src="js/jqurey-3.1.1.js"></sciprt>
 		<sciprt src="js/bootstrap.js"></sciprt>
 	</div>
+	
+	
+	
+	
+
+
+  
+
+
+	<script type="text/javascript">
+	drawGraph(document.getElementById("g1"));
+	drawGraph(document.getElementById("g2"));
+
+	function drawGraph(obj) {
+	    this.gages = obj.getElementsByTagName("span");
+	    this.values = obj.getElementsByTagName("em");
+
+	    for(var i = 0; i < this.gages.length; i ++) {
+	        (function(idx) {
+	            var current_value = 0;
+	            var gage_object = this.gages[idx];
+	            var gage_value = this.values[idx];
+	            var gage_width = parseInt(gage_object.style.width);
+	            var timer = null;
+
+	            timer = setInterval(function() {
+	                if(current_value < gage_width) {
+	                    current_value += Math.ceil((gage_width - current_value) / 15);
+	                    gage_object.style.width = current_value + "%";
+	                    gage_value.innerHTML = current_value + "%";
+	                } else {
+	                    clearInterval(timer);
+	                }
+	            }, 10);
+	        })(i);
+	    }
+	}
+	</script>
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>

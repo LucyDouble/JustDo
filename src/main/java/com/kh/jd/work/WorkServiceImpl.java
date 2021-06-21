@@ -65,8 +65,37 @@ public class WorkServiceImpl implements WorkService{
 
 	@Override
 	public int getlistWorkResultCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return workDao.getlistWorkResultCount(map);
+	}
+
+	@Override
+	public List<Work> registrationNo(int lecture_no) {
+		return workDao.registrationNo(lecture_no);
+	}
+
+	@Override
+	public int addWorkResult(int regstration_no) {
+		return workDao.addWorkResult(regstration_no);
+	}
+
+	@Override
+	public int getCountClass1(int work_no) {
+		return workDao.getCountClass1(work_no);
+	}
+
+	@Override
+	public int getCountWorkSubmit1(int work_no) {
+		return workDao.getCountWorkSubmit1(work_no);
+	}
+
+	@Override
+	public int getCountClass2(int work_no) {
+		return workDao.getCountClass2(work_no);
+	}
+
+	@Override
+	public int getCountWorkSubmit2(int work_no) {
+		return workDao.getCountWorkSubmit2(work_no);
 	}
 
 

@@ -4,18 +4,22 @@
 
 
 	<select id="listWork" resultType="Work" parameterType="Map">
-			select * from (select rownum as rnum,work_no,work_start,work_end,lecture_no ,work_subject,work_content,lectureclass_class as lecture_class 
-			,lecture_title,to_char(work_start,'yyyymmdd') as startday
-			,to_char(work_end,'yyyymmdd') as endday  ,teacher_number
-			from (SELECT * FROM works w join (select * from lecture join lectureclass using(lecture_no)) l using (lecture_no)order by work_no desc)) 
+            select * 
+			from (select rownum as rnum,work_no,work_start,work_end,lecture_no ,work_subject,work_content
+                            ,lecture_title,to_char(work_start,'yyyymmdd') as startday
+							,to_char(work_end,'yyyymmdd') as endday  ,teacher_number
+				  from (SELECT * 
+						FROM works w join  lecture  l 
+						using (lecture_no)order by work_no asc)) 
 			where teacher_number=#{teacher_number}
 			<if test='keyword !=null || !keyword.equals("")'>
 			 and work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%'
 			</if>
+			 order by rnum desc
 	</select>
 	<select id="getlistCount" resultType="int" parameterType="Map">
 		SELECT COUNT(*) 
-		FROM works w join (select * from lecture join lectureclass using(lecture_no)) l on w.lecture_no = l.lecture_no 
+		FROM works w join lecture l on w.lecture_no = l.lecture_no 
 		where teacher_number=#{teacher_number}
 		<if test='keyword !=null || !keyword.equals("")'>
 			 and work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%'
@@ -26,8 +30,16 @@
 		SEQ_work.nextval,#{lecture_no},#{work_subject}
 		,#{work_start}
 		,#{work_end}
-		,#{work_content},#{work_answer}
+		,#{work_content}
 		)
+	</insert>
+	<select id="registrationNo" parameterType="int" resultType="Work">
+		select registration_no from lectureclass l join registration r using(lectureclass_no) where lecture_no=#{lecture_no}
+	</select>
+	<insert id="addWorkResult" parameterType="int">
+		insert into works_result values(
+		(select nvl(max(work_no), 0) from works),#{registration_no},null
+		)	
 	</insert>
 	
 	<select id="viewWork" resultType="Work">
@@ -49,30 +61,77 @@
 		where work_no=#{work_no}
 	</update>
 	<select id="listWorkResult" resultType="Work" parameterType="Map">
-		select rownum as rnum,name,work_answer
-		from (select wl.*,s.name as name 
-		        from (select w.*,l.student_number 
-		                from works w join works_list l 
+		select rownum as rnum, work_no, lecture_no, work_subject,work_start,work_end,work_content,student_number,lecture_class,name,work_submit
+		from(select wl.*,s.name as name 
+		        from(select w.*,l.student_number ,l.lectureclass_class as lecture_class,l.work_submit as work_submit 
+		                from works w join (select * 
+		                                    from works_result wr join (select * from registration join lectureclass using(lectureclass_no) ) r 
+		                                    using (registration_no)) l 
 		                on w.work_no=l.work_no 
-		                where w.work_no=#{work_no}) wl join student s 
-		        on wl.student_number=s.student_number 
+		                where w.work_no=#{work_no} )wl join student s 
+		        on wl.student_number=s.student_number order by name asc
+		        )
 		<if test='keyword !=null || !keyword.equals("")'>
 			 where name like '%'||#{keyword}||'%'
 		</if>
-		order by name)
+		
 	</select>
 	<select id="getlistWorkResultCount" resultType="int" parameterType="Map">
-        SELECT COUNT(*) 
-        FROM (select rownum as rnum,wl.*,s.name as name 
-                from (select w.*,l.student_number 
-                        from works w join works_list l 
-                        on w.work_no=l.work_no 
-                        where w.work_no=#{work_no}) wl join student s 
-                on wl.student_number=s.student_number ) 
+		SELECT COUNT(*) 
+		FROM(select rownum as rnum,wl.*,s.name as name 
+		        from(select w.*,l.student_number 
+		                from works w join (select * 
+		                                    from works_result wr join registration r 
+		                                    using (registration_no)) l 
+		                on w.work_no=l.work_no 
+		                where w.work_no=#{work_no})wl join student s 
+		        on wl.student_number=s.student_number)
 		<if test='keyword !=null || !keyword.equals("")'>
 			 where name like '%'||#{keyword}||'%'
 		</if>
 	</select>
+	<select id="getCountClass1" parameterType="int" resultType="int">
+		select count(*) 
+		from (select * 
+				from works_result join registration 
+				using(registration_no)
+				where work_no = #{work_no}) wr join lectureclass lc 
+		using(lectureclass_no) 
+		where lectureclass_class=1
+	</select>
+	<select id="getCountWorkSubmit1" parameterType="int" resultType="int">
+		select count(work_submit) 
+		from (select * 
+				from works_result join registration 
+				using(registration_no)
+				where work_no = #{work_no}) wr join lectureclass lc 
+		using(lectureclass_no) 
+		where lectureclass_class=1
+	</select>
+	<select id="getCountClass2" parameterType="int" resultType="int">
+		select count(*) 
+		from (select * 
+				from works_result join registration 
+				using(registration_no)
+				where work_no = #{work_no}) wr join lectureclass lc 
+		using(lectureclass_no) 
+		where lectureclass_class=2
+	</select>
+	<select id="getCountWorkSubmit2" parameterType="int" resultType="int">
+		select count(work_submit) 
+		from (select * 
+				from works_result join registration 
+				using(registration_no)
+				where work_no = #{work_no}) wr join lectureclass lc 
+		using(lectureclass_no) 
+		where lectureclass_class=2
+	</select>
+	
+	
+	
+	
+	
+	
 	
 	
 	

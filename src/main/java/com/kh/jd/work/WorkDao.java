@@ -54,4 +54,22 @@ public class WorkDao {
 	public int getlistWorkResultCount(Map<String, Object> map) {
 		return sqlSession.selectOne("work.getlistWorkResultCount",map);
 	}
+	public List<Work> registrationNo(int lecture_no) {
+		return sqlSession.selectList("work.registrationNo", lecture_no);
+	}
+	public int addWorkResult(int regstration_no) {
+		return sqlSession.insert("work.addWorkResult",regstration_no);
+	}
+	public int getCountClass1(int work_no) {
+		return sqlSession.selectOne("work.getCountClass1",work_no);
+	}
+	public int getCountWorkSubmit1(int work_no) {
+		return sqlSession.selectOne("work.getCountWorkSubmit1",work_no);
+	}
+	public int getCountClass2(int work_no) {
+		return sqlSession.selectOne("work.getCountClass2",work_no);
+	}
+	public int getCountWorkSubmit2(int work_no) {
+		return sqlSession.selectOne("work.getCountWorkSubmit2",work_no);
+	}
 }
