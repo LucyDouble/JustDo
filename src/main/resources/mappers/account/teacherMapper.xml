@@ -5,10 +5,10 @@
 		<result property="teacher_number" column="TEACHER_NUMBER"/>
 		<result property="id" column="ID"/>
 		<result property="password" column="PASSWORD"/>
-		<result property="teacher_name" column="NAME" />
-		<result property="teacher_address" column="ADDRESS" />
-		<result property="teacher_phone" column="PHONE" />
-		<result property="teacher_email" column="EMAIL" />
+		<result property="name" column="NAME" />
+		<result property="address" column="ADDRESS" />
+		<result property="phone" column="PHONE" />
+		<result property="email" column="EMAIL" />
 		<result property="accept" column="ACCEPT"/>
 		
 	</resultMap>
@@ -20,30 +20,33 @@
 		WHERE ID=#{id} AND PASSWORD = #{password}
 	</select>
 	<select id="idCheck" resultType="int">
-		SELECT count(*) from (SELECT ID FROM STUDENT WHERE ID=#{id}
+		SELECT count(*) from (SELECT ID FROM Teacher WHERE ID=#{id}
 		union all
 		SELECT
 		ID FROM TEACHER WHERE ID = #{id})
 	</select>
-	<select id="signUp">
-		insert into teacher(teacher_num, id, password, teacher_name, teacher_address, teacher_phone, teacher_email) 
-		values (#{teacher_num}, #{id}, #{password}, #{teacher_name}, #{teacher_address}, #{teacher_phone}, #{teacher_email}, #{accept})
-	</select>
+	<insert id="signUp" parameterType="Teacher">
+		
+		insert into Teacher values ((SELECT nvl(max(Teacher_NUMBER), 0) + 1 FROM Teacher) , #{id},
+		#{password}, #{name}, #{address}, #{phone},
+		#{email}, #{accept})
+	</insert>
 	<select id="infoTeacher" parameterType="Teacher" resultMap="TeacherMap">
 			SELECT * FROM TEACHER
 			WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>
 	<select id="emailCheck" resultType="int">
 		select count(*) from (SELECT
-		email FROM STUDENT WHERE EMAIL=#{student_email}
+		email FROM Teacher WHERE EMAIL=#{email}
 		union all
 		SELECT email
-		FROM TEACHER WHERE EMAIL = #{student_email})
+		FROM TEACHER WHERE EMAIL = #{email})
 	</select>
 	<select id="phoneCheck" resultType="int">
-		SELECT count(*) from (SELECT PHONE FROM STUDENT WHERE PHONE=#{teacher_phone}
+		SELECT count(*) from (SELECT PHONE FROM Teacher WHERE PHONE=#{phone}
 		union all
 		SELECT
-		PHONE FROM TEACHER WHERE PHONE = #{teacher_phone})
+		PHONE FROM TEACHER WHERE PHONE = #{phone})
 	</select>
+
 </mapper>

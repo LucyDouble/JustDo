@@ -1,7 +1,6 @@
 package com.kh.jd.account;
 
 
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 

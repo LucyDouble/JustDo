@@ -34,9 +34,10 @@ public class AccountController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
-	@RequestMapping(value = "/signUpPage")
-	public String signUpPage() {
-		return "account/signUp";
+	@RequestMapping(value = "account/signUp", method=RequestMethod.GET)
+	public void signUpPage() {
+		logger.info("get register");
+
 	}
 
 	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
@@ -44,12 +45,12 @@ public class AccountController {
 	public String idCheck(HttpServletRequest request, @RequestParam(name = "signUpSelect") String check) {
 		System.out.println(check);
 		if (check == "student" || check.equals("student")) {
-			String student_id = request.getParameter("sign_id");
+			String student_id = request.getParameter("id");
 			System.out.println(student_id);
 			int result = sService.idCheck(student_id);
 			return Integer.toString(result);
 		} else {
-			String teacher_id = request.getParameter("sign_id");
+			String teacher_id = request.getParameter("id");
 			System.out.println(teacher_id);
 			int result = tService.idCheck(teacher_id);
 			return Integer.toString(result);
@@ -108,19 +109,19 @@ public class AccountController {
 	public String emailCheck(HttpServletRequest request, @RequestParam(name = "signUpSelect") String check) {
 		System.out.println(check);
 		if (check == "student" || check.equals("student")) {
-			String student_email = request.getParameter("sign_email");
+			String student_email = request.getParameter("email");
 			System.out.println(student_email);
 			int result = sService.emailCheck(student_email);
 			return Integer.toString(result);
 		} else {
-			String teacher_email = request.getParameter("sign_email");
+			String teacher_email = request.getParameter("email");
 			System.out.println(teacher_email);
 			int result = tService.emailCheck(teacher_email);
 			return Integer.toString(result);
 		}
 	}
 
-@RequestMapping(value="/mailCheck", method=RequestMethod.GET)
+@RequestMapping(value="account/mailCheck", method=RequestMethod.GET)
 @ResponseBody
 public String mailCheckGet(String email) throws Exception{
 	logger.info("이메일 데이터 전송 확인");
@@ -157,16 +158,36 @@ public String mailCheckGet(String email) throws Exception{
 public String phoneCheck(HttpServletRequest request, @RequestParam(name = "signUpSelect") String check) {
 	System.out.println(check);
 	if (check == "student" || check.equals("student")) {
-		String student_phone = request.getParameter("sign_phone");
+		String student_phone = request.getParameter("phone");
 		System.out.println(student_phone);
 		int result = sService.phoneCheck(student_phone);
 		return Integer.toString(result);
 	} else {
-		String teacher_phone = request.getParameter("sign_phone");
+		String teacher_phone = request.getParameter("phone");
 		System.out.println(teacher_phone);
 		int result = tService.phoneCheck(teacher_phone);
 		return Integer.toString(result);
 	}
 }
-
+/* 회원 가입 */
+@RequestMapping(value="account/signUp", method = RequestMethod.POST)
+public String addMember(Student sDto, Teacher tDto, @RequestParam(name = "signUpSelect") String check) {
+	logger.info("post register");
+	System.out.println("TEST");
+	if (check == "student" || check.equals("student")) {
+		sService.signUp(sDto);
+	} else {
+		tService.signUp(tDto);
+	}
+	return "redirect:/";
+			
 }
+	
+}
+	
+
+
+
+
+
+

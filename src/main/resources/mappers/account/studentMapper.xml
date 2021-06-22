@@ -5,10 +5,10 @@
 		<result property="student_number" column="STUDENT_NUMBER" />
 		<result property="id" column="ID" />
 		<result property="password" column="PASSWORD" />
-		<result property="student_name" column="NAME" />
-		<result property="student_address" column="ADDRESS" />
-		<result property="student_phone" column="PHONE" />
-		<result property="student_email" column="EMAIL" />
+		<result property="name" column="NAME" />
+		<result property="address" column="ADDRESS" />
+		<result property="phone" column="PHONE" />
+		<result property="email" column="EMAIL" />
 	</resultMap>
 	<select id="loginCheck" resultType="String">
 		SELECT count(*) FROM STUDENT
@@ -20,11 +20,17 @@
 		SELECT
 		ID FROM TEACHER WHERE ID = #{id})
 	</select>
-	<select id="signUp">
+	<!-- <select id="signUp">
 		insert into student values (#{student_number}, #{id},
 		#{password}, #{student_name}, #{student_address}, #{student_phone},
 		#{student_email})
-	</select>
+	</select> -->
+	<insert id="signUp" parameterType="Student">
+		
+		insert into student values ((SELECT nvl(max(STUDENT_NUMBER), 0) + 1 FROM STUDENT) , #{id},
+		#{password}, #{name}, #{address}, #{phone},
+		#{email})
+	</insert>
 	<select id="infoStudent" parameterType="Student"
 		resultMap="StudentMap">
 		SELECT * FROM STUDENT
@@ -33,15 +39,16 @@
 	</select>
 	<select id="emailCheck" resultType="int">
 		select count(*) from (SELECT
-		email FROM STUDENT WHERE EMAIL=#{student_email}
+		email FROM STUDENT WHERE EMAIL=#{email}
 		union all
 		SELECT email
-		FROM TEACHER WHERE EMAIL = #{student_email})
+		FROM TEACHER WHERE EMAIL = #{email})
 	</select>
 	<select id="phoneCheck" resultType="int">
-		SELECT count(*) from (SELECT PHONE FROM STUDENT WHERE PHONE=#{student_phone}
+		SELECT count(*) from (SELECT PHONE FROM STUDENT WHERE PHONE=#{phone]}
 		union all
 		SELECT
-		PHONE FROM TEACHER WHERE PHONE = #{student_phone})
+		PHONE FROM TEACHER WHERE PHONE = #{phone})
 	</select>
+	
 </mapper>
