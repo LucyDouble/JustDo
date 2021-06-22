@@ -21,7 +21,7 @@
 			<div class="sel-lang-wrap">
 			</div>
 			<div class="logo-wrap">
-				<img src="resources/images/logo.png">
+				<img src="../resources/images/logo.png">
 			</div>
 			
 		</header>

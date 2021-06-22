@@ -6,7 +6,7 @@
 <script type="text/javascript" src="<c:url value="/resources/js/header.js"/>"></script>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <header id="header">
-        <a href=""><img class="logo" src="resources/images/logo.png"></a>
+        <a href=""><img class="logo" src="../resources/images/logo.png"></a>
         
         <div id="top_menu">
             <c:choose>
@@ -15,10 +15,10 @@
              	</c:when>
              	<c:otherwise>
              	<a href="logout">로그아웃</a>
-             	<img class="person" src="resources/images/person.png" >
+             	<img class="person" src="../resources/images/person.png" >
              	</c:otherwise>
              </c:choose>
-             <a href="signUpPage" id=signUpPage>회원가입</a>
+             <a href="signUp" id="signU">회원가입</a>
         </div>
         
         <nav>
@@ -54,7 +54,7 @@
                 </li>
             </ul>
         </nav>
-        <a href=""><img class="logo3"  src="resources/images/logo3.jpg"></a>
+        <a href=""><img class="logo3"  src="../resources/images/logo3.jpg"></a>
     </header>
     <script>
     	if(${sessionScope.student_id == null && sessionScope.teacher_id == null}){

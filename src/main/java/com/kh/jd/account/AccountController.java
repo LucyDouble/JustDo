@@ -40,7 +40,7 @@ public class AccountController {
 
 	}
 
-	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
+	@RequestMapping(value = "account/idCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public String idCheck(HttpServletRequest request, @RequestParam(name = "signUpSelect") String check) {
 		System.out.println(check);
@@ -57,12 +57,12 @@ public class AccountController {
 		}
 	}
 
-	@RequestMapping("/login")
+	@RequestMapping("account/login")
 	public String login() {
 		return "account/login";
 	}
 
-	@RequestMapping(value = "/loginCheck", method = RequestMethod.POST)
+	@RequestMapping(value = "account/loginCheck", method = RequestMethod.POST)
 	public String loginCheck(Student sDto, Teacher tDto, HttpSession session, HttpServletRequest request,
 			@RequestParam(name = "loginSelect") String check, Model model) {
 		System.out.println(check);
@@ -95,7 +95,7 @@ public class AccountController {
 		return "account/signUp";
 	}
 
-	@RequestMapping("logout")
+	@RequestMapping("account/logout")
 	public ModelAndView logout(HttpSession session) {
 		sService.logout(session);
 		ModelAndView mav = new ModelAndView();
@@ -104,7 +104,7 @@ public class AccountController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/emailCheck", method = RequestMethod.GET)
+	@RequestMapping(value = "account/emailCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public String emailCheck(HttpServletRequest request, @RequestParam(name = "signUpSelect") String check) {
 		System.out.println(check);
@@ -153,7 +153,7 @@ public String mailCheckGet(String email) throws Exception{
 
 }
 
-@RequestMapping(value="/phoneCheck", method=RequestMethod.GET)
+@RequestMapping(value="account/phoneCheck", method=RequestMethod.GET)
 @ResponseBody
 public String phoneCheck(HttpServletRequest request, @RequestParam(name = "signUpSelect") String check) {
 	System.out.println(check);

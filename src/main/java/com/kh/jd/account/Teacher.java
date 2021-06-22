@@ -7,14 +7,14 @@ public class Teacher {
 	private String name;
 	private String address;
 	private String phone;
-	private String emaill;
+	private String email;
 	private int accept;
 	
 	
 	@Override
 	public String toString() {
 		return "Teacher [teacher_number=" + teacher_number + ", id=" + id + ", password=" + password + ", name=" + name
-				+ ", address=" + address + ", phone=" + phone + ", emaill=" + emaill + ", accept=" + accept + "]";
+				+ ", address=" + address + ", phone=" + phone + ", email=" + email + ", accept=" + accept + "]";
 	}
 	public int getTeacher_number() {
 		return teacher_number;
@@ -52,11 +52,11 @@ public class Teacher {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getEmaill() {
-		return emaill;
+	public String getEmail() {
+		return email;
 	}
-	public void setEmaill(String emaill) {
-		this.emaill = emaill;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public int getAccept() {
 		return accept;

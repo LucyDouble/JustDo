@@ -230,7 +230,7 @@ label {
 							.val();
 					console.log(signUpSelect);
 					$.ajax({
-						url : '${pageContext.request.contextPath}/idCheck?id='
+						url : '${pageContext.request.contextPath}/account/idCheck?id='
 								+ id + "&signUpSelect=" + signUpSelect,
 						type : 'GET',
 						success : function(data) {
@@ -332,7 +332,7 @@ label {
 							console.log(signUpSelect);
 							$
 									.ajax({
-										url : '${pageContext.request.contextPath}/emailCheck?email='
+										url : '${pageContext.request.contextPath}/account/emailCheck?email='
 												+ email
 												+ "&signUpSelect="
 												+ signUpSelect,
@@ -434,7 +434,7 @@ label {
 							console.log(signUpSelect);
 							$
 									.ajax({
-										url : '${pageContext.request.contextPath}/phoneCheck?phone='
+										url : '${pageContext.request.contextPath}/account/phoneCheck?phone='
 												+ phone
 												+ "&signUpSelect="
 												+ signUpSelect,

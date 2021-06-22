@@ -29,7 +29,7 @@
 		
 		insert into Teacher values ((SELECT nvl(max(Teacher_NUMBER), 0) + 1 FROM Teacher) , #{id},
 		#{password}, #{name}, #{address}, #{phone},
-		#{email}, #{accept})
+		#{email}, 2)
 	</insert>
 	<select id="infoTeacher" parameterType="Teacher" resultMap="TeacherMap">
 			SELECT * FROM TEACHER
