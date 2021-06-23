@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>JD 교육원</title>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/common/main.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">

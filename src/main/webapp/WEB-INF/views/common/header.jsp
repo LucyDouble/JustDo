@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<c:url value="/resources/css/common/header.css"/>"> 
 <script type="text/javascript" src="<c:url value="/resources/js/header.js"/>"></script>
-	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <header id="header">
     <a href="<%=request.getContextPath()%>/jdHome?command=main"><img class="logo" src="resources/images/logo.png"></a>
     
@@ -23,12 +23,12 @@
     
     <nav>
         <ul>
-            <li class="aboutJD"><a id="aboutJD" href="#">JD소개</a>
+            <li class="aboutJD"><a id="aboutJD" href="#">JD안내</a>
                 <div id="drop_content">
-                    <a href="#">JD 소개</a> <a href="#">이용방법</a> <a href="#">오시는 길</a>
+                    <a href="aboutJD">JD 소개</a> <a href="#">이용방법</a> <a href="#">오시는 길</a>
                 </div>
             </li>
-            <li class="aboutJD"><a href="#">강사소개</a>
+            <li class=""><a href="#">강사소개</a>
                 <div id="drop_content">
                     <a href="#">강남 교육원</a> 
                     <a href="#">종각 교육원</a> 
@@ -54,10 +54,10 @@
             </li>
         </ul>
     </nav>
-    <a href=""><img class="logo3"  src="../resources/images/logo3.jpg"></a>
+    <a href=""><img class="logo3"  src="resources/images/logo3.jpg"></a>
 </header>
 <script>
-	if(${sessionScope.student_id == null && sessionScope.teacher_id == null}){
+	if($(sessionScope.student_id == null && sessionScope.teacher_id == null)){
 		$('#signUpPage').show();
 		$('#login').show();
 	}else{
