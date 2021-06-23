@@ -119,17 +119,6 @@
 	</section>
 </div>
 <script>
-/* 새창으로 열기 */
-/* function popupCenter() {
-	var w = 1000;
-	var h = 700;
-	
-	var xPos = (document.body.offsetWidth/2) - (w/2); // 가운데 정렬
-	xPos += window.screenLeft; // 듀얼 모니터일 때
-	var yPos = (document.body.offsetHeight/2) - (h/2);
-	
-	window.open("lectureAddForm", "add", "width="+w+", height="+h+", left="+xPos+", top="+yPos);
-} */
 
 /* 등록 폼 이동 */
 function addForm(){

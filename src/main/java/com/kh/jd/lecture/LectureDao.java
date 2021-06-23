@@ -41,4 +41,11 @@ public class LectureDao {
 		return sqlSession.update("Lecture.editLecture", lecture);
 	}
 	
+	public List<Lecture> listLectureClass(){
+		return sqlSession.selectList("Lecture.listLectureClass");
+	}
+	
+	public Lecture viewLectureClass(Lecture lecture) {
+		return sqlSession.selectOne("Lecture.viewLectureClass", lecture);
+	}
 }

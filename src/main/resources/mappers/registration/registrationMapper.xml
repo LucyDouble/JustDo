@@ -6,4 +6,18 @@
 		<result column="lectureclass_no" property="lectureclass_no"/>
 		<result column="student_number" property="student_number"/>
 	</resultMap>
+	
+	<!-- 수강신청 -->
+	<insert id="addRegistration" parameterType="Registration">
+		INSERT INTO REGISTRATION VALUES(
+			SEQ_REGISTRATION.NEXTVAL,
+			lectureclass_no= #{lectureclass_no},
+			student_number= #{student_number}
+		)
+	</insert>
+	
+	<!-- 수강인원 체크 -->
+	<select id="checkStudent" resultMap="RegistrationResult" parameterType="string">
+		SELECT COUNT(registration_no) FROM REGISTRATION WHERE lectureclass_no = #{lectureclass_no}
+	</select>
 </mapper>

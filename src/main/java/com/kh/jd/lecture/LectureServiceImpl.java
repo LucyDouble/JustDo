@@ -44,5 +44,14 @@ public class LectureServiceImpl implements LectureService{
 	public int editLecture(Lecture lecture) {
 		return Ldao.editLecture(lecture);
 	}
+	
+	@Override
+	public List<Lecture> listLectureClass() {
+		return Ldao.listLectureClass();
+	}
+	@Override
+	public Lecture viewLectureClass(Lecture lecture) {
+		return Ldao.viewLectureClass(lecture);
+	}
 
 }
