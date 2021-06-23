@@ -16,7 +16,7 @@
 <div class="vn_page">
 	<form id="frm">
 	<!-- TODO -->
-	<input type="hidden" name="teacher_number" value="100001">
+	<input type="hidden" name="teacher_number" value="100002">
 	<input type="hidden" name="work_no" value="${workDto.work_no }">
     <p class="vn_title">과제 조회</p>
     <br>

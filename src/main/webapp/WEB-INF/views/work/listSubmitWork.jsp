@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>과제리스트-강사</title>
+<title>과제리스트-학생</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/listWork.css"/>">
@@ -30,10 +30,10 @@
 					<tr>
 						<th>No.</th>
 						<th class="work_title">수업명</th>
+						<th>강사 명</th>
 						<th class="work_title">제목</th>
 						<th class="work_date">제출기간</th>
 						<th>진행여부</th>
-						<th>제출현황</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -41,26 +41,14 @@
 						<tr>
 							<td>${i.rnum }</td>
 							<td >${i.lecture_title }</td>
-							<td class="ln_cont" onclick="location.href='viewWork?work_no=${i.work_no }'">${i.work_subject }</td>
+							<td>${i.name }</td>
+							<td class="ln_cont" onclick="location.href='viewSubmitWork?work_no=${i.work_no }&registration_no=${i.registration_no }'">${i.work_subject }</td>
 							<td>${i.work_start }~ ${i.work_end }</td>
 							<td>
 								<c:if test="${time<i.startday}">진행전</c:if> 
 								<c:if test="${time>=i.startday && time<=i.endday}">진행중</c:if> 
 								<c:if test="${time>i.endday}">완료</c:if>
 							</td>
-		<form id ="ResultFrm" action="listWorkResult" method="post">
-							<td  >
-								<c:if test="${time>=i.startday}" >
-									<input type="hidden" name="work_no" value="${i.work_no }">
-									<input type="hidden" name="work_subject" value="${i.work_subject }">
-									<input type="hidden" name="lecture_class" value="${i.lecture_class }">
-									<input type="hidden" name="lecture_title" value="${i.lecture_title }">
-									<input type="hidden" name="work_start" value="${i.work_start }">
-									<input type="hidden" name="work_end" value="${i.work_end }">
-									<input type="submit" id ="ResultBtn" value="보러가기">
-								</c:if>
-							</td>
-		</form>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -83,14 +71,14 @@
 
 	<c:if test="${startPage != 1 }">
 	   <a
-		  href="<%=request.getContextPath() %>/listWork?page=${startPage-1}&keyword=${keyword}">이전</a>
+		  href="<%=request.getContextPath() %>/listSubmitWork?page=${startPage-1}&keyword=${keyword}">이전</a>
 	</c:if>
 	<c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
 	 	<c:if test="${p eq currentPage}">
 	 		<font color="#6A60A9" size="4"><b>[${p}]</b></font>
 	 	</c:if>
 	 	<c:if test="${p ne currentPage}">
-	 		<c:url var="listWorkChk" value="listWork?keyword=${keyword}">
+	 		<c:url var="listWorkChk" value="listSubmitWork?keyword=${keyword}">
 	 			<c:param name="page" value="${p}" />
 	 		</c:url>
 	 		<a href="${listWorkChk}">${p}</a>
@@ -98,7 +86,7 @@
 	 </c:forEach>
 	<c:if test="${endPage < pageCnt }">
 	   <a
-		  href="<%=request.getContextPath() %>/listWork?page=${endPage+1}&keyword=${keyword}">다음</a>
+		  href="<%=request.getContextPath() %>/listSubmitWork?page=${endPage+1}&keyword=${keyword}">다음</a>
 	</c:if>
 		 
 		<sciprt src="js/jqurey-3.1.1.js"></sciprt>

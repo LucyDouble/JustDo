@@ -66,10 +66,20 @@
 							<td>${i.rnum }</td>
 							<td>${i.name }</td>
 							<td>${i.lecture_class} </td>
-							<td class="ln_cont ln_cont_workResult" onclick="location.href=''">
-								<c:if test="${i.work_submit ==null }">x</c:if>
-								<c:if test="${i.work_submit !=null }">제출</c:if>
-							</td>
+							<form id="frm" action="viewWorkResult" method="POST">
+								<td class="ln_cont ln_cont_workResult" id="workSubmit" >
+								<input type="hidden" name="work_no" value="${work_no }" >
+								<input type="hidden" name="work_start" value="${i.work_start }">
+								<input type="hidden" name="work_end" value="${i.work_end }">
+								<input type="hidden" name="work_content" value="${i.work_content }">
+								<input type="hidden" name="work_submit" value="${i.work_submit }">
+								<input type="hidden" name="lecture_class" value="${i.lecture_class }">
+								<input type="hidden" name="name" value="${i.name}">
+								<input type="hidden" name="registration_no" value="${i.registration_no}" >
+									<c:if test="${i.work_submit ==null }"><input type="submit" id ="ResultBtn" value="x"></c:if>
+									<c:if test="${i.work_submit !=null }"><input type="submit" id ="ResultBtn" value="제출"></c:if>
+								</td>
+							</form>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -81,16 +91,17 @@
 	<ul id="g1" class="graph">
         <li class="graph_li">&nbsp;&nbsp;&nbsp;<span style="width: ${total}%" >전체<em>0%</em></span></li>
         <br>
-        <li class="graph_li">&nbsp;&nbsp;&nbsp;<span style="width: ${classOne}%">1반<em>0%</em></span></li>
+        <li class="graph_li">&nbsp;&nbsp;&nbsp;<span style="width: ${classOne}%">1 반<em>0%</em></span></li>
         <br>
-        <li class="graph_li">&nbsp;&nbsp;&nbsp;<span style="width: ${classTwo}%">2반<em>0%</em></span></li>
+        <li class="graph_li">&nbsp;&nbsp;&nbsp;<span style="width: ${classTwo}%">2 반<em>0%</em></span></li>
     </ul>
 			
 			
 			
 			<br>
-
-	<div class="pageNo" =>
+<br>
+<br>
+	<div class="pageNo" >
 		<button style="clear:both;" class="button" onclick="location.href='listWork'">
 				<span>과제목록</span>
 		</button>
@@ -104,14 +115,14 @@
 
 	<c:if test="${startPage != 1 }">
 	   <a
-		  href="<%=request.getContextPath() %>/listWork?page=${startPage-1}&keyword=${keyword}">이전</a>
+		  href="<%=request.getContextPath() %>/listWorkResult?page=${startPage-1}&keyword=${keyword}">이전</a>
 	</c:if>
 	<c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
 	 	<c:if test="${p eq currentPage}">
 	 		<font color="#6A60A9" size="4"><b>[${p}]</b></font>
 	 	</c:if>
 	 	<c:if test="${p ne currentPage}">
-	 		<c:url var="listWorkChk" value="listWork?keyword=${keyword}">
+	 		<c:url var="listWorkChk" value="listWorkResult?keyword=${keyword}">
 	 			<c:param name="page" value="${p}" />
 	 		</c:url>
 	 		<a href="${listWorkChk}">${p}</a>
@@ -119,7 +130,7 @@
 	 </c:forEach>
 	<c:if test="${endPage < pageCnt }">
 	   <a
-		  href="<%=request.getContextPath() %>/listWork?page=${endPage+1}&keyword=${keyword}">다음</a>
+		  href="<%=request.getContextPath() %>/listWorkResult?page=${endPage+1}&keyword=${keyword}">다음</a>
 	</c:if>
 	</div>	 
 		<sciprt src="js/jqurey-3.1.1.js"></sciprt>
@@ -135,6 +146,12 @@
 
 
 	<script type="text/javascript">
+	
+	
+	
+	
+	
+	
 	drawGraph(document.getElementById("g1"));
 	drawGraph(document.getElementById("g2"));
 

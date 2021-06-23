@@ -98,5 +98,25 @@ public class WorkServiceImpl implements WorkService{
 		return workDao.getCountWorkSubmit2(work_no);
 	}
 
+	@Override
+	public List<Work> listSubmitWork(int startPage, int limit, Map<String, Object> map) {
+		return workDao.listSubmitWork(startPage, limit, map);
+	}
+
+	@Override
+	public int getListSubmitCount(Map<String, Object> map) {
+		return workDao.getListSubmitCount(map);
+	}
+
+	@Override
+	public Work viewSubmitWork(Work vo) {
+		return workDao.viewSubmitWork(vo);
+	}
+
+	@Override
+	public int submitWork(Work vo) {
+		return workDao.submitWork(vo);
+	}
+
 
 }

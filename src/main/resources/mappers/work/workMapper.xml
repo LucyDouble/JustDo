@@ -3,27 +3,26 @@
 <mapper namespace="work">
 
 
-	<select id="listWork" resultType="Work" parameterType="Map">
-            select * 
-			from (select rownum as rnum,work_no,work_start,work_end,lecture_no ,work_subject,work_content
+	<select id="listWork" resultType="Work" parameterType="hashMap">
+            select rownum as rnum, work_no,work_start,work_end,lecture_no ,work_subject,work_content
+                            ,lecture_title,to_char(work_start,'yyyymmdd') as startday
+							,to_char(work_end,'yyyymmdd') as endday  ,teacher_number 
+			from (select work_no,work_start,work_end,lecture_no ,work_subject,work_content
                             ,lecture_title,to_char(work_start,'yyyymmdd') as startday
 							,to_char(work_end,'yyyymmdd') as endday  ,teacher_number
 				  from (SELECT * 
 						FROM works w join  lecture  l 
 						using (lecture_no)order by work_no asc)) 
-			where teacher_number=#{teacher_number}
-			<if test='keyword !=null || !keyword.equals("")'>
-			 and work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%'
-			</if>
+			
+			 where teacher_number=#{teacher_number}
+				and (work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
 			 order by rnum desc
 	</select>
 	<select id="getlistCount" resultType="int" parameterType="Map">
 		SELECT COUNT(*) 
 		FROM works w join lecture l on w.lecture_no = l.lecture_no 
 		where teacher_number=#{teacher_number}
-		<if test='keyword !=null || !keyword.equals("")'>
-			 and work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%'
-		</if>
+			 and (work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
 	</select>
 	<insert id="addWork" parameterType="Work" >
 		insert into works values(
@@ -61,9 +60,9 @@
 		where work_no=#{work_no}
 	</update>
 	<select id="listWorkResult" resultType="Work" parameterType="Map">
-		select rownum as rnum, work_no, lecture_no, work_subject,work_start,work_end,work_content,student_number,lecture_class,name,work_submit
+		select rownum as rnum, work_no, lecture_no, work_subject,work_start,work_end,work_content,student_number,lecture_class,name,work_submit,registration_no
 		from(select wl.*,s.name as name 
-		        from(select w.*,l.student_number ,l.lectureclass_class as lecture_class,l.work_submit as work_submit 
+		        from(select w.*,l.student_number ,l.lectureclass_class as lecture_class,l.work_submit as work_submit,l.registration_no
 		                from works w join (select * 
 		                                    from works_result wr join (select * from registration join lectureclass using(lectureclass_no) ) r 
 		                                    using (registration_no)) l 
@@ -126,11 +125,47 @@
 		using(lectureclass_no) 
 		where lectureclass_class=2
 	</select>
-	
-	
-	
-	
-	
+	<select id="listSubmitWork" parameterType="Map" resultType="Work">
+		select rownum rnum,wltlc.lecture_no,wltlc.work_no,work_subject,wltlc.work_start,wltlc.work_end,wltlc.lecture_title,
+		        wltlc.name,wltlc.work_content,wltlc.lectureclass_no,wltlc.lectureclass_class,r.student_number,r.registration_no,
+		        to_char(work_start,'yyyymmdd') as startday ,to_char(work_end,'yyyymmdd') as endday
+		from (select wlt.lecture_no,wlt.work_no,work_subject,wlt.work_start,wlt.work_end,wlt.lecture_title,wlt.name,wlt.work_content,lc.lectureclass_no,lc.lectureclass_class
+		        from (select wl.*,t.name
+		                from (SELECT * 
+		                      FROM works w join  lecture  l 
+		                      using (lecture_no)order by work_no asc) wl join teacher t 
+		                on wl.teacher_number=t.teacher_number) wlt join lectureclass lc 
+		        on wlt.lecture_no=lc.lecture_no) wltlc join registration r 
+		on wltlc.lectureclass_no=r.lectureclass_no
+		where student_number=#{student_number}
+			 and (work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
+		order by rnum desc	
+	</select>
+	<select id="getlistSubmitCount" resultType="int" parameterType="Map">
+		select count(*)
+		from (select wlt.lecture_no,wlt.work_no,work_subject,wlt.work_start,wlt.work_end,wlt.lecture_title,wlt.name,wlt.work_content,lc.lectureclass_no,lc.lectureclass_class
+		        from (select wl.*,t.name
+		                from (SELECT * 
+		                      FROM works w join  lecture  l 
+		                      using (lecture_no)order by work_no asc) wl join teacher t 
+		                on wl.teacher_number=t.teacher_number) wlt join lectureclass lc 
+		        on wlt.lecture_no=lc.lecture_no) wltlc join registration r 
+		on wltlc.lectureclass_no=r.lectureclass_no
+		where student_number=#{student_number}
+			 and (work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
+		
+	</select>
+	<select id="viewSubmitWork" resultType="Work">
+		select *
+		from (select *       
+		        from (select * 
+		                from registration r join works_result ws using(registration_no)  
+		                where work_no=#{work_no} and registration_no=#{registration_no}) r_ws join works w 
+		                using(work_no)) ww join lecture l using(lecture_no)
+	</select>
+	<update id="submitWork" parameterType="Work">
+		update works_result set work_submit=#{work_submit} where work_no = #{work_no} and registration_no=#{registration_no}
+	</update>
 	
 	
 	

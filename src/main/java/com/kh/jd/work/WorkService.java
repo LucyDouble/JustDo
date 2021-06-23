@@ -26,4 +26,8 @@ public interface WorkService {
 	public int getCountWorkSubmit1(int work_no);
 	public int getCountClass2(int work_no) ;
 	public int getCountWorkSubmit2(int work_no) ;
+	public List<Work> listSubmitWork(int startPage, int limit,Map<String, Object> map) ;
+	public int getListSubmitCount(Map<String, Object> map) ;
+	public Work viewSubmitWork(Work vo) ;
+	public int submitWork(Work vo) ;
 }

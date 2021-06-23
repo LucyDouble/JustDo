@@ -18,7 +18,6 @@ public class WorkDao {
 	private SqlSession sqlSession;
 
 	public List<Work> listWork(int startPage, int limit,Map<String, Object> map) {
-
 		int startRow = (startPage - 1) * limit;
 		RowBounds row = new RowBounds(startRow, limit);
 		return sqlSession.selectList("work.listWork", map, row);
@@ -71,5 +70,19 @@ public class WorkDao {
 	}
 	public int getCountWorkSubmit2(int work_no) {
 		return sqlSession.selectOne("work.getCountWorkSubmit2",work_no);
+	}
+	public List<Work> listSubmitWork(int startPage, int limit,Map<String, Object> map) {
+		int startRow = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(startRow, limit);
+		return sqlSession.selectList("work.listSubmitWork", map, row);
+	}
+	public int getListSubmitCount(Map<String, Object> map) {
+		return sqlSession.selectOne("work.getlistSubmitCount",map);
+	}
+	public Work viewSubmitWork(Work vo) {
+		return sqlSession.selectOne("work.viewSubmitWork", vo);
+	}
+	public int submitWork(Work vo) {
+		return sqlSession.update("work.submitWork", vo);
 	}
 }

@@ -18,6 +18,7 @@ public class Work {
 	private int startday;
 	private int endday;
 	private int teacher_number;
+	private int student_number;
 	private String name;
 	private int rnum;
 	private int registration_no;
@@ -26,13 +27,22 @@ public class Work {
 	
 
 	
+	public int getStudent_number() {
+		return student_number;
+	}
+
+	public void setStudent_number(int student_number) {
+		this.student_number = student_number;
+	}
+
 	@Override
 	public String toString() {
 		return "Work [work_no=" + work_no + ", lecture_no=" + lecture_no + ", work_subject=" + work_subject
 				+ ", work_start=" + work_start + ", work_end=" + work_end + ", work_content=" + work_content
 				+ ", work_submit=" + work_submit + ", lecture_class=" + lecture_class + ", lecture_title="
 				+ lecture_title + ", startday=" + startday + ", endday=" + endday + ", teacher_number=" + teacher_number
-				+ ", name=" + name + ", rnum=" + rnum + ", registration_no=" + registration_no + "]";
+				+ ", student_number=" + student_number + ", name=" + name + ", rnum=" + rnum + ", registration_no="
+				+ registration_no + "]";
 	}
 
 	public int getRegistration_no() {

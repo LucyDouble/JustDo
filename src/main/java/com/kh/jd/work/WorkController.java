@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -40,8 +41,8 @@ public class WorkController {
 			, @RequestParam(name = "keyword", defaultValue = "") String keyword
 			/*, @RequestParam(name = "teacher_number") int teacher_number*/) {
 
-		//TODO
-		int teacher_number=100001;
+		//TODO 세션값으로 가져오길..
+		int teacher_number=100002;
 		Map<String,Object>map = new HashMap<String,Object>();
 		map.put("keyword", keyword);
 		map.put("teacher_number", teacher_number);
@@ -96,7 +97,7 @@ public class WorkController {
 		return "work/addWork";
 	}
 	@RequestMapping(value = "/addWork", method = RequestMethod.POST)
-	public String addWork(ModelAndView mv,Work vo)  {
+	public String addWork(ModelAndView mv,Work vo,HttpServletRequest re)  {
 		System.out.println(vo.getLecture_no());
 		List<Work> aa =workService.registrationNo(vo.getLecture_no());
 		System.out.println(aa);
@@ -104,6 +105,9 @@ public class WorkController {
 		for (Work work : aa) {
 			workService.addWorkResult( work.getRegistration_no());
 		}
+		//TODO 세션값으로 선생번호 무조건 넘겨 줘야 함. 근데 애초에 list 에서 session으로 선생 번호 가져 올 수 있으니 그 점 참조.
+		re.getSession().setAttribute("teacher_number", vo.getTeacher_number());
+		System.out.println("이거 보러왔다."+re.getSession().getAttribute("teacher_number"));
 		return "redirect:/listWork";
 		
 	}
@@ -172,15 +176,12 @@ public class WorkController {
 	public ModelAndView listWorkResult(Work vo,ModelAndView mv
 			, @RequestParam(name = "page", defaultValue = "1") int page
 			, @RequestParam(name = "keyword", defaultValue = "") String keyword)  {
-		System.out.println("결과목록으로 이동할껀데 잘 들어왔나"+vo);
 		
 		
 		double class1_mo= workService.getCountClass1(vo.getWork_no());
 		double class1_ch= workService.getCountWorkSubmit1(vo.getWork_no())*100;
 		double class2_mo= workService.getCountClass2(vo.getWork_no());
 		double class2_ch= workService.getCountWorkSubmit2(vo.getWork_no())*100;
-		System.out.println(class1_mo+"<분자"+class1_ch+"<분모"+class2_mo+"<분모"+class2_ch);
-		System.out.println(String.format("%.0f", class1_ch/class1_mo)+"어랍쇼?"+String.format("%.0f", class2_ch/class2_mo));
 		String classOne=String.format("%.0f", class1_ch/class1_mo);
 		String classTwo=String.format("%.0f", class2_ch/class2_mo);
 		String total =String.format("%.0f", (class2_ch+class1_ch)/(class2_mo+class1_mo));
@@ -236,4 +237,110 @@ public class WorkController {
 		
 		return mv;
 	}
+	@RequestMapping(value = "/viewWorkResult")
+	public String viewWorkResult(Work vo, Model model )  {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
+		System.out.println(vo);
+		System.out.println(vo.getRegistration_no());
+		System.out.println(vo.getWork_no());
+		model.addAttribute("workDto", vo);
+		/*
+		 * Calendar time = Calendar.getInstance(); String format_time1 =
+		 * format1.format(time.getTime()); int nowdate = Integer.parseInt(format_time1);
+		 * model.addAttribute("time", nowdate); Work vo = workService.viewWork(work_no);
+		 * model.addAttribute("workDto", vo);
+		 */
+		return "workResult/viewWorkResult";
+	}
+	@RequestMapping(value = "/listSubmitWork", method = RequestMethod.GET)
+	public ModelAndView listSubmitWork(ModelAndView mv
+			, @RequestParam(name = "page", defaultValue = "1") int page
+			, @RequestParam(name = "keyword", defaultValue = "") String keyword
+			/*, @RequestParam(name = "student_number") int student_number*/) {
+
+		//TODO
+		int student_number=3;
+		Map<String,Object>map = new HashMap<String,Object>();
+		map.put("keyword", keyword);
+		map.put("student_number", student_number);
+		
+		
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
+		Calendar time = Calendar.getInstance();
+		String format_time1 = format1.format(time.getTime());
+		int nowdate = Integer.parseInt(format_time1);
+		mv.addObject("time", nowdate);
+		
+		int listCount = workService.getListSubmitCount(map);
+		
+		int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
+		int currentPage = page;
+		
+		int startPage = 1; 
+		int endPage = 5;
+		if(currentPage % pageBlock == 0)   { 
+			startPage = ((currentPage/pageBlock)-1) * pageBlock + 1;	
+		}else {
+			startPage = (currentPage/pageBlock) * pageBlock + 1;  
+		}		
+		endPage = startPage + pageBlock - 1;
+	
+		if(endPage > pageCnt)
+			endPage = pageCnt;
+		// 페이지 값 처리용
+		// 한 페이지당 출력할 목록 갯수
+		int maxPage = (int) ((double) listCount / LIMIT + 0.9);
+		mv.addObject("pageCnt", pageCnt);
+		mv.addObject("startPage", startPage);
+		mv.addObject("endPage", endPage);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("maxPage", maxPage);
+		mv.addObject("keyword", keyword);
+		mv.addObject("listCount", listCount);
+
+		
+		List<Work> listWork = workService.listSubmitWork(currentPage, LIMIT,map);
+		System.out.println(listWork);
+
+		mv.addObject("listWork", listWork);
+		mv.setViewName("work/listSubmitWork");
+		return mv;
+	}
+	@RequestMapping(value = "/viewSubmitWork")
+	public String viewSubmitWork(Work vo, Model model )  {
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMdd");
+		
+		Calendar time = Calendar.getInstance();
+		String format_time1 = format2.format(time.getTime());
+		int nowdate = Integer.parseInt(format_time1);
+		model.addAttribute("time", nowdate);
+		Work vo1 = workService.viewSubmitWork(vo);
+		String endtime = format2.format(vo1.getWork_end());
+		String srarttime = format2.format(vo1.getWork_start());
+		int endtime1 = Integer.parseInt(endtime);
+		int srarttime1 = Integer.parseInt(srarttime);
+		System.out.println("현재시간 :"+nowdate+"끝나는시간"+endtime1);
+		model.addAttribute("endtime", endtime1);
+		model.addAttribute("starttime", srarttime1);
+		model.addAttribute("workDto", vo1);
+		return "work/viewSubmitWork";
+	}
+	@RequestMapping(value = "/submitWorkForm", method = RequestMethod.POST)
+	public String submitWorkForm(Model model,Work vo) {
+		Work vo1 = workService.viewSubmitWork(vo);
+		
+		model.addAttribute("workDto", vo1);
+
+		return "work/submitWork";
+	}
+	@RequestMapping(value = "/submitWork", method = RequestMethod.POST)
+	public String submitWork(Work vo )  {
+
+		workService.submitWork(vo);
+		
+		//TODO 리스트로 가려면 학생 넘버를 받아 와서 세션으로 넘겨 줘야 함. 애초에 리스트에서 세션으로 정해 줄 수도 있으니 참조.
+		return "redirect:/listSubmitWork";
+	}
+
 }

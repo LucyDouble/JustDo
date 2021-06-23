@@ -59,7 +59,7 @@
   </script>
     </div>
     <br>
-    <button type="button" class="button" onclick="location.href='listWork'"><span>목록</span></button>
+    <button type="button" class="button" onclick="history.back();"><span>취소</span></button>
     <button type="submit" class="button" id="add"><span>등록</span></button>
   </form>
   <script type="text/javascript">

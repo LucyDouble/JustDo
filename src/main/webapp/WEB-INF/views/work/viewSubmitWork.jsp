@@ -9,13 +9,11 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
-<script src="https://cdn.ckeditor.com/4.16.1/standard-all/ckeditor.js"></script>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 <div class="vn_page">
-	<form id="frm" action="submitWork" method="POST">
 
     <p class="vn_title">제출 과제 조회</p>
     <table class="table">
@@ -50,26 +48,39 @@
         </tbody>
     </table>
     
- 	    <br>
-    <div id="editor" class="form-group">
-	    <label class="an_label" for="work_content">&nbsp;&nbsp;내용</label>
-	    <textarea cols="10" id="work_content" name="work_submit" rows="10"></textarea>
-	    <input type="hidden" name="work_no" value="${workDto.work_no}">
-	    <input type="hidden" name="registration_no" value="${workDto.registration_no}">
-    	
-    	
-    <script>
-	    CKEDITOR.replace('work_content', { height: '400px',
-	      extraPlugins: 'editorplaceholder',
-	      editorplaceholder: '내용을 입력하세요.'
-	    });
-    </script>
-   		<input type="submit" class="button"  value="등록"></input>
-   		<input type="button" class="button" onclick="history.back();" value="취소"></input>
+    <c:if test="${not empty workDto.work_submit}">
+ 	<table class="table">
+        <thead>
+            <tr>
+                <th class="vn_cont">&nbsp;&nbsp;나의 결과물</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+            <tr class="cont3">
+                <td class="vn_cont">&nbsp;&nbsp;${workDto.work_submit}</td>
+            </tr>
+        </tbody>
+    </table>
+    </c:if>
+    <c:if test="${time>endtime}">
+   		<button type="button" class="button" onclick="history.back();"><span>확인</span></button>
+    </c:if>
+    
+    <c:if test="${time<=endtime && time>=starttime}">
+	    <c:if test="${empty workDto.work_submit }">
+	    <form action="submitWorkForm" method="POST">
+	    	<input type="hidden" value="${workDto.work_no }" name="work_no">
+	    	<input type="hidden" value="${workDto.registration_no }" name="registration_no">
+	   		<input type="submit" class="button" value="DO"></input>
+	   	</form>
+	   	</c:if>
+	   	 <c:if test="${not empty workDto.work_submit}">
+	   		<button type="button" class="button" onclick="history.back();"><span>수정</span></button>
+	   	</c:if>
+    </c:if>
     
     
-    
-    </form>
     </div>
 
 </body>

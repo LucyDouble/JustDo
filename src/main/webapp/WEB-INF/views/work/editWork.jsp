@@ -24,7 +24,7 @@
     <br>
 <form class="frm" id="frm">
 	<!-- TODO -->
-	<input type="hidden" name="teacher_number" value="100001">
+	<input type="hidden" name="teacher_number" value="100002">
 	<input type="hidden" name="work_no" value="${workDto.work_no }">
     <div class="work_form-group">
         <label class="work_an_label" for="work_subject">&nbsp;&nbsp;제목</label>
