@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>MS</title>
+<title>회원 정보 수정</title>
 <style>
 .userMyPage_userInfo {
    margin: 30px 20px;
@@ -162,7 +162,6 @@
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	
 	<div class="container">
       <h1 class = "userMyPage_title">마이 페이지</h1>
@@ -172,7 +171,7 @@
             <table class ="userMyPage_userTable">
                <tr id = "userMyPage_userIdTr">
                   <th>회원아이디</th>
-                  <td><input type = "text" name = "user_id" id = "userMyPage_id" value = "${id }" readonly></td>
+                  <td><input type = "text" name = "user_id" id = "userMyPage_id" value = "${DTO.id }" readonly></td>
                </tr>
                <tr>
                   <th>비밀번호</th>
@@ -181,25 +180,23 @@
                </tr>
                <tr>
                   <th>이름</th>
-                  <td><input type = "text" name = "user_name" id = "userMyPage_name" value = "${name }" readonly>
-                  <p id = "edit_name" class = "edit" style = "float : right; font-size : 18px; margin-top : 10px; margin-right : 30px;" onclick = "edit('name')">수정하기</p>
-               	  <p id = "errorName" style = "display : none; margin-left : 70px; color : red; font-size : 15px; margin-bottom : 0px;"></p></td>
+                  <td><input type = "text" name = "user_name" id = "userMyPage_name" value = "${DTO.name }" readonly></td>
                </tr>
                <tr>
                   <th>핸드폰번호</th>
-                  <td><input type = "text" name = "user_phone" id = "userMyPage_phone" value = "${phone }" readonly>
+                  <td><input type = "text" name = "user_phone" id = "userMyPage_phone" value = "${DTO.phone }" readonly>
                   <p id = "edit_phone" class = "edit" style = "float : right; font-size : 18px; margin-top : 10px; margin-right : 30px;" onclick ="edit('phone')">수정하기</p>
                   <p id = "errorPhone" style = "display : none; margin-left : 70px; color : red; font-size : 15px; margin-bottom : 0px;"></p></td>
                </tr>
                <tr>
                   <th>주소</th>
-                  <td><input type = "text" name = "user_address" id = "user_address" value = "${address }" readonly>
+                  <td><input type = "text" name = "user_address" id = "user_address" value = "${DTO.address }" readonly>
                   <p id = "edit_address" class = "edit" style = "float : right; font-size : 18px; margin-top : 10px; margin-right : 30px;" onclick ="edit('address')">수정하기</p>
                   <p id = "errorAddress" style = "display : none; margin-left : 70px; color : red; font-size : 15px; margin-bottom : 0px;"></p></td>
                </tr>
                <tr>
                   <th>회원이메일</th>
-                  <td><input type = "text" name = "user_email" id = "userMyPage_email" value = "${email}" readonly>
+                  <td><input type = "text" name = "user_email" id = "userMyPage_email" value = "${DTO.email}" readonly>
                   <p id = "edit_email" class = "edit" style = "float : right; font-size : 18px; margin-top : 10px; margin-right : 30px;" onclick ="edit('email')">수정하기</p>
                   <p id = "errorEmail" style = "display : none; margin-left : 70px; color : red; font-size : 15px; margin-bottom : 0px;"></p></td>
                </tr>
@@ -248,15 +245,7 @@ $(document).ready(function(){
 	
 	///////////수정확인 버튼을 눌렀을 경우/////////////
 	function editOk(e){ 
-    	if(e == "name"){
-    		if(nameP.test($('#userMyPage_name').val())){
-    			$('#errorName').css("display","none");
-    			editFinish(e);
-    		} else{
-    			console.log(($('#userMyPage_name').val()));
-    			$('#errorName').show().html("한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)");
-    		}
-    	} else if (e == "phone"){
+    	 if (e == "phone"){
     		if(phoneP.test($('#userMyPage_phone').val())){
     			$('#errorPhone').css("display","none");
     			editFinish(e);

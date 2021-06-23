@@ -2,51 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Teacher">
 	<resultMap type="Teacher" id="TeacherMap">
-		<result property="teacher_number" column="TEACHER_NUMBER"/>
-		<result property="id" column="ID"/>
-		<result property="password" column="PASSWORD"/>
+		<result property="teacher_number" column="TEACHER_NUMBER" />
+		<result property="id" column="ID" />
+		<result property="password" column="PASSWORD" />
 		<result property="name" column="NAME" />
 		<result property="address" column="ADDRESS" />
 		<result property="phone" column="PHONE" />
 		<result property="email" column="EMAIL" />
-		<result property="accept" column="ACCEPT"/>
-		
+		<result property="accept" column="ACCEPT" />
+
 	</resultMap>
-	
+
 
 
 	<select id="loginCheck" resultType="String">
-		SELECT COUNT(*) FROM TEACHER 
+		SELECT COUNT(*) FROM TEACHER
 		WHERE ID=#{id} AND PASSWORD = #{password}
 	</select>
 	<select id="idCheck" resultType="int">
-		SELECT count(*) from (SELECT ID FROM Teacher WHERE ID=#{id}
+		SELECT count(*) from (SELECT ID
+		FROM Teacher WHERE ID=#{id}
 		union all
 		SELECT
-		ID FROM TEACHER WHERE ID = #{id})
+		ID FROM TEACHER WHERE ID =
+		#{id})
 	</select>
 	<insert id="signUp" parameterType="Teacher">
-		
-		insert into Teacher values ((SELECT nvl(max(Teacher_NUMBER), 0) + 1 FROM Teacher) , #{id},
+
+		insert into Teacher values ((SELECT nvl(max(Teacher_NUMBER), 0) + 1 FROM
+		Teacher) , #{id},
 		#{password}, #{name}, #{address}, #{phone},
-		#{email}, 2)
+		#{email},
+		2)
 	</insert>
-	<select id="infoTeacher" parameterType="Teacher" resultMap="TeacherMap">
-			SELECT * FROM TEACHER
-			WHERE ID = #{id} AND PASSWORD = #{password}
+	<select id="infoTeacher" parameterType="Teacher"
+		resultMap="TeacherMap">
+		SELECT * FROM TEACHER
+		WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>
 	<select id="emailCheck" resultType="int">
 		select count(*) from (SELECT
 		email FROM Teacher WHERE EMAIL=#{email}
 		union all
 		SELECT email
-		FROM TEACHER WHERE EMAIL = #{email})
+		FROM
+		TEACHER WHERE EMAIL = #{email})
 	</select>
 	<select id="phoneCheck" resultType="int">
-		SELECT count(*) from (SELECT PHONE FROM Teacher WHERE PHONE=#{phone}
+		SELECT count(*) from (SELECT
+		PHONE FROM Teacher WHERE PHONE=#{phone}
 		union all
 		SELECT
-		PHONE FROM TEACHER WHERE PHONE = #{phone})
+		PHONE FROM
+		TEACHER WHERE PHONE = #{phone})
 	</select>
+	<update id="updateStudent">
+		UPDATE STUDENT SET
+		PASSWORD=#{PASSWORD},
+		ADDRESS=#{ADDRESS},
+		PHONE=#{PHONE},
+		EMAIL=#{EMAIL}
+	</update>
 
 </mapper>

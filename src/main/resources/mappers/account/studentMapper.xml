@@ -15,14 +15,17 @@
 		WHERE ID = #{id} AND PASSWORD = #{password}
 	</select>
 	<select id="idCheck" resultType="int">
-		SELECT count(*) from (SELECT ID FROM STUDENT WHERE ID=#{id}
+		SELECT count(*) from (SELECT ID
+		FROM STUDENT WHERE ID=#{id}
 		union all
 		SELECT
-		ID FROM TEACHER WHERE ID = #{id})
+		ID FROM TEACHER WHERE ID =
+		#{id})
 	</select>
 	<insert id="signUp" parameterType="Student">
-		
-		insert into student values ((SELECT nvl(max(STUDENT_NUMBER), 0) + 1 FROM STUDENT) , #{id},
+
+		insert into student values ((SELECT nvl(max(STUDENT_NUMBER), 0) + 1 FROM
+		STUDENT) , #{id},
 		#{password}, #{name}, #{address}, #{phone},
 		#{email})
 	</insert>
@@ -37,16 +40,19 @@
 		email FROM STUDENT WHERE EMAIL=#{email}
 		union all
 		SELECT email
-		FROM TEACHER WHERE EMAIL = #{email})
+		FROM
+		TEACHER WHERE EMAIL = #{email})
 	</select>
 	<select id="phoneCheck" resultType="int">
-		SELECT count(*) from (SELECT PHONE FROM STUDENT WHERE PHONE=#{phone]}
+		SELECT count(*) from (SELECT
+		PHONE FROM STUDENT WHERE PHONE=#{phone]}
 		union all
 		SELECT
-		PHONE FROM TEACHER WHERE PHONE = #{phone})
+		PHONE FROM
+		TEACHER WHERE PHONE = #{phone})
 	</select>
-	<update id="updateStudent">
-		UPDATE STUDENT SET
+	<update id="updateTeacher">
+		UPDATE TEACHER SET
 		PASSWORD=#{PASSWORD},
 		ADDRESS=#{ADDRESS},
 		PHONE=#{PHONE},

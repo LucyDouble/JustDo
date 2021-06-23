@@ -1,13 +1,16 @@
 package com.kh.jd.account;
 
 
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,10 +25,10 @@ public class AccountController {
 	@Autowired
 	TeacherService tService;
 
-	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
 
-	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
+
+	@RequestMapping(value = "idCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public String idCheck(HttpServletRequest request, @RequestParam(name = "signUpSelect") String check) {
 		System.out.println(check);
@@ -42,23 +45,53 @@ public class AccountController {
 		}
 	}
 
-	@RequestMapping("/login")
+	@RequestMapping("login")
 	public String login() {
 		return "account/login";
 	}
 
+	@RequestMapping(value = "loginCheck", method = RequestMethod.POST)
+	public String loginCheck(Student sDto, Teacher tDto, HttpSession session, HttpServletRequest request,
+			@RequestParam(name = "loginSelect") String check, Model model) {
+		System.out.println(check);
+		boolean result = false;
+		if (check == "student" || check.equals("student")) {
+			result = sService.loginCheck(sDto, session);
+		} else {
+			result = tService.loginCheck(tDto, session);
+		}
+		if (result == true) {
+			System.out.println(result);
+			model.addAttribute("msg", "성공");
+			session = request.getSession();
+			if (check == "student" || check.equals("student")) {
+				Student list = new Student();
+				list = sService.infoStudent(sDto);
+				System.out.println(list);
+				request.getSession().setAttribute("DTO", list);
+			} else {
+				Teacher list = new Teacher();
+				list = tService.infoTeacher(tDto);
+				System.out.println(list);
+				request.getSession().setAttribute("DTO", list);
+			}
+		} else {
+			System.out.println(result);
+			model.addAttribute("msg", "실패");
+			return "account/login";
+		}
+		return "common/main";
+	}
 
-
-	@RequestMapping("/logout")
+	@RequestMapping("logout")
 	public ModelAndView logout(HttpSession session) {
+
 		sService.logout(session);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("account/signUp");
+		mav.setViewName("common/main");
 		mav.addObject("msg", "logout");
 		return mav;
 	}
-
-
 
 	
 }
