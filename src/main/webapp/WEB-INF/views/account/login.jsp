@@ -5,7 +5,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!doctype HTML>
 <html>
-<link rel="stylesheet" href="<c:url value="/resources/css/account/login.css"/>"> 
+<link rel="stylesheet" href="<c:url value="resources/css/account/login.css"/>"> 
 <head>
 	<meta charset="UTF-8">
 	<title>로그인</title>
@@ -21,7 +21,7 @@
 			<div class="sel-lang-wrap">
 			</div>
 			<div class="logo-wrap">
-				<img src="../resources/images/logo.png">
+				<img src="resources/images/logo.png">
 			</div>
 			
 		</header>
@@ -71,7 +71,7 @@ $('#login').click(function(){
 });
 //회원가입 버튼
 $('#signUp').click(function() {
-	location.href="signUpPage";
+	location.href="signUp";
 });
 </script>
 </html>

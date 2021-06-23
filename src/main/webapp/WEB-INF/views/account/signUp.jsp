@@ -12,7 +12,6 @@
 
 <style>
 .form {
-	margin-top: 100px;
 	position: absolute;
 	left: 40%;
 }
@@ -101,15 +100,21 @@ label {
 label {
 	font-size: 20px;
 }
+
+.logo{
+	width:250px;
+	height:250px;
+}
 </style>
 
 </head>
 
 <body>
 
-	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<form id="form" class="form" action="signUp" method="POST">
 		<div class="signUp-group">
+    <a href="<%=request.getContextPath()%>/jdHome?command=main"><img class="logo" src="resources/images/logo.png"></a>
+    <br>
 			<label for="category">구분</label><br> <input type="radio"
 				name="signUpSelect" checked="checked" value="student">수강생 <input
 				type="radio" name="signUpSelect" value="teacher">교직원
@@ -196,6 +201,7 @@ label {
  -->
 			<input type="submit" class="btn btn-primary px-3" id="reg_submit"
 				value="가입하기" />
+		<br><br><br><br><br><br><br><br>
 		</div>
 	</form>
 
@@ -230,7 +236,7 @@ label {
 							.val();
 					console.log(signUpSelect);
 					$.ajax({
-						url : '${pageContext.request.contextPath}/account/idCheck?id='
+						url : '${pageContext.request.contextPath}/idCheck?id='
 								+ id + "&signUpSelect=" + signUpSelect,
 						type : 'GET',
 						success : function(data) {
@@ -332,7 +338,7 @@ label {
 							console.log(signUpSelect);
 							$
 									.ajax({
-										url : '${pageContext.request.contextPath}/account/emailCheck?email='
+										url : '${pageContext.request.contextPath}/emailCheck?email='
 												+ email
 												+ "&signUpSelect="
 												+ signUpSelect,
@@ -434,7 +440,7 @@ label {
 							console.log(signUpSelect);
 							$
 									.ajax({
-										url : '${pageContext.request.contextPath}/account/phoneCheck?phone='
+										url : '${pageContext.request.contextPath}/phoneCheck?phone='
 												+ phone
 												+ "&signUpSelect="
 												+ signUpSelect,
