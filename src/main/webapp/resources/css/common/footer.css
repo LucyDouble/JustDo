@@ -30,7 +30,7 @@ a:hover {
     width: 100%;
     background-color: #6A60A9;
     margin-bottom: 10px;
-    font-size:0;
+    font-size: 0;
 }
 
 #footer_main>span {
@@ -47,6 +47,7 @@ a:hover {
 #footer_menu1 {
     position: relative;
     text-align: center ;
+    color: #44576C;
 }
 
 #footer_menu1>span {
@@ -56,21 +57,19 @@ a:hover {
 
 .footer_m1 {
     letter-spacing: 1px;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
 }
 
 .hr{
     width: 800px;
     margin: auto;
+    color: #44576C;
 }
 
 #company {
     clear: both;
     padding: 20px 0px 0px 0px;
     margin-left: 20px;
-}
-
-.copyright {
-    font-weight: bold;
+    color: #44576C;
 }
