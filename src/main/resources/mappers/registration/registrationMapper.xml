@@ -10,9 +10,7 @@
 	<!-- 수강신청 -->
 	<insert id="addRegistration" parameterType="Registration">
 		INSERT INTO REGISTRATION VALUES(
-			SEQ_REGISTRATION.NEXTVAL,
-			lectureclass_no= #{lectureclass_no},
-			student_number= #{student_number}
+			SEQ_REGISTRATION.NEXTVAL, #{lectureclass_no}, #{student_number}
 		)
 	</insert>
 	

@@ -42,11 +42,12 @@ public class RegistrationController {
 			, Model m) {
 		int student_no = Integer.parseInt(request.getParameter("student_number"));
 		int lectureclass_no = Integer.parseInt(request.getParameter("lectureclass_no"));
-		String lectureNo = request.getParameter("lectureclass_no");
+		String lectureClassNo = request.getParameter("lectureclass_no");
 		registration.setLectureclass_no(lectureclass_no);
 		registration.setStudent_number(student_no);
+		System.out.println(registration);
 		RService.addRegistration(registration);
-		m.addAttribute("check", RService.checkStudent(lectureNo));
+//		m.addAttribute("check", RService.checkStudent(lectureClassNo));
 		return "";
 	}
 }

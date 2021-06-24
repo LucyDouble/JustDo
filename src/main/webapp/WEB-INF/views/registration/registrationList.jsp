@@ -10,7 +10,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/bootstrap/bootstrap.css">
+<link rel="stylesheet" href="resources/fullcalendar/lib/main.css">
+<script src="resources/fullcalendar/lib/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+    
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+	        businessHours: true,
+	    	locale: 'ko',
+	    	height: 400,
+	    	dayMaxEvents: true,
+	    	 headerToolbar: {
+	    	        left: '',
+	    	        center: 'title',
+	    	        right: 'prev,next today'
+	    	      },
+	    	events:[
+	    		{
+	    			title: '아아아아',
+	    			start: '2021-06-24',
+	    			end: '2021-06-30'
+	    		}
+	    	]      
+      });
+    
+      calendar.render();
+    });
+</script>
+<style>
+	a{
+		color:black;
+		text-decoration: none;
+	}
+	a:hover {
+		color:black;
+	}
+	#calendar{
+		width: 400px;
+	}
+</style>
 </head>
 <body>
 	<section>
@@ -44,7 +84,7 @@
 								<td>${vo.lectureclass_start} ~ ${vo.lectureclass_end}</td>
 								<td>${vo.teacher_number }</td>
 								<td>${vo.lecture_limit}</td>
-								<td>0</td>
+								<td>${check}</td>
 								<td><button>신청</button></td>
 							</tr>
 							</c:forEach>
@@ -53,7 +93,7 @@
 			</form>
 		</article>
 		<article>
-			<p>캘린더</p>
+			<div id="calendar"></div>
 			<p>6월강사일정</p>
 		</article>
 		<article>
@@ -93,8 +133,8 @@
 								<td>${vo.lectureclass_start } ~ ${vo.lectureclass_end }</td>
 								<td>${vo.teacher_number }</td>
 								<td>${vo.lecture_limit }</td>
-								<td id="${vo.lectureclass_no}">0</td>
-								<td><button  onclick="request('${vo.lectureclass_no}','${vo.lecture_no }');">신청</button></td>
+								<td>${check}</td>
+								<td id="${vo.lectureclass_no}"><button  onclick="request('${vo.lectureclass_no}','${vo.lecture_no }');">신청</button></td>
 								<td><a href="javascript:void(0);" onclick="pop('${vo.lecture_no}', '${ vo.lectureclass_class}');">보기</a></td>
 							</tr>
 							</c:forEach>
@@ -136,7 +176,7 @@
 					lecture_no : number1
     	},
     	success: function(data){
-    		
+    		$("#"+number+" button").val("완료");
     	},
     	error : function(){
     		
