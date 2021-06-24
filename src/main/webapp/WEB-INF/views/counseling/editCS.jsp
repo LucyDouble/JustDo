@@ -12,10 +12,9 @@
 </head>
 <body>
 
-	<button id="show">팝업열기</button>
 	<div class="background">
 		<div class="ec_popup">
-			<!-- <div class="cd-popup-container"> -->
+			<div class="cd-popup-container">
 			<div class="ec_head">
 			<h2 class="ec_title">&nbsp;&nbsp;상담신청 수정</h2>
 			</div>
@@ -37,13 +36,15 @@
 				</form>
 			</div>
 		</div>
+	</div>
+		
 
 	<script>
-      function show() {
+      function editshow() {
         document.querySelector(".background").className = "background show";
       }
 
-      function close() {
+      function editclose() {
         document.querySelector(".background").className = "background";
       }
 

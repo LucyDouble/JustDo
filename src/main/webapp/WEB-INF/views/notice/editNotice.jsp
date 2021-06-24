@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
+
+
 </head>
 <body>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
@@ -23,21 +25,27 @@
 				<label class="en_label" for="subject">제목</label> <input
 					type="text" class="form-control" id="subject" name="n_sub" placeholder="제목을 입력하세요." value="${notice.notice_sub }">
 			</div>
-			<br>
+			<br> 
 			<div id="editor" class="form-group">
 				<label class="en_label" for="content">내용</label>
-				<textarea cols="10" id="editor1" name="editor1" rows="10">${notice.notice_con }</textarea>
-				<script>
+				<textarea id="editor1" name="editor1" rows="10" cols="10">${notice.notice_con }</textarea>
+				<script type="text/javascript">
+					CKEDITOR.editorConfig = function( config ) {
+					    config.filebrowserUploadMethod = 'form';
+					};
 					CKEDITOR.replace('editor1', {
 						height : '400px',
 						extraPlugins : 'editorplaceholder',
-						editorplaceholder : '내용을 입력하세요.'
+						editorplaceholder : '내용을 입력하세요.',
+						filebrowserUploadUrl:'${pageContext.request.contextPath}/fileupload'
 					});
+ 					window.parent.CKEDITOR.tools.callFunction(1,"${url}","전송완료");
 				</script>
-
-
+				
+					<!-- printWriter.println("<script>window.parent.CKEDITOR.tools.callFunction("+callback+",'"+fileUrl+"','이미지가 업로드되었습니다.')"+"</script>"); -->
 				<br>
 			</div>
+			
 			<button type="submit" id="btnUpdate" class="button"><span>수정</span>
 			</button>
 		</form>
@@ -51,16 +59,5 @@
 <script>
 
 
-	//수정 버튼 클릭 이벤트
-/* 	$(document).on('click', '#btnUpdate', function() {
-		var url = "${pageContext.request.contextPath}/editNotice";
-		url = url + "?n_no=" + $
-		{
-			notice.notice_no
-		}
-		;
-		url = url + "&mode=edit";
-		location.href = url;
-	}); */
 </script>
 </html>

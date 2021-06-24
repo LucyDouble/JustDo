@@ -13,7 +13,7 @@ public interface NoticeService {
 	//글조회
 	public Notice viewNotice(int notice_no);
 	//글등록
-	public int addNotice(Map<String, Object> add);
+	public int addNotice(Map<String, Object> map);
 	//글삭제
 	public int removeNotice(int notice_no);
 	//글수정

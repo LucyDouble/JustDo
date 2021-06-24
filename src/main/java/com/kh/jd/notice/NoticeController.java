@@ -1,22 +1,34 @@
 package com.kh.jd.notice;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
-
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.security.auth.callback.Callback;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.JsonObject;
 import com.kh.jd.work.Work;
 
 @Controller
@@ -28,7 +40,6 @@ public static final int pageBlock = 5;
 
 	// 목록조회
 	@RequestMapping(value = "/listNotice", method = RequestMethod.GET)
-//	public ModelAndView listNotice(ModelAndView mv) {
 		public ModelAndView listNotice(ModelAndView mv,@RequestParam(name = "page", defaultValue = "1") int page) {
 		
 		Map<String,Object>map = new HashMap<String,Object>();
@@ -145,6 +156,71 @@ public static final int pageBlock = 5;
 		noticeService.removeNotice(notice_no);
 		return "redirect:/listNotice";
 	}
-	
-	
+	// 이미지 업로드
+	@RequestMapping(value = "/fileupload", method = RequestMethod.POST)
+	public String fileUpload(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile) throws Exception {
+//		JsonObject json = new JsonObject();
+		PrintWriter printWriter = null;
+		OutputStream out = null;
+		MultipartFile file = multiFile.getFile("upload");
+		if(file != null) {
+			if(file.getSize() > 0 && StringUtils.isNotBlank(file.getName())) {
+				if(file.getContentType().toLowerCase().startsWith("notice/imageUpload")) {
+					try {
+							String fileName = file.getName();
+							byte[] bytes = file.getBytes();
+							String uploadPath = request.getServletContext().getRealPath("/images");
+							File uploadFile = new File(uploadPath);
+							if(!uploadFile.exists()) {
+								uploadFile.mkdirs();
+							}
+							fileName = UUID.randomUUID().toString();
+							uploadPath = uploadPath + "/" + fileName;
+							out = new FileOutputStream(new File(uploadPath));
+							out.write(bytes);
+							out.flush();
+							
+							
+							printWriter = response.getWriter();
+							System.out.println("response : " + response);
+							response.setContentType("text/html");
+							String fileUrl = request.getContextPath() + "/resources/imageUpload/" + fileName;
+							String callback = request.getParameter("CKEditorFuncNum");
+							
+							// 제이슨 데이터로 등록, {"uploaded":1, "fileName":"tes.jpg", "url":"/imgages/test.jpg"}
+							// 4.9버전이상부터 json형태
+//							json.addProperty("uploaded", 1);
+//							json.addProperty("fileName", fileName);
+//							json.addProperty("url", fileUrl);
+//							printWriter.println(json);
+							
+							// 4.9버전 이하는 스크립트형태로 리턴
+//							printWriter.println("<script>window.parent.CKEDITOR.tools.callFunction("+callback+
+//									",'"+fileUrl+"','이미지가 업로드되었습니다.')"+""
+//									+ "</script>");
+							
+							if(!callback.equals("1")) { // callback이 1일 경우만 성공한 것
+					        	 printWriter.println("<script>alert('이미지 업로드에 실패했습니다.');"+"</script>");
+					        	 System.out.println();
+					        }else {
+					             printWriter.println("<script>window.parent.CKEDITOR.tools.callFunction("+callback+",'"+fileUrl+"','이미지가 업로드되었습니다.')"+"</script>");
+					        }
+					}catch(IOException e) {
+						e.printStackTrace();
+					}finally {
+						if(out != null) {
+							out.close();
+						}
+						if(printWriter != null) {
+							printWriter.close();
+						}
+										}
+								}
+						}
+				}
+				return null;
+	}
 }
+
+
+

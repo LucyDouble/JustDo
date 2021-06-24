@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,13 +26,12 @@
         </form>
             <i class="fas fa-search"></i>
     </div>
-
-		<form id="lc_form">
+		<!-- <form id="lc_form"> -->
 			<table class="table">
 				<thead>
 					<tr>
 						<th><label class="checkbox"> <input type="checkbox"
-								id="checkall" class="checkbox" /> <span class="icon"></span>
+								id="checkall" class="checkbox" name="allCheck" /> <span class="icon"></span>
 						</label></th>
 						<th>No.</th>
 						<th>이름</th>
@@ -41,66 +41,50 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><label class="checkbox"> <input type="checkbox"
+				<c:forEach items="${listCS }" var="list">
+					<tr><td><label class="checkbox"> <input type="checkbox"
 								class="checkbox" name="item" /> <span class="icon"></span>
 						</label></td>
-						<!-- <input type="checkbox" class="checkbox" name="item" /><span></span></td> -->
-						<td>1</td>
-						<td>고현민</td>
-						<td>010-1111-2222</td>
-						<td>jdhm@jdec.co.kr</td>
-						<td>2021-06-12 16:00</td>
+						<td>${list.counseling_no }</td>
+						<td  class="lc_cont" onclick="viewshow('${list.counseling_name }','${list.counseling_phone }','${list.counseling_email }','${list.counseling_date } ${list.clock } ');">${list.counseling_name }</td>
+						<td>${list.counseling_phone }</td>
+						<td>${list.counseling_email }</td>
+						<td>${list.counseling_date } 시간 [ ${list.clock } ]</td>
 					</tr>
-					<tr>
-						<td><label class="checkbox"> <input type="checkbox"
-								class="checkbox" name="item" /> <span class="icon"></span>
-						</label></td>
-						<td>2</td>
-						<td>권용휘</td>
-						<td>010-1111-3333</td>
-						<td>jdyh@jdec.co.kr</td>
-						<td>2021-06-04 17:00</td>
-					</tr>
-					<tr>
-						<td><label class="checkbox"> <input type="checkbox"
-								class="checkbox" name="item" /> <span class="icon"></span>
-						</label></td>
-						<td>3</td>
-						<td>박강훈</td>
-						<td>010-1111-5555</td>
-						<td>jdkh@jdec.co.kr</td>
-						<td>2021-06-04 18:00</td>
-					</tr>
-					<tr>
-						<td><label class="checkbox"> <input type="checkbox"
-								class="checkbox" name="item" /> <span class="icon"></span>
-						</label></td>
-						<td>4</td>
-						<td>이호재</td>
-						<td>010-1111-6666</td>
-						<td>jdhj@jdec.co.kr</td>
-						<td>2021-06-04 19:00</td>
-					</tr>
-					<tr>
-						<td><label class="checkbox"> <input type="checkbox"
-								class="checkbox" name="item" /> <span class="icon"></span>
-						</label></td>
-						<td>5</td>
-						<td>정재만</td>
-						<td>010-1111-7777</td>
-						<td>jdjm@jdec.co.kr</td>
-						<td>2021-06-04 20:00</td>
-					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
-		</form>
-		<button class="button" onclick="location.href=''">
+	<!-- 	</form> -->
+		
+		<div class="ln_paging">
+			<c:if test="${startPage != 1 }">
+				<a
+					href="<%=request.getContextPath() %>/listCS?page=${startPage-1}&keyword=${keyword}">이전</a>
+			</c:if>
+			<c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
+				<c:if test="${p eq currentPage}">
+					<font color="#6A60A9" size="4"><b>[${p}]</b></font>
+				</c:if>
+				<c:if test="${p ne currentPage}">
+					<c:url var="listCSChk" value="listCS?keyword=${keyword}">
+						<c:param name="page" value="${p}" />
+					</c:url>
+					<a href="${listCSChk}">${p}</a>
+				</c:if>
+			</c:forEach>
+			<c:if test="${endPage < pageCnt }">
+				<a
+					href="<%=request.getContextPath() %>/listCS?page=${endPage+1}&keyword=${keyword}">다음</a>
+			</c:if>
+		</div>
+		
+		<button id="btnRemove" class="button">
 			<span>삭제</span>
 		</button>
-
-		<br> <br> <br>
+		<br>
 	</div>
+	<br>
+	<br>
 	<jsp:include page="../counseling/addCS.jsp"></jsp:include>
 	<script>
 	$("#checkall").change(function(){
@@ -112,8 +96,11 @@
 	     $("input[name='item']").prop('checked', false);
 	    }
 	});
+	
+	</script>
 
-</script>
-<jsp:include page="../common/footer.jsp"></jsp:include>
+<jsp:include page="../counseling/viewCS.jsp"></jsp:include>
+<jsp:include page="../counseling/removeCS.jsp"></jsp:include>
 </body>
+<jsp:include page="../common/footer.jsp"></jsp:include>
 </html>

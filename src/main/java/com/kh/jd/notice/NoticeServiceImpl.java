@@ -30,8 +30,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	@Override
 	//글등록
-	public int addNotice(Map<String,Object> add) {
-		return noticeDao.addNotice(add);
+	public int addNotice(Map<String,Object> map) {
+		return noticeDao.addNotice(map);
 	}
 	@Override
 	//글삭제

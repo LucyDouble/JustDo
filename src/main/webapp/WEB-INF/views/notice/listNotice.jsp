@@ -43,10 +43,10 @@
 						<td class="ln_cont"><a href="viewNotice?n_no=${list.notice_no}">${list.notice_sub }</a></td>
 						<td>
 							<c:if test="${list.manager_number >= 20000 }">운영자</c:if>
-							<c:if test="${list.teacher_number >= 100000 }">${list.teacher_name}</c:if>
+							<c:if test="${list.teacher_number >= 100000 }">${list.teacher_name }</c:if>
 							</td>
- 							<td><fmt:parseDate value="${list.notice_date}" var="noticePostDate" pattern="yyyy-MM-dd"/>
-							<fmt:formatDate value="${noticePostDate}" pattern="yyyy.MM.dd"/></td>
+ 							<td><fmt:parseDate value="${list.notice_date }" var="noticePostDate" pattern="yyyy-MM-dd"/>
+							<fmt:formatDate value="${noticePostDate }" pattern="yyyy.MM.dd"/></td>
 							<td>${list.hit }</td>
 					</tr>
 					</c:forEach>

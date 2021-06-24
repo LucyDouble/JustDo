@@ -27,7 +27,7 @@ body {
 }
 
 .lc_page, .ac_page {
-	width: 800px;
+	width: 1000px;
 }
 
 .ln_title {
@@ -170,7 +170,7 @@ body {
 	padding-left: 10px;
 }
 
-.ln_cont:hover {
+.ln_cont:hover, .lc_cont:hover{
 	font-weight: bold;
 	/* transform: scale(1.03); */
 	/* transition: all 0.5s */
@@ -178,7 +178,7 @@ body {
 }
 
 /* removeNotice 모달 css */
-.background {
+.rc_background, .vc_background {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -229,10 +229,10 @@ body {
 	margin-top:14px;
 }
 
-.rn_a, .rc_a {
+/* .rn_a, .rc_a {
 	color: #35a785;
 	text-decoration: none;
-}
+} */
 
 .rn_li:first-child a:hover, .rc_li:first-child a:hover {
 	color: #EE2560;
@@ -252,13 +252,16 @@ ol,.cd-buttons {
 .rn_li:first-child a, .rc_li:first-child a {
 	background: #fc7169;
 	float: left;
-	margin-left: -32px;
+	/* margin-left: -32px; */
 	border-radius: 0 0 0 5px;
 	color: white;
 	width: 170px;
 	height: 60px;
 	line-height: 60px;
 	text-decoration: none;
+	position : absolute;
+	bottom:0px;
+	left:0px;
 }
 
 .rn_li:last-child a, .rc_li:last-child a {
@@ -271,6 +274,9 @@ ol,.cd-buttons {
 	height: 60px;
 	line-height: 60px;
 	text-decoration: none;
+	position : absolute;
+	bottom:0px;
+	right:0px;
 }
 
 .rn_p, .rc_p {
@@ -446,7 +452,9 @@ ol,.cd-buttons {
 	margin:0;
 	padding:0;
 }
-
+#viewCS:hover {
+	font-weight: bold;
+}
 /* listCS 서치바 CSS */
 .lc_search_box{
     margin-bottom: 15px;

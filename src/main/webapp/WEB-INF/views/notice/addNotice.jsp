@@ -36,14 +36,19 @@ function addWirte(){
     <br>
     <div id="editor" class="form-group">
       <label class="an_label" for="content">내용</label>
-    	<textarea cols="10" id="editor1" name="notice_con" rows="10"></textarea>
+    	<textarea id="editor1" name="notice_con" rows="10" cols="10"></textarea>
     	
     	
    <script>
+   var ckeditor_config = {
+		   resize_enaleb : false,
+		   enterMode : CKEDITOR.ENTER_BR,
+		   shiftEnterMode : CKEDITOR.ENTER_R,
+   	};
     CKEDITOR.replace('editor1', { height: '400px',
       extraPlugins: 'editorplaceholder',
       editorplaceholder: '내용을 입력하세요.'
-    });
+    },ckeditor_config );
 
   </script>
     </div>

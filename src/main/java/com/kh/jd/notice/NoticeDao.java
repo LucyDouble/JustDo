@@ -34,8 +34,8 @@ public class NoticeDao {
 	}
 	
 	//글등록
-	public int addNotice(Map<String, Object> add) {
-		return sqlSession.insert("Notice.addNotice", add);
+	public int addNotice(Map<String, Object> map) {
+		return sqlSession.insert("Notice.addNotice", map);
 	}
 	
 	//글삭제

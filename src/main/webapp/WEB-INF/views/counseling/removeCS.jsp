@@ -12,9 +12,7 @@
 
 </head>
 <body>
-
-	<button id="show">팝업열기</button>
-	<div class="background">
+	<div class="rc_background">
 		<div class="popup">
 			<div class="cd-popup-container">
 				<div class="rc_cont">
@@ -22,24 +20,32 @@
 				<p class="rc_p">상담신청을 정말 삭제 하시겠습니까?</p>
 				</div>
 				<ul id="close" class="cd-buttons">
-					<li class="rc_li"><a class="rc_a" href="#0">삭제</a></li>
-					<li class="rc_li"><a class="rc_a" href="#0">취소</a></li>
+					<li class="rc_li"><a class="rc_a" href="#0" id="rc_remove">삭제</a></li>
+					<li class="rc_li"><a class="rc_a" href="#0" id="rc_close">취소</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 
 	<script>
-      function show() {
-        document.querySelector(".background").className = "background show";
+      function removeshow() {
+        document.querySelector(".rc_background").className = "rc_background show";
       }
 
-      function close() {
-        document.querySelector(".background").className = "background";
+      function removeclose() {
+        document.querySelector(".rc_background").className = "rc_background";
       }
 
-      document.querySelector("#show").addEventListener("click", show);
-      document.querySelector("#close").addEventListener("click", close);
+      document.querySelector("#btnRemove").addEventListener("click", removeshow);
+      document.querySelector("#close").addEventListener("click", removeclose);
+      
+  		//삭제 버튼 클릭 이벤트
+		$(document).on('click', '#remove', function(){
+	    var url = "${pageContext.request.contextPath}/removeCS";
+	    url = url + "?c_no=" + ${counseling.counseling_no};
+			location.href = url;
+		});
+  		
     </script>
 </body>
 </html>

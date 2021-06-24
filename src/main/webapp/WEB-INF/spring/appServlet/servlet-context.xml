@@ -36,6 +36,5 @@
 	<beans:bean id="qrcodeview"
 		class="com.kh.jd.attend.QRCodeView" />
 
-
-
+		
 </beans:beans>

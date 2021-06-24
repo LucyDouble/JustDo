@@ -1,4 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="counseling">
+<mapper namespace="Counseling">
+	<resultMap type="Counseling" id="CounselingMap">
+		<result property="counseling_no" column="COUNSELING_NO"/>
+		<result property="counseling_name" column="COUNSELING_NAME"/>
+		<result property="counseling_phone" column="COUNSELING_PHONE"/>
+		<result property="counseling_email" column="COUNSELING_EMAIL"/>
+		<result property="counseling_date" column="COUNSELING_DATE"/>
+		<result property="manager_num" column="MANAGER_NUMBER"/>
+		<result property="manager_name" column="MANAGER_NAME"/>
+	</resultMap>
+
+	<!-- 목록조회 -->
+		<select id="listCS" resultType="Counseling">
+		<![CDATA[
+			select counseling_no, manager_number, counseling_name, counseling_phone, counseling_email, to_char(counseling_date,'yyyy/mm/dd') as counseling_date, to_char (counseling_date,'hh24:mi') as clock from counseling
+			order by counseling_no desc
+		]]>
+		</select>
+		
+	<!-- 페이징 -->
+		<select id="getlistCount" resultType="int" parameterType="Map">
+		SELECT COUNT(*)
+		from counseling
+		</select>
+		
+	<!-- 상세조회 -->
+		<select id="viewCS" resultType="Counseling">
+			select * from counseling
+			where counseling_no = #{counseling_no}
+		</select>
+	
+	<!-- 등록 -->
+		<insert id="addCS" parameterType="Counseling">
+		<![CDATA[
+	        insert into counseling values((	        
+	        	select nvl(max(counseling_no),0)+1 cnt from counseling), ${manager_number}, #{counseling_name}, #{counseling_phone}, #{counseling_email}, to_date(#{counseling_date},'yyyy-mm-dd hh24:mi')) 
+		]]>
+		</insert>
+		
+	<!-- 삭제 -->
+		<delete id="removeNotice" parameterType="Notice">
+			<![CDATA[
+			delete from counseling where counseling_no = #{counseling_no}
+			]]>
+		</delete>
+	
+	
 </mapper>

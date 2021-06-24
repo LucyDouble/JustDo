@@ -9,11 +9,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
-
 </head>
 <body>
-
-	<button id="show">팝업열기</button>
 	<div class="background">
 		<div class="popup">
 			<div class="cd-popup-container">
@@ -21,12 +18,11 @@
 				<p class="rn_p">게시글을 정말 삭제 하시겠습니까?</p>
 				</div>
 				<ul id="close" class="cd-buttons">
-					<li class="rn_li"><a class="rn_a" href="#0">삭제</a></li>
-					<li class="rn_li"><a class="rn_a" href="#0">취소</a></li>
+					<li class="rn_li"><a class="rn_a" href="#0" id="remove">삭제</a></li>
+					<li class="rn_li"><a class="rn_a" href="#0" id="close">취소</a></li>
 				</ul>
 			</div>
 		</div>
-	</div>
 
 	<script>
       function show() {
@@ -37,8 +33,15 @@
         document.querySelector(".background").className = "background";
       }
 
-      document.querySelector("#show").addEventListener("click", show);
+      document.querySelector("#btnRemove").addEventListener("click", show);
       document.querySelector("#close").addEventListener("click", close);
+    			   
+    			   	//삭제 버튼 클릭 이벤트
+    				$(document).on('click', '#remove', function(){
+    			    var url = "${pageContext.request.contextPath}/removeNotice";
+    			    url = url + "?n_no=" + ${notice.notice_no};
+    					location.href = url;
+    				});
     </script>
 </body>
 </html>
