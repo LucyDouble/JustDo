@@ -104,5 +104,7 @@
 		<sciprt src="js/jqurey-3.1.1.js"></sciprt>
 		<sciprt src="js/bootstrap.js"></sciprt>
 	</div>
+	<br> <br> <br>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

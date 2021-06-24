@@ -118,5 +118,10 @@ public class WorkServiceImpl implements WorkService{
 		return workDao.submitWork(vo);
 	}
 
+	@Override
+	public int removeSubmitWork(Work vo) {
+		return workDao.removeSubmitWork(vo);
+	}
+
 
 }

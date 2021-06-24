@@ -85,4 +85,7 @@ public class WorkDao {
 	public int submitWork(Work vo) {
 		return sqlSession.update("work.submitWork", vo);
 	}
+	public int removeSubmitWork(Work vo) {
+		return sqlSession.update("work.removeSubmitWork", vo);
+	}
 }

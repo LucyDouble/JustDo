@@ -15,9 +15,9 @@
 <body>
 <div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 <div class="vn_page">
-	<form id="frm" action="submitWork" method="POST">
+	<form id="frm" action="editSubmitWork" method="POST">
 
-    <p class="vn_title">과제 제출</p>
+    <p class="vn_title">제출 과제 수정</p>
     <table class="table">
 				<thead>
 					<tr>
@@ -53,10 +53,10 @@
  	    <br>
     <div id="editor" class="form-group">
 	    <label class="an_label" for="work_content">&nbsp;&nbsp;내용</label>
-	    <textarea cols="10" id="work_content" name="work_submit" rows="10"></textarea>
+	    <textarea cols="10" id="work_content" name="work_submit" rows="10">${workDto.work_submit }</textarea>
 	    <input type="hidden" name="work_no" value="${workDto.work_no}">
 	    <input type="hidden" name="registration_no" value="${workDto.registration_no}">
-    	
+    </div>
     	
     <script>
 	    CKEDITOR.replace('work_content', { height: '400px',
@@ -64,14 +64,15 @@
 	      editorplaceholder: '내용을 입력하세요.'
 	    });
     </script>
-   		<input type="submit" class="button"  value="등록"></input>
+   		<input type="submit" class="button"  value="수정"></input>
    		<input type="button" class="button" onclick="history.back();" value="취소"></input>
     
     
     
     </form>
     </div>
-
+<br> <br> <br>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
-    <%-- <jsp:include page="../common/footer.jsp"></jsp:include> --%>
+ 
 </html>

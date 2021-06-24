@@ -68,6 +68,7 @@
     </c:if>
     
     <c:if test="${time<=endtime && time>=starttime}">
+	   		<button type="button" class="button" onclick="location.href='listSubmitWork'"><span>목록</span></button>
 	    <c:if test="${empty workDto.work_submit }">
 	    <form action="submitWorkForm" method="POST">
 	    	<input type="hidden" value="${workDto.work_no }" name="work_no">
@@ -75,14 +76,27 @@
 	   		<input type="submit" class="button" value="DO"></input>
 	   	</form>
 	   	</c:if>
-	   	 <c:if test="${not empty workDto.work_submit}">
-	   		<button type="button" class="button" onclick="history.back();"><span>수정</span></button>
+	   	 <c:if test="${not empty workDto.work_submit}" >
+	   	<form action="editSubmitWorkForm" method="POST" id="frm">
+	    	<input type="hidden" value="${workDto.work_no }" name="work_no">
+	    	<input type="hidden" value="${workDto.registration_no }" name="registration_no">
+	   		<input type="submit" class="button" value="수정"></input>
+	   		 <button type="button" class="button" id="remove" ><span>삭제</span></button>
+	   	</form>
 	   	</c:if>
     </c:if>
     
     
     </div>
-
+	<script>
+    $("#remove").click(function(){
+    	var frm=document.getElementById("frm");
+    	frm.action="removeSubmitWork";
+        frm.method="POST";
+        frm.submit();
+    });
+    
+    </script>
 </body>
     <%-- <jsp:include page="../common/footer.jsp"></jsp:include> --%>
 </html>

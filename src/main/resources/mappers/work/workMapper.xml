@@ -166,7 +166,9 @@
 	<update id="submitWork" parameterType="Work">
 		update works_result set work_submit=#{work_submit} where work_no = #{work_no} and registration_no=#{registration_no}
 	</update>
-	
+	<update id="removeSubmitWork" parameterType="Work">
+		update works_result set work_submit=null where work_no=#{work_no} and registration_no=#{registration_no}
+	</update>
 	
 	
 	

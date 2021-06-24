@@ -30,4 +30,5 @@ public interface WorkService {
 	public int getListSubmitCount(Map<String, Object> map) ;
 	public Work viewSubmitWork(Work vo) ;
 	public int submitWork(Work vo) ;
+	public int removeSubmitWork(Work vo) ;
 }

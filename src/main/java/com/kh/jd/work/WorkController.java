@@ -320,7 +320,6 @@ public class WorkController {
 		String srarttime = format2.format(vo1.getWork_start());
 		int endtime1 = Integer.parseInt(endtime);
 		int srarttime1 = Integer.parseInt(srarttime);
-		System.out.println("현재시간 :"+nowdate+"끝나는시간"+endtime1);
 		model.addAttribute("endtime", endtime1);
 		model.addAttribute("starttime", srarttime1);
 		model.addAttribute("workDto", vo1);
@@ -342,5 +341,37 @@ public class WorkController {
 		//TODO 리스트로 가려면 학생 넘버를 받아 와서 세션으로 넘겨 줘야 함. 애초에 리스트에서 세션으로 정해 줄 수도 있으니 참조.
 		return "redirect:/listSubmitWork";
 	}
+	@RequestMapping(value = "/editSubmitWorkForm", method = RequestMethod.POST)
+	public String editSubmitWorkForm(Model model,Work vo) {
+		Work vo1 = workService.viewSubmitWork(vo);
+		
+		model.addAttribute("workDto", vo1);
 
+		return "work/editSubmitWork";
+	}
+	@RequestMapping(value = "/editSubmitWork", method = RequestMethod.POST)
+	public String editSubmitWork(Model model,Work vo)  {
+		System.out.println(vo);
+		workService.submitWork(vo);
+		SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMdd");
+		Calendar time = Calendar.getInstance();
+		String format_time1 = format2.format(time.getTime());
+		int nowdate = Integer.parseInt(format_time1);
+		model.addAttribute("time", nowdate);
+		Work vo1 = workService.viewSubmitWork(vo);
+		String endtime = format2.format(vo1.getWork_end());
+		String srarttime = format2.format(vo1.getWork_start());
+		int endtime1 = Integer.parseInt(endtime);
+		int srarttime1 = Integer.parseInt(srarttime);
+		model.addAttribute("endtime", endtime1);
+		model.addAttribute("starttime", srarttime1);
+		model.addAttribute("workDto", vo1);
+		return "work/viewSubmitWork";
+	}
+	@RequestMapping(value = "/removeSubmitWork", method = RequestMethod.POST)
+	public String removeSubmitWork(Model model,Work vo) {
+		workService.removeSubmitWork(vo);
+		//TODO 리스트로 가려면 학생 넘버를 받아 와서 세션으로 넘겨 줘야 함. 애초에 리스트에서 세션으로 정해 줄 수도 있으니 참조.
+		return "redirect:/listSubmitWork";
+	}
 }

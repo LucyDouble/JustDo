@@ -67,7 +67,7 @@
     <button type="button" class="button" onclick="history.back();"><span>확인</span></button>
     </form>
     </div>
-
+<br> <br> <br>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
-    <%-- <jsp:include page="../common/footer.jsp"></jsp:include> --%>
 </html>
