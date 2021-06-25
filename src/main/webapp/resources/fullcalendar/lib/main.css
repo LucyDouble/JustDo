@@ -734,6 +734,7 @@ A HORIZONTAL event
     position: relative;
     z-index: 4;
     padding: 4px;
+    font-size: 11px;
   }
 .fc {
 
@@ -807,7 +808,7 @@ A HORIZONTAL event
 
 }
 .fc .fc-daygrid-day-bottom {
-    font-size: .85em;
+    font-size: 12px;
     padding: 2px 3px 0
   }
 .fc .fc-daygrid-day-bottom:before {
