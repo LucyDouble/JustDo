@@ -3,6 +3,7 @@ package com.kh.jd.counseling;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,4 @@ public class CounselingDao {
 	public int removeCS(int counseling_no) {
 		return sqlSession.delete("Counseling.removeCS", counseling_no);
 	}
-	
 }

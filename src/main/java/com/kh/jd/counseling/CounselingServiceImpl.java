@@ -42,5 +42,4 @@ public class CounselingServiceImpl implements CounselingService{
 		result = counselingDao.removeCS(counseling_no);
 		return result;
 	}
-	
 }

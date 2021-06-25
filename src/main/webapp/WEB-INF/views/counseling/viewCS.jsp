@@ -26,10 +26,10 @@
 						<button type="submit" class="vc_ebtn">수정</button>
 						</div>
 			</div>
-		</div>
+		</div>a
 	</div>
 	<script>
-	 function viewshow(name, phone, email, date) {
+	function viewshow(name, phone, email, date) {
 		 $("#vc_name").val(name);
 		 $("#vc_phone").val(phone);
 		 $("#vc_email").val(email);

@@ -40,7 +40,7 @@
 		</insert>
 		
 	<!-- 삭제 -->
-		<delete id="removeNotice" parameterType="Notice">
+		<delete id="removeCS" parameterType="Counseling">
 			<![CDATA[
 			delete from counseling where counseling_no = #{counseling_no}
 			]]>

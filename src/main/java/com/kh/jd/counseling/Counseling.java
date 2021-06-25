@@ -1,5 +1,7 @@
 package com.kh.jd.counseling;
 
+import java.util.Arrays;
+
 import org.springframework.stereotype.Component;
 
 
@@ -14,15 +16,16 @@ public class Counseling {
 	private String counseling_email;
 	private String counseling_date;
 	private String clock;
+	private int [] cnoList;
 	private int rnum;
+	
 	@Override
 	public String toString() {
 		return "Counseling [counseling_no=" + counseling_no + ", manager_number=" + manager_number + ", manager_name="
 				+ manager_name + ", counseling_name=" + counseling_name + ", counseling_phone=" + counseling_phone
 				+ ", counseling_email=" + counseling_email + ", counseling_date=" + counseling_date + ", clock=" + clock
-				+ ", rnum=" + rnum + "]";
+				+ ", cnoList=" + Arrays.toString(cnoList) + ", rnum=" + rnum + "]";
 	}
-	
 	public int getCounseling_no() {
 		return counseling_no;
 	}
@@ -77,7 +80,10 @@ public class Counseling {
 	public void setClock(String clock) {
 		this.clock = clock;
 	}
-	
-	
-	
+	public int[] getCnoList() {
+		return cnoList;
+	}
+	public void setCnoList(int[] cnoList) {
+		this.cnoList = cnoList;
+	}
 }

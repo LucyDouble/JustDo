@@ -9,7 +9,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
-
 </head>
 <body>
 	<div class="rc_background">
@@ -20,32 +19,63 @@
 				<p class="rc_p">상담신청을 정말 삭제 하시겠습니까?</p>
 				</div>
 				<ul id="close" class="cd-buttons">
-					<li class="rc_li"><a class="rc_a" href="#0" id="rc_remove">삭제</a></li>
+					<li class="rc_li"><a class="rc_a" href="#0" id="rc_remove" onclick="delcs();">삭제</a></li>
 					<li class="rc_li"><a class="rc_a" href="#0" id="rc_close">취소</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
-
 	<script>
-      function removeshow() {
-        document.querySelector(".rc_background").className = "rc_background show";
-      }
+	document.querySelector("#btnRemove").addEventListener("click",removeshow);
+	function removeshow() {
+		document.querySelector(".rc_background").className = "rc_background show";
+	}
 
-      function removeclose() {
+	document.querySelector("#rc_close").addEventListener("click", removeclose);
+	
+	function removeclose() {
         document.querySelector(".rc_background").className = "rc_background";
       }
-
-      document.querySelector("#btnRemove").addEventListener("click", removeshow);
-      document.querySelector("#close").addEventListener("click", removeclose);
-      
-  		//삭제 버튼 클릭 이벤트
-		$(document).on('click', '#remove', function(){
-	    var url = "${pageContext.request.contextPath}/removeCS";
-	    url = url + "?c_no=" + ${counseling.counseling_no};
+		    			  /*  	//삭제 버튼 클릭 이벤트
+		    				 $(document).on('click', '#remove', function(){
+		    			    var url = "${pageContext.request.contextPath}/removeCS";
+		    			    url = url + "?c_no=" + ${counseling_no.counseling_no};
+		    					location.href = url;
+		    				}); */
+	/* 	//삭제 버튼 클릭 이벤트
+		$(document).on('click', '#rc_remove', function() {
+			var url = "${pageContext.request.contextPath}/removeCS";
+			url = url + "?c_no=" + ${counseling.counseling_no };
 			location.href = url;
-		});
-  		
-    </script>
+		}); */
+
+		/* $(document).on('click', '#rc_remove', function(){
+		    var cnt = $("input[name='item']:checked").length;
+		    var arr = new Array();
+		    $("input[name='item']:checked").each(function() {
+		        arr.push($(this).attr('counseling_no'));
+		    });
+		    if(cnt == 0){
+		        alert("선택된 신청인이 없습니다.");
+		    }
+		    else{
+		        $.ajax = {
+		            type: "POST",
+		            url: "removeCS",
+		            data: "RPRT_ODR=" + arr + "&CNT=" + cnt,
+		            dataType:"json",
+		            success: function(jdata){
+		                if(jdata != 1) {
+		                    alert("삭제 오류");
+		                }
+		                else{
+		                    alert("삭제 성공");
+		                }
+		            },
+		            error: function(){alert("서버통신 오류");}
+		        };
+		    }
+		} */
+	</script>
 </body>
 </html>

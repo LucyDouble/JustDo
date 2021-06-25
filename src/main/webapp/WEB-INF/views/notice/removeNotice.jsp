@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
 </head>
 <body>
-	<div class="background">
+	<div class="rn_background">
 		<div class="popup">
 			<div class="cd-popup-container">
 				<img class="rn_warning" src="resources/images/alert.png">
@@ -26,11 +26,11 @@
 
 	<script>
       function show() {
-        document.querySelector(".background").className = "background show";
+        document.querySelector(".rn_background").className = "rn_background show";
       }
 
       function close() {
-        document.querySelector(".background").className = "background";
+        document.querySelector(".rn_background").className = "rn_background";
       }
 
       document.querySelector("#btnRemove").addEventListener("click", show);

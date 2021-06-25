@@ -34,7 +34,7 @@ public static final int pageBlock = 5;
 	
 	//목록조회
 	@RequestMapping(value = "/listCS", method = RequestMethod.GET)
-	public ModelAndView listCS(Counseling vo, ModelAndView mv, HttpServletRequest request, @RequestParam(name = "page", defaultValue = "1") int page) {
+	public ModelAndView listCS(ModelAndView mv, HttpServletRequest request, @RequestParam(name = "page", defaultValue = "1") int page) {
 				
 		Map<String,Object> map = new HashMap<String, Object>(); 
 		
@@ -109,11 +109,9 @@ public static final int pageBlock = 5;
 		return "counseling/editCS";
 	}
 	// 삭제
-	@RequestMapping(value = "/removeCS", method = RequestMethod.GET)
-	public String removeCS(RedirectAttributes rttr, @RequestParam(name="c_no") int counseling_no) {
-		counselingService.removeCS(counseling_no);
-		return "redirect:/listCS";
+	@RequestMapping(value="/removeCS",  method=RequestMethod.GET)
+	public String removeCS(@RequestParam(name="c_no", required=false) List<Integer> counseling_no) {
+		for(Integer num : counseling_no) counselingService.removeCS(num);
+	return "redirect:/listCS";
 	}
-	
-	
 }
