@@ -16,7 +16,7 @@
 		<typeAlias type="com.kh.jd.progress.Progress" alias="Progress"/>
 		<typeAlias type="com.kh.jd.registration.Registration" alias="Registration"/>
 		<typeAlias type="com.kh.jd.video.Video" alias="Video"/>
-	 	<typeAlias type="com.kh.jd.counseling.Counseling" alias="CS"/>
+	 	<typeAlias type="com.kh.jd.counseling.Counseling" alias="Counseling"/>
 		<typeAlias type="com.kh.jd.notice.Notice" alias="Notice"/>
 		
 	</typeAliases>
