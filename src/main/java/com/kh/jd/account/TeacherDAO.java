@@ -1,6 +1,7 @@
 package com.kh.jd.account;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -56,6 +57,16 @@ public class TeacherDAO {
 		public int phoneCheck(String teacher_phone) {
 			System.out.println("phoneCheck");
 			int result = sqlSession.selectOne("Teacher.phoneCheck", teacher_phone);
+			return result;
+		}
+		
+		//비밀번호 수정
+		public int editStudentPassword(String student_password, String student_id) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("student_id", student_id);
+			System.out.println(student_password);
+			System.out.println(student_id);
+			int result = sqlSession.selectOne("Student.editStudentPassword", student_password);
 			return result;
 		}
 }

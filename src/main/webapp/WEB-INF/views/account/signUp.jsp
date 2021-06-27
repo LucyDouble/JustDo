@@ -307,7 +307,7 @@ label {
 
 			} else {
 				console.log('false');
-				$('#pw_check').text('비밀번호는 숫자, 문자, 특수문자 조합 8~15자리만 가능합니다. :(')
+				$('#pw_check').text('비밀번호는 숫자, 문자, 특수문자 조합 8~16자리만 가능합니다. :(')
 				$('#pw_check').css('color', 'red');
 				$('#pw_check').css('font-size', '5px')
 

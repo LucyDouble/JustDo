@@ -84,6 +84,34 @@ public String mailCheckGet(String email) throws Exception{
 	return num;
 
 }
+@RequestMapping(value="/phoneCheck", method=RequestMethod.GET)
+@ResponseBody
+public String phoneCheck(HttpServletRequest request, @RequestParam(name = "signUpSelect") String check) {
+	System.out.println(check);
+	if (check == "student" || check.equals("student")) {
+		String student_phone = request.getParameter("phone");
+		System.out.println(student_phone);
+		int result = sService.phoneCheck(student_phone);
+		return Integer.toString(result);
+	} else {
+		String teacher_phone = request.getParameter("phone");
+		System.out.println(teacher_phone);
+		int result = tService.phoneCheck(teacher_phone);
+		return Integer.toString(result);
+	}
+}
+@RequestMapping(value="/signUp", method = RequestMethod.POST)
+public String addMember(Student sDto, Teacher tDto, @RequestParam(name = "signUpSelect") String check) {
+	logger.info("post register");
+	System.out.println("TEST");
+	if (check == "student" || check.equals("student")) {
+		sService.signUp(sDto);
+	} else {
+		tService.signUp(tDto);
+	}
+	return "common/main";
+			
+}
 }
 
 

@@ -2,6 +2,9 @@ package com.kh.jd.account;
 
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
@@ -29,4 +32,16 @@ public interface StudentService {
 	
 	//휴대폰 중복 체크
 	public int phoneCheck(String student_phone);
+
+	//수강생 비밀번호 수정
+	public void editStudentPw(String student_pw, String student_id);
+
+	//수강생 이름 수정
+	public void editStudentName(String student_name, String student_id);
+	
+	//수강생 주소 수정
+	public void editStudentAddress(String student_address, String student_id);
+	
+	//수강생 휴대폰 번호 수정
+	public void editStudentPhone(String student_phone, String student_id);
 }

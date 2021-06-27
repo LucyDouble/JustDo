@@ -51,11 +51,20 @@
 		PHONE FROM
 		TEACHER WHERE PHONE = #{phone})
 	</select>
-	<update id="updateTeacher">
-		UPDATE TEACHER SET
-		PASSWORD=#{PASSWORD},
-		ADDRESS=#{ADDRESS},
-		PHONE=#{PHONE},
-		EMAIL=#{EMAIL}
+	<!-- 비밀번호 수정 -->
+	<update id="editStudentPw" parameterType="hashmap">
+		UPDATE STUDENT SET PASSWORD = #{password} where ID=#{id}
 	</update>
+	<!-- 휴대폰 번호 수정  -->
+	<update id="editStudentPhone" parameterType="hashmap">
+		UPDATE STUDENT SET PHONE =#{phone} where id=#{id}
+	</update>
+	<!-- 주소 수정  -->
+	<update id="editStudentAddress" parameterType="hashmap">
+		UPDATE STUDENT SET ADDRESS=#{address} where id=#{id}
+	</update>
+		<update id="editStudentName" parameterType="hashmap">
+		UPDATE STUDENT SET NAME=#{name} where id=#{id}
+	</update>
+	
 </mapper>

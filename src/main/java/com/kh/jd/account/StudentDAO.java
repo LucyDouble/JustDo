@@ -1,10 +1,12 @@
 package com.kh.jd.account;
 
-
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +15,8 @@ public class StudentDAO {
 
 	@Autowired
 	SqlSession sqlSession;
-
+	@Autowired
+	SqlSessionTemplate sqlSessionTemplate;
 	//아이디 체크
 	public int idCheck(String student_id) {
 		System.out.println("idCheck");
@@ -58,4 +61,36 @@ public class StudentDAO {
 			int result = sqlSession.selectOne("Student.phoneCheck", student_phone);
 			return result;
 		}
+	//수강생 비밀번호 수정
+		public void editStudentPw(String student_pw, String student_id) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("password", student_pw);
+			map.put("id", student_id);
+			sqlSession.update("Student.editStudentPw", map);
+		}
+	//수강생 이름 수정
+		public void editStudentName(String student_name, String student_id) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("name", student_name);
+			map.put("id", student_id);
+			sqlSession.update("Student.editStudentName", map);
+		}
+	//수강생 주소 수정
+		public void editStudentAddress(String student_address, String student_id) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("address", student_address);
+			map.put("id", student_id);
+			sqlSession.update("Student.editStudentAddress", map);
+		}
+		//수강생 휴대폰번호 수정
+		public void editStudentPhone(String student_phone, String student_id) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("phone", student_phone);
+			map.put("id", student_id);
+			sqlSession.update("Student.editStudentPhone", map);
+		}
+
+		
+
+		
 }

@@ -57,12 +57,12 @@
     <a href=""><img class="logo3"  src="resources/images/logo3.jpg"></a>
 </header>
 <script>
-	if($(sessionScope.student_id == null && sessionScope.teacher_id == null)){
+/* 	if($(sessionScope.student_id == null && sessionScope.teacher_id == null)){
 		$('#signUpPage').show();
 		$('#login').show();
 	}else{
 		$('#signUpPage').hide();
 		$('#login').hide();
 		$('#logout').show();
-	}
+	} */
 </script>
