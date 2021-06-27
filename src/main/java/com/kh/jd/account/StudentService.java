@@ -44,4 +44,7 @@ public interface StudentService {
 	
 	//수강생 휴대폰 번호 수정
 	public void editStudentPhone(String student_phone, String student_id);
+	
+	//수강생 탈퇴
+	public void deleteStudent(String student_id);
 }

@@ -63,5 +63,8 @@
 		PHONE=#{PHONE},
 		EMAIL=#{EMAIL}
 	</update>
+	<delete id="deleteStudent">
+		DELETE FROM STUDENT WHERE USER_ID=#{user_id}
+	</delete>
 
 </mapper>

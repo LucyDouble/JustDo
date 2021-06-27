@@ -66,5 +66,8 @@
 		<update id="editStudentName" parameterType="hashmap">
 		UPDATE STUDENT SET NAME=#{name} where id=#{id}
 	</update>
+	<delete id="deleteStudent">
+		DELETE FROM STUDENT WHERE ID = #{id}
+	</delete>
 	
 </mapper>

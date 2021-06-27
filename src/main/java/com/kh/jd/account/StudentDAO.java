@@ -89,7 +89,10 @@ public class StudentDAO {
 			map.put("id", student_id);
 			sqlSession.update("Student.editStudentPhone", map);
 		}
-
+		//수강생 탈퇴
+		public void deleteStudent(String student_id) {
+			sqlSession.delete("Student.deleteStudent", student_id);
+		}
 		
 
 		

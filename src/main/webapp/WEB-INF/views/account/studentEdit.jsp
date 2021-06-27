@@ -317,7 +317,7 @@ $(document).ready(function(){
                data : $('#studentMyPage_myForm').serialize(),
                success : function(data){
                   alert("탈퇴처리 되었습니다.");
-                  location.href = '<%=request.getContextPath()%>'
+                  location.href = '<%=request.getContextPath()%>/jdHome'
                }
             });
             $('#studentMyPage_mainModal').hide();
