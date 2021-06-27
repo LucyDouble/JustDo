@@ -19,7 +19,6 @@ public class CounselingDao {
 	
 	//목록 조회
 	public List<Counseling> listCS(int startPage, int limit,Map<String, Object> map){
-		
 		int startRow = (startPage - 1) * limit;
 		RowBounds row = new RowBounds(startRow, limit);
 		return sqlSession.selectList("Counseling.listCS", map, row);
@@ -40,5 +39,9 @@ public class CounselingDao {
 	//삭제
 	public int removeCS(int counseling_no) {
 		return sqlSession.delete("Counseling.removeCS", counseling_no);
+	}
+	//수정
+	public int editCS(Map<String, Object> edit) {
+		return sqlSession.update("Counseling.editCS", edit);
 	}
 }

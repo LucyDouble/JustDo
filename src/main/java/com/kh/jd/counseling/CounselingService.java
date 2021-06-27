@@ -17,4 +17,6 @@ public interface CounselingService {
 	public int addCS(Counseling vo);
 	//삭제
 	public int removeCS(int counseling_no);
+	//수정
+	public int editCS(Map<String, Object> map);
 }

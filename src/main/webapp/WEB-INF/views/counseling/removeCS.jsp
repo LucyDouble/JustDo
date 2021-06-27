@@ -26,56 +26,32 @@
 		</div>
 	</div>
 	<script>
-	document.querySelector("#btnRemove").addEventListener("click",removeshow);
-	function removeshow() {
-		document.querySelector(".rc_background").className = "rc_background show";
-	}
-
 	document.querySelector("#rc_close").addEventListener("click", removeclose);
 	
 	function removeclose() {
         document.querySelector(".rc_background").className = "rc_background";
-      }
-		    			  /*  	//삭제 버튼 클릭 이벤트
-		    				 $(document).on('click', '#remove', function(){
-		    			    var url = "${pageContext.request.contextPath}/removeCS";
-		    			    url = url + "?c_no=" + ${counseling_no.counseling_no};
-		    					location.href = url;
-		    				}); */
-	/* 	//삭제 버튼 클릭 이벤트
-		$(document).on('click', '#rc_remove', function() {
-			var url = "${pageContext.request.contextPath}/removeCS";
-			url = url + "?c_no=" + ${counseling.counseling_no };
-			location.href = url;
-		}); */
-
-		/* $(document).on('click', '#rc_remove', function(){
-		    var cnt = $("input[name='item']:checked").length;
-		    var arr = new Array();
-		    $("input[name='item']:checked").each(function() {
-		        arr.push($(this).attr('counseling_no'));
-		    });
-		    if(cnt == 0){
-		        alert("선택된 신청인이 없습니다.");
-		    }
-		    else{
-		        $.ajax = {
-		            type: "POST",
-		            url: "removeCS",
-		            data: "RPRT_ODR=" + arr + "&CNT=" + cnt,
-		            dataType:"json",
-		            success: function(jdata){
-		                if(jdata != 1) {
-		                    alert("삭제 오류");
-		                }
-		                else{
-		                    alert("삭제 성공");
-		                }
-		            },
-		            error: function(){alert("서버통신 오류");}
-		        };
-		    }
-		} */
+    }
+	
+	//삭제 버튼 클릭 이벤트
+	function delcs() {
+		
+		var valueArr = new Array();
+		var list = $("input[name='item']");
+		for(var i=0; i<list.length; i++){
+			if(list[i].checked){
+				valueArr.push(list[i].value);
+			}
+		}
+		if (valueArr.length == 0){
+			alert("선택된 상담신청이 없습니다.");
+		}
+		else{
+		console.log(valueArr);
+		var url = "${pageContext.request.contextPath}/removeCS";
+		url = url + "?c_no=" + valueArr;
+		location.href = url;
+		}
+	}
 	</script>
 </body>
 </html>

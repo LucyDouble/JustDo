@@ -22,9 +22,9 @@
 		<br>
 
 		<div class="lc_search_box">
-			<form name="lc_search">
-				<input type="text" class="lc_search_input" name="txt"
-					placeholder="이름으로 검색" onmouseout="document.search.txt.value = ''">
+			<form name="lc_search" action="#" method="get">
+				<input class="lc_search_input" type="text" name="keyword"
+					placeholder="이름으로 검색" onmouseout="document.search.keyword.value = ''">
 			</form>
 			<i class="fas fa-search"></i>
 		</div>
@@ -50,8 +50,7 @@
 									id="item" class="checkbox" name=item value="${list.counseling_no }" /> <span class="icon"></span>
 							</label></td>
 							<td>${list.counseling_no }</td>
-							<td class="lc_cont"
-								onclick="viewshow('${list.counseling_name }','${list.counseling_phone }','${list.counseling_email }','${list.counseling_date } ${list.clock } ');">${list.counseling_name }</td>
+ 							<td class="lc_cont" onclick="viewshow('${list.counseling_name }','${list.counseling_phone }','${list.counseling_email }','${list.counseling_date } [TIME] ${list.clock } ','${list.counseling_date }','${list.clock }');">${list.counseling_name }</td> 
 							<td>${list.counseling_phone }</td>
 							<td>${list.counseling_email }</td>
 							<td>${list.counseling_date }<p class="hopetime">시간</p>${list.clock }</td>
@@ -60,7 +59,7 @@
 				</tbody>
 			</table>
 		</form>
-		<button id="btnRemove" class="button">
+		<button id="btnRemove" class="button" onclick="btnRemoveClick();">
 			<span>삭제</span>
 		</button>
 
@@ -101,39 +100,21 @@
 				$("input[name='item']").prop('checked', false);
 			}
 		});
-	 /* 	$(".checkbox").click(function() {
-	 		var valueArr = new Array();
-	 		var list = $("input[name='item']");
-	 		for(var i=0; i<list.length; i++){
-				if(list[i].checked){
-					valueArr.push(list[i].value);
-				}
-			};
-			console.log(valueArr);
-			
-	 	}); */
 
-		//삭제 버튼 클릭 이벤트
-		function delcs() {
-			
-			var valueArr = new Array();
-			var list = $("input[name='item']");
-			for(var i=0; i<list.length; i++){
-				if(list[i].checked){
-					valueArr.push(list[i].value);
+		//삭제 버튼 클릭시 모달팝업
+		function btnRemoveClick(){
+			if ($('input').is(":checked") == false){
+				alert("체크박스 선택 후 삭제 해주세요.");
+			} 
+			else{
+			document.querySelector(".rc_background").className = "rc_background show";
 				}
 			}
-			console.log(valueArr);
-			var url = "${pageContext.request.contextPath}/removeCS";
-			url = url + "?c_no=" + valueArr;
-			location.href = url;
-			
-		}
 	</script>
-
 
 	<jsp:include page="../counseling/removeCS.jsp"></jsp:include>
 	<jsp:include page="../counseling/viewCS.jsp"></jsp:include>
+	<jsp:include page="../counseling/editCS.jsp"></jsp:include>
 </body>
 <jsp:include page="../common/footer.jsp"></jsp:include>
 </html>

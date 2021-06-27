@@ -187,7 +187,7 @@ body {
 }
 
 /* remove 모달 css */
-.rc_background, .vc_background, .rn_background {
+.rc_background, .vc_background, .rn_background, .ec_background {
 	position: fixed;
 	top: 0;
 	left: 0;

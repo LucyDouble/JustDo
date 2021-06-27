@@ -42,4 +42,9 @@ public class CounselingServiceImpl implements CounselingService{
 		result = counselingDao.removeCS(counseling_no);
 		return result;
 	}
+	@Override
+	//수정
+	public int editCS(Map<String,Object> map) {
+		return counselingDao.editCS(map);
+	}
 }

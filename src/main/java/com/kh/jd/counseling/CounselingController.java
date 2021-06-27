@@ -30,13 +30,17 @@ public class CounselingController {
 @Autowired
 private CounselingService counselingService;
 public static final int LIMIT = 10;
+public static final int LIMIT2 = 10;
 public static final int pageBlock = 5;
 	
 	//목록조회
 	@RequestMapping(value = "/listCS", method = RequestMethod.GET)
-	public ModelAndView listCS(ModelAndView mv, HttpServletRequest request, @RequestParam(name = "page", defaultValue = "1") int page) {
+	public ModelAndView listCS(ModelAndView mv
+			, @RequestParam(name = "page", defaultValue = "1") int page
+			, @RequestParam(name = "keyword", defaultValue = "") String keyword ) {
 				
 		Map<String,Object> map = new HashMap<String, Object>(); 
+		map.put("keyword", keyword);
 		
 		int listCount = counselingService.getListCount(map);
 		int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
@@ -61,9 +65,11 @@ public static final int pageBlock = 5;
 		mv.addObject("endPage", endPage);
 		mv.addObject("currentPage", currentPage);
 		mv.addObject("maxPage", maxPage);
+		mv.addObject("keyword", keyword);
 		mv.addObject("listCount", listCount);
 		
-		List<Counseling> listCS = counselingService.listCS(startPage, LIMIT, map);
+		System.out.println(map.get("keyword"));
+		List<Counseling> listCS = counselingService.listCS(currentPage, LIMIT, map);
 		System.out.println("listCS =" + listCS);
 		mv.addObject("listCS", listCS);
 		mv.setViewName("counseling/listCS");
@@ -98,15 +104,42 @@ public static final int pageBlock = 5;
 		counselingService.addCS(vo);
 		return mv;
 	}
+	// 수정폼
+	@RequestMapping(value = "/editCSForm", method = RequestMethod.GET)
+	public ModelAndView eidtNotice(ModelAndView mv, @RequestParam(name="c_no") int counseling_no) {
+		Counseling vo = new Counseling ();
+		vo = counselingService.viewCS(counseling_no);
+		System.out.println("vo : " + vo);
+		mv.addObject("counseling", vo);
+		mv.setViewName("counseling/editCS");
+		return mv;
+	}
+	
+	
 	// 수정	
-	@RequestMapping(value = "/editCS", method = RequestMethod.GET)
-	public String editCS(Locale locale, ModelAndView mv) {
-				
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		String formattedDate = dateFormat.format(date);
-		mv.addObject("serverTime", formattedDate );
-		return "counseling/editCS";
+	@RequestMapping(value = "/editCS", method = RequestMethod.POST)
+	public ModelAndView editNotice(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView(); // mv 객체 생성
+		Map<String, Object> map = new HashMap<String, Object>();
+		String c_no = "";
+		String c_name = "";
+		String c_phone = "";
+		String c_email = "";
+		String c_date = "";
+		c_no = request.getParameter("c_no");
+		c_name = request.getParameter("c_name");
+		c_phone = request.getParameter("c_phone");
+		c_email = request.getParameter("c_email");
+		c_date = request.getParameter("c_date");
+		map.put("counseling_no", c_no);
+		map.put("counseling_name", c_name);
+		map.put("counseling_phone", c_phone);
+		map.put("counseling_email", c_email);
+		map.put("counseling_date", c_date);
+		System.out.println("컨트롤러 map : " + map);
+		counselingService.editCS(map);
+		mv.setViewName("redirect:/viewCS?c_no="+c_no);
+		return mv;
 	}
 	// 삭제
 	@RequestMapping(value="/removeCS",  method=RequestMethod.GET)
