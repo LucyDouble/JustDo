@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.jd.account.Student;
+import com.kh.jd.account.Teacher;
 import com.kh.jd.lecture.Lecture;
 
 @Controller
@@ -33,16 +35,18 @@ public class WorkController {
 	@Autowired
 	private WorkService workService;
 	public static final int LIMIT = 10;
-	public static final int LIMIT2 = 10;
+	public static final int LIMIT2 = 5;
 	public static final int pageBlock = 5;
 	@RequestMapping(value = "/listWork", method = RequestMethod.GET)
 	public ModelAndView listWork(ModelAndView mv
 			, @RequestParam(name = "page", defaultValue = "1") int page
 			, @RequestParam(name = "keyword", defaultValue = "") String keyword
+			,HttpServletRequest re
 			/*, @RequestParam(name = "teacher_number") int teacher_number*/) {
 
-		//TODO 세션값으로 가져오길..
-		int teacher_number=100002;
+		//TODO 완료 -세션값으로 가져오길..
+		Teacher te= (Teacher)re.getSession().getAttribute("DTO");
+		int teacher_number=te.getTeacher_number();
 		Map<String,Object>map = new HashMap<String,Object>();
 		map.put("keyword", keyword);
 		map.put("teacher_number", teacher_number);
@@ -91,8 +95,9 @@ public class WorkController {
 		return mv;
 	}
 	@RequestMapping(value = "/addWorkForm", method = RequestMethod.POST)
-	public String addWorkForm(Model model,@RequestParam(name = "teacher_number") int teacher_number) {
-		List<Lecture> list = workService.lecturechk(teacher_number);
+	public String addWorkForm(Model model,HttpServletRequest re) {
+		Teacher te = (Teacher)re.getSession().getAttribute("DTO");
+		List<Lecture> list = workService.lecturechk(te.getTeacher_number());
 		model.addAttribute("lecturechk", list);
 		return "work/addWork";
 	}
@@ -105,9 +110,7 @@ public class WorkController {
 		for (Work work : aa) {
 			workService.addWorkResult( work.getRegistration_no());
 		}
-		//TODO 세션값으로 선생번호 무조건 넘겨 줘야 함. 근데 애초에 list 에서 session으로 선생 번호 가져 올 수 있으니 그 점 참조.
-		re.getSession().setAttribute("teacher_number", vo.getTeacher_number());
-		System.out.println("이거 보러왔다."+re.getSession().getAttribute("teacher_number"));
+		//TODO 완료-과제를 출제하고 list로 바로 넘어 가야 함.
 		return "redirect:/listWork";
 		
 	}
@@ -143,16 +146,16 @@ public class WorkController {
 	@RequestMapping(value = "/editWorkFrom")
 	public String editWorkForm(@RequestParam(name = "work_no") int work_no
 			, Model model
-			,@RequestParam(name = "teacher_number") int teacher_number)  {
+			,HttpServletRequest re)  {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
-
+		Teacher te =(Teacher) re.getSession().getAttribute("DTO");
 		Calendar time = Calendar.getInstance();
 		String format_time1 = format1.format(time.getTime());
 		int nowdate = Integer.parseInt(format_time1);
 		model.addAttribute("time", nowdate);
 		Work vo = workService.viewWork(work_no);
 		model.addAttribute("workDto", vo);
-		List<Lecture> list = workService.lecturechk(teacher_number);
+		List<Lecture> list = workService.lecturechk(te.getTeacher_number());
 		model.addAttribute("lecturechk", list);
 		return "work/editWork";
 	}
@@ -256,10 +259,12 @@ public class WorkController {
 	public ModelAndView listSubmitWork(ModelAndView mv
 			, @RequestParam(name = "page", defaultValue = "1") int page
 			, @RequestParam(name = "keyword", defaultValue = "") String keyword
+			,HttpServletRequest re
 			/*, @RequestParam(name = "student_number") int student_number*/) {
 
-		//TODO
-		int student_number=3;
+		//TODO 완료 - 세션값 처리
+		Student st = (Student) re.getSession().getAttribute("DTO");
+		int student_number=st.getStudent_number();
 		Map<String,Object>map = new HashMap<String,Object>();
 		map.put("keyword", keyword);
 		map.put("student_number", student_number);

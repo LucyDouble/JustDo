@@ -45,7 +45,7 @@
 							<td class="ln_cont" onclick="location.href='viewSubmitWork?work_no=${i.work_no }&registration_no=${i.registration_no }'">${i.work_subject }</td>
 							<td>${i.work_start }~ ${i.work_end }</td>
 							<td>
-								<c:if test="${time<i.startday}">진행전</c:if> 
+								<c:if test="${time<i.startday}">x</c:if> 
 								<c:if test="${time>=i.startday && time<=i.endday}">진행중</c:if> 
 								<c:if test="${time>i.endday}">완료</c:if>
 							</td>

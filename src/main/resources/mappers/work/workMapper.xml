@@ -126,20 +126,23 @@
 		where lectureclass_class=2
 	</select>
 	<select id="listSubmitWork" parameterType="Map" resultType="Work">
-		select rownum rnum,wltlc.lecture_no,wltlc.work_no,work_subject,wltlc.work_start,wltlc.work_end,wltlc.lecture_title,
-		        wltlc.name,wltlc.work_content,wltlc.lectureclass_no,wltlc.lectureclass_class,r.student_number,r.registration_no,
-		        to_char(work_start,'yyyymmdd') as startday ,to_char(work_end,'yyyymmdd') as endday
-		from (select wlt.lecture_no,wlt.work_no,work_subject,wlt.work_start,wlt.work_end,wlt.lecture_title,wlt.name,wlt.work_content,lc.lectureclass_no,lc.lectureclass_class
-		        from (select wl.*,t.name
-		                from (SELECT * 
-		                      FROM works w join  lecture  l 
-		                      using (lecture_no)order by work_no asc) wl join teacher t 
-		                on wl.teacher_number=t.teacher_number) wlt join lectureclass lc 
-		        on wlt.lecture_no=lc.lecture_no) wltlc join registration r 
-		on wltlc.lectureclass_no=r.lectureclass_no
-		where student_number=#{student_number}
-			 and (work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
-		order by rnum desc	
+		select rownum rnum,lecture_no,work_no,work_subject,work_start,work_end,lecture_title,name,work_content,lectureclass_no,
+		        lectureclass_class,student_number,registration_no,to_char(work_start,'yyyymmdd') as startday ,to_char(work_end,'yyyymmdd') as endday
+		from (select wltlc.lecture_no,wltlc.work_no,work_subject,wltlc.work_start,wltlc.work_end,wltlc.lecture_title,
+				        wltlc.name,wltlc.work_content,wltlc.lectureclass_no,wltlc.lectureclass_class,r.student_number,r.registration_no,
+				        to_char(work_start,'yyyymmdd') as startday ,to_char(work_end,'yyyymmdd') as endday
+		      from (select wlt.lecture_no,wlt.work_no,work_subject,wlt.work_start,wlt.work_end,wlt.lecture_title,wlt.name,wlt.work_content,lc.lectureclass_no,lc.lectureclass_class
+		            from (select wl.*,t.name
+		                  from (SELECT * 
+		                        FROM works w join  lecture  l 
+		                        using (lecture_no)order by work_no asc) wl join teacher t 
+		                  on wl.teacher_number=t.teacher_number
+		                  where (work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%') ) wlt join lectureclass lc 
+		            on wlt.lecture_no=lc.lecture_no ) wltlc join registration r 
+		      on wltlc.lectureclass_no=r.lectureclass_no
+		      where student_number=#{student_number}
+		      order by work_no asc)
+		order by rnum desc
 	</select>
 	<select id="getlistSubmitCount" resultType="int" parameterType="Map">
 		select count(*)

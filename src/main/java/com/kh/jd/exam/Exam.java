@@ -6,91 +6,142 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Exam {
-	private int examNo;
-	private int lectureCo;
-	private int teacherNo;
-	private int studentNo;
-	private String examSub;
-	private Date examStart;
-	private Date examEnd;
-	private int examProgress;
-	private String examCon;
-	private String examAns;
-	private int grade;
+	private int exam_no;
+	private int lecture_no;
+	private int teacher_number;
+	private int student_number;
+	private String exam_subject;
+	private Date exam_date;
+	private String exam_start;
+	private String exam_end;
+	private String exam_content;
+	private String exam_answer;
+	private int rnum;
+	private String lecture_title;
+	private int lectureclass_no;
+	private int lectureclass_class;
+	private Date lectureclass_start;
+	private Date lectureclass_end;
+	private int examdate;
+	
+	
+	
+	
 	
 	
 	
 	@Override
 	public String toString() {
-		return "Exam [examNo=" + examNo + ", lectureCo=" + lectureCo + ", teacherNo=" + teacherNo + ", studentNo="
-				+ studentNo + ", examSub=" + examSub + ", examStart=" + examStart + ", examEnd=" + examEnd
-				+ ", examProgress=" + examProgress + ", examCon=" + examCon + ", examAns=" + examAns + ", grade="
-				+ grade + "]";
+		return "Exam [exam_no=" + exam_no + ", lecture_no=" + lecture_no + ", teacher_number=" + teacher_number
+				+ ", student_number=" + student_number + ", exam_subject=" + exam_subject + ", exam_date=" + exam_date
+				+ ", exam_start=" + exam_start + ", exam_end=" + exam_end + ", exam_content=" + exam_content
+				+ ", exam_answer=" + exam_answer + ", rnum=" + rnum + ", lecture_title=" + lecture_title
+				+ ", lectureclass_no=" + lectureclass_no + ", lectureclass_class=" + lectureclass_class
+				+ ", lectureclass_start=" + lectureclass_start + ", lectureclass_end=" + lectureclass_end
+				+ ", examdate=" + examdate + "]";
 	}
-	public int getExamNo() {
-		return examNo;
+	public int getExamdate() {
+		return examdate;
 	}
-	public void setExamNo(int examNo) {
-		this.examNo = examNo;
+	public void setExamdate(int examdate) {
+		this.examdate = examdate;
 	}
-	public int getLectureCo() {
-		return lectureCo;
+	public int getExam_no() {
+		return exam_no;
 	}
-	public void setLectureCo(int lectureCo) {
-		this.lectureCo = lectureCo;
+	public void setExam_no(int exam_no) {
+		this.exam_no = exam_no;
 	}
-	public int getTeacherNo() {
-		return teacherNo;
+	public int getLecture_no() {
+		return lecture_no;
 	}
-	public void setTeacherNo(int teacherNo) {
-		this.teacherNo = teacherNo;
+	public void setLecture_no(int lecture_no) {
+		this.lecture_no = lecture_no;
 	}
-	public int getStudentNo() {
-		return studentNo;
+	public int getTeacher_number() {
+		return teacher_number;
 	}
-	public void setStudentNo(int studentNo) {
-		this.studentNo = studentNo;
+	public void setTeacher_number(int teacher_number) {
+		this.teacher_number = teacher_number;
 	}
-	public String getExamSub() {
-		return examSub;
+	public int getStudent_number() {
+		return student_number;
 	}
-	public void setExamSub(String examSub) {
-		this.examSub = examSub;
+	public void setStudent_number(int student_number) {
+		this.student_number = student_number;
 	}
-	public Date getExamStart() {
-		return examStart;
+	public String getExam_subject() {
+		return exam_subject;
 	}
-	public void setExamStart(Date examStart) {
-		this.examStart = examStart;
+	public void setExam_subject(String exam_subject) {
+		this.exam_subject = exam_subject;
 	}
-	public Date getExamEnd() {
-		return examEnd;
+	public Date getExam_date() {
+		return exam_date;
 	}
-	public void setExamEnd(Date examEnd) {
-		this.examEnd = examEnd;
+	public void setExam_date(Date exam_date) {
+		this.exam_date = exam_date;
 	}
-	public int getExamProgress() {
-		return examProgress;
+	public String getExam_start() {
+		return exam_start;
 	}
-	public void setExamProgress(int examProgress) {
-		this.examProgress = examProgress;
+	public void setExam_start(String exam_start) {
+		this.exam_start = exam_start;
 	}
-	public String getExamCon() {
-		return examCon;
+	public String getExam_end() {
+		return exam_end;
 	}
-	public void setExamCon(String examCon) {
-		this.examCon = examCon;
+	public void setExam_end(String exam_end) {
+		this.exam_end = exam_end;
 	}
-	public String getExamAns() {
-		return examAns;
+	public String getExam_content() {
+		return exam_content;
 	}
-	public void setExamAns(String examAns) {
-		this.examAns = examAns;
+	public void setExam_content(String exam_content) {
+		this.exam_content = exam_content;
 	}
-	public int getGrade() {
-		return grade;
+	public String getExam_answer() {
+		return exam_answer;
 	}
-	public void setGrade(int grade) {
-		this.grade = grade;
+	public void setExam_answer(String exam_answer) {
+		this.exam_answer = exam_answer;
 	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	public String getLecture_title() {
+		return lecture_title;
+	}
+	public void setLecture_title(String lecture_title) {
+		this.lecture_title = lecture_title;
+	}
+	public int getLectureclass_no() {
+		return lectureclass_no;
+	}
+	public void setLectureclass_no(int lectureclass_no) {
+		this.lectureclass_no = lectureclass_no;
+	}
+	public int getLectureclass_class() {
+		return lectureclass_class;
+	}
+	public void setLectureclass_class(int lectureclass_class) {
+		this.lectureclass_class = lectureclass_class;
+	}
+	public Date getLectureclass_start() {
+		return lectureclass_start;
+	}
+	public void setLectureclass_start(Date lectureclass_start) {
+		this.lectureclass_start = lectureclass_start;
+	}
+	public Date getLectureclass_end() {
+		return lectureclass_end;
+	}
+	public void setLectureclass_end(Date lectureclass_end) {
+		this.lectureclass_end = lectureclass_end;
+	}
+	
+	
 }

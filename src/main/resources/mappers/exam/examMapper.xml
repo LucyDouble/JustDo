@@ -1,4 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="exam">
+	<select id="listExam" resultType="Exam" parameterType="hashMap">
+		select rownum rnum,l.lecture_title,elc.lectureclass_no,elc.lectureclass_class,
+		        elc.lectureclass_start,elc.lectureclass_end,elc.exam_no,elc.exam_subject,
+		        elc.exam_date,to_char(elc.exam_start,'hh24:mi') as exam_start,
+		        to_char(elc.exam_end,'hh24:mi') as exam_end,elc.exam_content,elc.exam_answer 
+		        ,l.teacher_number,to_char(exam_date,'yyyymmdd') as examdate 
+		from (select * 
+		        from exam e join lectureclass lc 
+		        using(lectureclass_no) 
+		        order by exam_no) elc join lecture l 
+		using(lecture_no)
+		where teacher_number=#{teacher_number}
+				  and (exam_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
+		order by rnum desc	
+	</select>
+	<select id="getlistCount" resultType="int" parameterType="hashMap">
+		select count(*)
+		from (select * 
+		        from exam e join lectureclass lc 
+		        using(lectureclass_no) 
+		        order by exam_no) elc join lecture l 
+		using(lecture_no)
+		where teacher_number=#{teacher_number}
+				  and (exam_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
+		
+	</select>
+	<select id="viewExam" parameterType="int" resultType="Exam">
+		select l.lecture_title,elc.lectureclass_no,elc.lectureclass_class,
+		        elc.lectureclass_start,elc.lectureclass_end,elc.exam_no,elc.exam_subject,
+		        elc.exam_date,to_char(elc.exam_start,'hh24:mi') as exam_start,
+		        to_char(elc.exam_end,'hh24:mi') as exam_end,elc.exam_content,elc.exam_answer 
+		        ,l.teacher_number,to_char(exam_date,'yyyymmdd') as examdate 
+		from (select * 
+		        from exam e join lectureclass lc 
+		        using(lectureclass_no) 
+		        order by exam_no) elc join lecture l 
+		using(lecture_no)
+		where exam_no=#{exam_no}
+	</select>
 </mapper>

@@ -66,8 +66,6 @@
 				</tbody>
 			</table>
 		<form action="addWorkForm" method="post">
-			<!-- TODO -->
-			<input type="hidden" name="teacher_number" value="100002">
 			<button class="button">
 				<span>과제등록</span>
 			</button>

@@ -63,7 +63,7 @@
         </tbody>
     </table>
     </c:if>
-    <c:if test="${time>endtime}">
+    <c:if test="${time>endtime || time<starttime}">
    		<button type="button" class="button" onclick="history.back();"><span>확인</span></button>
     </c:if>
     
@@ -77,21 +77,52 @@
 	   	</form>
 	   	</c:if>
 	   	 <c:if test="${not empty workDto.work_submit}" >
-	   	<form action="editSubmitWorkForm" method="POST" id="frm">
+	   	<form id="frm">
 	    	<input type="hidden" value="${workDto.work_no }" name="work_no">
 	    	<input type="hidden" value="${workDto.registration_no }" name="registration_no">
-	   		<input type="submit" class="button" value="수정"></input>
-	   		 <button type="button" class="button" id="remove" ><span>삭제</span></button>
+	   		<input type="button" class="button"  id="edit"  value="수정"></input>
+	   		 <button type="button" class="button" id="btnRemove"><span>삭제</span></button>
 	   	</form>
 	   	</c:if>
     </c:if>
     
     
     </div>
+	<div class="rc_background">
+		<div class="popup">
+			<div class="cd-popup-container">
+				<div class="rc_cont">
+				<img class="rc_warning" src="resources/images/alert.png">
+				<p class="rc_p">정말 삭제 하시겠습니까?</p>
+				</div>
+				<ul id="close" class="cd-buttons">
+					<li class="rc_li"><a class="rc_a" id="remove" >삭제</a></li>
+					<li class="rc_li"><a class="rc_a" id="rc_close">취소</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
 	<script>
+	document.querySelector("#btnRemove").addEventListener("click",removeshow);
+	function removeshow() {
+		document.querySelector(".rc_background").className = "rc_background show";
+	}
+
+	document.querySelector("#rc_close").addEventListener("click", removeclose);
+	
+	function removeclose() {
+        document.querySelector(".rc_background").className = "rc_background";
+      }
     $("#remove").click(function(){
     	var frm=document.getElementById("frm");
     	frm.action="removeSubmitWork";
+        frm.method="POST";
+        frm.submit();
+    });
+    $("#edit").click(function(){
+    	var frm=document.getElementById("frm");
+    	frm.action="editSubmitWorkForm";
         frm.method="POST";
         frm.submit();
     });
