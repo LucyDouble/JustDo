@@ -8,27 +8,29 @@
 			<div class="ec_head">
 			<h2 class="ec_title">&nbsp;&nbsp;상담신청 수정</h2>
 			</div>
-				<form action="" class="ec_Form" name="form">
+				<form id="editCS" class="ec_Form" name="form">
 					<div class="form-group">
+					<input type="hidden" name="c_no" id="ec_no">
 						<label class="ec_label" for="ec_name">이름</label>
-							<input type="text" class="ec_label_input" id="ec_name" name="counseling_name" value="">
+							<input type="text" class="ec_label_input" id="ec_name" name="c_name" value="">
 						<label class="ec_label" for="ec_phone">연락처</label>
-							<input type="text" class="ec_label_input" id="ec_phone" name="counseling_phone" value="">
+							<input type="text" class="ec_label_input" id="ec_phone" name="c_phone" value="">
 						<label class="ec_label" for="ec_email">이메일</label> 
-							<input type="text" class="ec_label_input" id="ec_email" name="counseling_email" value="">
+							<input type="text" class="ec_label_input" id="ec_email" name="c_email" value="">
 						<label class="ec_label" for="ec_time">희망상담시간</label>
-							<input type="datetime-local" class="ec_label_input" id="ec_time" name="counseling_date" value="" >
+							<input type="datetime-local" class="ec_label_input" id="ec_time" name="c_date" value="" >
 					</div>
 				</form>
 						<div class="ec_btns">
 						<button class="ec_cbtn" onclick="editclose();">취소</button>
-						<button type="submit" class="ec_ebtn">수정</button>
+						<button class="ec_ebtn" onclick="editCS();">수정</button>
 						</div>
 			</div>
 		</div>
 	</div>
 	<script>
       function editshow() {
+    	 $("#ec_no").val($("#vc_no").val());
     	 $("#ec_name").val($("#vc_name").val());
     	 $("#ec_phone").val($("#vc_phone").val());
     	 $("#ec_email").val($("#vc_email").val());
@@ -44,4 +46,10 @@
         document.querySelector(".ec_background").className = "ec_background";
       }
 
+	function editCS(){
+		var frm = document.getElementById("editCS");
+		frm.action = "editCS";
+		frm.method = "POST";
+		frm.submit();
+	}
     </script>  

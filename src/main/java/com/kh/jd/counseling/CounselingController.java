@@ -104,6 +104,7 @@ public static final int pageBlock = 5;
 		counselingService.addCS(vo);
 		return mv;
 	}
+	
 	// 수정폼
 	@RequestMapping(value = "/editCSForm", method = RequestMethod.GET)
 	public ModelAndView eidtNotice(ModelAndView mv, @RequestParam(name="c_no") int counseling_no) {
@@ -114,11 +115,10 @@ public static final int pageBlock = 5;
 		mv.setViewName("counseling/editCS");
 		return mv;
 	}
-	
-	
+		
 	// 수정	
 	@RequestMapping(value = "/editCS", method = RequestMethod.POST)
-	public ModelAndView editNotice(HttpServletRequest request) {
+	public ModelAndView editNotice(HttpServletRequest request) throws ParseException {
 		ModelAndView mv = new ModelAndView(); // mv 객체 생성
 		Map<String, Object> map = new HashMap<String, Object>();
 		String c_no = "";
@@ -131,14 +131,22 @@ public static final int pageBlock = 5;
 		c_phone = request.getParameter("c_phone");
 		c_email = request.getParameter("c_email");
 		c_date = request.getParameter("c_date");
+		System.out.println("날짜 이렇게 들어옴 = "+c_date);
+		String[] aaa = c_date.split("T");
+		String ccc = aaa[0]+" "+aaa[1];
+//		SimpleDateFormat fm = new SimpleDateFormat("yyyy-mm-dd hh:mm");
+//		Date to = fm.parse(ccc);
+//		System.out.println("포맷은 = "+ fm.parse(ccc));
+		
+		
 		map.put("counseling_no", c_no);
 		map.put("counseling_name", c_name);
 		map.put("counseling_phone", c_phone);
 		map.put("counseling_email", c_email);
-		map.put("counseling_date", c_date);
+		map.put("counseling_date", ccc);
 		System.out.println("컨트롤러 map : " + map);
 		counselingService.editCS(map);
-		mv.setViewName("redirect:/viewCS?c_no="+c_no);
+		mv.setViewName("redirect:/listCS");
 		return mv;
 	}
 	// 삭제

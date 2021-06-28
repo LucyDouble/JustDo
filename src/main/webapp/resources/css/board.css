@@ -73,6 +73,7 @@ body {
 }
 .cont3{
 	height:400px;
+	max-height:800px;
 }
 .table .table tr:nth-child(even) {
 	background-color: #f8f6ff;
@@ -173,11 +174,14 @@ body {
 
 .ln_cont, .vn_cont {
 	text-align: left;
+	max-width:1000px;
+}
+.vn_cont p img{
+	max-width:100%;
 }
 #editor1{
 	padding-left: 10px;
 }
-
 .ln_cont:hover, .lc_cont:hover{
 	font-weight: bold;
 	cursor:pointer;

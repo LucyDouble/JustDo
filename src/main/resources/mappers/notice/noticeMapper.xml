@@ -42,7 +42,7 @@
 		  		select nvl(max(notice_no),0)+1 cnt from notice
 			</selectKey>
 	        insert into notice values(	        
-	        	${numbc}, ${manager_number}, ${teacher_number}, #{notice_sub}, #{notice_con}, sysdate ,#{notice_filepath} )
+	        	${numbc}, ${manager_number}, ${teacher_number}, #{notice_sub}, #{notice_con}, sysdate, #{notice_filepath}, #{hit} )
 		</insert>
 		
 		<!-- 글수정 -->

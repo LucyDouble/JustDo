@@ -11,6 +11,7 @@
 			</div>	
 				<form action="" class="vc_Form" method="get">
 					<div class="form-group">
+						<input type="hidden" id="vc_no">
 						<label class="vc_label" for="vc_name">이름</label>
 							<input type="text" class="vc_label_input" id="vc_name" name="counseling_name" value="" readonly>
 						<label class="vc_label" for="vc_phone">연락처</label>
@@ -31,7 +32,8 @@
 	<input type="hidden" id="date2" value="">
 	<input type="hidden" id="clock" value="">
 	<script>
-	function viewshow(name, phone, email, date, date2, clock) {
+	function viewshow(num, name, phone, email, date, date2, clock) {
+			 $("#vc_no").val(num);
 			 $("#vc_name").val(name);
 			 $("#vc_phone").val(phone);
 			 $("#vc_email").val(email);

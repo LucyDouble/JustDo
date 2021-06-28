@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
@@ -24,7 +25,7 @@
 		<div class="lc_search_box">
 			<form name="lc_search" action="#" method="get">
 				<input class="lc_search_input" type="text" name="keyword"
-					placeholder="이름으로 검색" onmouseout="document.search.keyword.value = ''">
+					placeholder="검색" onmouseout="document.search.keyword.value = ''">
 			</form>
 			<i class="fas fa-search"></i>
 		</div>
@@ -50,7 +51,7 @@
 									id="item" class="checkbox" name=item value="${list.counseling_no }" /> <span class="icon"></span>
 							</label></td>
 							<td>${list.counseling_no }</td>
- 							<td class="lc_cont" onclick="viewshow('${list.counseling_name }','${list.counseling_phone }','${list.counseling_email }','${list.counseling_date } [TIME] ${list.clock } ','${list.counseling_date }','${list.clock }');">${list.counseling_name }</td> 
+ 							<td class="lc_cont" onclick="viewshow('${list.counseling_no }','${list.counseling_name }','${list.counseling_phone }','${list.counseling_email }','${list.counseling_date } [TIME] ${list.clock } ','${list.counseling_date }','${list.clock }');">${list.counseling_name }</td> 
 							<td>${list.counseling_phone }</td>
 							<td>${list.counseling_email }</td>
 							<td>${list.counseling_date }<p class="hopetime">시간</p>${list.clock }</td>
