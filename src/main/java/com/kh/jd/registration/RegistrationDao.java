@@ -1,5 +1,7 @@
 package com.kh.jd.registration;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,5 +17,9 @@ public class RegistrationDao {
 
 	public Registration checkStudent(String number) {
 		return sqlSession.selectOne("Registration.checkStudent", number);
+	}
+	
+	public List<Registration> calendarAdd(String number) {
+		return sqlSession.selectList("Registration.addCalendar", number);
 	}
 }

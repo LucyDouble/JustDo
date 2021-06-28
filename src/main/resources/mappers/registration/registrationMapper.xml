@@ -18,4 +18,11 @@
 	<select id="checkStudent" resultMap="RegistrationResult" parameterType="string">
 		SELECT COUNT(registration_no) FROM REGISTRATION WHERE lectureclass_no = #{lectureclass_no}
 	</select>
+	
+	<!-- 수강신청 시 캘린더에 출력 -->
+	<select id="addCalendar" parameterType="string" resultType="Registration">
+		select R.*, o.lectureclass_class, o.lectureclass_start, o.lectureclass_end, o.lecture_title, o.lecture_reference, o.lecture_target, o.lecture_start, o.lecture_end 
+		from registration R join (select * from lectureclass LT join lecture L on lt.lecture_no = l.lecture_no) O
+		on r.lectureclass_no = O.lectureclass_no where student_number = #{student_number}
+	</select>
 </mapper>

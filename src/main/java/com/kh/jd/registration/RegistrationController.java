@@ -1,13 +1,22 @@
 package com.kh.jd.registration;
 
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.jd.lecture.Lecture;
@@ -50,4 +59,23 @@ public class RegistrationController {
 //		m.addAttribute("check", RService.checkStudent(lectureClassNo));
 		return "";
 	}
+	
+	// 캘린더에 내 강의 출력
+	@RequestMapping(value = "calendarAdd", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Registration> calendarAdd(HttpServletRequest request, HttpServletResponse response) {
+		String number = "4";
+		System.out.println(RService.calendarAdd(number));
+//		JSONObject json = new JSONObject();
+//		JSONArray json = new JSONArray();
+//		json.add(RService.calendarAdd(number));
+//		json.put("result", RService.calendarAdd(number));
+		
+//		return json;
+//		HashMap<String, Object> map = new HashMap<String, Object>();
+//		map.put("result",  RService.calendarAdd(number));
+		return RService.calendarAdd(number);
+	}
+	
+	
 }

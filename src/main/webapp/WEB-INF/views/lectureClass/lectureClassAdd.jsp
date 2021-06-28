@@ -8,56 +8,65 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/bootstrap/bootstrap.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/lectureList.css"/>">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<style>
-@font-face {
-    src : url("resources/fonts/SCDream4.otf");
-    font-family: SCDream4;
-    }
-     body {
-        margin: 0px;
-        padding: 0px;
-        width: 800px;
-        margin: auto;
-        font-family: SCDream4;
-    }
-      .cont {
-    	border-bottom: 1px;
-    	border-bottom-style: solid;
-    	border-bottom-color: black;
-    	margin-bottom: 50px;
-    }
-</style>
 <body>
-<section>
-		<div class="cont">
-			<article class="content1">
-				<h2>분반설정</h2>
-			</article>
-		</div>
 		<div>
-			<article>
+				<p class="ln_title LClass">분반설정</p>
+		</div>
+		<div class="classFrm">
 				<form id="classfrm">
 							<input type="hidden" name= "lecture_no" value="<%=request.getParameter("lecture_no")%>">
 							<input type="hidden" name= "lecture_no_1" value="<%=request.getParameter("lecture_no")%>">
-					Class : <input type="text" name="lectureclass_class" readonly value="1"><br>
-					수업시작 : <input type="time" name="lectureclass_start">
-					수업종료 : <input type="time" name="lectureclass_end"><br>
-					Class : <input type="text" name="lectureclass_class_1" readonly value="2"><br>
-					수업시작 : <input type="time" name="lectureclass_start_2">
-					수업종료 : <input type="time" name="lectureclass_end_3">
+					Class  <input type="text" class="form-control" name="lectureclass_class" readonly value="1"><br>
+					수업시작 <input type="time" class="form-control" name="lectureclass_start" id="time1" value="09:00" readonly>
+					수업종료  <input type="time" class="form-control" name="lectureclass_end" id="time2"><br>
+					Class  <input type="text" class="form-control" name="lectureclass_class_1" readonly value="2"><br>
+					수업시작  <input type="time" class="form-control" name="lectureclass_start_2" id="time3"  >
+					수업종료  <input type="time" class="form-control" name="lectureclass_end_3" id="time4" value="23:00" readonly>
 				</form>
-				<button id="btnClass">설정</button>
-			</article>
+				<button id="btnClass" class="button">설정</button>
 		</div>
-	</section>
 <script>
 	$("#btnClass").click(function(){
-		var frm = document.getElementById("classfrm");
-		frm.action = "lectureClassAdd";
-		frm.method = "post";
-		frm.submit();
+		
+	    var t1 = $("#time1").val();
+	    var t2 = $("#time2").val();
+	    var t3 = $("#time3").val();
+	    var t4 = $("#time4").val();
+	    if(t1 != "" && t2 != "" && t3 != "" && t4 != ""){
+		    if(t1 > t2){
+		    	alert("Class 1의 종료시간을 잘못 입력했습니다.");
+		    	$("#time1").focus();
+		    	return false;
+		    }
+		    if(t2 > t3){
+		    	alert("Class 2의 시작시간을 잘못 입력했습니다.");
+		    	$("#time3").focus();
+		    	return false;
+		    }
+	    } else{
+	    	alert("입력하지 않은 값이 있습니다.")
+	    	return false;
+	    }
+	    
+    	var frm = $("#classfrm").serialize()
+	    
+	    $.ajax({
+	    	url: "lectureClassAdd",
+	    	type: "post",
+	    	data: frm,
+	    	success: function(data){
+	    		/* opener.location.reload(); */
+	    	    window.close();
+		 	},
+		 	error : function(){
+		 		
+		 	}
+	    }); 
 	});
 </script>
 </body>

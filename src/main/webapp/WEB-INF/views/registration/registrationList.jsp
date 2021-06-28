@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="resources/fullcalendar/lib/main.css">
 <script src="resources/fullcalendar/lib/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
       var calendarEl = document.getElementById('calendar');
@@ -20,26 +21,40 @@
       var calendar = new FullCalendar.Calendar(calendarEl, {
 	        businessHours: true,
 	    	locale: 'ko',
-	    	height: 400,
-	    	dayMaxEvents: true,
-	    	 headerToolbar: {
+	    	height: 550,
+	    	headerToolbar: {
 	    	        left: '',
 	    	        center: 'title',
 	    	        right: 'prev,next today'
 	    	      },
-	    	events:[
-	    		{
-	    			title: '아아아아',
-	    			start: '2021-06-24',
-	    			end: '2021-06-30'
+	    	      
+	    	 events: function(info, successCallback, failureCallback){
+	    		$.ajax({
+	    		url: 'calendarAdd',
+	    		type: 'post',
+	    		dataType: 'json',	
+	    		success:
+	    			function(result){
+	    			var events = [];
+	    			if(result!=null){
+	    				$.each(result, function(index, element){
+	    					var enddate = element.lecture_end;
+	    					if(enddate==null){
+	    						enddate = element.lecture_start;
+	    					}
+	    					var startdate=moment(element.lecture_start).format('YYYY-MM-DD');
+	    					var enddate=moment(enddate).format('YYYY-MM-DD');
+	    					events.push({
+	    						title: element.lecture_title,
+	    						start: startdate,
+	    						end: enddate
+	    					});
+	    				});
+	    			}
+	    			successCallback(events);
 	    		},
-	    		{
-	    			title: '기기기기',
-	    			start: '2021-06-24',
-	    			end: '2021-06-30',
-	    			color : 'black'
-	    		}
-	    	]      
+	    		});  
+	    	} 
       });
     
       calendar.render();
@@ -54,7 +69,7 @@
 		color:black;
 	}
 	#calendar{
-		width: 400px;
+		width: 550px;
 	}
 </style>
 </head>

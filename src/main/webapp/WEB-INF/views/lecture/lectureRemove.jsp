@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
-	<div class="background">
+	<div class="rc_background">
 		<div class="popup">
 			<div class="cd-popup-container">
 				<img class="rn_warning" src="resources/images/alert.png">
@@ -13,18 +13,18 @@
 				</div>
 				<ul id="close" class="cd-buttons">
 					<li class="rn_li"><a class="rn_a" href="#" id="remove">삭제</a></li>
-					<li class="rn_li"><a class="rn_a" href="">취소</a></li>
+					<li class="rn_li"><a class="rn_a" href="#" id="cancle">취소</a></li>
 				</ul>
 			</div>
 		</div>
 
 	<script>
       function show() {
-        document.querySelector(".background").className = "background show";
+        document.querySelector(".rc_background").className = "rc_background show";
       }
 
       function close() {
-        document.querySelector(".background").className = "background";
+        document.querySelector(".rc_background").className = "rc_background";
       }
 
       document.querySelector("#btnRemove").addEventListener("click", show);
@@ -51,5 +51,8 @@
     			alert("삭제할려면 박스에 체크해주세요");
     		}  
     		
+      });
+      $("#cancle").click(function(e){
+    	  e.preventDefault();
       });
     </script>

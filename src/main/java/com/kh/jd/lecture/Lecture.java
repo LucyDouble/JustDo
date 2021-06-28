@@ -21,6 +21,7 @@ public class Lecture {
 	private String lectureclass_start;
 	private String lectureclass_end;
 	private int lectureclass_no;
+	private String name;
 	
 	@Override
 	public String toString() {
@@ -30,7 +31,7 @@ public class Lecture {
 				+ lecture_target + ", lecture_start=" + lecture_start + ", lecture_end=" + lecture_end
 				+ ", lecture_state=" + lecture_state + ", lectureclass_class=" + lectureclass_class
 				+ ", lectureclass_start=" + lectureclass_start + ", lectureclass_end=" + lectureclass_end
-				+ ", lectureclass_no=" + lectureclass_no + "]";
+				+ ", lectureclass_no=" + lectureclass_no + ", name=" + name + "]";
 	}
 
 	public int getLecture_no() {
@@ -152,6 +153,17 @@ public class Lecture {
 	public void setLectureclass_no(int lectureclass_no) {
 		this.lectureclass_no = lectureclass_no;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	
 	
 	
 }

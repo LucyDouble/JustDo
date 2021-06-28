@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.jd.account.Teacher;
 import com.kh.jd.lectureClass.LectureClass;
 import com.kh.jd.lectureClass.LectureClassService;
 
@@ -27,6 +28,7 @@ public class LectureController {
 	@RequestMapping(value = "lecture", method = RequestMethod.GET)
 	public ModelAndView listLecture(ModelAndView mv, HttpServletRequest request, HttpSession session) {
 			System.out.println("@@@@@@@@여기@@@@@@@@");
+			request.getSession().getAttribute("DTO");
 			mv.addObject("list", LService.listLecture());
 			mv.addObject("list2",LCService.listLectureClass());
 			mv.setViewName("lecture/lectureList");

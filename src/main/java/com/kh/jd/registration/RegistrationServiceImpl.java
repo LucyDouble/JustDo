@@ -1,5 +1,7 @@
 package com.kh.jd.registration;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 	@Override
 	public Registration checkStudent(String number) {
 		return Rdao.checkStudent(number);
+	}
+
+	@Override
+	public List<Registration> calendarAdd(String number) {
+		return Rdao.calendarAdd(number);
 	}
 	
 	

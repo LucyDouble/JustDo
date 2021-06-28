@@ -7,73 +7,17 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title>강의 목록</title>
 <link rel="stylesheet" href="resources/css/bootstrap/bootstrap.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/lectureList.css"/>">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style>
-	@font-face {
-    src : url("resources/fonts/SCDream4.otf");
-    font-family: SCDream4;
-    }
-     body {
-        margin: 0px;
-        padding: 0px;
-        width: 800px;
-        margin: auto;
-        font-family: SCDream4;
-    }
-     .table th {
-    font-size: 18px;
-    color: #fff;
-    line-height: 1.4;
-    background-color: #6A60A9;
-    }
-    .table td {
-    font-size: 15px;
-    color: black;
-    line-height: 1.4;
-    }
-    .table .table tr:nth-child(even) {
-    background-color: #f8f6ff;
-    }
-    .table {
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
-    -webkit-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
-    -o-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
-    -ms-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
-    }
-    .cont {
-    	border-bottom: 1px;
-    	border-bottom-style: solid;
-    	border-bottom-color: black;
-    	margin-bottom: 50px;
-    }
-    .content1 {
-    	margin: 30px;
-    	
-    }
-    h2 {
-    	
-    }
-    .lecNo{
-    	text-decoration: none;
-    	color: black;
-    }
-</style>
 </head>
 <body>
-<div>
-	<section>
-		<div class="cont">
-			<article class="content1">
-				<h2>강의정보</h2>
-			</article>
-		</div>
+	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
+		<div class="ln_page">
+			<p class="ln_title">강의정보</p>
 		<div>
-			<article>
 				<form id="lecturefrm">
 					<table class="table">
 						<thead>
@@ -93,16 +37,16 @@
 							<c:set var="vo2" value="${list2[status.index]}"/>
 								<tr>
 									<td>${vo.lecture_no}</td>
-									<td>${vo2.lecture_no }</td>
+									<%-- <td>${vo2.lecture_no }</td> --%>
 									<c:if test="${vo.lecture_no != vo2.lecture_no }">
-									<td><a class="lecNo" href="lectureClassAddForm?lecture_no=${vo.lecture_no}">설정</a></td>
+									<td><a class="lecNo" href="javascript:void(0);" onclick="LeClass('${vo.lecture_no}');">설정</a></td>
 									</c:if>
 									<c:if test="${vo.lecture_no == vo2.lecture_no }">
 									<td>완료고고고</td>
 									</c:if>
 									<td>${vo.lecture_title}</td>
 									<td>${vo.lecture_start} ~ ${vo.lecture_end}</td>
-									<td>교직원</td>
+									<td>${vo.name}</td>
 									<td>${vo.lecture_limit}</td>
 									<td>0</td>
 									<td><input type="radio" name="lectureNo" value="${vo.lecture_no}"></td>
@@ -111,13 +55,13 @@
 						</tbody>
 					</table>
 				</form>
-					<button onclick="addForm();">등록</button>
-					<button id="btnEdit">수정</button>
-					<button id="btnRemove">삭제</button>
-			</article>
 		</div>
-	</section>
-</div>
+			<div class="btns">
+					<button class="button" onclick="addForm();">등록</button>
+					<button class="button" id="btnEdit">수정</button>
+					<button class="button" id="btnRemove">삭제</button>
+			</div>
+		</div>
 <script>
 
 /* 등록 폼 이동 */
@@ -138,8 +82,17 @@ $("#btnEdit").click(function(){
 	}
 });
 
+/* 분반 설정창 오픈 */
+function LeClass(num){
+	var w = 800;
+	var h = 700;
+	var width = (window.screen.width-w) / 2;
+	var height = (window.screen.height-h) / 2;
+	window.open("lectureClassAddForm?lecture_no="+num, "lectureClassAddForm", "width="+w+", height="+h+", left="+width+", top="+height);
+}
 
 </script>
 <jsp:include page="../lecture/lectureRemove.jsp"></jsp:include>
+<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

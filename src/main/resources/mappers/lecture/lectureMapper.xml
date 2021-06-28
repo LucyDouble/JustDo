@@ -26,9 +26,7 @@
 	
 	<!-- 목록조회 -->
 	<select id="listLecture" resultMap="lectureResult">
-		SELECT 
-			*
-		FROM LECTURE ORDER BY lecture_no ASC
+		SELECT * FROM lecture L join teacher T ON l.teacher_number=t.teacher_number ORDER BY lecture_no ASC
 	</select>
 	
 	<!-- 강의등록 -->

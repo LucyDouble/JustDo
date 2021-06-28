@@ -7,72 +7,55 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title>강의등록</title>
+<link rel="stylesheet" href="resources/css/bootstrap/bootstrap.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/lectureList.css"/>">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<style>
-@font-face {
-    src : url("resources/fonts/SCDream4.otf");
-    font-family: SCDream4;
-    }
-     body {
-        margin: 0px;
-        padding: 0px;
-        width: 800px;
-        margin: auto;
-        font-family: SCDream4;
-    }
-</style>
 <body>
-<div>
-	<section>
-		<div class="cont">
-			<article class="content1">
-				<h2>강의등록</h2>
-			</article>
-		</div>
+<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
+<div class="ln_page">
+				<p class="ln_title">강의등록</p>
 		<div>
-			<article>
 				<form id="frmAdd" name="add">
 					<table class="table">
 							<tr>
 								<th>NO</th>
-								<td><input type="hidden" name="teacher_number" value="100001" id="a1"></td>
+								<td><input type="hidden" name="teacher_number" value="100001"></td>
 								<th>강의명</th>
-								<td><input type="text" name="lecture_title" id="a3"></td>
+								<td><input type="text" name="lecture_title" class="form-control"></td>
 							</tr>
 							<tr>
 								<th>전공</th>
-								<td><input type="text" name="lecture_major" id="a4"></td>
+								<td><input type="text" name="lecture_major" class="form-control"></td>
 								<th>제한인원</th>
-								<td><input type="text" name="lecture_limit" id="a8"></td>
+								<td><input type="text" name="lecture_limit" class="form-control" value="30" readonly></td>
 							</tr>
 							<tr>
 								<th>교직원</th>
-								<td><input type="text" value="나다"></td>
+								<td><input type="text" value="${DTO.id}" class="form-control" readonly></td>
 								<th>E-mail</th>
-								<td><input type="text" value="나야"></td>
+								<td><input type="text" value="${DTO.email}" class="form-control" readonly></td>
 							</tr>
 							<tr>
-								<th>강의날짜</th>
-								<td><input type="text" name="lecture_day" id="a7"></td>
+								<!-- <th>강의날짜</th>
+								<td><input type="text" name="lecture_day" class="form-control"></td> -->
 								<th>강의기간</th>
-								<td><input type="date" name="lecture_start" id="a9"> ~ <input type="date" name="lecture_end" id="a10"></td>
+								<td colspan="3"><input type="date" name="lecture_start" class="form-control month"> ~ <input type="date" name="lecture_end" class="form-control month"></td>
 							</tr>
 							<tr>
 								<th>교과목개요 및 학습목표</th>
-								<td colspan="3"><input type="text" name="lecture_target" id="a11"></td>
+								<td colspan="3"><input type="text" name="lecture_target" class="form-control"></td>
 							</tr>
 							<tr>
 								<th>교재 및 참고문헌</th>
-								<td colspan="3"><input type="text" name="lecture_reference" id="a12"></td>
+								<td colspan="3"><input type="text" name="lecture_reference" class="form-control"></td>
 							</tr>
 					</table>
-					<button id="btnAdd">등록</button>			
+					<button id="btnAdd" class="button">등록</button>			
 				</form>
-			</article>
 		</div>
-	</section>
 </div>
 <script>
 	
@@ -99,5 +82,6 @@
         }); */
     });
 </script>
+<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>
