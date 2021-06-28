@@ -28,5 +28,36 @@ public class ExamServiceImpl implements ExamService{
 	public Exam viewWork(int exam_no) {
 		return examDao.viewWork(exam_no);
 	}
+
+	@Override
+	public int checkExamNo(Exam vo) {
+		return examDao.checkExamNo(vo);
+	}
+	
+	@Override
+	public void addExam(Exam vo) {
+		examDao.addExam(vo);
+	}
+
+	@Override
+	public void editExam(Exam vo) {
+		examDao.editExam(vo);
+	}
+
+	@Override
+	public void removeExam(int exam_no) {
+		examDao.removeExam(exam_no);
+	}
+
+	@Override
+	public List<Exam> registrationNo(int lectureclass_no) {
+		return examDao.registrationNo(lectureclass_no);
+	}
+
+	@Override
+	public int addExamResult(int regstration_no) {
+		return examDao.addExamResult(regstration_no);
+	}
+
 	
 }

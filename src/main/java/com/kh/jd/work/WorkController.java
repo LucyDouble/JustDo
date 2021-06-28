@@ -139,7 +139,6 @@ public class WorkController {
 	@RequestMapping(value = "/removeWork", method = RequestMethod.POST)
 	public String removeWork(@RequestParam(name = "work_no") int work_no )  {
 
-		System.out.println("바보야"+work_no);
 		workService.removeWork(work_no);
 		return "redirect:/listWork";
 	}

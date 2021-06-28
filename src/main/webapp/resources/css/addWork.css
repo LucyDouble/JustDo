@@ -95,6 +95,14 @@ height: 150px;
 	float: right;
     width: 480px;
     text-align: left;
+    
+}
+.choice_form2{
+	float: right;
+    width: 480px;
+    text-align: left;
+    position: relative;
+    bottom: 25px;
 }
 .work_an_label {
 	float:left;

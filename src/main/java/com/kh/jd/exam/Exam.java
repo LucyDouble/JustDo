@@ -23,6 +23,7 @@ public class Exam {
 	private Date lectureclass_start;
 	private Date lectureclass_end;
 	private int examdate;
+	private int registration_no;
 	
 	
 	
@@ -30,6 +31,12 @@ public class Exam {
 	
 	
 	
+	public int getRegistration_no() {
+		return registration_no;
+	}
+	public void setRegistration_no(int registration_no) {
+		this.registration_no = registration_no;
+	}
 	@Override
 	public String toString() {
 		return "Exam [exam_no=" + exam_no + ", lecture_no=" + lecture_no + ", teacher_number=" + teacher_number

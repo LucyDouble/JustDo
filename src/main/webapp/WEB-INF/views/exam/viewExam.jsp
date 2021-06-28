@@ -15,8 +15,6 @@
 <div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 <div class="vn_page">
 	<form id="frm">
-	<!-- TODO -->
-	<input type="hidden" name="teacher_number" value="100002">
 	<input type="hidden" name="exam_no" value="${examDto.exam_no }">
     <p class="vn_title">시험 조회</p>
     <br>
@@ -30,9 +28,6 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="vn_cont">&nbsp;&nbsp;시험 시간 : ${examDto.exam_date} [${examDto.exam_start }~ ${examDto.exam_end }]</td>
-            </tr>
             <tr class="cont3">
                 <td class="vn_cont">&nbsp;&nbsp;<br><strong style="font-size: 22px;">[시험문제]</strong><br><br>${examDto.exam_content }</td>
             </tr>
@@ -41,7 +36,7 @@
             </tr>
         </tbody>
     </table>
-    <button type="button" class="button" onclick="location.href='listWork'"><span>목록</span></button>
+    <button type="button" class="button" onclick="location.href='listExam'"><span>목록</span></button>
     <c:if test="${time<examDto.examdate}">
 	    <button type="button" class="button" id="edit" ><span>수정</span></button>
 	    <button type="button" class="button"  id="btnRemove"><span>삭제</span></button>
@@ -77,13 +72,13 @@
       
     $("#remove").click(function(){
     	var frm=document.getElementById("frm");
-    	frm.action="removeWork";
+    	frm.action="removeExam";
         frm.method="POST";
         frm.submit();
     });
     $("#edit").click(function(){
     	var frm=document.getElementById("frm");
-    	frm.action="editWorkFrom";
+    	frm.action="editExamFrom";
         frm.method="POST";
         frm.submit();
     });

@@ -27,4 +27,22 @@ public class ExamDao {
 	public Exam viewWork(int exam_no) {
 		return sqlSession.selectOne("exam.viewExam", exam_no);
 	}
+	public int checkExamNo(Exam vo) {
+		return sqlSession.selectOne("exam.checkClassNo", vo);
+	}
+	public void addExam(Exam vo) {
+		sqlSession.insert("exam.addExam",vo);
+	}
+	public List<Exam> registrationNo(int lectureclass_no) {
+		return sqlSession.selectList("exam.registrationNo", lectureclass_no);
+	}
+	public int addExamResult(int regstration_no) {
+		return sqlSession.insert("exam.addExamResult",regstration_no);
+	}
+	public void editExam(Exam vo) {
+		sqlSession.insert("exam.editExam",vo);
+	}
+	public void removeExam(int exam_no) {
+		sqlSession.delete("exam.removeExam",exam_no);
+	}
 }

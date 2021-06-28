@@ -32,7 +32,7 @@
 		        elc.lectureclass_start,elc.lectureclass_end,elc.exam_no,elc.exam_subject,
 		        elc.exam_date,to_char(elc.exam_start,'hh24:mi') as exam_start,
 		        to_char(elc.exam_end,'hh24:mi') as exam_end,elc.exam_content,elc.exam_answer 
-		        ,l.teacher_number,to_char(exam_date,'yyyymmdd') as examdate 
+		        ,l.teacher_number,to_char(exam_date,'yyyymmdd') as examdate ,lecture_no
 		from (select * 
 		        from exam e join lectureclass lc 
 		        using(lectureclass_no) 
@@ -40,4 +40,29 @@
 		using(lecture_no)
 		where exam_no=#{exam_no}
 	</select>
+	<select id="checkClassNo" parameterType="Exam" resultType="int">
+		select lectureclass_no from lectureclass where lecture_no=#{lecture_no} and lectureclass_class=#{lectureclass_class}
+	</select>
+	<insert id="addExam" parameterType="Exam">
+		insert into exam values(seq_exam.nextval,#{lectureclass_no},
+										  #{exam_subject},#{exam_date},to_date(#{exam_start},'hh24:mi'),
+										  to_date(#{exam_end},'hh24:mi'),#{exam_content},#{exam_answer})
+	</insert>
+	<select id="registrationNo" parameterType="int" resultType="Exam">
+		select registration_no from lectureclass l join registration r using(lectureclass_no) where lectureclass_no=#{lectureclass_no}
+	</select>
+	<insert id="addExamResult" parameterType="int">
+		insert into exam_result values(
+		(select nvl(max(exam_no), 0) from exam),#{registration_no},null,null
+		)	
+	</insert>
+	<update id="editExam" parameterType="Exam">
+		update exam 
+		set exam_subject=#{exam_subject}, exam_date=#{exam_date}, exam_start=to_date(#{exam_start},'hh24:mi'),lectureclass_no=#{lectureclass_no},
+			 exam_end= to_date(#{exam_end},'hh24:mi'),exam_content=#{exam_content},exam_answer=#{exam_answer}
+		where exam_no=#{exam_no}
+	</update>
+	<delete id="removeExam">
+		DELETE from exam where exam_no=#{exam_no}
+	</delete>
 </mapper>

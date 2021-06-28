@@ -71,8 +71,6 @@
 				</tbody>
 			</table>
 		<form action="addExamForm" method="post">
-			<!-- TODO -->
-			<input type="hidden" name="teacher_number" value="100002">
 			<button class="button">
 				<span>시험등록</span>
 			</button>
