@@ -119,9 +119,6 @@ label {
 				name="signUpSelect" checked="checked" value="student">수강생 <input
 				type="radio" name="signUpSelect" value="teacher">교직원
 		</div>
-		<div class="number-group">
-			<input type="hidden">
-		</div>
 		<br>
 		<!-- 아이디 -->
 		<div class="id-group">
@@ -269,6 +266,7 @@ label {
 
 									$('#id_check').text(
 											"아이디는 영어와 숫자 4~12자리만 가능합니다.");
+									$('#id').val("");
 									$('#id_check').css('color', 'red');
 									$('#id_check').css('font-size', '5px')
 									$("#reg_submit").attr("disabled", true);
@@ -307,10 +305,11 @@ label {
 
 			} else {
 				console.log('false');
+			
 				$('#pw_check').text('비밀번호는 숫자, 문자, 특수문자 조합 8~16자리만 가능합니다. :(')
 				$('#pw_check').css('color', 'red');
-				$('#pw_check').css('font-size', '5px')
-
+				$('#pw_check').css('font-size', '5px');
+				$('#password').val("");
 			}
 		});
 
@@ -374,7 +373,7 @@ label {
 													$("#email_submit").show();
 												} else {
 													$('#email_check').text(
-															'이메일을 확인해주세요 :()');
+															'이메일을 확인해주세요 :(');
 													$('#email_check').css(
 															'color', 'red');
 													$("#email_check").css(
@@ -459,6 +458,7 @@ label {
 														'font-size', '5px');
 												$("#reg_submit").attr(
 														"disabled", true);
+													$("#phone").val("");
 											} else {
 												// 이메일
 												if (phoneCheck.test($('#phone')

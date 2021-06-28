@@ -28,7 +28,6 @@
 		#{id})
 	</select>
 	<insert id="signUp" parameterType="Teacher">
-
 		insert into Teacher values ((SELECT nvl(max(Teacher_NUMBER), 0) + 1 FROM
 		Teacher) , #{id},
 		#{password}, #{name}, #{address}, #{phone},
@@ -56,15 +55,22 @@
 		PHONE FROM
 		TEACHER WHERE PHONE = #{phone})
 	</select>
-	<update id="updateStudent">
-		UPDATE STUDENT SET
-		PASSWORD=#{PASSWORD},
-		ADDRESS=#{ADDRESS},
-		PHONE=#{PHONE},
-		EMAIL=#{EMAIL}
+	<update id="editTeacherPw" parameterType="hashmap">
+		UPDATE TEACHER SET PASSWORD = #{password} where ID=#{id}
 	</update>
-	<delete id="deleteStudent">
-		DELETE FROM STUDENT WHERE USER_ID=#{user_id}
+	<!-- 휴대폰 번호 수정  -->
+	<update id="editTeacherPhone" parameterType="hashmap">
+		UPDATE TEACHER SET PHONE =#{phone} where id=#{id}
+	</update>
+	<!-- 주소 수정  -->
+	<update id="editTeacherAddress" parameterType="hashmap">
+		UPDATE TEACHER SET ADDRESS=#{address} where id=#{id}
+	</update>
+		<update id="editTeacherName" parameterType="hashmap">
+		UPDATE TEACHER SET NAME=#{name} where id=#{id}
+	</update>
+	<delete id="deleteTeacher">
+		DELETE FROM TEACHER WHERE ID=#{id}
 	</delete>
 
 </mapper>

@@ -51,6 +51,31 @@ public class TeacherServiceImpl implements TeacherService {
 	public int phoneCheck(String teacher_phone) {
 		return dao.phoneCheck(teacher_phone);
 	}
+
+	@Override
+	public void editTeacherPw(String teacher_pw, String teacher_id) {
+		dao.editTeacherPw(teacher_pw, teacher_id);
+	}
+
+	@Override
+	public void editTeacherName(String teacher_name, String teacher_id) {
+		dao.editTeacherName(teacher_name, teacher_id);
+	}
+
+	@Override
+	public void editTeacherAddress(String teacher_address, String teacher_id) {
+		dao.editTeacherAddress(teacher_address, teacher_id);
+	}
+
+	@Override
+	public void editTeacherPhone(String teacher_phone, String teacher_id) {
+		dao.editTeacherPhone(teacher_phone, teacher_id);
+	}
+
+	@Override
+	public void deleteTeacher(String teacher_id) {
+		dao.deleteTeacher(teacher_id);
+	}
 	
 
 

@@ -50,6 +50,12 @@
 						</c:when>
 						<c:otherwise>
 						<a href="logout" id="logout">로그아웃</a>
+						<c:if test="${sessionScope.student_id !=null && sessionScope.teacher_id == null }">
+						<a href="editStudentForm">수강생 정보수정</a>
+						</c:if>
+						<c:if test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null }">
+						<a href="editTeacherForm">교직원 정보수정</a>
+						</c:if>						
 						</c:otherwise>
 					</c:choose>
 				</div></li>
