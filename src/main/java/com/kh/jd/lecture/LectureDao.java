@@ -23,8 +23,8 @@ public class LectureDao {
 		return result;
 	}
 	
-	public List<Lecture> listLecture(){
-		return sqlSession.selectList("Lecture.listLecture");
+	public List<Lecture> listLecture(int teacher_number){
+		return sqlSession.selectList("Lecture.listLecture", teacher_number);
 	}
 	
 	public int removeLecture(String lecture_no) {

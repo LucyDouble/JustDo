@@ -27,7 +27,14 @@
         document.querySelector(".rc_background").className = "rc_background";
       }
 
-      document.querySelector("#btnRemove").addEventListener("click", show);
+      document.querySelector("#btnRemove").addEventListener("click", function(){
+    	  var check = $("input:radio[name='lectureNo']").is(":checked");
+    	  if(check==true){
+    		  show();
+    	  }else{
+    		  alert("삭제할려면 박스에 체크해주세요.");
+    	  }
+      });
       document.querySelector("#close").addEventListener("click", close);
       
       $("#remove").click(function(e){

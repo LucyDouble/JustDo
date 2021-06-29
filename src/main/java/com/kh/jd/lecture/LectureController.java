@@ -28,8 +28,9 @@ public class LectureController {
 	@RequestMapping(value = "lecture", method = RequestMethod.GET)
 	public ModelAndView listLecture(ModelAndView mv, HttpServletRequest request, HttpSession session) {
 			System.out.println("@@@@@@@@여기@@@@@@@@");
-			request.getSession().getAttribute("DTO");
-			mv.addObject("list", LService.listLecture());
+			Teacher te= (Teacher)request.getSession().getAttribute("DTO");
+			int teacher_number=te.getTeacher_number();
+			mv.addObject("list", LService.listLecture(teacher_number));
 			mv.addObject("list2",LCService.listLectureClass());
 			mv.setViewName("lecture/lectureList");
 		return mv;

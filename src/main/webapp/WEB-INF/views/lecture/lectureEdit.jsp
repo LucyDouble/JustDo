@@ -23,21 +23,21 @@
 							<tr>
 								<th>NO</th>
 								<td><input type="hidden" name="teacher_number"
-									value="100001" id="a1"><input type="text" class="form-control" name="lecture_no" value="${view.lecture_no}" readonly></td>
+									value="${DTO.teacher_number }" id="a1"><input type="text" class="form-control" name="lecture_no" value="${view.lecture_no}" readonly></td>
 								<th>강의명</th>
-								<td><input type="text" name="lecture_title" class="form-control" value="${view.lecture_title}"></td>
+								<td><input type="text" name="lecture_title" class="form-control" value="${view.lecture_title}" maxlength="49"></td>
 							</tr>
 							<tr>
 								<th>전공</th>
-								<td><input type="text" name="lecture_major" class="form-control" value="${view.lecture_major}"></td>
+								<td><input type="text" name="lecture_major" class="form-control" value="${view.lecture_major}" maxlength="20"></td>
 								<th>제한인원</th>
 								<td><input type="text" name="lecture_limit" class="form-control" value="${view.lecture_limit}" readonly></td>
 							</tr>
 							<tr>
 								<th>교직원</th>
-								<td><input type="text" value="나다" class="form-control"></td>
+								<td><input type="text" value="${DTO.name}" class="form-control"></td>
 								<th>E-mail</th>
-								<td><input type="text" value="나야" class="form-control"></td>
+								<td><input type="text" value="${DTO.email}" class="form-control"></td>
 							</tr>
 							<tr>
 								<%-- <th>강의날짜</th>
@@ -48,11 +48,15 @@
 							</tr>
 							<tr>
 								<th>교과목개요 및 학습목표</th>
-								<td colspan="3"><input type="text" name="lecture_target" class="form-control" value="${view.lecture_target}"></td>
+								<td colspan="3">
+								<textarea style="resize:none;" rows="4" cols="24" name="lecture_target" class="form-control">${view.lecture_target}</textarea>
+								</td>
 							</tr>
 							<tr>
 								<th>교재 및 참고문헌</th>
-								<td colspan="3"><input type="text" name="lecture_reference" class="form-control" value="${view.lecture_reference}"></td>
+								<td colspan="3">
+								<textarea style="resize:none;" rows="4" cols="24" name="lecture_reference" class="form-control">${view.lecture_reference}</textarea>
+								</td>
 							</tr>
 						</table>
 						<button id="btnEdit" class="button">수정</button>

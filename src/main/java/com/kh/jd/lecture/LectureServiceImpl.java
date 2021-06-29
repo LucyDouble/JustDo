@@ -24,8 +24,8 @@ public class LectureServiceImpl implements LectureService{
 		return result;
 	}
 	@Override
-	public List<Lecture> listLecture() {
-		return Ldao.listLecture();
+	public List<Lecture> listLecture(int teacher_number) {
+		return Ldao.listLecture(teacher_number);
 	}
 	
 	@Override

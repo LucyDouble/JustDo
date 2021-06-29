@@ -17,6 +17,10 @@
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 		<div class="ln_page">
 			<p class="ln_title">강의정보</p>
+			<c:if test="${empty list}">
+				<p>등록된 강의가 없습니다.</p>
+			</c:if>
+			<c:if test="${not empty list}">
 		<div>
 				<form id="lecturefrm">
 					<table class="table">
@@ -49,21 +53,22 @@
 									<td>${vo.name}</td>
 									<td>${vo.lecture_limit}</td>
 									<td>0</td>
-									<td><input type="radio" name="lectureNo" value="${vo.lecture_no}"></td>
+									<td><label class="checkbox">
+									<input type="radio" name="lectureNo" value="${vo.lecture_no}"><span class="icon"></span></label></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</form>
 		</div>
+			</c:if>
 			<div class="btns">
-					<button class="button" onclick="addForm();">등록</button>
-					<button class="button" id="btnEdit">수정</button>
-					<button class="button" id="btnRemove">삭제</button>
+					<button class="button" onclick="addForm();"><span>등록</span></button>
+					<button class="button" id="btnEdit"><span>수정</span></button>
+					<button class="button" id="btnRemove"><span>삭제</span></button>
 			</div>
 		</div>
 <script>
-
 /* 등록 폼 이동 */
 function addForm(){
 	location.href="lectureAddForm";

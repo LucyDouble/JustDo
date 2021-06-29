@@ -25,8 +25,10 @@
 	</select>
 	
 	<!-- 목록조회 -->
-	<select id="listLecture" resultMap="lectureResult">
-		SELECT * FROM lecture L join teacher T ON l.teacher_number=t.teacher_number ORDER BY lecture_no ASC
+	<select id="listLecture" resultMap="lectureResult" parameterType="int">
+		SELECT l.lecture_no, l.teacher_number, l.lecture_title, l.lecture_limit, l.lecture_major, l.lecture_day, 
+		l.lecture_reference, l.lecture_target, l.lecture_start, l.lecture_end, l.lecture_state, t.name, t.email
+		FROM lecture L join teacher T ON l.teacher_number=t.teacher_number WHERE l.teacher_number = #{teacher_number} ORDER BY lecture_no ASC
 	</select>
 	
 	<!-- 강의등록 -->
