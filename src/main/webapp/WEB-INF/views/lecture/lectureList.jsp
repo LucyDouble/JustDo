@@ -55,7 +55,7 @@
 									<td>${vo.lecture_limit}</td>
 									<td>${vo.lecture_personnel}</td>
 									<td><label class="checkbox">
-									<input type="radio" name="lectureNo" value="${vo.lecture_no}"><span class="icon"></span></label></td>
+									<input type="radio" name="lectureNo" value="${vo.lecture_no}" class="checkbox"><span class="icon"></span></label></td>
 								</tr>
 							</c:forEach>
 						</tbody>

@@ -24,6 +24,7 @@ body {
 
 .ln_page, .vn_page, .en_page, .an_page {
 	width: 1000px;
+	margin: 0 auto;
 }
 
 .lc_page, .ac_page {
