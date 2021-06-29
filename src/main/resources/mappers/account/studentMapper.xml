@@ -85,7 +85,7 @@
 		SELECT * FROM STUDENT WHERE ID = #{id}
 	</select>
 	<update id="tempPassword" parameterType="Map">
-		UPDATE STUDENT SET PASSWORD = #{param3} WHERE ID = #{param1} and EMAIL = #{param2}
+		UPDATE STUDENT SET PASSWORD = #{password} WHERE ID = #{id}
 	</update>
 
 </mapper>

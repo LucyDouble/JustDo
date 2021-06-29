@@ -146,15 +146,18 @@ public class StudentDAO {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("id", student_id);
 			map.put("email", student_email);
+			HashMap<String, String> map2 = new HashMap<String, String>();
+			map2.put("id", student_id);
+			map2.put("password", key);
 			System.out.println(student_id);
 			System.out.println(student_email);
-			sqlSession.update("Student.tempPassword", key);
+			sqlSession.update("Student.tempPassword", map2);
 			
 			Student student = sqlSession.selectOne("Student.infoStudent2", student_id);
 			String name = student.getName();
 			MimeMessage mail = mailSender.createMimeMessage();
 			String cert_msg ="<h2>안녕하세요 '"+ name +"' 님</h2><br><br>" 
-					+ "<p>비밀번호 찾기를 신청해주셔서 임시 비밀번호를 발급해드렸습니다.</p>"
+					+ "<p>JD교육원 임시 비밀번호를 발급해드렸습니다.</p>"
 					+ "<p>임시로 발급 드린 비밀번호는 <h2 style='color : blue'>'" + key +"'</h2>이며 로그인 후 마이페이지에서 비밀번호를 변경해주시면 됩니다.</p><br>"
 					+ "<h3><a href='http://localhost:8080/jd/jdHome'> 교육원 접속 ^0^</a></h3><br><br>"
 					+ "(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";

@@ -39,7 +39,7 @@
 						<c:when
 							test="${sessionScope.student_id == null && sessionScope.teacher_id ==null}">
 							<a href="login" id="login">로그인</a>
-							<a href="signUpPage">회원가입</a>
+							<a href="signUp">회원가입</a>
 							<a href="<%=request.getContextPath()%>/lecture">수강과목</a>
 						</c:when>
 						<c:otherwise>
