@@ -10,13 +10,17 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/listWork.css"/>">
 <script src="https://kit.fontawesome.com/afd6aa68df.js" crossorigin="anonymous"></script>
-
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/common/header.css"/>">
+<script type="text/javascript"
+	src="<c:url value="/resources/js/header.js"/>"></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
 </head>
 <body>
 	
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div class="ln_page">
-		<p class="ln_title">시험 리스트</p>
+		<p class="ln_title">시험 리스트 ${time2 }</p>
 		<!-- 서치바 -->
 		<div class="lc_search_box">
 			<form class="lc_search" action="#" method="get">
@@ -31,7 +35,6 @@
 						<th>No.</th>
 						<th class="work_title">수업명</th>
 						<th class="work_title">제목</th>
-						<th>class</th>
 						<th class="work_date">시험 일</th>
 						<th>진행여부</th>
 						<th>제출현황</th>
@@ -43,17 +46,18 @@
 							<td>${i.rnum }</td>
 							<td>${i.lecture_title }</td>
 							<td class="ln_cont" onclick="location.href='viewExam?exam_no=${i.exam_no }'">${i.exam_subject }</td>
-							<td>${i.lectureclass_class}</td>
 							<td>${i.exam_date} [${i.exam_start }~ ${i.exam_end }]</td>
 							
 							<td>
 								<c:if test="${time<i.examdate}">진행전</c:if> 
-								<c:if test="${time==i.examdate}">진행중</c:if> 
+								<c:if test="${time==i.examdate && time2<i.examStart}">진행전</c:if> 
+								<c:if test="${time==i.examdate && time2>=i.examStart && time2 <=i.examEnd}"><strong style="color: #6A60A9;">진행중</strong></c:if> 
+								<c:if test="${time==i.examdate && time2>i.examEnd}">완료</c:if> 
 								<c:if test="${time>i.examdate}">완료</c:if>
 							</td>
 		<form id ="ResultFrm" action="listExamResult" method="post">
 							<td  >
-							 	<c:if test="${time>=i.examdate}" >
+							 	<c:if test="${time>i.examdate || (time==i.examdate && time2>i.examEnd)}" >
 									<input type="hidden" name="exam_no" value="${i.exam_no }">
 									<input type="hidden" name="exam_subject" value="${i.exam_subject }">
 									<input type="hidden" name="lecture_no" value="${i.lecture_no }">

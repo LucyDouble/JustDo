@@ -2,49 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="exam">
 	<select id="listExam" resultType="Exam" parameterType="hashMap">
-		select rownum rnum,l.lecture_title,elc.lectureclass_no,elc.lectureclass_class,
-		        elc.lectureclass_start,elc.lectureclass_end,elc.exam_no,elc.exam_subject,
-		        elc.exam_date,to_char(elc.exam_start,'hh24:mi') as exam_start,
-		        to_char(elc.exam_end,'hh24:mi') as exam_end,elc.exam_content,elc.exam_answer 
-		        ,l.teacher_number,to_char(exam_date,'yyyymmdd') as examdate 
-		from (select * 
-		        from exam e join lectureclass lc 
-		        using(lectureclass_no) 
-		        order by exam_no) elc join lecture l 
-		using(lecture_no)
-		where teacher_number=#{teacher_number}
-				  and (exam_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
-		order by rnum desc	
+            select rownum as rnum, exam_no,lecture_no ,exam_subject,exam_content,exam_date
+                            ,to_char(exam_date,'yyyyMMdd') as examdate , to_char(exam_start,'hh24:mi') as exam_start
+                            ,to_char(exam_start,'hh24mi')as examStart  ,teacher_number ,exam_answer 
+                            ,to_char(exam_end,'hh24:mi') as exam_end,  to_char(exam_end,'hh24mi')as examEnd , lecture_title
+			from (select *
+				     from (SELECT * 
+							  FROM exam e join  lecture  l 
+							  using (lecture_no)order by exam_no asc))  
+			 where teacher_number=#{teacher_number}
+				   	   and (exam_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
+			 order by rnum desc
+
 	</select>
 	<select id="getlistCount" resultType="int" parameterType="hashMap">
 		select count(*)
-		from (select * 
-		        from exam e join lectureclass lc 
-		        using(lectureclass_no) 
-		        order by exam_no) elc join lecture l 
-		using(lecture_no)
+		from (SELECT * 
+				 FROM exam e join  lecture  l 
+				 using(lecture_no))
 		where teacher_number=#{teacher_number}
 				  and (exam_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
 		
 	</select>
 	<select id="viewExam" parameterType="int" resultType="Exam">
-		select l.lecture_title,elc.lectureclass_no,elc.lectureclass_class,
-		        elc.lectureclass_start,elc.lectureclass_end,elc.exam_no,elc.exam_subject,
-		        elc.exam_date,to_char(elc.exam_start,'hh24:mi') as exam_start,
-		        to_char(elc.exam_end,'hh24:mi') as exam_end,elc.exam_content,elc.exam_answer 
-		        ,l.teacher_number,to_char(exam_date,'yyyymmdd') as examdate ,lecture_no
-		from (select * 
-		        from exam e join lectureclass lc 
-		        using(lectureclass_no) 
-		        order by exam_no) elc join lecture l 
-		using(lecture_no)
-		where exam_no=#{exam_no}
+            select rownum as rnum, exam_no,lecture_no ,exam_subject,exam_content,exam_date
+                            ,to_char(exam_date,'yyyyMMdd') as examdate , to_char(exam_start,'hh24:mi') as exam_start
+                            ,to_char(exam_start,'hh24mi')as examStart  ,teacher_number ,exam_answer 
+                            ,to_char(exam_end,'hh24:mi') as exam_end,  to_char(exam_end,'hh24mi')as examEnd , lecture_title
+			from (select *
+				     from (SELECT * 
+							  FROM exam e join  lecture  l 
+							  using (lecture_no)order by exam_no asc))  
+			 where exam_no=#{exam_no}
 	</select>
 	<select id="checkClassNo" parameterType="Exam" resultType="int">
 		select lectureclass_no from lectureclass where lecture_no=#{lecture_no} and lectureclass_class=#{lectureclass_class}
 	</select>
 	<insert id="addExam" parameterType="Exam">
-		insert into exam values(seq_exam.nextval,#{lectureclass_no},
+		insert into exam values(seq_exam.nextval,#{lecture_no},
 										  #{exam_subject},#{exam_date},to_date(#{exam_start},'hh24:mi'),
 										  to_date(#{exam_end},'hh24:mi'),#{exam_content},#{exam_answer})
 	</insert>
@@ -58,11 +53,44 @@
 	</insert>
 	<update id="editExam" parameterType="Exam">
 		update exam 
-		set exam_subject=#{exam_subject}, exam_date=#{exam_date}, exam_start=to_date(#{exam_start},'hh24:mi'),lectureclass_no=#{lectureclass_no},
+		set exam_subject=#{exam_subject}, exam_date=#{exam_date}, exam_start=to_date(#{exam_start},'hh24:mi'),lecture_no=#{lecture_no},
 			 exam_end= to_date(#{exam_end},'hh24:mi'),exam_content=#{exam_content},exam_answer=#{exam_answer}
 		where exam_no=#{exam_no}
 	</update>
 	<delete id="removeExam">
 		DELETE from exam where exam_no=#{exam_no}
 	</delete>
+	<select id="listExamResult" resultType="Exam" parameterType="Map">
+		select df.*,er.exam_grade
+		from(select rownum as rnum, exam_no, lecture_no, exam_subject,exam_date,to_char(exam_start,'hh24:mi') as exam_start, to_char(exam_end,'hh24:mi') as exam_end, 
+		            exam_content, student_number, lectureclass_class,name,exam_submit,registration_no,exam_answer
+		     from(select el.*,s.name as name 
+		          from(select e.*,l.student_number ,l.lectureclass_class as lectureclass_class,l.exam_submit as exam_submit,l.registration_no
+		               from exam e join (select * 
+		                                 from exam_result er join (select * from registration join lectureclass using(lectureclass_no) ) r 
+		                                 using (registration_no)) l 
+		                on e.exam_no=l.exam_no
+		                where e.exam_no=#{exam_no})el join student s 
+		          on el.student_number=s.student_number order by name asc )) df join exam_result er 
+		     on df.registration_no= er.registration_no
+		where er.exam_no=#{exam_no}
+		<if test='keyword !=null || !keyword.equals("")'>
+			 and name like '%'||#{keyword}||'%'
+		</if>
+	</select>
+	<select id="getlistExamResultCount" resultType="int" parameterType="Map">
+		select count(*)
+		from(select el.*,s.name as name 
+		        from(select e.*,l.student_number ,l.lectureclass_class as lectureclass_class,l.exam_submit as exam_submit,l.registration_no
+		                from exam e join (select * 
+		                                    from exam_result er join (select * from registration join lectureclass using(lectureclass_no) ) r 
+		                                    using (registration_no)) l 
+		                on e.exam_no=l.exam_no 
+		                where e.exam_no=#{exam_no} )el join student s 
+		        on el.student_number=s.student_number order by name asc
+		        )
+		<if test='keyword !=null || !keyword.equals("")'>
+			 where name like '%'||#{keyword}||'%'
+		</if>
+	</select>
 </mapper>

@@ -51,12 +51,6 @@ public class ExamController {
 		map.put("teacher_number", teacher_number);
 		
 		
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
-		Calendar time = Calendar.getInstance();
-		String format_time1 = format1.format(time.getTime());
-		int nowdate = Integer.parseInt(format_time1);
-		mv.addObject("time", nowdate);
-		
 		int listCount = examService.getListCount(map);
 		
 		int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
@@ -89,6 +83,27 @@ public class ExamController {
 		List<Exam> listExam = examService.listExam(currentPage, LIMIT,map);
 		System.out.println(listExam);
 
+		
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
+		Calendar time = Calendar.getInstance();
+		String format_time1 = format1.format(time.getTime());
+		int nowdate = Integer.parseInt(format_time1);
+		mv.addObject("time", nowdate);
+		
+		SimpleDateFormat format2 = new SimpleDateFormat("HHmm");
+		String format_time2 = format2.format(time.getTime());
+		int nowdate2 = Integer.parseInt(format_time2);
+		mv.addObject("time2", nowdate2);
+		
+		SimpleDateFormat format3 = new SimpleDateFormat("yyyy-MM-dd");
+		String format_time3 = format3.format(time.getTime());
+		mv.addObject("nowdate", format_time3);
+		
+		SimpleDateFormat format4 = new SimpleDateFormat("HH:mm");
+		String format_time4 = format4.format(time.getTime());
+		mv.addObject("nowtime", format_time4);
+		
+		
 		mv.addObject("listExam", listExam);
 		mv.setViewName("exam/listExam");
 		return mv;
@@ -114,12 +129,10 @@ public class ExamController {
 	}
 	@RequestMapping(value = "/addExam", method = RequestMethod.POST)
 	public String addExam(HttpServletRequest re, Model model,Exam vo )  {
-		int class_no=examService.checkExamNo(vo);
-		vo.setLectureclass_no(class_no);
 		examService.addExam(vo);
-		List<Exam> aa =examService.registrationNo(vo.getLectureclass_no());
+		List<Work> aa =workService.registrationNo(vo.getLecture_no());
 		System.out.println(aa);
-		for (Exam exam : aa) {
+		for (Work exam: aa) {
 			examService.addExamResult(exam.getRegistration_no());
 		}
 		
@@ -138,11 +151,6 @@ public class ExamController {
 	}
 	@RequestMapping(value = "/editExam", method = RequestMethod.POST)
 	public String editExam(HttpServletRequest re, Model model,Exam vo )  {
-		System.out.println(vo.getLecture_no());
-		System.out.println(vo.getLectureclass_class());
-		int class_no=examService.checkExamNo(vo);
-		System.out.println("번호"+class_no);
-		vo.setLectureclass_no(class_no);
 		examService.editExam(vo);
 		
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
@@ -160,5 +168,77 @@ public class ExamController {
 
 		examService.removeExam(exam_no);
 		return "redirect:/listExam";
+	}
+	@RequestMapping(value = "/listExamResult", method = RequestMethod.POST)
+	public ModelAndView listExamResult(Exam vo,ModelAndView mv
+			, @RequestParam(name = "page", defaultValue = "1") int page
+			, @RequestParam(name = "keyword", defaultValue = "") String keyword)  {
+		
+		
+		//TODO
+//		double class1_mo= workService.getCountClass1(vo.getWork_no());
+//		double class1_ch= workService.getCountWorkSubmit1(vo.getWork_no())*100;
+//		double class2_mo= workService.getCountClass2(vo.getWork_no());
+//		double class2_ch= workService.getCountWorkSubmit2(vo.getWork_no())*100;
+//		String classOne=String.format("%.0f", class1_ch/class1_mo);
+//		String classTwo=String.format("%.0f", class2_ch/class2_mo);
+//		String total =String.format("%.0f", (class2_ch+class1_ch)/(class2_mo+class1_mo));
+		Map<String,Object>map = new HashMap<String,Object>();
+		map.put("keyword", keyword);
+		map.put("exam_no", vo.getExam_no());
+		
+		
+		int listCount = examService.getlistExamResultCount(map);
+		
+		int pageCnt = (listCount / LIMIT2) + (listCount % LIMIT2 == 0 ? 0 : 1);
+		int currentPage = page;
+		
+		int startPage = 1; 
+		int endPage = 5;
+		if(currentPage % pageBlock == 0)   { 
+			startPage = ((currentPage/pageBlock)-1) * pageBlock + 1;	
+		}else {
+			startPage = (currentPage/pageBlock) * pageBlock + 1;  
+		}		
+		endPage = startPage + pageBlock - 1;
+	
+		if(endPage > pageCnt)
+			endPage = pageCnt;
+		// 페이지 값 처리용
+		// 한 페이지당 출력할 목록 갯수
+		int maxPage = (int) ((double) listCount / LIMIT2 + 0.9);
+		mv.addObject("pageCnt", pageCnt);
+		mv.addObject("startPage", startPage);
+		mv.addObject("endPage", endPage);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("maxPage", maxPage);
+		mv.addObject("keyword", keyword);
+		mv.addObject("listCount", listCount);
+		mv.addObject("lecture_title",vo.getLecture_title() );
+		mv.addObject("lecture_class",vo.getLectureclass_class() );
+		mv.addObject("exam_subject",vo.getExam_subject() );
+		mv.addObject("exam_date",vo.getExam_date() );
+		mv.addObject("exam_start",vo.getExam_start() );
+		mv.addObject("exam_end",vo.getExam_end() );
+		mv.addObject("exam_no", vo.getExam_no() );
+//		mv.addObject("classOne", classOne);
+//		mv.addObject("classTwo", classTwo);
+//		mv.addObject("total", total);
+		
+		List<Exam> listExam = examService.listExamResult(currentPage, LIMIT2,map);
+
+		mv.addObject("listExam", listExam);
+		mv.setViewName("examResult/listExamResult");
+		
+		
+		
+		return mv;
+	}
+	@RequestMapping(value = "/viewExamResult", method = RequestMethod.POST)
+	public ModelAndView viewExamResult(Exam vo, ModelAndView mv )  {
+		mv.addObject("examDto", vo);
+		System.out.println("why?"+vo.getExam_answer());
+		mv.setViewName("examResult/viewExamResult");
+		return mv;
 	}
 }

@@ -11,6 +11,11 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
 <script src="https://cdn.ckeditor.com/4.16.1/standard-all/ckeditor.js"></script>
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/common/header.css"/>">
+<script type="text/javascript"
+	src="<c:url value="/resources/js/header.js"/>"></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
 </head>
 <body>
 <div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>

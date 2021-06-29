@@ -9,8 +9,11 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/listWork.css"/>">
-<script src="https://kit.fontawesome.com/afd6aa68df.js" crossorigin="anonymous"></script>
-
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/common/header.css"/>">
+<script type="text/javascript"
+	src="<c:url value="/resources/js/header.js"/>"></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
 </head>
 <body>
 	
@@ -54,8 +57,6 @@
 				</tbody>
 			</table>
 		<form action="addWorkForm" method="post">
-			<!-- TODO -->
-			<input type="hidden" name="teacher_number" value="100002">
 			<button class="button">
 				<span>과제등록</span>
 			</button>

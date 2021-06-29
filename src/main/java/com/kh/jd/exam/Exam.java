@@ -24,6 +24,11 @@ public class Exam {
 	private Date lectureclass_end;
 	private int examdate;
 	private int registration_no;
+	private int examStart;
+	private int examEnd;
+	private String name;
+	private String exam_submit;
+	private int exam_grade;
 	
 	
 	
@@ -31,12 +36,6 @@ public class Exam {
 	
 	
 	
-	public int getRegistration_no() {
-		return registration_no;
-	}
-	public void setRegistration_no(int registration_no) {
-		this.registration_no = registration_no;
-	}
 	@Override
 	public String toString() {
 		return "Exam [exam_no=" + exam_no + ", lecture_no=" + lecture_no + ", teacher_number=" + teacher_number
@@ -45,7 +44,45 @@ public class Exam {
 				+ ", exam_answer=" + exam_answer + ", rnum=" + rnum + ", lecture_title=" + lecture_title
 				+ ", lectureclass_no=" + lectureclass_no + ", lectureclass_class=" + lectureclass_class
 				+ ", lectureclass_start=" + lectureclass_start + ", lectureclass_end=" + lectureclass_end
-				+ ", examdate=" + examdate + "]";
+				+ ", examdate=" + examdate + ", registration_no=" + registration_no + ", examStart=" + examStart
+				+ ", examEnd=" + examEnd + ", name=" + name + ", exam_submit=" + exam_submit + ", exam_grade="
+				+ exam_grade + "]";
+	}
+	public String getExam_submit() {
+		return exam_submit;
+	}
+	public void setExam_submit(String exam_submit) {
+		this.exam_submit = exam_submit;
+	}
+	public int getExam_grade() {
+		return exam_grade;
+	}
+	public void setExam_grade(int exam_grade) {
+		this.exam_grade = exam_grade;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getExamStart() {
+		return examStart;
+	}
+	public void setExamStart(int examStart) {
+		this.examStart = examStart;
+	}
+	public int getExamEnd() {
+		return examEnd;
+	}
+	public void setExamEnd(int examEnd) {
+		this.examEnd = examEnd;
+	}
+	public int getRegistration_no() {
+		return registration_no;
+	}
+	public void setRegistration_no(int registration_no) {
+		this.registration_no = registration_no;
 	}
 	public int getExamdate() {
 		return examdate;

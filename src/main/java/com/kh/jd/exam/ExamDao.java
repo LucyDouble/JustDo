@@ -45,4 +45,13 @@ public class ExamDao {
 	public void removeExam(int exam_no) {
 		sqlSession.delete("exam.removeExam",exam_no);
 	}
+	public int getlistExamResultCount(Map<String, Object> map) {
+		return sqlSession.selectOne("exam.getlistExamResultCount",map);
+	}
+	public List<Exam> listExamResult(int startPage, int limit,Map<String, Object> map) {
+
+		int startRow = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(startRow, limit);
+		return sqlSession.selectList("exam.listExamResult", map, row);
+	}
 }

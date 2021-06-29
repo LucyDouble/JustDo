@@ -9,21 +9,17 @@
 <script src="https://cdn.ckeditor.com/4.16.1/standard-all/ckeditor.js"></script>
 <!-- 클래식 -->
 <!-- <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script> -->
-<style type="text/css">
-.choice_form2{
-	float: right;
-    width: 480px;
-    text-align: left;
-    position: relative;
-    bottom: 25px;
-}
-</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/addWork.css"/>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/common/header.css"/>">
+<script type="text/javascript"
+	src="<c:url value="/resources/js/header.js"/>"></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
 </head>
 <body>
 <div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
@@ -37,7 +33,7 @@
         <input type="text" class="work_form-control form-control" id="exam_subject" name="exam_subject" placeholder="제목을 입력하세요." value="${examDto.exam_subject }">
     </div>
     <br>
-    <div class="choice_form2">
+    <div class="choice_form">
     	강의 선택 : 
     	<select name="lecture_no" id="lecture_no">
     		<option value="${examDto.lecture_no} " >${examDto.lecture_title }</option>
@@ -45,16 +41,6 @@
     		<option value="${i.lecture_no }">${i.lecture_title }</option>
     		</c:forEach>
     	</select>
-    	<br>
-    	분반 :
-    	<c:if test="${examDto.lectureclass_class ==1 }">
-    		<input type="radio" name="lectureclass_class"  checked value="1">1반 
-    		<input type="radio" name="lectureclass_class"  value="2">2반
-    	</c:if>
-    	<c:if test="${examDto.lectureclass_class ==2 }">
-    		<input type="radio" name="lectureclass_class"   value="1">1반 
-    		<input type="radio" name="lectureclass_class" checked value="2">2반
-    	</c:if>
     	<br>
       시험 날 : 
 	<input type="date" name="exam_date" id="exam_date" value="${examDto.exam_date }"> 
@@ -99,22 +85,16 @@
 		  var frm=document.getElementById("frm");
 		  	var exam_subject=document.getElementById("exam_subject");
 		  	var lecture_no = document.getElementById("lecture_no");
-		  	var lectureclass_class = $('input[name="lectureclass_class"]:checked').val();
 		  	var exam_date= document.getElementById("exam_start");
 		  	var exam_start = document.getElementById("exam_start");
 		  	var exam_end = document.getElementById("exam_end");
 		  	var exam_content = document.getElementById("exam_content");
-		  	console.log(lectureclass_class);
 		  	if(exam_subject.value==""){
 		  		alert("제목을 입력해 주세요.");
 		  		return false;
 		  	}
 		  	else if(lecture_no.value=="back"){
 		  		alert("강의를 선택해 주세요.");
-		  		return false;
-		  	}
-		  	else if(lectureclass_class==null){
-		  		alert("분반을 선택해 주세요.");
 		  		return false;
 		  	}
 		  	else if(exam_date.value==""||exam_start.value=="" ||exam_end.value==""){

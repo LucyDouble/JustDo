@@ -9,6 +9,11 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/common/header.css"/>">
+<script type="text/javascript"
+	src="<c:url value="/resources/js/header.js"/>"></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>

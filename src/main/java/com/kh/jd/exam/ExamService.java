@@ -3,6 +3,7 @@ package com.kh.jd.exam;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 
 import com.kh.jd.work.Work;
 
@@ -16,4 +17,6 @@ public interface ExamService {
 	public int addExamResult(int regstration_no) ;
 	public void editExam(Exam vo) ;
 	public void removeExam(int exam_no) ;
+	public int getlistExamResultCount(Map<String, Object> map) ;
+	public List<Exam> listExamResult(int startPage, int limit,Map<String, Object> map) ;
 }

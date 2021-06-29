@@ -85,9 +85,7 @@
 		                on w.work_no=l.work_no 
 		                where w.work_no=#{work_no})wl join student s 
 		        on wl.student_number=s.student_number)
-		<if test='keyword !=null || !keyword.equals("")'>
 			 where name like '%'||#{keyword}||'%'
-		</if>
 	</select>
 	<select id="getCountClass1" parameterType="int" resultType="int">
 		select count(*) 

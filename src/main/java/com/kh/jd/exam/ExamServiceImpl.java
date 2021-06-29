@@ -59,5 +59,15 @@ public class ExamServiceImpl implements ExamService{
 		return examDao.addExamResult(regstration_no);
 	}
 
+	@Override
+	public int getlistExamResultCount(Map<String, Object> map) {
+		return examDao.getlistExamResultCount(map);
+	}
+
+	@Override
+	public List<Exam> listExamResult(int startPage, int limit, Map<String, Object> map) {
+		return examDao.listExamResult(startPage, limit, map);
+	}
+
 	
 }
