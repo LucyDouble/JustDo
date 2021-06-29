@@ -7,12 +7,13 @@
 		<result column="lecture_title" property="lecture_title"/>
 		<result column="lecture_limit" property="lecture_limit"/>
 		<result column="lecture_major" property="lecture_major"/>
-		<result column="lecture_day" property="lecture_day"/>
+		<result column="lecture_personnel" property="lecture_personnel"/>
 		<result column="lecture_reference" property="lecture_reference"/>
 		<result column="lecture_target" property="lecture_target"/>
 		<result column="lecture_start" property="lecture_start"/>
 		<result column="lecture_end" property="lecture_end"/>
 		<result column="lecture_state" property="lecture_state"/>
+		<result column="lecture_check" property="lecture_check"/>
 		<result column="lectureclass_class" property="lectureclass_class"/>
 		<result column="lcstart" property="lectureclass_start"/>
 		<result column="lcend" property="lectureclass_end"/>
@@ -25,18 +26,18 @@
 	</select>
 	
 	<!-- 목록조회 -->
-	<select id="listLecture" resultMap="lectureResult" parameterType="int">
-		SELECT l.lecture_no, l.teacher_number, l.lecture_title, l.lecture_limit, l.lecture_major, l.lecture_day, 
-		l.lecture_reference, l.lecture_target, l.lecture_start, l.lecture_end, l.lecture_state, t.name, t.email
-		FROM lecture L join teacher T ON l.teacher_number=t.teacher_number WHERE l.teacher_number = #{teacher_number} ORDER BY lecture_no ASC
+	<select id="listLecture" resultType="Lecture" parameterType="int">
+		SELECT rownum rnum, l.lecture_no,l.teacher_number, l.lecture_title, l.lecture_limit, l.lecture_major, l.lecture_personnel, 
+		l.lecture_reference, l.lecture_target, l.lecture_start, l.lecture_end, l.lecture_state, l.lecture_check, t.name, t.email
+		FROM lecture L join teacher T ON l.teacher_number=t.teacher_number WHERE l.teacher_number = #{teacher_number} ORDER BY rnum DESC
 	</select>
 	
 	<!-- 강의등록 -->
 	<insert id="addLecture" parameterType="Lecture" >
 		INSERT INTO LECTURE VALUES(
 			SEQ_LECTURE.NEXTVAL, #{teacher_number}, #{lecture_title}, #{lecture_limit},
-			#{lecture_major}, #{lecture_day}, #{lecture_reference}, #{lecture_target}, #{lecture_start},
-			#{lecture_end}, 0 
+			#{lecture_major}, 0, #{lecture_reference}, #{lecture_target}, #{lecture_start},
+			#{lecture_end}, 0, 0 
 		) 
 	</insert>
 	
@@ -48,14 +49,14 @@
 	<!-- 강의수정 -->
 	<update id="editLecture">
 		UPDATE LECTURE SET lecture_no = #{lecture_no}, teacher_number= #{teacher_number}, lecture_title= #{lecture_title}, lecture_limit= #{lecture_limit},
-		lecture_major= #{lecture_major}, lecture_day= #{lecture_day}, lecture_reference= #{lecture_reference}, 
-		lecture_target= #{lecture_target}, lecture_start= #{lecture_start}, lecture_end = #{lecture_end} WHERE lecture_no = #{lecture_no}
+		lecture_major= #{lecture_major}, lecture_personnel= #{lecture_personnel}, lecture_reference= #{lecture_reference}, 
+		lecture_target= #{lecture_target}, lecture_start= #{lecture_start}, lecture_end = #{lecture_end}, lecture_check = #{lecture_check} WHERE lecture_no = #{lecture_no}
 	</update>
 	
 	<!-- 분반 포함 리스트 -->
 	<select id="listLectureClass" resultMap="lectureResult">
 		select l.lecture_no, l.teacher_number, l.lecture_title, l.lecture_limit, l.lecture_major,
-			l.lecture_day, l.lecture_reference, l.lecture_target, l.lecture_start, l.lecture_end, l.lecture_state,
+			l.lecture_personnel, l.lecture_reference, l.lecture_target, l.lecture_start, l.lecture_end, l.lecture_state, l.lecture_check,
 			lc.lectureclass_class, lc.lectureclass_no, to_char(lc.lectureclass_start,'hh24:mi') lcstart, to_char(lc.lectureclass_end,'hh24:mi') lcend
 		from lecture L join lectureclass LC on L.lecture_no = LC.lecture_no
 	</select>
@@ -63,8 +64,13 @@
 	<!-- 분반 포함 하나만 -->
 	<select id="viewLectureClass" resultMap="lectureResult" parameterType="Lecture">
 		select l.lecture_no, l.teacher_number, l.lecture_title, l.lecture_limit, l.lecture_major,
-			l.lecture_day, l.lecture_reference, l.lecture_target, l.lecture_start, l.lecture_end, l.lecture_state,
+			l.lecture_personnel, l.lecture_reference, l.lecture_target, l.lecture_start, l.lecture_end, l.lecture_state, l.lecture_check,
 			lc.lectureclass_class, to_char(lc.lectureclass_start,'hh24:mi') lcstart, to_char(lc.lectureclass_end,'hh24:mi') lcend
 		from lecture L join lectureclass LC on L.lecture_no = LC.lecture_no where l.lecture_no = #{lecture_no} and lc.lectureclass_class = #{lectureclass_class}
 	</select>
+	
+	<!-- 분반 설정 시 분반 유무 수정 -->
+	<update id="checkLectureClass" parameterType="int">
+		UPDATE lecture SET lecture_check =1 WHERE lecture_no =#{lecture_no}
+	</update>
 </mapper>

@@ -10,4 +10,5 @@ public interface LectureService {
 	public int editLecture(Lecture lecture);
 	public List<Lecture> listLectureClass();
 	public Lecture viewLectureClass(Lecture lecture);
+	public int checkLectureClass(int lecture_no);
 }

@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<meta charset="UTF-8">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/common/header.css"/>">
-<script type="text/javascript"
-	src="<c:url value="/resources/js/header.js"/>"></script>
-<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <header id="header">
 	<a href="<%=request.getContextPath()%>/jdHome?command=main"><img
 		class="logo" src="resources/images/logo.png"></a>
@@ -53,6 +47,10 @@
 							<c:if
 								test="${sessionScope.student_id !=null && sessionScope.teacher_id == null }">
 								<a href="editStudentForm">수강생 정보수정</a>
+							</c:if>
+							<c:if
+								test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null }">
+								<a href="lecture">강의등록</a>
 							</c:if>
 							<c:if
 								test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null }">
