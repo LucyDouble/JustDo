@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>MS</title>
+<title>JD 교육원</title>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <style>

@@ -80,4 +80,9 @@ public class StudentServiceImpl implements StudentService {
 		dao.deleteStudent(student_id);
 	}
 
+	@Override
+	public String student_searchId(String student_name, String student_email) {
+		return dao.student_searchId(student_name, student_email);
+	}
+
 }

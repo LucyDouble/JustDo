@@ -47,4 +47,7 @@ public interface StudentService {
 	
 	//수강생 탈퇴
 	public void deleteStudent(String student_id);
+	
+	//수강생 아이디 찾기
+	public String student_searchId(String student_name, String student_email);
 }

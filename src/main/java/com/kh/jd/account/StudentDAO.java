@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +95,21 @@ public class StudentDAO {
 			sqlSession.delete("Student.deleteStudent", student_id);
 		}
 		
+		//아이디 찾기
+		public String student_searchId(String student_name, String student_email) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("name", student_name);
+			map.put("email", student_email);
+			String result = "";
+			try {
+				result = sqlSession.selectOne("Student.searchStudentId", map);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return result;
+		}
+		
+		//비밀번호 찾기
 
 		
 }

@@ -28,7 +28,8 @@
 		#{id})
 	</select>
 	<insert id="signUp" parameterType="Teacher">
-		insert into Teacher values ((SELECT nvl(max(Teacher_NUMBER), 0) + 1 FROM
+		insert into Teacher values
+		((SELECT nvl(max(Teacher_NUMBER), 0) + 1 FROM
 		Teacher) , #{id},
 		#{password}, #{name}, #{address}, #{phone},
 		#{email},
@@ -37,7 +38,8 @@
 	<select id="infoTeacher" parameterType="Teacher"
 		resultMap="TeacherMap">
 		SELECT * FROM TEACHER
-		WHERE ID = #{id} AND PASSWORD = #{password}
+		WHERE ID = #{id} AND PASSWORD =
+		#{password}
 	</select>
 	<select id="emailCheck" resultType="int">
 		select count(*) from (SELECT
@@ -56,18 +58,22 @@
 		TEACHER WHERE PHONE = #{phone})
 	</select>
 	<update id="editTeacherPw" parameterType="hashmap">
-		UPDATE TEACHER SET PASSWORD = #{password} where ID=#{id}
+		UPDATE TEACHER SET
+		PASSWORD = #{password} where ID=#{id}
 	</update>
-	<!-- 휴대폰 번호 수정  -->
+	<!-- 휴대폰 번호 수정 -->
 	<update id="editTeacherPhone" parameterType="hashmap">
-		UPDATE TEACHER SET PHONE =#{phone} where id=#{id}
+		UPDATE TEACHER SET
+		PHONE =#{phone} where id=#{id}
 	</update>
-	<!-- 주소 수정  -->
+	<!-- 주소 수정 -->
 	<update id="editTeacherAddress" parameterType="hashmap">
-		UPDATE TEACHER SET ADDRESS=#{address} where id=#{id}
+		UPDATE TEACHER SET
+		ADDRESS=#{address} where id=#{id}
 	</update>
-		<update id="editTeacherName" parameterType="hashmap">
-		UPDATE TEACHER SET NAME=#{name} where id=#{id}
+	<update id="editTeacherName" parameterType="hashmap">
+		UPDATE TEACHER SET
+		NAME=#{name} where id=#{id}
 	</update>
 	<delete id="deleteTeacher">
 		DELETE FROM TEACHER WHERE ID=#{id}

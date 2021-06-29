@@ -1,0 +1,122 @@
+@charset "UTF-8";
+.form {
+	position: absolute;
+	left: 40%;
+}
+
+label {
+	font-weight: bold;
+		font-size: 20px;
+	
+}
+
+.btn {
+	display: inline-block;
+	border-radius: 7px;
+	background-color: #6A60A9;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 5px;
+	width: 50px;
+	height: 20px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	float: right;
+}
+
+#post_btn {
+	display: inline-block;
+	border-radius: 7px;
+	background-color: #6A60A9;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 5px;
+	width: 80px;
+	height: 20px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	float: right;
+}
+
+#email_submit {
+	display: inline-block;
+	border-radius: 7px;
+	background-color: #6A60A9;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 5px;
+	width: 80px;
+	height: 20px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	float: right;
+}
+
+.btn btn-primary px-3 {
+	display: inline-block;
+	border-radius: 7px;
+	background-color: #6A60A9;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 5px;
+	width: 150px;
+	height: 40px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	float: right;
+}
+
+#mail_check_input_box_false {
+	background-color: #ebebe4;
+}
+
+#mail_check_input_box_true {
+	background-color: white;
+}
+
+#email_check {
+	top: 30px;
+}
+
+label {
+	font-size: 20px;
+}
+
+.logo{
+	width:250px;
+	height:250px;
+}
+.select {
+    padding: 15px 0;
+}
+.select input[type=radio]{
+    display: none;
+}
+.select input[type=radio]+label{
+    display: inline-block;
+    cursor: pointer;
+    height: 24px;
+    width: 90px;
+    border: 1px solid #6A60A9
+;
+    line-height: 24px;
+    text-align: center;
+    font-weight:bold;
+    font-size:13px;
+}
+.select input[type=radio]+label{
+    background-color: #fff;
+    color: #333;
+}
+.select input[type=radio]:checked+label{
+    background-color: #6A60A9;
+    color: #fff;
+}

@@ -1,3 +1,4 @@
+
 $(document).on('load',function(){
      if($(sessionScope.student_id == null && sessionScope.teacher_id == null)){
          $('#signUpPage').show();

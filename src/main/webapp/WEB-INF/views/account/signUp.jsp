@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
-
+<link rel="stylesheet"
+	href="<c:url value="resources/css/account/signup.css"/>">
 <head>
 <meta charset="UTF-8">
 <title>회원 가입</title>
@@ -10,114 +14,17 @@
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-<style>
-.form {
-	position: absolute;
-	left: 40%;
-}
-
-label {
-	font-weight: bold;
-	font-size: 18px;
-}
-
-.btn {
-	display: inline-block;
-	border-radius: 7px;
-	background-color: #6A60A9;
-	border: none;
-	color: #FFFFFF;
-	text-align: center;
-	font-size: 5px;
-	width: 50px;
-	height: 20px;
-	transition: all 0.5s;
-	cursor: pointer;
-	margin: 5px;
-	float: right;
-}
-
-#post_btn {
-	display: inline-block;
-	border-radius: 7px;
-	background-color: #6A60A9;
-	border: none;
-	color: #FFFFFF;
-	text-align: center;
-	font-size: 5px;
-	width: 80px;
-	height: 20px;
-	transition: all 0.5s;
-	cursor: pointer;
-	margin: 5px;
-	float: right;
-}
-
-#email_submit {
-	display: inline-block;
-	border-radius: 7px;
-	background-color: #6A60A9;
-	border: none;
-	color: #FFFFFF;
-	text-align: center;
-	font-size: 5px;
-	width: 80px;
-	height: 20px;
-	transition: all 0.5s;
-	cursor: pointer;
-	margin: 5px;
-	float: right;
-}
-
-.btn btn-primary px-3 {
-	display: inline-block;
-	border-radius: 7px;
-	background-color: #6A60A9;
-	border: none;
-	color: #FFFFFF;
-	text-align: center;
-	font-size: 5px;
-	width: 150px;
-	height: 40px;
-	transition: all 0.5s;
-	cursor: pointer;
-	margin: 5px;
-	float: right;
-}
-
-#mail_check_input_box_false {
-	background-color: #ebebe4;
-}
-
-#mail_check_input_box_true {
-	background-color: white;
-}
-
-#email_check {
-	top: 30px;
-}
-
-label {
-	font-size: 20px;
-}
-
-.logo{
-	width:250px;
-	height:250px;
-}
-</style>
 
 </head>
 
 <body>
 
 	<form id="form" class="form" action="signUp" method="POST">
-		<div class="signUp-group">
-    <a href="<%=request.getContextPath()%>/jdHome?command=main"><img class="logo" src="resources/images/logo.png"></a>
-    <br>
-			<label for="category">구분</label><br> <input type="radio"
-				name="signUpSelect" checked="checked" value="student">수강생 <input
-				type="radio" name="signUpSelect" value="teacher">교직원
+		<a href="<%=request.getContextPath()%>/jdHome?command=main"><img
+			class="logo" src="resources/images/logo.png"></a> <br> <br>
+		<div class="select">
+			<input type="radio" id="select" name="signUpSelect" checked="checked" value="student"><label for="select">수강생</label> 
+			<input	type="radio" id="select2" name="signUpSelect" value="teacher"><label for="select2">교직원</label>
 		</div>
 		<br>
 		<!-- 아이디 -->
@@ -150,11 +57,11 @@ label {
 			<div class="check_font" id="name_check"></div>
 		</div>
 		<div class="address_group">
-			<label for="address">주소</label><input type="button"
-				id="post_btn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-			<input type="text" style="width: 250px; height: 30px"
-				id="address" name="address" placeholder="주소를 입력해주세요"><br>
-			<span id="guide" style="color: #999; display: none"></span>
+			<label for="address">주소</label><input type="button" id="post_btn"
+				onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+			<input type="text" style="width: 250px; height: 30px" id="address"
+				name="address" placeholder="주소를 입력해주세요"><br> <span
+				id="guide" style="color: #999; display: none"></span>
 		</div>
 
 
@@ -197,8 +104,8 @@ label {
 			<!-- 			<button class="btn btn-primary px-3" id="reg_submit">
  -->
 			<input type="submit" class="btn btn-primary px-3" id="reg_submit"
-				value="가입하기" />
-		<br><br><br><br><br><br><br><br>
+				value="가입하기" /> <br> <br> <br> <br> <br> <br>
+			<br> <br>
 		</div>
 	</form>
 
@@ -305,7 +212,7 @@ label {
 
 			} else {
 				console.log('false');
-			
+
 				$('#pw_check').text('비밀번호는 숫자, 문자, 특수문자 조합 8~16자리만 가능합니다. :(')
 				$('#pw_check').css('color', 'red');
 				$('#pw_check').css('font-size', '5px');
@@ -458,7 +365,7 @@ label {
 														'font-size', '5px');
 												$("#reg_submit").attr(
 														"disabled", true);
-													$("#phone").val("");
+												$("#phone").val("");
 											} else {
 												// 이메일
 												if (phoneCheck.test($('#phone')
@@ -571,7 +478,8 @@ label {
 							}
 
 							// 우편번호와 주소 정보를 해당 필드에 넣는다.
-							document.getElementById("address").value = roadAddr + extraRoadAddr;
+							document.getElementById("address").value = roadAddr
+									+ extraRoadAddr;
 
 							// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
 							if (roadAddr !== '') {
