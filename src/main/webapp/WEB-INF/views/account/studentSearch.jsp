@@ -115,7 +115,7 @@ body {
 					<div class="form-group">
 						<label class="font-weight-bold text-black" for="inputId">아이디</label>
 						<div>
-							<input type="text" class="form-control" id="inputId" name="inputId_2">
+							<input type="text" class="form-control" id="inputId" name="inputId">
 						</div>
 					</div>
 					<div class="form-group">
@@ -198,13 +198,12 @@ body {
 	
 	// 비밀번호 찾기 이메일로 보내기
 	$('#searchBtn2').click(function(){
-		console.log("패스워드 찾기 : ajax 들어가기 전");
 		console.log($('#inputId').val());
 		console.log($('#inputEmail_2').val());
 		$.ajax({
 			type : "get",
-			url : "${pageContext.request.contextPath}/user/searchPassword?userId="
-					+ $('#inputId').val() + "&userEmail=" + $('#inputEmail_2').val(),
+			url : "${pageContext.request.contextPath}/account/searchPassword?inputId="
+					+ $('#inputId').val() + "&inputEmail_2=" + $('#inputEmail_2').val(),
 			success : function(data){
 					
 						alert("해당 이메일로 임시 비밀번호를 발송하였습니다.");

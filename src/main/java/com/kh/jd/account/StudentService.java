@@ -50,4 +50,7 @@ public interface StudentService {
 	
 	//수강생 아이디 찾기
 	public String student_searchId(String student_name, String student_email);
+	
+	//수강생 비밀번호 찾기
+	public void sendPassword(String student_id, String student_email);
 }

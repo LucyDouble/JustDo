@@ -36,6 +36,10 @@
 		WHERE ID = #{id} AND PASSWORD =
 		#{password}
 	</select>
+	<select id = "infoStudent2" resultType="Student">
+		select * from STUDENT where
+		ID = #{id}
+	</select>
 	<select id="emailCheck" resultType="int">
 		select count(*) from (SELECT
 		email FROM STUDENT WHERE EMAIL=#{email}
@@ -77,5 +81,11 @@
 	<select id = "searchStudentId" resultType="String">
 		SELECT NVL(ID, 0) FROM STUDENT WHERE NAME=#{name} and EMAIL = #{email}
 	</select>
+	<select id= "searchStudentPw" parameterType="Student" resultType="Student">
+		SELECT * FROM STUDENT WHERE ID = #{id}
+	</select>
+	<update id="tempPassword" parameterType="Map">
+		UPDATE STUDENT SET PASSWORD = #{param3} WHERE ID = #{param1} and EMAIL = #{param2}
+	</update>
 
 </mapper>

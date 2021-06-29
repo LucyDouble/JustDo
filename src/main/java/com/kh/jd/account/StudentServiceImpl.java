@@ -85,4 +85,9 @@ public class StudentServiceImpl implements StudentService {
 		return dao.student_searchId(student_name, student_email);
 	}
 
+	@Override
+	public void sendPassword(String student_id, String student_email) {
+		dao.sendPassword(student_id, student_email);
+	}
+
 }
