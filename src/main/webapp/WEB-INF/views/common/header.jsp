@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <header id="header">
 	<a href="<%=request.getContextPath()%>/jdHome?command=main"><img
-		class="logo" src="resources/images/logo.png"></a>
+		class="logo" src="resources/images/mainlogo.png"></a>
 
 	<div id="top_menu">
 		<c:choose>
