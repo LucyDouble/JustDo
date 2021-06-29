@@ -30,6 +30,9 @@
             <tr>
                 <td class="vn_cont"><p class="vn_cont_p">작성일</p>&nbsp;&nbsp;${notice.notice_date }</td>
             </tr>
+              <tr>
+                <td class="vn_cont"><p class="vn_cont_p">첨부파일</p>&nbsp;&nbsp;${notice.notice_filepath }</td>
+            </tr>
             <tr class="cont3">
                 <td class="vn_cont">${notice.notice_con }</td>
             </tr>

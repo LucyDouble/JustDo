@@ -172,6 +172,47 @@ body {
 	right: 0;
 }
 
+.fileBtn {
+	display: inline-block;
+	border-radius: 7px;
+	background-color: #6A60A9;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 15px;
+	width: 70px;
+	height: 35px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	float: left;
+}
+
+.fileBtn span {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+}
+
+.fileBtn span:after {
+	content: '*';
+	position: absolute;
+	opacity: 0;
+	top: -5px;
+	right: -10px;
+	transition: 0.2s;
+}
+
+.fileBtn:hover span {
+	padding-right: 10px;
+}
+
+.fileBtn:hover span:after {
+	opacity: 1;
+	right: 0;
+}
+
 .ln_cont, .vn_cont {
 	text-align: left;
 	max-width:1000px;
@@ -185,6 +226,9 @@ body {
 .ln_cont:hover, .lc_cont:hover{
 	font-weight: bold;
 	cursor:pointer;
+    color: #EE2560;
+
+	
 	/* transform: scale(1.03); */
 	/* transition: all 0.5s */
 	/* ease-in-out; */
@@ -331,6 +375,7 @@ ol,.cd-buttons {
     border:1px solid #c8ccd4;
     border-radius: 3px;
     transition: backgorund 0.1s ease;
+    top : -2px;
 }
 .checkbox .icon::after{
     content: '';

@@ -17,6 +17,7 @@ import javax.security.auth.callback.Callback;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -97,38 +98,70 @@ public class NoticeController {
 
 	// 글등록
 	@RequestMapping(value = "/addNotice", method = RequestMethod.POST)
-	public ModelAndView addNotice(HttpServletRequest request) {
-		// System.out.println("들어왔니 add = "+add);
+	public ModelAndView addNotice(HttpServletResponse response, HttpServletRequest request
+			,  @RequestParam(name = "notice_filepath", required = false) MultipartFile  multiFile) throws IOException {
+
 		ModelAndView mv = new ModelAndView();
 		Map<String, Object> map = new HashMap<String, Object>();
-
 		String t_no = "";
 		String m_no = "";
 		String n_sub = "";
 		String n_con = "";
-		String n_file = "";
 		int hit = 0;
-		
+
 		t_no = request.getParameter("teacher_number");
 		m_no = request.getParameter("manager_number");
 		n_sub = request.getParameter("notice_sub");
 		n_con = request.getParameter("notice_con");
-		n_file = request.getParameter("notice_file");
 		
 		map.put("teacher_number", t_no);
 		map.put("manager_number", m_no);
 		map.put("notice_sub", n_sub);
 		map.put("notice_con", n_con);
-		map.put("notice_filepath", n_file);
 		map.put("hit", hit);
-		
 		// map.put("manager_number", mng); //subject, content, num
 
-		System.out.println("map : " + map);
-		noticeService.addNotice(map);
-
-		mv.setViewName("redirect:/listNotice");
+		try {
+			if (multiFile != null && !multiFile.equals(""))
+				saveFile(multiFile, request);
+			String path = "\\resources\\imageUpload\\";
+			map.put("notice_filepath", path + multiFile.getOriginalFilename());
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("이미지 저장에 실패했습니다");
+		}
+		try {
+			System.out.println("map : " + map);
+			noticeService.addNotice(map);
+			mv.setViewName("redirect:/listNotice");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mv;
+	}
+
+	// 파일 저장
+	private void saveFile(MultipartFile report, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\imageUpload";
+		File folder = new File(savePath);
+
+		if (!folder.exists()) {
+			folder.mkdir(); // 폴더가 없다면 생성한다.
+		}
+		String filePath = null;
+		try {
+			System.out.println(report.getOriginalFilename() + "을 저장합니다.");
+			System.out.println("저장 경로 : " + savePath);
+			filePath = folder + "\\" + report.getOriginalFilename();
+
+			report.transferTo(new File(filePath)); // 파일을 저장한다
+			System.out.println("파일 명 : " + report.getOriginalFilename());
+			System.out.println("파일 경로 : " + filePath);
+			System.out.println("파일 전송이 완료되었습니다.");
+		} catch (Exception e) {
+			System.out.println("파일 전송 에러 : " + e.getMessage());
+		}
 	}
 
 	// 글수정폼
@@ -168,70 +201,71 @@ public class NoticeController {
 		noticeService.removeNotice(notice_no);
 		return "redirect:/listNotice";
 	}
-	// 이미지 업로드
+
+	// ck에디터 이미지 업로드
 	@RequestMapping(value = "/fileupload", method = RequestMethod.POST)
-	public String fileUpload(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile) throws Exception {
+	public String fileUpload(HttpServletRequest request, HttpServletResponse response,
+			MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload) throws Exception {
+
 		JsonObject json = new JsonObject();
 		PrintWriter printWriter = null;
 		OutputStream out = null;
 		MultipartFile file = multiFile.getFile("upload");
-		if(file != null) {
-			if(file.getSize() > 0 && StringUtils.isNotBlank(file.getName())) {
-				if(file.getContentType().toLowerCase().startsWith("image/")) {
+		if (file != null) {
+			if (file.getSize() > 0 && StringUtils.isNotBlank(file.getName())) {
+				if (file.getContentType().toLowerCase().startsWith("image/")) {
 					try {
-							String fileName = file.getName();
-							byte[] bytes = file.getBytes();
-							String uploadPath = request.getServletContext().getRealPath("/resources/imageUpload/");
-							File uploadFile = new File(uploadPath);
-							if(!uploadFile.exists()) {
-								uploadFile.mkdirs();
-							}
-							fileName = UUID.randomUUID().toString();
-							uploadPath = uploadPath + "/" + fileName;
-							out = new FileOutputStream(new File(uploadPath));
-							out.write(bytes);
-							out.flush();
-							
-							printWriter = response.getWriter();
-							System.out.println("response : " + response);
-							response.setContentType("text/html");
-							String fileUrl = request.getContextPath() + "/resources/imageUpload/" + fileName;
-							String callback = request.getParameter("CKEditorFuncNum");
-							
-							// 제이슨 데이터로 등록, {"uploaded":1, "fileName":"tes.jpg", "url":"/imgages/test.jpg"}
-							// 4.9버전이상부터 json형태
+						String fileName = file.getName();
+						byte[] bytes = file.getBytes();
+						String uploadPath = request.getServletContext().getRealPath("/resources/imageUpload/");
+						File uploadFile = new File(uploadPath);
+						if (!uploadFile.exists()) {
+							uploadFile.mkdirs();
+						}
+						fileName = UUID.randomUUID().toString();
+						uploadPath = uploadPath + "/" + fileName;
+						out = new FileOutputStream(new File(uploadPath));
+						out.write(bytes);
+						out.flush();
+
+						printWriter = response.getWriter();
+						System.out.println("response : " + response);
+						response.setContentType("text/html");
+						String fileUrl = request.getContextPath() + "/resources/imageUpload/" + fileName;
+						String callback = request.getParameter("CKEditorFuncNum");
+
+						// 제이슨 데이터로 등록, {"uploaded":1, "fileName":"tes.jpg", "url":"/imgages/test.jpg"}
+						// 4.9버전이상부터 json형태
+						json.addProperty("uploaded", 1);
+						json.addProperty("fileName", fileName);
+						json.addProperty("url", fileUrl);
+						printWriter.println(json);
+
+						// 4.9버전 이하는 스크립트형태로 리턴
+						if (!callback.equals("1")) { // callback이 1일 경우만 성공한 것
+							printWriter.println("<script>alert('이미지 업로드에 실패했습니다.');" + "</script>");
+							System.out.println();
+						} else {
+
 							json.addProperty("uploaded", 1);
 							json.addProperty("fileName", fileName);
 							json.addProperty("url", fileUrl);
 							printWriter.println(json);
-							
-							// 4.9버전 이하는 스크립트형태로 리턴
-							/*if(!callback.equals("1")) { // callback이 1일 경우만 성공한 것
-					        	 printWriter.println("<script>alert('이미지 업로드에 실패했습니다.');"+"</script>");
-					        	 System.out.println();
-					        }else {*/
-//					        	printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
-//					        			+ callback
-//					        			+ ",'"
-//					        			+ fileUrl
-//					        			+ "','이미지를 업로드 하였습니다.'"
-//					        			+ ")</script>");
-//					        			printWriter.flush(); 
-					        	
-					}catch(IOException e) {
+						}
+					} catch (IOException e) {
 						e.printStackTrace();
-					}finally {
-						if(out != null) {
+					} finally {
+						if (out != null) {
 							out.close();
 						}
-						if(printWriter != null) {
+						if (printWriter != null) {
 							printWriter.close();
 						}
-										}
-								}
-						}
+					}
 				}
-				return null;
+			}
+		}
+		return null;
 	}
-}
 
+}
