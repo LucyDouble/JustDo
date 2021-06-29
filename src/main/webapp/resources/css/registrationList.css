@@ -4,7 +4,6 @@ body {
 	padding: 0px;
 	text-align: center;
 	/* width: 1400px */
-	margin: auto;
 	font-family: SCDream4;
 	overflow-y: scroll;
 	height: auto;
@@ -13,6 +12,7 @@ body {
 }
 .ln_page, .vn_page, .en_page, .an_page {
 	width: 1000px;
+	margin: 0 auto;
 }
 
 .lc_page, .ac_page {
@@ -61,3 +61,30 @@ body {
 	-ms-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
 	padding-top: 500px;
 }
+.ln_cont, .vn_cont {
+	text-align: left;
+}
+
+.ln_cont:hover {
+	font-weight: bold;
+	/* transform: scale(1.03); */
+	/* transition: all 0.5s */
+	/* ease-in-out; */
+}
+.form-control {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	/* min-height: 60px; */
+	box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
+	-webkit-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
+	-o-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
+	-ms-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
+}
+#calendar{
+ 		width: 1000px; 
+        /* max-width: 900px; */
+        /* margin: 0 auto; */
+	}

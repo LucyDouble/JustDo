@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
-<link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
-	<div class="rc_background">
+	<div class="background">
 		<div class="popup">
 			<div class="cd-popup-container">
 				<img class="rn_warning" src="resources/images/alert.png">
@@ -20,11 +16,11 @@
 
 	<script>
       function show() {
-        document.querySelector(".rc_background").className = "rc_background show";
+        document.querySelector(".background").className = "background show";
       }
 
       function close() {
-        document.querySelector(".rc_background").className = "rc_background";
+        document.querySelector(".background").className = "background";
       }
 
       document.querySelector("#btnRemove").addEventListener("click", function(){

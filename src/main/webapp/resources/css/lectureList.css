@@ -1,7 +1,7 @@
 @charset "UTF-8";
 body {
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	text-align: center;
 	/* width: 1400px */
 	margin: auto;
@@ -12,19 +12,10 @@ body {
 	
 }
 .ln_page, .vn_page, .en_page, .an_page {
+	margin: 0 auto;
 	width: 1000px;
 }
 
-.lc_page, .ac_page {
-	width: 800px;
-}
-
-.ln_title {
-	font-size: 25px;
-	font-weight: bold;
-	clear: both;
-	margin-bottom: 50px;
-}
 
 .vn_title, .en_title, .an_title, .lc_title{
 	font-size: 25px;
@@ -179,4 +170,105 @@ body {
 	opacity: 1;
 	transform: rotate(45deg) scale(1);
 	/* box-shadow:0 0 2px 0 dodgerBlue; */
+}
+.background{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index: 1000;
+	/* 숨기기 */
+	z-index: -1;
+	opacity: 0;
+}
+
+.show {
+	opacity: 1;
+	z-index: 1000;
+	transition: all 0.5s;
+}
+
+.popup {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #ffffff;
+	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
+	border-radius: 7px;
+	/* 임시 지정 */
+	width: 340px;
+	height: 150px;
+	text-align: center;
+	/* 초기에 약간 아래에 배치 */
+	transform: translate(-50%, -40%);
+}
+.show .popup{
+	transform: translate(-50%, -50%);
+	transition: all 0.5s;
+}
+.ln_title {
+	font-size: 25px;
+	font-weight: bold;
+	clear: both;
+	margin-bottom: 50px;
+}
+.rn_warning,.rc_warning {
+	height:30px;
+	line-height:60px; 
+	float:left;
+	margin-left:20px;
+	margin-top:14px;
+}
+.rn_li:first-child a:hover, .rc_li:first-child a:hover {
+	color: #EE2560;
+	font-weight: bold;
+}
+.rn_li:last-child a:hover, .rc_li:last-child a:hover {
+	color: #EE2560;
+	font-weight: bold;
+}
+ol,.cd-buttons {
+	list-style: none;
+	
+}
+.rn_li:first-child a, .rc_li:first-child a {
+	background: #fc7169;
+	float: left;
+	/* margin-left: -32px; */
+	border-radius: 0 0 0 5px;
+	color: white;
+	width: 170px;
+	height: 60px;
+	line-height: 60px;
+	text-decoration: none;
+	position : absolute;
+	bottom:0px;
+	left:0px;
+}
+
+.rn_li:last-child a, .rc_li:last-child a {
+	/* background: #b6bece; */
+	background: #b6bece;
+	float: right;
+	border-radius: 0 0 5px 0;
+	color: white;
+	width: 170px;
+	height: 60px;
+	line-height: 60px;
+	text-decoration: none;
+	position : absolute;
+	bottom:0px;
+	right:0px;
+}
+
+.rn_p, .rc_p {
+	display: block;
+	/* color: #8f9cb5; */
+	/* color:#EE2560; */
+	color:gray;
+	line-height: 60px;
+	margin-top: 20px;
 }
