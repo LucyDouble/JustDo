@@ -11,27 +11,30 @@ public class Lecture {
 	private String lecture_title;
 	private int lecture_limit;
 	private String lecture_major;
-	private String lecture_day;
+	private int lecture_personnel;
 	private String lecture_reference;
 	private String lecture_target;
 	private Date lecture_start;
 	private Date lecture_end;
 	private int lecture_state;
+	private int lecture_check;
 	private int lectureclass_class;
 	private String lectureclass_start;
 	private String lectureclass_end;
 	private int lectureclass_no;
 	private String name;
+	private int rnum;
 	
 	@Override
 	public String toString() {
 		return "Lecture [lecture_no=" + lecture_no + ", teacher_number=" + teacher_number + ", lecture_title="
 				+ lecture_title + ", lecture_limit=" + lecture_limit + ", lecture_major=" + lecture_major
-				+ ", lecture_day=" + lecture_day + ", lecture_reference=" + lecture_reference + ", lecture_target="
-				+ lecture_target + ", lecture_start=" + lecture_start + ", lecture_end=" + lecture_end
-				+ ", lecture_state=" + lecture_state + ", lectureclass_class=" + lectureclass_class
-				+ ", lectureclass_start=" + lectureclass_start + ", lectureclass_end=" + lectureclass_end
-				+ ", lectureclass_no=" + lectureclass_no + ", name=" + name + "]";
+				+ ", lecture_personnel=" + lecture_personnel + ", lecture_reference=" + lecture_reference
+				+ ", lecture_target=" + lecture_target + ", lecture_start=" + lecture_start + ", lecture_end="
+				+ lecture_end + ", lecture_state=" + lecture_state + ", lecture_check=" + lecture_check
+				+ ", lectureclass_class=" + lectureclass_class + ", lectureclass_start=" + lectureclass_start
+				+ ", lectureclass_end=" + lectureclass_end + ", lectureclass_no=" + lectureclass_no + ", name=" + name
+				+ ", rnum=" + rnum + "]";
 	}
 
 	public int getLecture_no() {
@@ -74,12 +77,12 @@ public class Lecture {
 		this.lecture_major = lecture_major;
 	}
 
-	public String getLecture_day() {
-		return lecture_day;
+	public int getLecture_personnel() {
+		return lecture_personnel;
 	}
 
-	public void setLecture_day(String lecture_day) {
-		this.lecture_day = lecture_day;
+	public void setLecture_personnel(int lecture_personnel) {
+		this.lecture_personnel = lecture_personnel;
 	}
 
 	public String getLecture_reference() {
@@ -122,6 +125,14 @@ public class Lecture {
 		this.lecture_state = lecture_state;
 	}
 
+	public int getLecture_check() {
+		return lecture_check;
+	}
+
+	public void setLecture_check(int lecture_check) {
+		this.lecture_check = lecture_check;
+	}
+
 	public int getLectureclass_class() {
 		return lectureclass_class;
 	}
@@ -161,9 +172,13 @@ public class Lecture {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-	
-	
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 	
 }

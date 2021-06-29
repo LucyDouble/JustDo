@@ -52,10 +52,9 @@
 								<td><p>${view.teacher_number}</p></td>
 							</tr>
 							<tr>
-								<th>강의시간</th>
+								<th colspan="3">강의시간</th>
 								<td><p>${view.lectureclass_start} ~ ${view.lectureclass_end}</p></td>
-								<th>강의날짜</th>
-								<td><p>${view.lecture_day}</p></td>
+								
 							</tr>
 							<tr>
 								<th>제한인원</th>

@@ -48,4 +48,8 @@ public class LectureDao {
 	public Lecture viewLectureClass(Lecture lecture) {
 		return sqlSession.selectOne("Lecture.viewLectureClass", lecture);
 	}
+	
+	public int checkLectureClass(int lecture_no) {
+		return sqlSession.update("Lecture.checkLectureClass", lecture_no);
+	}
 }

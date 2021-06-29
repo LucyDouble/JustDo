@@ -31,7 +31,6 @@ public class LectureController {
 			Teacher te= (Teacher)request.getSession().getAttribute("DTO");
 			int teacher_number=te.getTeacher_number();
 			mv.addObject("list", LService.listLecture(teacher_number));
-			mv.addObject("list2",LCService.listLectureClass());
 			mv.setViewName("lecture/lectureList");
 		return mv;
 	}

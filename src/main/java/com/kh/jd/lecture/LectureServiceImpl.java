@@ -53,5 +53,9 @@ public class LectureServiceImpl implements LectureService{
 	public Lecture viewLectureClass(Lecture lecture) {
 		return Ldao.viewLectureClass(lecture);
 	}
+	@Override
+	public int checkLectureClass(int lecture_no) {
+		return Ldao.checkLectureClass(lecture_no);
+	}
 
 }

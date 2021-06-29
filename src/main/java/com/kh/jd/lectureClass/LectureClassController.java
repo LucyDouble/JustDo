@@ -23,6 +23,8 @@ import com.kh.jd.lecture.LectureService;
 public class LectureClassController {
 	@Autowired
 	private LectureClassService LCService;
+	@Autowired
+	private LectureService LService;
 	
 	// 분반 등록 폼
 	@RequestMapping(value="lectureClassAddForm", method=RequestMethod.GET)
@@ -65,6 +67,7 @@ public class LectureClassController {
 		list.add(lc2);
 		
 		LCService.addLectureClass(list);
+		LService.checkLectureClass(num);
 		return "redirect:/lecture";
 	}
 }

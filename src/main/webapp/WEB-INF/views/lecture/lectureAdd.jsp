@@ -45,15 +45,15 @@
 								<td colspan="3"><input type="date" name="lecture_start" class="form-control month" id="in3"> ~ <input type="date" name="lecture_end" class="form-control month" id="in4"></td>
 							</tr>
 							<tr>
-								<th>교과목개요 및 학습목표</th>
+								<th style="line-height:5">교과목개요 및 학습목표</th>
 								<td colspan="3">
-								<textarea style="resize:none;" rows="4" cols="24" name="lecture_target" class="form-control" maxlength="99" id="in5"></textarea>
+								<textarea style="resize:none;" rows="3" cols="24" name="lecture_target" class="form-control" maxlength="99" id="in5"></textarea>
 								</td>
 							</tr>
 							<tr>
-								<th>교재 및 참고문헌</th>
+								<th style="line-height:5">교재 및 참고문헌</th>
 								<td colspan="3">
-								<textarea style="resize:none;" rows="4" cols="24" name="lecture_reference" class="form-control" maxlength="99" id="in6"></textarea>
+								<textarea style="resize:none;" rows="3" cols="24" name="lecture_reference" class="form-control" maxlength="99" id="in6"></textarea>
 								</td>
 							</tr>
 					</table>
@@ -64,7 +64,7 @@
 <script>
 	
     $("#btnAdd").click(function(){
-      	var frm = document.getElementById("frmAdd") 
+      	var frm = document.getElementById("frmAdd");
         
       	var title = $("#in1").val();
       	var major = $("#in2").val();
@@ -73,7 +73,14 @@
       	var target = $("#in5").val();
       	var ref = $("#in6").val();
       	
-		if(title==""){
+      	/* 현재시간 구하기 */
+      	var today = new Date();
+      	var year = today.getFullYear();
+      	var month = ('0' + (today.getMonth() + 1)).slice(-2);
+      	var day = ('0' + today.getDate()).slice(-2);
+      	var dateString = year + '-' + month  + '-' + day;
+		
+      	if(title==""){
 			alert("강의명을 입력하지 않았습니다.");
 			$("#in1").focus();
 			return false;
@@ -109,7 +116,16 @@
 			$("#in3").focus();
 			return false;
 		}
-		
+		if(start>end){
+			alert("시작기간이 종료기간보다 늦을 수 없습니다.");
+			$("#in3").focus();
+			return false;
+		}
+		if(start<dateString){
+			alert("설정한 시작기간은 현재시간보다 늦을 수 없습니다.");
+			$("#in3").focus();
+			return false;
+		}
         frm.action="lectureAdd";
         frm.method="POST";
         frm.submit();

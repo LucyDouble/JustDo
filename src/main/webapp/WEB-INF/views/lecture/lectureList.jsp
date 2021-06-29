@@ -37,22 +37,20 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="vo" items="${list}" varStatus="status">	
-							<c:set var="vo2" value="${list2[status.index]}"/>
+							<c:forEach var="vo" items="${list}">	
 								<tr>
-									<td>${vo.lecture_no}</td>
-									<%-- <td>${vo2.lecture_no }</td> --%>
-									<c:if test="${vo.lecture_no != vo2.lecture_no }">
+									<td>${vo.rnum}</td>
+									<c:if test="${vo.lecture_check == 0 }">
 									<td><a class="lecNo" href="javascript:void(0);" onclick="LeClass('${vo.lecture_no}');">설정</a></td>
 									</c:if>
-									<c:if test="${vo.lecture_no == vo2.lecture_no }">
-									<td>완료고고고</td>
+									<c:if test="${vo.lecture_check == 1 }">
+									<td style="color: #EE2560">완료</td>
 									</c:if>
 									<td>${vo.lecture_title}</td>
 									<td>${vo.lecture_start} ~ ${vo.lecture_end}</td>
 									<td>${vo.name}</td>
 									<td>${vo.lecture_limit}</td>
-									<td>0</td>
+									<td>${vo.lecture_personnel}</td>
 									<td><label class="checkbox">
 									<input type="radio" name="lectureNo" value="${vo.lecture_no}"><span class="icon"></span></label></td>
 								</tr>

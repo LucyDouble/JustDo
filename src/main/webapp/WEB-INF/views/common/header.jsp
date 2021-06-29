@@ -56,6 +56,10 @@
 							</c:if>
 							<c:if
 								test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null }">
+								<a href="lecture">강의등록</a>
+							</c:if>
+							<c:if
+								test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null }">
 								<a href="editTeacherForm">교직원 정보수정</a>
 							</c:if>
 						</c:otherwise>

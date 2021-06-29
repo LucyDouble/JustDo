@@ -10,6 +10,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/bootstrap/bootstrap.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/registrationList.css"/>">
 <link rel="stylesheet" href="resources/fullcalendar/lib/main.css">
 <script src="resources/fullcalendar/lib/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -61,27 +63,17 @@
     });
 </script>
 <style>
-	a{
-		color:black;
-		text-decoration: none;
-	}
-	a:hover {
-		color:black;
-	}
 	#calendar{
 		width: 550px;
 	}
 </style>
 </head>
 <body>
-	<section>
-		<article>
+<div class="ln_page">
 			<ul>
-				<li>수강목록</li>
-				<li>수강신청</li>
+				<li><p class="ln_title">수강목록</p></li>
+				<li><p class="ln_title">수강신청</p></li>
 			</ul>
-		</article>
-		<article>
 			<form>
 				<table class="table">
 					<thead>
@@ -112,12 +104,8 @@
 						</tbody>					
 				</table>
 			</form>
-		</article>
-		<article>
 			<div id="calendar"></div>
 			<p>6월강사일정</p>
-		</article>
-		<article>
 			<p>안내문</p>
 			<ul>
 				<li>안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</li>
@@ -125,9 +113,7 @@
 				<li>주의사항주의사항주의사항주의사항주의사항</li>
 				<li>주의사항주의사항주의사항주의사항주의사항</li>
 			</ul>
-		</article>
-		
-		<article>
+</div>		
 			<form id="ReFrm">
 				<input type="hidden" name="student_number" id="id" value="1">
 				</form>
@@ -163,12 +149,8 @@
 				</table>
 			
 			
-		</article>
-		<article>
 			<p>캘린더</p>
 			<p>6월강사일정</p>
-		</article>
-		<article>
 			<p>안내문</p>
 			<ul>
 				<li>안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</li>
@@ -176,8 +158,6 @@
 				<li>주의사항주의사항주의사항주의사항주의사항</li>
 				<li>주의사항주의사항주의사항주의사항주의사항</li>
 			</ul>
-		</article>
-	</section>	
 <script>
 	function pop(num, num1){
 		var w = 800;
