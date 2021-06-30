@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Manager">
+	<resultMap type="Manager" id="ManagerMap">
+		<result property="manager_number" column="MANAGER_NUMBER" />
+		<result property="id" column="ID" />
+		<result property="password" column="PASSWORD" />
+		<result property="name" column="NAME" />
+		<result property="address" column="ADDRESS" />
+		<result property="phone" column="PHONE" />
+		<result property="email" column="EMAIL" />
+
+	</resultMap>
+
+
+
+	<select id="loginCheck" resultType="String">
+		SELECT COUNT(*) FROM MANAGERS
+		WHERE ID=#{id} AND PASSWORD = #{password}
+	</select>
+	<select id="infoManager" parameterType="Manager"
+		resultMap="ManagerMap">
+		SELECT * FROM MANAGERS
+		WHERE ID = #{id} AND PASSWORD =
+		#{password}
+	</select>
+		<select id="idCheck" resultType="int">
+		SELECT count(*) FROM MANAGERS WHERE ID = #{id} AND PASSWORD = #{password};
+
+	</select>
+
+</mapper>

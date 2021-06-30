@@ -73,4 +73,14 @@
 	<update id="checkLectureClass" parameterType="int">
 		UPDATE lecture SET lecture_check =1 WHERE lecture_no =#{lecture_no}
 	</update>
+	
+	<!-- 스케줄러 사용 프로시저 호출 -->
+	<select id="scheduleState" >
+		CALL pro_scheduled()
+	</select>
+	
+	<!-- 페이징 처리 -->
+	<select id="getlistCount" resultType="int" parameterType="Map">
+		SELECT count(*) from lecture
+	</select>
 </mapper>

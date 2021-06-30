@@ -30,10 +30,10 @@
 				<section class="login-input-section-wrap">
 
 					<div class="login-input-wrap">
-						<input name="id" id="id" placeholder="Username" type="text"></input>
+						<input name="id" id="id" placeholder="아이디" type="text"></input>
 					</div>
 					<div class="login-input-wrap password-wrap">
-						<input name="password" id="password" placeholder="Password"
+						<input name="password" id="password" placeholder="비밀번호"
 							type="password"></input>
 					</div>
 					<div class="form-group">

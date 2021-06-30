@@ -1,8 +1,10 @@
 package com.kh.jd.lecture;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service("LService")
@@ -56,6 +58,24 @@ public class LectureServiceImpl implements LectureService{
 	@Override
 	public int checkLectureClass(int lecture_no) {
 		return Ldao.checkLectureClass(lecture_no);
+	}
+	
+	@Override
+	@Scheduled(cron = "0 * * * * *") // 1분 주기
+//	@Scheduled(cron = "0 0 0 * * *") // 매일 자정 
+	public void scheduleState() {
+		System.out.println("1분마다 나와@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//		System.out.println("@@@@@@자정에 확인@@@@@@");
+		try {
+			Ldao.scheduleState();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("---------스케줄러 에러-----------");
+		}
+	}
+	@Override
+	public int getListCount(Map<String, Object> map) {
+		return Ldao.getListCount(map);
 	}
 
 }

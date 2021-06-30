@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class AccountController {
+public class ManagerController {
 
 	@Autowired
 	StudentService sService;
 	@Autowired
 	TeacherService tService;
+	@Autowired
+	ManagerService mService;
 
 
 
@@ -93,7 +95,43 @@ public class AccountController {
 		return mav;
 	}
 
-	
+
+@RequestMapping("managerLoginJDEDU")
+public String managerLogin() {
+	return "account/managerLogin";
+}
+
+@RequestMapping(value = "managerIdCheck", method = RequestMethod.GET)
+@ResponseBody
+public String managerIdCheck(HttpServletRequest request) {
+
+		String manager_id = request.getParameter("id");
+		System.out.println(manager_id);
+		int result = mService.idCheck(manager_id);
+		return Integer.toString(result);
+	}
+
+@RequestMapping(value = "managerLoginCheck", method = RequestMethod.POST)	
+public String loginCheck(Manager aDto, HttpSession session, HttpServletRequest request, Model model) {
+	boolean result = false;
+	result = mService.loginCheck(aDto, session);
+	System.out.println(result);
+	if(result == true) {
+		System.out.println(result);
+		model.addAttribute("msg", "성공");
+		session = request.getSession();
+		Manager list = new Manager();
+		list = mService.infoManager(aDto);
+		System.out.println(list);
+		request.getSession().setAttribute("DTO", list);
+	}else {
+		System.out.println(result);
+		model.addAttribute("msg", "실패");
+		return "account/managerLogin";
+	}
+	return "common/main";
+}
+
 }
 	
 
