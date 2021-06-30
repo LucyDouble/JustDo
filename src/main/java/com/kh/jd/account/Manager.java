@@ -1,7 +1,7 @@
 package com.kh.jd.account;
 
-public class Student {
-	private int student_number;
+public class Manager {
+	private int manager_number;
 	private String id;
 	private String password;
 	private String name;
@@ -9,18 +9,12 @@ public class Student {
 	private String phone;
 	private String email;
 
+	
+
 	@Override
 	public String toString() {
-		return "Student [student_number=" + student_number + ", id=" + id + ", password=" + password + ", name=" + name
+		return "Manager [manager_number=" + manager_number + ", id=" + id + ", password=" + password + ", name=" + name
 				+ ", address=" + address + ", phone=" + phone + ", email=" + email + "]";
-	}
-
-	public int getStudent_number() {
-		return student_number;
-	}
-
-	public void setStudent_number(int student_number) {
-		this.student_number = student_number;
 	}
 
 	public String getId() {
@@ -59,8 +53,12 @@ public class Student {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public int getManager_number() {
+		return manager_number;
+	}
+
+	public void setManager_number(int manager_number) {
+		this.manager_number = manager_number;
 	}
 
 	public String getEmail() {
@@ -69,6 +67,10 @@ public class Student {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 }
