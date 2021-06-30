@@ -1,5 +1,7 @@
 package com.kh.jd.exam;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +13,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -176,13 +180,28 @@ public class ExamController {
 		
 		
 		//TODO
-//		double class1_mo= workService.getCountClass1(vo.getWork_no());
-//		double class1_ch= workService.getCountWorkSubmit1(vo.getWork_no())*100;
-//		double class2_mo= workService.getCountClass2(vo.getWork_no());
-//		double class2_ch= workService.getCountWorkSubmit2(vo.getWork_no())*100;
-//		String classOne=String.format("%.0f", class1_ch/class1_mo);
-//		String classTwo=String.format("%.0f", class2_ch/class2_mo);
-//		String total =String.format("%.0f", (class2_ch+class1_ch)/(class2_mo+class1_mo));
+		double class1_mo= examService.getCountClass1(vo.getExam_no());
+		List<Integer> class1_ch= examService.getGradeExam1(vo.getExam_no());
+		double class2_mo= examService.getCountClass2(vo.getExam_no());
+		List<Integer> class2_ch= examService.getGradeExam2(vo.getExam_no());
+		System.out.println(class1_ch+"이게 나오려나요?"+class1_ch);
+		
+		int class1Sum=0;
+		int class2Sum=0;
+		for (Integer integer : class1_ch) {
+			class1Sum +=integer;
+		}
+		for (Integer integer : class2_ch) {
+			class2Sum +=integer;
+		}
+		String classOne=String.format("%.0f", class1Sum/class1_mo);
+		String classTwo=String.format("%.0f", class2Sum/class2_mo);
+		String total =String.format("%.0f", (class1Sum+class2Sum)/(class2_mo+class1_mo));
+		
+		
+		System.out.println(classOne);
+		System.out.println(classTwo);
+		System.out.println(total);
 		Map<String,Object>map = new HashMap<String,Object>();
 		map.put("keyword", keyword);
 		map.put("exam_no", vo.getExam_no());
@@ -221,9 +240,9 @@ public class ExamController {
 		mv.addObject("exam_start",vo.getExam_start() );
 		mv.addObject("exam_end",vo.getExam_end() );
 		mv.addObject("exam_no", vo.getExam_no() );
-//		mv.addObject("classOne", classOne);
-//		mv.addObject("classTwo", classTwo);
-//		mv.addObject("total", total);
+		mv.addObject("classOne", classOne);
+		mv.addObject("classTwo", classTwo);
+		mv.addObject("total", total);
 		
 		List<Exam> listExam = examService.listExamResult(currentPage, LIMIT2,map);
 
@@ -237,8 +256,18 @@ public class ExamController {
 	@RequestMapping(value = "/viewExamResult", method = RequestMethod.POST)
 	public ModelAndView viewExamResult(Exam vo, ModelAndView mv )  {
 		mv.addObject("examDto", vo);
-		System.out.println("why?"+vo.getExam_answer());
+		System.out.println("안나온=면ㅇ 죽인다"+vo);
 		mv.setViewName("examResult/viewExamResult");
 		return mv;
+	}
+	@RequestMapping(value="editExamGrade", method=RequestMethod.POST) 
+	public void editExamGrade( HttpServletResponse response, Exam vo,
+		HttpSession session) throws IOException{
+		response.setContentType("text/html; charset=utf-8"); // PrintWriter 객체를 생성하여 통신에 대한 응답 결과를 전달한다. 
+		PrintWriter out = response.getWriter(); 
+		examService.editExamGrade(vo);
+		
+			out.flush(); 
+			out.close();
 	}
 }

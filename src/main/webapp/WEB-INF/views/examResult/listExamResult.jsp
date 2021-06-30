@@ -10,6 +10,11 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/listWorkResult.css"/>">
+<link rel="stylesheet"
+    href="<c:url value="/resources/css/common/header.css"/>">
+<script type="text/javascript"
+    src="<c:url value="/resources/js/header.js"/>"></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
 <script src="https://kit.fontawesome.com/afd6aa68df.js" crossorigin="anonymous"></script>
 
 </head>
@@ -82,9 +87,12 @@
 									<input type="hidden" name="lectureclass_class" value="${i.lectureclass_class }">
 									<input type="hidden" name="name" value="${i.name}">
 									<input type="hidden" name="registration_no" value="${i.registration_no}" >
+									<input type="hidden" name="exam_grade" value="${i.exam_grade}" >
+									<input type="hidden" name="lecture_title" value="${lecture_title}" >
+									<input type="hidden" name="exam_subject" value="${exam_subject}" >
 									<button type="submit" id ="ResultBtn">
 										<c:if test="${i.exam_grade==0}">0</c:if>
-										<c:if test="${i.exam_grade!=0}">입~~</c:if>
+										<c:if test="${i.exam_grade!=0}">${i.exam_grade}</c:if>
 									</button>
 								</td>
 							</form>
@@ -95,13 +103,13 @@
 			
 			
 			
-	<div class="graph_title">평균 제출율</div>
+	<div class="graph_title">평균 점수</div>
 	<ul id="g1" class="graph">
-        <li class="graph_li">&nbsp;&nbsp;&nbsp;<span style="width: ${total}%" >전체<em>0%</em></span></li>
+        <li class="graph_li">&nbsp;&nbsp;&nbsp;<span style="width: ${total}%" >전체<em>0점</em></span></li>
         <br>
-        <li class="graph_li">&nbsp;&nbsp;&nbsp;<span style="width: ${classOne}%">1 반<em>0%</em></span></li>
+        <li class="graph_li">&nbsp;&nbsp;&nbsp;<span style="width: ${classOne}%">1 반<em>0점</em></span></li>
         <br>
-        <li class="graph_li">&nbsp;&nbsp;&nbsp;<span style="width: ${classTwo}%">2 반<em>0%</em></span></li>
+        <li class="graph_li">&nbsp;&nbsp;&nbsp;<span style="width: ${classTwo}%">2 반<em>0점</em></span></li>
     </ul>
 			
 			

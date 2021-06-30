@@ -8,13 +8,13 @@
 <title>시험리스트-교직원</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
-<link rel="stylesheet" href="<c:url value="/resources/css/listWork.css"/>">
 <script src="https://kit.fontawesome.com/afd6aa68df.js" crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/common/header.css"/>">
 <script type="text/javascript"
 	src="<c:url value="/resources/js/header.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/listWork.css"/>">
 </head>
 <body>
 	

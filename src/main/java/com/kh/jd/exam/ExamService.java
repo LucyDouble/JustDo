@@ -19,4 +19,9 @@ public interface ExamService {
 	public void removeExam(int exam_no) ;
 	public int getlistExamResultCount(Map<String, Object> map) ;
 	public List<Exam> listExamResult(int startPage, int limit,Map<String, Object> map) ;
+	public void editExamGrade(Exam vo) ;
+	public int getCountClass1(int exam_no) ;
+	public int getCountClass2(int exam_no) ;
+	public List<Integer> getGradeExam1(int exam_no) ;
+	public List<Integer> getGradeExam2(int exam_no) ; 
 }

@@ -69,5 +69,31 @@ public class ExamServiceImpl implements ExamService{
 		return examDao.listExamResult(startPage, limit, map);
 	}
 
+	@Override
+	public void editExamGrade(Exam vo) {
+		examDao.editExamGrade(vo);
+	}
+
+	@Override
+	public int getCountClass1(int exam_no) {
+		return examDao.getCountClass1(exam_no);
+	}
+
+	@Override
+	public int getCountClass2(int exam_no) {
+		// TODO Auto-generated method stub
+		return examDao.getCountClass2(exam_no);
+	}
+
+	@Override
+	public List<Integer>getGradeExam1(int exam_no) {
+		return examDao.getGradeExam1(exam_no);
+	}
+
+	@Override
+	public List<Integer> getGradeExam2(int exam_no) {
+		return examDao.getGradeExam2(exam_no);
+	}
+
 	
 }

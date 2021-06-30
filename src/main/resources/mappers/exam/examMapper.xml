@@ -93,4 +93,43 @@
 			 where name like '%'||#{keyword}||'%'
 		</if>
 	</select>
+	<update id="editExamGrade" parameterType="Exam">
+		update exam_result set exam_grade=#{exam_grade} where exam_no=#{exam_no} and registration_no=#{registration_no}
+	</update>
+	<select id="getCountClass1" parameterType="int" resultType="int">
+		select count(*) 
+		from (select * 
+				from exam_result join registration 
+				using(registration_no)
+				where exam_no = #{exam_no}) wr join lectureclass lc 
+		using(lectureclass_no) 
+		where lectureclass_class=1
+	</select>
+	<select id="getGradeExam1" parameterType="int" resultType="int">
+		select nvl(wr.exam_grade,0) as exam_grade
+		from (select * 
+				from exam_result join registration 
+				using(registration_no)
+				where exam_no = #{exam_no}) wr join lectureclass lc 
+		using(lectureclass_no) 
+		where lectureclass_class=1
+	</select>
+	<select id="getCountClass2" parameterType="int" resultType="int">
+		select count(*) 
+		from (select * 
+				from exam_result join registration 
+				using(registration_no)
+				where exam_no = #{exam_no}) wr join lectureclass lc 
+		using(lectureclass_no) 
+		where lectureclass_class=2
+	</select>
+	<select id="getGradeExam2" parameterType="int" resultType="int">
+		select nvl(wr.exam_grade,0) as exam_grade
+		from (select * 
+				from exam_result join registration 
+				using(registration_no)
+				where exam_no = #{exam_no}) wr join lectureclass lc 
+		using(lectureclass_no) 
+		where lectureclass_class=2
+	</select>
 </mapper>

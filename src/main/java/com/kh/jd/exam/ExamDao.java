@@ -54,4 +54,19 @@ public class ExamDao {
 		RowBounds row = new RowBounds(startRow, limit);
 		return sqlSession.selectList("exam.listExamResult", map, row);
 	}
+	public void editExamGrade(Exam vo) {
+		sqlSession.update("exam.editExamGrade",vo);
+	}
+	public int getCountClass1(int exam_no) {
+		return sqlSession.selectOne("exam.getCountClass1", exam_no);
+	}
+	public int getCountClass2(int exam_no) {
+		return sqlSession.selectOne("exam.getCountClass2", exam_no);
+	}
+	public List<Integer> getGradeExam1(int exam_no) {
+		return sqlSession.selectList("exam.getGradeExam1", exam_no);
+	}
+	public List<Integer> getGradeExam2(int exam_no) {
+		return sqlSession.selectList("exam.getGradeExam2", exam_no);
+	}
 }
