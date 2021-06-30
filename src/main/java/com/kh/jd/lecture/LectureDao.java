@@ -1,6 +1,7 @@
 package com.kh.jd.lecture;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +52,13 @@ public class LectureDao {
 	
 	public int checkLectureClass(int lecture_no) {
 		return sqlSession.update("Lecture.checkLectureClass", lecture_no);
+	}
+	
+	public void scheduleState() {
+		sqlSession.selectOne("Lecture.scheduleState");
+	}
+	
+	public int getListCount(Map<String, Object> map) {
+		return sqlSession.selectOne("Lecture.getlistCount", map);
 	}
 }

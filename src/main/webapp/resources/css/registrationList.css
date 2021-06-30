@@ -23,7 +23,6 @@ body {
 	font-size: 25px;
 	font-weight: bold;
 	clear: both;
-	margin-bottom: 50px;
 }
 
 .vn_title, .en_title, .an_title, .lc_title{
@@ -88,3 +87,19 @@ body {
         /* max-width: 900px; */
         /* margin: 0 auto; */
 	}
+.LC_title{
+	float: left;
+}
+.LC_title_cont{
+	float: left;
+	margin-right: 15px;
+}
+.LC_content{
+	display: none;
+}
+#LC_cont{
+	display: block;
+}
+.selected{
+	color:#EE2560;
+}

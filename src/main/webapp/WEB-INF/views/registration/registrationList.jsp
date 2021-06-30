@@ -23,10 +23,11 @@
 <body>
 <div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 <div class="ln_page">
-			<ul>
-				<li><p class="ln_title">수강목록</p></li>
-				<li><p class="ln_title">수강신청</p></li>
+			<ul class="LC_title">
+				<li class="LC_title_cont"><p class="ln_title">수강목록</p></li>
+				<li class="LC_title_cont"><p class="ln_title">수강신청</p></li>
 			</ul>
+			<div class="LC_content" id="LC_cont">
 			<form>
 				<table class="table">
 					<thead>
@@ -66,7 +67,8 @@
 				<li>주의사항주의사항주의사항주의사항주의사항</li>
 				<li>주의사항주의사항주의사항주의사항주의사항</li>
 			</ul>
-		
+			</div>
+			<div class="LC_content">
 			<form id="ReFrm">
 				<input type="hidden" name="student_number" id="id" value="1">
 				</form>
@@ -101,7 +103,6 @@
 						</tbody>					
 				</table>
 			
-			
 			<p>캘린더</p>
 			<p>6월강사일정</p>
 			<p>안내문</p>
@@ -111,6 +112,7 @@
 				<li>주의사항주의사항주의사항주의사항주의사항</li>
 				<li>주의사항주의사항주의사항주의사항주의사항</li>
 			</ul>
+			</div>
 </div>
 <script>
 	function pop(num, num1){
@@ -139,6 +141,23 @@
     	
     	}); 
 	}
+	$(".LC_title_cont").click(function(){
+		var btn = $(this).index();
+		$(".LC_content").each(function(index, element){
+			if(btn ==index){
+				$(element).css("display","block");
+			}else{
+				$(element).css("display","none");
+			}
+		});
+		$(".LC_title_cont").each(function(index, element){
+			if(btn == index){
+				$(element).addClass("selected");
+			}else{
+				$(element).removeClass("selected");
+			}			
+		});
+	});
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {

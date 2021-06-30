@@ -1,6 +1,7 @@
 package com.kh.jd.lecture;
 
 import java.util.List;
+import java.util.Map;
 
 public interface LectureService {
 	public int addLecture(Lecture lecture);
@@ -11,4 +12,6 @@ public interface LectureService {
 	public List<Lecture> listLectureClass();
 	public Lecture viewLectureClass(Lecture lecture);
 	public int checkLectureClass(int lecture_no);
+	public void scheduleState();
+	public int getListCount(Map<String, Object> map);
 }

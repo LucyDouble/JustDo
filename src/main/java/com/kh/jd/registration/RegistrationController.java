@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,6 +25,8 @@ import com.kh.jd.lecture.LectureService;
 
 @Controller
 public class RegistrationController {
+	public static final int LIMIT = 10;
+	public static final int pageBlock = 5;
 	@Autowired
 	private LectureService LService;
 	@Autowired
@@ -31,8 +34,40 @@ public class RegistrationController {
 	
 	// 수강 목록
 	@RequestMapping(value = "registration", method = RequestMethod.GET)
-	public ModelAndView listLecture(ModelAndView mv, HttpServletRequest request, HttpSession session) {
+	public ModelAndView listLecture(ModelAndView mv, HttpServletRequest request, HttpSession session,
+			@RequestParam(name="page", defaultValue = "1") int page,
+			@RequestParam(name="keyword", defaultValue = "") String keyword) {
 		System.out.println("@@@@@@@@여기@@@@@@@@");
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("keyword", keyword);
+		
+		int listCount = LService.getListCount(map);
+		int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
+		int currentPage = page;
+		
+		int startPage = 1;
+		int endPage = 5;
+		if(currentPage % pageBlock == 0) {
+			startPage = ((currentPage/pageBlock)-1) * pageBlock + 1;
+		}else {
+			startPage = ((currentPage/pageBlock)) * pageBlock + 1;
+		}
+		endPage = startPage + pageBlock - 1;
+		
+		if(endPage > pageCnt)
+			endPage = pageCnt;
+		
+		int maxPage = (int)((double) listCount / LIMIT + 0.9 );
+		mv.addObject("pageCnt", pageCnt);
+		mv.addObject("startPage", startPage);
+		mv.addObject("endPage", endPage);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("maxPage", maxPage);
+		mv.addObject("keyword", keyword);
+		mv.addObject("listCount", listCount);
+
+		
+		
 		mv.addObject("list", LService.listLectureClass());
 		mv.setViewName("registration/registrationList");
 		return mv;
