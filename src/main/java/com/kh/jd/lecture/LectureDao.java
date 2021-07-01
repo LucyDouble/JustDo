@@ -58,7 +58,4 @@ public class LectureDao {
 		sqlSession.selectOne("Lecture.scheduleState");
 	}
 	
-	public int getListCount(Map<String, Object> map) {
-		return sqlSession.selectOne("Lecture.getlistCount", map);
-	}
 }

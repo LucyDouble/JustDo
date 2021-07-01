@@ -27,5 +27,20 @@ public class LectureClassServiceImpl implements LectureClassService {
 	public List<LectureClass> listLectureClass() {
 		return LCdao.listLectureClass();
 	}
+
+	@Override
+	public List<LectureClass> listJoinClass(int startPage, int limit, Map<String, Object> map) {
+		return LCdao.listJoinClass(startPage, limit, map);
+	}
+
+	@Override
+	public int getlistCount(Map<String, Object> map) {
+		return LCdao.getlistCount(map);
+	}
+
+	@Override
+	public List<LectureClass> listCalendarClass(Map<String, Object> map) {
+		return LCdao.listCalendarClass(map);
+	}
 	
 }

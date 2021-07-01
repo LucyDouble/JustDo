@@ -22,8 +22,13 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 
 	@Override
-	public List<Registration> calendarAdd(String number) {
-		return Rdao.calendarAdd(number);
+	public List<Registration> calendarAdd(int student_number) {
+		return Rdao.calendarAdd(student_number);
+	}
+
+	@Override
+	public List<Registration> listRegistration(int student_number) {
+		return Rdao.listRegistration(student_number);
 	}
 	
 	

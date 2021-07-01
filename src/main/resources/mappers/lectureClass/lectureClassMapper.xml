@@ -27,4 +27,36 @@
 <select id="listLectureClass" resultMap="LectureClassResult">
 	SELECT * FROM LECTURECLASS
 </select>
+
+<!-- 분반포함 목록 조회 -->
+<select id="listJoinClass" resultType="LectureClass" parameterType="hashMap">
+select rownum rnum, le.lecture_no, le.lectureclass_class, le.lectureclass_no, to_char(le.lectureclass_start,'hh24:mi') lectureclass_start, to_char(le.lectureclass_end,'hh24:mi') lectureclass_end,
+	lt.lecture_title, lt.lecture_limit, lt.lecture_major, lt.lecture_personnel, lt.lecture_reference, lt.lecture_target, 
+	lt.lecture_start, lt.lecture_end, lt.lecture_state, lt.lecture_check, lt.name
+from lectureclass LE join (select * from lecture L join teacher T on l.teacher_number = t.teacher_number) LT 
+on le.lecture_no= lt.lecture_no 
+where (lt.lecture_title like '%'||#{keyword}||'%' or lt.name like '%'||#{keyword}||'%') and  lt.lecture_state = 0 
+order by rnum desc
+</select>
+
+<!-- 페이징 처리 -->
+<select id="getlistCount" resultType="int" parameterType="Map">
+	select count(*) 
+	from lectureclass LC join (select * from lecture L join teacher T on l.teacher_number = t.teacher_number) LT
+	on lc.lecture_no = lt.lecture_no 
+	where (lt.lecture_title like '%'||#{keyword}||'%' or lt.name like '%'||#{keyword}||'%') and lt.lecture_state = 0 
+</select>
+
+<!-- 캘린더에 출력할 분반포함 목록 조회 -->
+<select id="listCalendarClass" resultType="LectureClass" parameterType="hashMap">
+select rownum rnum, le.lecture_no, le.lectureclass_class, le.lectureclass_no, to_char(le.lectureclass_start,'hh24:mi') lectureclass_start, to_char(le.lectureclass_end,'hh24:mi') lectureclass_end,
+	lt.lecture_title, lt.lecture_limit, lt.lecture_major, lt.lecture_personnel, lt.lecture_reference, lt.lecture_target, 
+	lt.lecture_start, lt.lecture_end, lt.lecture_state, lt.lecture_check, lt.name
+from lectureclass LE join (select * from lecture L join teacher T on l.teacher_number = t.teacher_number) LT 
+on le.lecture_no= lt.lecture_no 
+where (lt.lecture_title like '%'||#{keyword}||'%' or lt.name like '%'||#{keyword}||'%') and  lt.lecture_state = 0 
+order by rnum desc
+</select>
+
 </mapper>
+

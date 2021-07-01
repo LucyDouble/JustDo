@@ -6,74 +6,55 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title>강의계획서</title>
+<link rel="stylesheet" href="resources/css/bootstrap/bootstrap.css">
+<link rel="stylesheet" href="resources/css/fonts.css">
+<link rel="stylesheet" href="resources/css/lecturePlan.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style>
-@font-face {
-    src : url("resources/fonts/SCDream4.otf");
-    font-family: SCDream4;
-    }
-     body {
-        margin: 0px;
-        padding: 0px;
-        width: 800px;
-        margin: auto;
-        font-family: SCDream4;
-    }
-</style>
 </head>
 <body>
-<div>
-	<section>
+<div class="ln_page">
 		<div class="cont">
-			<article class="content1">
-				<h2>강의계획서</h2>
-			</article>
+				<p class="ln_title">강의계획서</p>
 		</div>
-		<div>
-			<article>
 					<table class="table">
 							<tr>
 								<th>NO</th>
-								<td><p>${view.lecture_no}</p></td>
+								<td>${view.lecture_no}</td>
 								<th>분반</th>
-								<td><p>${view.lectureclass_class}</p></td>
+								<td>${view.lectureclass_class}</td>
 							</tr>
 							<tr>
 								<th>강의명</th>
-								<td><p>${view.lecture_title}</p></td>
+								<td>${view.lecture_title}</td>
 								<th>전공</th>
-								<td><p>${view.lecture_major}</p></td>
+								<td>${view.lecture_major}</td>
 							</tr>
 							<tr>
 								<th>교직원</th>
-								<td><p>${view.teacher_number}</p></td>
+								<td>${view.teacher_number}</td>
 								<th>E-mail</th>
-								<td><p>${view.teacher_number}</p></td>
-							</tr>
-							<tr>
-								<th colspan="3">강의시간</th>
-								<td><p>${view.lectureclass_start} ~ ${view.lectureclass_end}</p></td>
-								
+								<td>${view.teacher_number}</td>
 							</tr>
 							<tr>
 								<th>제한인원</th>
-								<td><p>${view.lecture_limit}</p></td>
+								<td>${view.lecture_limit}</td>
 								<th>강의기간</th>
-								<td><p>${view.lecture_start} ~ ${view.lecture_end}</p></td>
+								<td>${view.lecture_start} ~ ${view.lecture_end}</td>
+							</tr>
+							<tr>
+								<th>강의시간</th>
+								<td colspan="3">${view.lectureclass_start} ~ ${view.lectureclass_end}</td>
 							</tr>
 							<tr>
 								<th>교과목개요 및 학습목표</th>
-								<td colspan="3"><p>${view.lecture_target}</p></td>
+								<td colspan="3">${view.lecture_target}</td>
 							</tr>
 							<tr>
 								<th>교재 및 참고문헌</th>
-								<td colspan="3"><p>${view.lecture_reference}</p></td>
+								<td colspan="3">${view.lecture_reference}</td>
 							</tr>
 					</table>
-			</article>
-		</div>
-	</section>
 </div>
 </body>
 </html>

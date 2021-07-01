@@ -13,5 +13,4 @@ public interface LectureService {
 	public Lecture viewLectureClass(Lecture lecture);
 	public int checkLectureClass(int lecture_no);
 	public void scheduleState();
-	public int getListCount(Map<String, Object> map);
 }

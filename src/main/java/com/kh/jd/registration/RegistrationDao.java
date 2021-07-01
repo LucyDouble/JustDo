@@ -19,7 +19,11 @@ public class RegistrationDao {
 		return sqlSession.selectOne("Registration.checkStudent", number);
 	}
 	
-	public List<Registration> calendarAdd(String number) {
-		return sqlSession.selectList("Registration.addCalendar", number);
+	public List<Registration> calendarAdd(int student_number) {
+		return sqlSession.selectList("Registration.addCalendar", student_number);
+	}
+	
+	public List<Registration> listRegistration(int student_number) {
+		return sqlSession.selectList("Registration.listRegistration", student_number);
 	}
 }

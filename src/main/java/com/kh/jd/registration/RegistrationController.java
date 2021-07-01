@@ -1,6 +1,5 @@
 package com.kh.jd.registration;
 
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.jd.account.Student;
+import com.kh.jd.account.Teacher;
 import com.kh.jd.lecture.Lecture;
 import com.kh.jd.lecture.LectureService;
+import com.kh.jd.lectureClass.LectureClass;
+import com.kh.jd.lectureClass.LectureClassService;
 
 @Controller
 public class RegistrationController {
@@ -31,17 +32,21 @@ public class RegistrationController {
 	private LectureService LService;
 	@Autowired
 	private RegistrationService RService;
+	@Autowired
+	private LectureClassService LCService;
 	
-	// 수강 목록
+	// 수강 목록, 신청
 	@RequestMapping(value = "registration", method = RequestMethod.GET)
 	public ModelAndView listLecture(ModelAndView mv, HttpServletRequest request, HttpSession session,
 			@RequestParam(name="page", defaultValue = "1") int page,
 			@RequestParam(name="keyword", defaultValue = "") String keyword) {
 		System.out.println("@@@@@@@@여기@@@@@@@@");
+		Student st= (Student)request.getSession().getAttribute("DTO");
+		int student_number=st.getStudent_number();
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("keyword", keyword);
 		
-		int listCount = LService.getListCount(map);
+		int listCount = LCService.getlistCount(map);
 		int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
 		int currentPage = page;
 		
@@ -65,10 +70,11 @@ public class RegistrationController {
 		mv.addObject("maxPage", maxPage);
 		mv.addObject("keyword", keyword);
 		mv.addObject("listCount", listCount);
-
-		
-		
-		mv.addObject("list", LService.listLectureClass());
+		List<LectureClass> list = LCService.listJoinClass(startPage, LIMIT, map);
+		mv.addObject("list", list);
+		List<Registration> list2 = RService.listRegistration(student_number);
+		System.out.println("수강신청 리스트"+ list2);
+		mv.addObject("list2", list2);
 		mv.setViewName("registration/registrationList");
 		return mv;
 	}
@@ -95,21 +101,25 @@ public class RegistrationController {
 		return "";
 	}
 	
-	// 캘린더에 내 강의 출력
+	// 캘린더에 내 수강 신청한 목록 출력
 	@RequestMapping(value = "calendarAdd", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Registration> calendarAdd(HttpServletRequest request, HttpServletResponse response) {
-		String number = "4";
-		System.out.println(RService.calendarAdd(number));
-//		JSONObject json = new JSONObject();
-//		JSONArray json = new JSONArray();
-//		json.add(RService.calendarAdd(number));
-//		json.put("result", RService.calendarAdd(number));
-		
-//		return json;
-//		HashMap<String, Object> map = new HashMap<String, Object>();
-//		map.put("result",  RService.calendarAdd(number));
-		return RService.calendarAdd(number);
+		Student st= (Student)request.getSession().getAttribute("DTO");
+		int student_number=st.getStudent_number();
+		System.out.println(RService.calendarAdd(student_number));
+		return RService.calendarAdd(student_number);
+	}
+	
+	// 캘린더에 수강 신청 할 강의 출력
+	@RequestMapping(value = "calendarAdd2", method = RequestMethod.POST)
+	@ResponseBody
+	public List<LectureClass> calendarAdd2(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam(name="keyword", defaultValue = "") String keyword) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("keyword", keyword);
+		System.out.println("수강신청 캘린더" + LCService.listCalendarClass(map));
+		return LCService.listCalendarClass(map);
 	}
 	
 	

@@ -28,10 +28,15 @@ public class LectureController {
 	@RequestMapping(value = "lecture", method = RequestMethod.GET)
 	public ModelAndView listLecture(ModelAndView mv, HttpServletRequest request, HttpSession session) {
 			System.out.println("@@@@@@@@여기@@@@@@@@");
-			Teacher te= (Teacher)request.getSession().getAttribute("DTO");
-			int teacher_number=te.getTeacher_number();
-			mv.addObject("list", LService.listLecture(teacher_number));
-			mv.setViewName("lecture/lectureList");
+			try {
+				Teacher te= (Teacher)request.getSession().getAttribute("DTO");
+				int teacher_number=te.getTeacher_number();
+				mv.addObject("list", LService.listLecture(teacher_number));
+				mv.setViewName("lecture/lectureList");
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("---교직원 로그인 안해서 오류---");
+			}
 		return mv;
 	}
 	

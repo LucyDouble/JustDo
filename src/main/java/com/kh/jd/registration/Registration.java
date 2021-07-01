@@ -18,6 +18,12 @@ public class Registration {
 	private String lecture_target;
 	private String lecture_start;
 	private String lecture_end;
+	private int rnum;
+	private String name;
+	private int lecture_limit;
+	private int lecture_personnel;
+	private String starttime;
+	private String endtime;
 	
 	@Override
 	public String toString() {
@@ -25,7 +31,9 @@ public class Registration {
 				+ ", student_number=" + student_number + ", lectureclass_class=" + lectureclass_class
 				+ ", lectureclass_start=" + lectureclass_start + ", lectureclass_end=" + lectureclass_end
 				+ ", lecture_title=" + lecture_title + ", lecture_reference=" + lecture_reference + ", lecture_target="
-				+ lecture_target + ", lecture_start=" + lecture_start + ", lecture_end=" + lecture_end + "]";
+				+ lecture_target + ", lecture_start=" + lecture_start + ", lecture_end=" + lecture_end + ", rnum="
+				+ rnum + ", name=" + name + ", lecture_limit=" + lecture_limit + ", lecture_personnel="
+				+ lecture_personnel + ", starttime=" + starttime + ", endtime=" + endtime + "]";
 	}
 
 	public int getRegistration_no() {
@@ -115,7 +123,53 @@ public class Registration {
 	public void setLecture_end(String lecture_end) {
 		this.lecture_end = lecture_end;
 	}
-	
-	
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getLecture_limit() {
+		return lecture_limit;
+	}
+
+	public void setLecture_limit(int lecture_limit) {
+		this.lecture_limit = lecture_limit;
+	}
+
+	public int getLecture_personnel() {
+		return lecture_personnel;
+	}
+
+	public void setLecture_personnel(int lecture_personnel) {
+		this.lecture_personnel = lecture_personnel;
+	}
+
+	public String getStarttime() {
+		return starttime;
+	}
+
+	public void setStarttime(String starttime) {
+		this.starttime = starttime;
+	}
+
+	public String getEndtime() {
+		return endtime;
+	}
+
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
 	
 }

@@ -73,9 +73,5 @@ public class LectureServiceImpl implements LectureService{
 			System.out.println("---------스케줄러 에러-----------");
 		}
 	}
-	@Override
-	public int getListCount(Map<String, Object> map) {
-		return Ldao.getListCount(map);
-	}
 
 }

@@ -53,7 +53,7 @@
 		lecture_target= #{lecture_target}, lecture_start= #{lecture_start}, lecture_end = #{lecture_end}, lecture_check = #{lecture_check} WHERE lecture_no = #{lecture_no}
 	</update>
 	
-	<!-- 분반 포함 리스트 -->
+	<!-- 분반 포함 리스트 @@너 필요 없을듯? -->
 	<select id="listLectureClass" resultMap="lectureResult">
 		select l.lecture_no, l.teacher_number, l.lecture_title, l.lecture_limit, l.lecture_major,
 			l.lecture_personnel, l.lecture_reference, l.lecture_target, l.lecture_start, l.lecture_end, l.lecture_state, l.lecture_check,
@@ -79,8 +79,4 @@
 		CALL pro_scheduled()
 	</select>
 	
-	<!-- 페이징 처리 -->
-	<select id="getlistCount" resultType="int" parameterType="Map">
-		SELECT count(*) from lecture
-	</select>
 </mapper>
