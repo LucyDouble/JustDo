@@ -40,6 +40,12 @@ ManagerDAO dao;
 	public List<Teacher> teacherList() {
 		return dao.teacherList();
 	}
+
+	@Override
+	public void acceptTeacher(String teacher_id) {
+		dao.acceptTeacher(teacher_id);
+		
+	}
 	
 	
 

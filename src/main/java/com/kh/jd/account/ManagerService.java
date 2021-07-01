@@ -23,4 +23,7 @@ public interface ManagerService {
 	
 	//비승인 교직원 조회
 	public List<Teacher> teacherList();
+	
+	//교직원 승인
+	public void acceptTeacher(String teacher_id);
 }

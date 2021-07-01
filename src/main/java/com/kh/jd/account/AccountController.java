@@ -126,10 +126,18 @@ public class AccountController {
 		return "common/main";
 	}
 
-	@RequestMapping(value = "acceptTeacher")
-	public String acceptTeacher(Model model) {
+	@RequestMapping(value = "acceptTeacherForm")
+	public String teacherList(Model model) {
 		List<Teacher> list = mService.teacherList();
 		model.addAttribute("list", list);
 		return "account/acceptPage";
 	}
+	
+	@RequestMapping(value = "acceptTeacher", method = RequestMethod.GET)
+	public @ResponseBody String acceptTeacher(Teacher teacherVO) {
+		String teacher_id = teacherVO.getId();
+		mService.acceptTeacher(teacher_id);
+		return "account/acceptPage";
+	}
+	
 }

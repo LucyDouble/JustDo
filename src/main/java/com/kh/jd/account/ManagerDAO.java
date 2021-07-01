@@ -45,15 +45,12 @@ public class ManagerDAO {
 	}
 	
 	//교직원 승인
-	public void acceptTeacher(String teacher_id, int teacher_accept) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", teacher_id);
-		map.put("teacher_accept", teacher_accept);
-		sqlSession.update("acceptTeacher", teacher_accept);
+	public void acceptTeacher(String teacher_id) {
+		sqlSession.update("acceptTeacher", teacher_id);
 	}
 	//비승인 교직원 조회
 	public List<Teacher> teacherList(){
 		return sqlSession.selectList("Teacher.notAcceptTeacher");
 	}
-
+	
 }

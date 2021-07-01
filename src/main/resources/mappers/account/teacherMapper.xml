@@ -80,7 +80,7 @@
 	</delete>
 	<update id="acceptTeacher" parameterType="hashmap">
 		UPDATE TEACHER SET
-		ACCEPT = #{accept} where id = #{id}
+		ACCEPT = 1 where id = #{id}
 	</update>
 	<select id="notAcceptTeacher" parameterType="Teacher"
 		resultMap="TeacherMap">
