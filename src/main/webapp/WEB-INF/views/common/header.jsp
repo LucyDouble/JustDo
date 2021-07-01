@@ -31,7 +31,30 @@
 						교육원</a>
 				</div></li>
 
-			<li class="aboutJD"><a href="#">수강신청</a></li>
+			<li class="aboutJD"><a href="#">강의</a>
+			<div id="drop_content">
+				<c:if
+					test="${sessionScope.student_id !=null && sessionScope.teacher_id == null && sessionScope.manager_id == null && sessionScope.manager_id == null}">
+					<a href="listAttend">출석하기</a>
+				</c:if>
+				<c:if
+					test="${sessionScope.student_id !=null && sessionScope.teacher_id == null && sessionScope.manager_id == null && sessionScope.manager_id == null}">
+					<a href="listSubmitWork">과제 조회</a>
+				</c:if>
+				<c:if
+					test="${sessionScope.student_id !=null && sessionScope.teacher_id == null && sessionScope.manager_id == null && sessionScope.manager_id == null}">
+					<a href="#">시험 조회</a>
+				</c:if>
+				<c:if
+					test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
+					<a href="listWork">과제 조회</a>
+				</c:if>
+				<c:if
+					test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
+					<a href="listExam">시험 조회</a>
+				</c:if>
+				</div>
+			</li>
 
 			<li class="aboutJD"><a href="#">마이페이지</a>
 				<div id="drop_content">

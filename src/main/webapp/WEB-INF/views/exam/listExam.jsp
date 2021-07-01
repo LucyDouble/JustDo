@@ -20,7 +20,7 @@
 	
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div class="ln_page">
-		<p class="ln_title">시험 리스트 ${time2 }</p>
+		<p class="ln_title">시험 리스트</p>
 		<!-- 서치바 -->
 		<div class="lc_search_box">
 			<form class="lc_search" action="#" method="get">

@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/listWork.css"/>">
+<script src="https://kit.fontawesome.com/afd6aa68df.js" crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/common/header.css"/>">
 <script type="text/javascript"
@@ -56,11 +57,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		<form action="addWorkForm" method="post">
-			<button class="button">
-				<span>과제등록</span>
-			</button>
-		</form>
+
 		<c:if test="${keyword !='' }">
 		<button class="button" onclick="location.href='listWork'">
 				<span>목록</span>
