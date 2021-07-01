@@ -113,7 +113,7 @@ public class NoticeController {
 		String n_sub = "";
 		String n_con = "";
 		int hit = 0;
-
+		String url = saveFile(multiFile, request);
 		t_no = request.getParameter("teacher_number");
 		m_no = request.getParameter("manager_number");
 		n_sub = request.getParameter("notice_sub");
@@ -128,11 +128,13 @@ public class NoticeController {
 
 		try {
 			if (multiFile != null && !multiFile.equals("")) {
-				String url = saveFile(multiFile, request);
+//				String url = saveFile(multiFile, request);
 			}
-			String path = "\\resources\\imageUpload\\";
-			map.put("notice_filepath", path + multiFile.getOriginalFilename());
-			map.put("notice_filename", multiFile.getOriginalFilename());
+//			String path = "\\resources\\imageUpload\\";
+//			map.put("notice_filepath", path + multiFile.getOriginalFilename());
+//			map.put("notice_filename", multiFile.getOriginalFilename());
+			map.put("notice_filepath", url);
+//			map.put("notice_filename", multiFile.getOriginalFilename());
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("이미지 저장에 실패했습니다");
@@ -160,7 +162,7 @@ public class NoticeController {
 		String filePath = null;
 		try {
 			System.out.println(report.getOriginalFilename() + "을 저장합니다.");
-			System.out.println("저장 경로 : " + savePath);
+			System.out.println("저장 경로 : " + url);
 			filePath = folder + "\\" + report.getOriginalFilename();
 
 			report.transferTo(new File(filePath)); // 파일을 저장한다
@@ -178,7 +180,7 @@ public class NoticeController {
 
 			
 			System.out.println("파일 명 : " + report.getOriginalFilename());
-			System.out.println("파일 경로 : " + filePath);
+			System.out.println("파일 경로 : " + url);
 			System.out.println("파일 전송이 완료되었습니다.");
 			
 		} catch (Exception e) {
