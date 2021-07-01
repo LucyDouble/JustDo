@@ -27,14 +27,14 @@ if(id == null || !id.equals("admin")){ //순서바뀌면 에러발생하므로 �
 		<td>핸드폰</td>
 		<td>이메일</td>
 	</tr>
-	<c:forEach items="${Teacher}" var="teacher">	
+	<c:forEach items="${list}" var="list">	
 		<tr>
-			<td><c:out value="${teacher.id}"></c:out></td>
-			<td><c:out value="${teacher.pw}"></c:out></td>
-			<td><c:out value="${teacher.name}"></c:out></td>
-			<td><c:out value="${teacher.address }"></c:out></td>
-			<td><c:out value="${teacher.phone}"></c:out></td>
-			<td><c:out value="${teacher.email}"></c:out></td>
+			<td><c:out value="${list.id}"></c:out></td>
+			<td><c:out value="${list.password}"></c:out></td>
+			<td><c:out value="${list.name}"></c:out></td>
+			<td><c:out value="${list.address }"></c:out></td>
+			<td><c:out value="${list.phone}"></c:out></td>
+			<td><c:out value="${list.email}"></c:out></td>
 		</tr>
 	</c:forEach>
 </table>

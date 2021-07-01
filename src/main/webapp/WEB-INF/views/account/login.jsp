@@ -49,6 +49,9 @@
 					<c:if test="${msg == '실패'}">
 						<p style="font-size: 5px; color: red">아이디 또는 패스워드가 틀렸습니다.</p>
 					</c:if>
+					<c:if test="${msg ==  '승인대기'}">
+						<p style="font-size: 5px; color: red">승인 이후 사용 가능합니다.</p>
+					</c:if>
 					<div class="login-stay-sign-in">
 						<i class="far fa-check-circle"></i>
 					</div>

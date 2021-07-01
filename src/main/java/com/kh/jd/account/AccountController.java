@@ -1,15 +1,12 @@
 package com.kh.jd.account;
 
-
-
-
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -29,26 +26,7 @@ public class AccountController {
 	TeacherService tService;
 	@Autowired
 	ManagerService mService;
-
-
-
-
-	@RequestMapping(value = "idCheck", method = RequestMethod.GET)
-	@ResponseBody
-	public String idCheck(HttpServletRequest request, @RequestParam(name = "signUpSelect") String check) {
-		System.out.println(check);
-		if (check == "student" || check.equals("student")) {
-			String student_id = request.getParameter("id");
-			System.out.println(student_id);
-			int result = sService.idCheck(student_id);
-			return Integer.toString(result);
-		} else {
-			String teacher_id = request.getParameter("id");
-			System.out.println(teacher_id);
-			int result = tService.idCheck(teacher_id);
-			return Integer.toString(result);
-		}
-	}
+	private static final Logger logger = LoggerFactory.getLogger(SignUpController.class);
 
 	@RequestMapping("login")
 	public String login() {
@@ -60,10 +38,14 @@ public class AccountController {
 			@RequestParam(name = "loginSelect") String check, Model model) {
 		System.out.println(check);
 		boolean result = false;
+		int accept = 0;
+		String teacher_id = request.getParameter("id");
+
 		if (check == "student" || check.equals("student")) {
 			result = sService.loginCheck(sDto, session);
 		} else {
 			result = tService.loginCheck(tDto, session);
+			accept = tService.acceptCheck(teacher_id);
 		}
 		if (result == true) {
 			System.out.println(result);
@@ -75,15 +57,25 @@ public class AccountController {
 				System.out.println(list);
 				request.getSession().setAttribute("DTO", list);
 			} else {
-				Teacher list = new Teacher();
-				list = tService.infoTeacher(tDto);
-				System.out.println(list);
-				request.getSession().setAttribute("DTO", list);
+				if (accept == 1) {
+					Teacher list = new Teacher();
+					list = tService.infoTeacher(tDto);
+					System.out.println(list);
+					request.getSession().setAttribute("DTO", list);
+				} else {
+					System.out.println(accept);
+					model.addAttribute("msg", "승인대기");
+					tService.logout(session);
+					return "account/login";
+				}
 			}
 		} else {
+
 			System.out.println(result);
 			model.addAttribute("msg", "실패");
 			return "account/login";
+			
+
 		}
 		return "common/main";
 	}
@@ -98,15 +90,14 @@ public class AccountController {
 		return mav;
 	}
 
+	@RequestMapping("managerLoginJDEDU")
+	public String managerLogin() {
+		return "account/managerLogin";
+	}
 
-@RequestMapping("managerLoginJDEDU")
-public String managerLogin() {
-	return "account/managerLogin";
-}
-
-@RequestMapping(value = "managerIdCheck", method = RequestMethod.GET)
-@ResponseBody
-public String managerIdCheck(HttpServletRequest request) {
+	@RequestMapping(value = "managerIdCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public String managerIdCheck(HttpServletRequest request) {
 
 		String manager_id = request.getParameter("id");
 		System.out.println(manager_id);
@@ -114,37 +105,31 @@ public String managerIdCheck(HttpServletRequest request) {
 		return Integer.toString(result);
 	}
 
-@RequestMapping(value = "managerLoginCheck", method = RequestMethod.POST)	
-public String loginCheck(Manager aDto, HttpSession session, HttpServletRequest request, Model model) {
-	boolean result = false;
-	result = mService.loginCheck(aDto, session);
-	System.out.println(result);
-	if(result == true) {
+	@RequestMapping(value = "managerLoginCheck", method = RequestMethod.POST)
+	public String loginCheck(Manager aDto, HttpSession session, HttpServletRequest request, Model model) {
+		boolean result = false;
+		result = mService.loginCheck(aDto, session);
 		System.out.println(result);
-		model.addAttribute("msg", "성공");
-		session = request.getSession();
-		Manager list = new Manager();
-		list = mService.infoManager(aDto);
-		System.out.println(list);
-		request.getSession().setAttribute("DTO", list);
-	}else {
-		System.out.println(result);
-		model.addAttribute("msg", "실패");
-		return "account/managerLogin";
+		if (result == true) {
+			System.out.println(result);
+			model.addAttribute("msg", "성공");
+			session = request.getSession();
+			Manager list = new Manager();
+			list = mService.infoManager(aDto);
+			System.out.println(list);
+			request.getSession().setAttribute("DTO", list);
+		} else {
+			System.out.println(result);
+			model.addAttribute("msg", "실패");
+			return "account/managerLogin";
+		}
+		return "common/main";
 	}
-	return "common/main";
+
+	@RequestMapping(value = "acceptTeacher")
+	public String acceptTeacher(Model model) {
+		List<Teacher> list = mService.teacherList();
+		model.addAttribute("list", list);
+		return "account/acceptPage";
+	}
 }
-@RequestMapping(value="acceptTeacher")
-	public String acceptTeacher(HttpSession session, Model model) {
-	List<Teacher> list = mService.teacherList();
-	model.addAttribute("list", list);
-	return "account/acceptPage";
-}
-}
-	
-
-
-
-
-
-

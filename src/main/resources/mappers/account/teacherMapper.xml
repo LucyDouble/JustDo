@@ -82,8 +82,12 @@
 		UPDATE TEACHER SET
 		ACCEPT = #{accept} where id = #{id}
 	</update>
-	<select id="notAcceptTeacher" parameterType="Teacher" resultMap="TeacherMap">
+	<select id="notAcceptTeacher" parameterType="Teacher"
+		resultMap="TeacherMap">
 		SELECT * FROM TEACHER WHERE ACCEPT = 2 ORDER BY NAME
+	</select>
+	<select id="acceptCheck" resultType="int">
+		SELECT ACCEPT FROM TEACHER WHERE ID = #{id}
 	</select>
 
 

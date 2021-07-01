@@ -76,6 +76,13 @@ public class TeacherServiceImpl implements TeacherService {
 	public void deleteTeacher(String teacher_id) {
 		dao.deleteTeacher(teacher_id);
 	}
+
+	@Override
+	public int acceptCheck(String teacher_id) {
+		int result = dao.acceptCheck(teacher_id);
+		dao.acceptCheck(teacher_id);
+		return result;
+	}
 	
 
 

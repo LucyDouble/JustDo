@@ -42,4 +42,9 @@ public interface TeacherService {
 
 	// 교직원 탈퇴
 	public void deleteTeacher(String teacher_id);
+
+	
+	//승인 체크
+	public int acceptCheck(String teacher_id);
+
 }

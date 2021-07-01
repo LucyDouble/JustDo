@@ -34,7 +34,22 @@ public class SignUpController {
 		return "account/signUp";
 	}
 
-
+	@RequestMapping(value = "idCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public String idCheck(HttpServletRequest request, @RequestParam(name = "signUpSelect") String check) {
+		System.out.println(check);
+		if (check == "student" || check.equals("student")) {
+			String student_id = request.getParameter("id");
+			System.out.println(student_id);
+			int result = sService.idCheck(student_id);
+			return Integer.toString(result);
+		} else {
+			String teacher_id = request.getParameter("id");
+			System.out.println(teacher_id);
+			int result = tService.idCheck(teacher_id);
+			return Integer.toString(result);
+		}
+	}
 
 	@RequestMapping(value = "/emailCheck", method = RequestMethod.GET)
 	@ResponseBody
@@ -67,7 +82,7 @@ public String mailCheckGet(String email) throws Exception{
 /* 이메일 보내기 */
 	String setFrom = "rkdgns92@gmail.com";
 	String toMail = email;
-	String title = "JD EDU 회원가입 인증 이메일입니다.";
+	String title = "[JD 교육원] 회원가입 인증 이메일입니다.";
 	String content = "인증번호는 " + checkNum + "입니다.";
 	try {
 		MimeMessage message = mailSender.createMimeMessage();

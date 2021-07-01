@@ -34,6 +34,14 @@ public class TeacherDAO {
 		System.out.println(name);
 		return (Integer.parseInt(name) == 0) ? false : true;
 	}
+	
+	//승인 체크
+	public int acceptCheck(String teacher_id) {
+		System.out.println("acceptCheck");
+		int accept = sqlSession.selectOne("Teacher.acceptCheck", teacher_id);
+		System.out.println(accept);
+		return accept;
+	}
 
 	// 로그 아웃
 	public void logout(HttpSession session) {

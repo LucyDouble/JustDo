@@ -54,5 +54,6 @@ public class ManagerDAO {
 	//비승인 교직원 조회
 	public List<Teacher> teacherList(){
 		return sqlSession.selectList("Teacher.notAcceptTeacher");
-	};
+	}
+
 }
