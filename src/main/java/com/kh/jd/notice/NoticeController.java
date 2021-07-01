@@ -244,7 +244,7 @@ public class NoticeController {
 		
 //		response.setContentType("application/octet-stream");
 //		response.setContentLength(fileByte.length);
-		response.setHeader("Content-Disposition",  "attachment; fileName=http://res.cloudinary.com/jdec/image/upload/"+URLEncoder.encode(filename, "UTF-8")+"\";");
+		response.setHeader("Content-Disposition",  "attachment; fileName=http://res.cloudinary.com/jdec/image/upload/"+URLEncoder.encode(filename, "UTF-8"));
 //		response.getOutputStream().write(fileByte);
 		response.getOutputStream().flush();
 		response.getOutputStream().close();
