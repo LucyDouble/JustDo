@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+#section-teacher {
+    clear: both;
+    min-height: 1400px;
+}
+
+.tabmenu {
+  max-width:1200px; 
+  margin: 0 auto; 
+  position:relative; 
+}
+
+.tabmenu ul li {
+  display: inline-block;
+  width:33.33%; 
+  float:left;  
+  text-align:center; 
+  line-height:40px;
+}
+
+.tabmenu label {
+  display:block;
+  width:100%; 
+  height:40px;
+  line-height:40px;
+  font-weight: bold;
+}
+
+.tabmenu input {
+	display:none;
+}
+
+.tabmenu label:hover {
+	cursor: pointer;
+}
+
+.tabCon {
+	width: 100%;
+  display:none; 
+  text-align:left;
+  margin-top:50px; 
+  padding: 20px;
+  position:absolute; 
+  left:0; top:40px; 
+  box-sizing: border-box; 
+  /* border : 5px solid red; */
+}
+
+.tabmenu input:checked ~ label {
+  background:#DEDCEE;
+}
+
+.tabmenu input:checked ~ .tabCon {
+  display:block;
+}
+
+#teacher-img {
+	position: relative;
+	float: left;
+	margin-left: 20px;
+}
+#teacher-img img {
+    width: 150px;
+	height: 150px;
+	border: 1px solid grey;
+	border-radius: 50%;
+}
+
+#teacher-con {
+	float: left;
+	margin-left: 100px;
+}
+
+#enter {
+	clear: both;
+	margin-bottom: 80px;
+}
+
+#teacher-con h3 {
+	color: #EE2560;
+}
