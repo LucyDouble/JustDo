@@ -47,7 +47,8 @@
 					<!-- printWriter.println("<script>window.parent.CKEDITOR.tools.callFunction("+callback+",'"+fileUrl+"','이미지가 업로드되었습니다.')"+"</script>"); -->
 				<br>
 			</div>
-			
+			<input type="file" name="n_file" value="${notice.notice_filepath} "
+				style="float: left;">
 			<button type="submit" id="btnUpdate" class="button"><span>수정</span>
 			</button>
 		</form>

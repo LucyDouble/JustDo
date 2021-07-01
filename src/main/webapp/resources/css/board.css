@@ -37,6 +37,7 @@ body {
 
 .lc_page, .ac_page {
 	width: 1000px;
+	margin: auto;
 }
 
 .ln_title {

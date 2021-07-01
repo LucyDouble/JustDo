@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/common/header.css"/>">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/header.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
 </head>
@@ -34,7 +35,7 @@
                 <td class="vn_cont"><p class="vn_cont_p">작성일</p>&nbsp;&nbsp;${notice.notice_date }</td>
             </tr>
               <tr>
-                <td class="vn_cont"><p class="vn_cont_p">첨부파일</p>&nbsp;&nbsp;${notice.notice_filepath }</td>
+                <td class="vn_cont"><p class="vn_cont_p">첨부파일</p>&nbsp;&nbsp;<a href="fileDownload?fileName=${notice.notice_filename}">${notice.notice_filename }</a></td>
             </tr>
             <tr class="cont3">
                 <td class="vn_cont">${notice.notice_con }</td>
@@ -48,6 +49,8 @@
     <button id="btnUpdate" class="button" onclick="location.href='editNoticeForm?n_no=${notice.notice_no}'"><span>수정</span></button>
     <button id="btnRemove" class="button"><span>삭제</span></button>
     </div>
+    <script>
+    </script>
     <jsp:include page="../common/footer.jsp"></jsp:include>
     <jsp:include page="../notice/removeNotice.jsp"></jsp:include>
 </body>

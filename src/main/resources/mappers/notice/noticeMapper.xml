@@ -42,14 +42,15 @@
 		  		select nvl(max(notice_no),0)+1 cnt from notice
 			</selectKey>
 	        insert into notice values(	        
-	        	${numbc}, ${manager_number}, ${teacher_number}, #{notice_sub}, #{notice_con}, sysdate, #{notice_filepath}, #{hit} )
+	        	${numbc}, ${manager_number}, ${teacher_number}, #{notice_sub}, #{notice_con}, sysdate, #{notice_filepath}, #{hit}, #{notice_filename} )
 		</insert>
 		
 		<!-- 글수정 -->
 		<update id="editNotice" parameterType="Notice" >
 			update notice set notice_sub = #{notice_sub},
 							  notice_con = #{notice_con},
-							  notice_date = sysdate
+							  notice_date = sysdate,
+							  notice_file = #{notice_file}
 			where
 				notice_no = ${notice_no}
 		</update>

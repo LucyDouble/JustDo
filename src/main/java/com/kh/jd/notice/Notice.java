@@ -11,6 +11,7 @@ public class Notice {
 	private String notice_con;
 	private String notice_date;
 	private String notice_filepath;
+	private String notice_filename;
 	private int manager_number;
 	private String manager_name;
 	private int teacher_number;
@@ -19,13 +20,14 @@ public class Notice {
 	private int hit;
 	private MultipartFile uploadFile;
 	
-	
+
 	@Override
 	public String toString() {
 		return "Notice [notice_no=" + notice_no + ", notice_sub=" + notice_sub + ", notice_con=" + notice_con
-				+ ", notice_date=" + notice_date + ", notice_no=" + notice_no + ", manager_number="
-				+ manager_number + ", manager_name=" + manager_name + ", teacher_number=" + teacher_number
-				+ ", teacher_name=" + teacher_name + ", rnum=" + rnum + ", hit=" + hit + "]";
+				+ ", notice_date=" + notice_date + ", notice_filepath=" + notice_filepath + ", notice_filename="
+				+ notice_filename + ", manager_number=" + manager_number + ", manager_name=" + manager_name
+				+ ", teacher_number=" + teacher_number + ", teacher_name=" + teacher_name + ", rnum=" + rnum + ", hit="
+				+ hit + ", uploadFile=" + uploadFile + "]";
 	}
 
 
@@ -143,10 +145,20 @@ public class Notice {
 		return uploadFile;
 	}
 
-
 	public void setUploadFile(MultipartFile uploadFile) {
 		this.uploadFile = uploadFile;
 	}
+
+
+	public String getNotice_filename() {
+		return notice_filename;
+	}
+
+
+	public void setNotice_filename(String notice_filename) {
+		this.notice_filename = notice_filename;
+	}
+	
 }
 
 	
