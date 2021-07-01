@@ -35,7 +35,7 @@
                 <td class="vn_cont"><p class="vn_cont_p">작성일</p>&nbsp;&nbsp;${notice.notice_date }</td>
             </tr>
               <tr>
-                <td class="vn_cont"><p class="vn_cont_p">첨부파일</p>&nbsp;&nbsp;<a href="fileDownload?fileName=${notice.notice_filename}">${notice.notice_filename }</a></td>
+                <td class="vn_cont"><p class="vn_cont_p">첨부파일</p>&nbsp;&nbsp;<a href="fileDownload?fileName=${notice.notice_filepath}">${notice.notice_filename }</a></td>
             </tr>
             <tr class="cont3">
                 <td class="vn_cont">${notice.notice_con }</td>

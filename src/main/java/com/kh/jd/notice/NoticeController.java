@@ -132,7 +132,7 @@ public class NoticeController {
 			}
 //			String path = "\\resources\\imageUpload\\";
 //			map.put("notice_filepath", path + multiFile.getOriginalFilename());
-//			map.put("notice_filename", multiFile.getOriginalFilename());
+			map.put("notice_filename", multiFile.getOriginalFilename());
 			map.put("notice_filepath", url);
 //			map.put("notice_filename", multiFile.getOriginalFilename());
 		} catch (Exception e) {
@@ -194,7 +194,10 @@ public class NoticeController {
 	public void downloadFile(HttpServletRequest request,HttpServletResponse response) throws Exception {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 //		String savePath = root + "\\imageUpload";
-		String filename = request.getParameter("fileName"); // 네임넣기
+		String filename = request.getParameter("fileName").substring(44); // 네임넣기
+		System.out.println("filename ="+filename);
+		
+//		String fileroot = request.getParameter()
 //		String realFilename = "";
 //		System.out.println(filename);
 //		
@@ -237,12 +240,12 @@ public class NoticeController {
 //	        } catch (Exception e) {
 //	            System.out.println("FileNotFoundException : " + e);
 //	        }
-		byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("D:\\final\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\JustDo\\resources\\imageUpload\\"+filename));
+//		byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File(""+filename));
 		
-		response.setContentType("application/octet-stream");
-		response.setContentLength(fileByte.length);
-		response.setHeader("Content-Disposition",  "attachment; fileName=\""+URLEncoder.encode(filename, "UTF-8")+"\";");
-		response.getOutputStream().write(fileByte);
+//		response.setContentType("application/octet-stream");
+//		response.setContentLength(fileByte.length);
+		response.setHeader("Content-Disposition",  "attachment; fileName=http://res.cloudinary.com/jdec/image/upload/"+URLEncoder.encode(filename, "UTF-8")+"\";");
+//		response.getOutputStream().write(fileByte);
 		response.getOutputStream().flush();
 		response.getOutputStream().close();
 	    }
