@@ -1,5 +1,7 @@
 package com.kh.jd.account;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
@@ -18,4 +20,7 @@ public interface ManagerService {
 	
 	//로그아웃
 	public void logout(HttpSession session);
+	
+	//비승인 교직원 조회
+	public List<Teacher> teacherList();
 }

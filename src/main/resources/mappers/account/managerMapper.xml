@@ -26,7 +26,6 @@
 	</select>
 		<select id="idCheck" resultType="int">
 		SELECT count(*) FROM MANAGERS WHERE ID = #{id} AND PASSWORD = #{password};
-
 	</select>
 
 </mapper>

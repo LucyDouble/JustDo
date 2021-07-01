@@ -8,7 +8,7 @@
 	<div id="top_menu">
 		<c:choose>
 			<c:when
-				test="${sessionScope.student_id == null && sessionScope.teacher_id ==null}">
+				test="${sessionScope.student_id == null && sessionScope.teacher_id ==null && sessionScope.manager_id == null}">
 				<a href="login">로그인</a>
 				<a href="signUp" id="signUp">회원가입</a>
 			</c:when>
@@ -37,7 +37,7 @@
 				<div id="drop_content">
 					<c:choose>
 						<c:when
-							test="${sessionScope.student_id == null && sessionScope.teacher_id ==null}">
+							test="${sessionScope.student_id == null && sessionScope.teacher_id ==null && sessionScope.manager_id == null}">
 							<a href="login" id="login">로그인</a>
 							<a href="signUp">회원가입</a>
 							<a href="<%=request.getContextPath()%>/lecture">수강과목</a>
@@ -45,15 +45,15 @@
 						<c:otherwise>
 							<a href="logout" id="logout">로그아웃</a>
 							<c:if
-								test="${sessionScope.student_id !=null && sessionScope.teacher_id == null }">
+								test="${sessionScope.student_id !=null && sessionScope.teacher_id == null && sessionScope.manager_id == null && sessionScope.manager_id == null}">
 								<a href="editStudentForm">수강생 정보수정</a>
 							</c:if>
 							<c:if
-								test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null }">
+								test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
 								<a href="lecture">강의등록</a>
 							</c:if>
 							<c:if
-								test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null }">
+								test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
 								<a href="editTeacherForm">교직원 정보수정</a>
 							</c:if>
 						</c:otherwise>

@@ -1,5 +1,7 @@
 package com.kh.jd.account;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,11 @@ ManagerDAO dao;
 	@Override
 	public void logout(HttpSession session) {
 		dao.logout(session);
+	}
+
+	@Override
+	public List<Teacher> teacherList() {
+		return dao.teacherList();
 	}
 	
 	

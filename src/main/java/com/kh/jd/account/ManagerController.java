@@ -3,6 +3,9 @@ package com.kh.jd.account;
 
 
 
+
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -131,7 +134,12 @@ public String loginCheck(Manager aDto, HttpSession session, HttpServletRequest r
 	}
 	return "common/main";
 }
-
+@RequestMapping(value="acceptTeacher")
+	public String acceptTeacher(HttpSession session, Model model) {
+	List<Teacher> list = mService.teacherList();
+	model.addAttribute("list", list);
+	return "account/acceptPage";
+}
 }
 	
 

@@ -1,5 +1,8 @@
 package com.kh.jd.account;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -40,4 +43,16 @@ public class ManagerDAO {
 		Manager result = sqlSession.selectOne("Manager.infoManager", dto);
 		return result;
 	}
+	
+	//교직원 승인
+	public void acceptTeacher(String teacher_id, int teacher_accept) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", teacher_id);
+		map.put("teacher_accept", teacher_accept);
+		sqlSession.update("acceptTeacher", teacher_accept);
+	}
+	//비승인 교직원 조회
+	public List<Teacher> teacherList(){
+		return sqlSession.selectList("Teacher.notAcceptTeacher");
+	};
 }
