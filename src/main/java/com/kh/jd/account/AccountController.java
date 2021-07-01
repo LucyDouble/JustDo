@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ManagerController {
+public class AccountController {
 
 	@Autowired
 	StudentService sService;
