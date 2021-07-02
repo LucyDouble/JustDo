@@ -23,8 +23,10 @@
 		<a href="<%=request.getContextPath()%>/jdHome?command=main"><img
 			class="logo" src="resources/images/logo.png"></a> <br> <br>
 		<div class="select">
-			<input type="radio" id="select" name="signUpSelect" checked="checked" value="student"><label for="select">수강생</label> 
-			<input	type="radio" id="select2" name="signUpSelect" value="teacher"><label for="select2">교직원</label>
+			<input type="radio" id="select" name="signUpSelect" checked="checked"
+				value="student"><label for="select">수강생</label> <input
+				type="radio" id="select2" name="signUpSelect" value="teacher"><label
+				for="select2">교직원</label>
 		</div>
 		<br>
 		<!-- 아이디 -->
@@ -33,6 +35,7 @@
 				style="width: 250px; height: 30px" class="form-control" id="id"
 				name="id" placeholder="ID" required>
 			<div class="check_font" id="id_check"></div>
+			<br>
 		</div>
 		<!-- 비밀번호 -->
 		<div class="password-group">
@@ -40,6 +43,7 @@
 				style="width: 250px; height: 30px" class="form-control"
 				id="password" name="password" placeholder="PASSWORD" required>
 			<div class="check_font" id="pw_check"></div>
+			<br>
 		</div>
 		<!-- 비밀번호 재확인 -->
 		<div class="passwordCheck-group">
@@ -48,6 +52,7 @@
 				style="width: 250px; height: 30px" placeholder="Confirm Password"
 				required>
 			<div class="check_font" id="pw2_check"></div>
+			<br>
 		</div>
 		<!-- 이름 -->
 		<div class="name-group">
@@ -55,13 +60,14 @@
 				style="width: 250px; height: 30px" class="form-control" id="name"
 				name="name" placeholder="Name" required>
 			<div class="check_font" id="name_check"></div>
+			<br>
 		</div>
 		<div class="address_group">
 			<label for="address">주소</label><input type="button" id="post_btn"
 				onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 			<input type="text" style="width: 250px; height: 30px" id="address"
 				name="address" placeholder="주소를 입력해주세요"><br> <span
-				id="guide" style="color: #999; display: none"></span>
+				id="guide" style="color: #999; display: none"></span> <br>
 		</div>
 
 
@@ -74,7 +80,9 @@
 				<input class="email" name="email" id="email"
 					style="width: 250px; height: 30px">
 			</div>
-			<div class="check_font" id="email_check"></div>
+			<div class="check_font" id="email_check">
+				<br>
+			</div>
 			<div class="mail_check_button">
 				<button class="email_submit" id="email_submit">인증번호전송</button>
 				<div class="clearfix"></div>

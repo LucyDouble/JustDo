@@ -1,0 +1,63 @@
+@charset "UTF-8";
+@keyframes jelly{
+        from {transform: scale(1,1);}
+        30%{transform:scale(1.25,0.75);}
+        40%{transform:scale(0.75,1.25);}
+        50%{transform:scale(1.15,0.85);}
+        60%{transform:scale(0.95,1.05);}
+        70%{transform:scale(1.05,0.95);}
+        to {transform:scale(1,1);}
+    }
+body {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	/* width: 1400px */
+	margin: auto;
+	font-family: SCDream4;
+	height: auto;
+	min-height: 100%;
+}
+
+.button {
+	display: inline-block;
+	border-radius: 7px;
+	background-color: #6A60A9;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 15px;
+	width: 70px;
+	height: 35px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+}
+.index{
+	font-size : 20px;
+	color : #fff;
+	line-height : 2;
+	background-color : #6A60A9;
+	text-align : center;
+
+}
+.value{
+	font-size : 18px;
+	color: black;
+	line-height:1.4;
+}
+table{
+	margin-left: auto;
+	margin-right: auto;
+}
+td{
+	width : 200px;
+	height : 60px;
+}
+td:first-child {
+	border-radius: 7px 0 0 0;
+}
+
+td:last-child {
+	border-radius: 0 7px 0 0;
+}
