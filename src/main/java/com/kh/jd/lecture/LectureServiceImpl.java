@@ -61,17 +61,21 @@ public class LectureServiceImpl implements LectureService{
 	}
 	
 	@Override
-	@Scheduled(cron = "0 * * * * *") // 1분 주기
-//	@Scheduled(cron = "0 0 0 * * *") // 매일 자정 
+//	@Scheduled(cron = "0 * * * * *") // 1분 주기
+	@Scheduled(cron = "0 0 0 * * *") // 매일 자정 
 	public void scheduleState() {
-		System.out.println("1분마다 나와@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-//		System.out.println("@@@@@@자정에 확인@@@@@@");
+//		System.out.println("1분마다 나와@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println("@@@@@@자정에 확인@@@@@@");
 		try {
 			Ldao.scheduleState();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("---------스케줄러 에러-----------");
 		}
+	}
+	@Override
+	public Lecture addLecturePlan(Lecture lecture) {
+		return Ldao.addLecturePlan(lecture);
 	}
 
 }

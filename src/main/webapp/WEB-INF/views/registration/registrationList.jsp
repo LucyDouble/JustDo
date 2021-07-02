@@ -61,51 +61,57 @@
 								<td>${vo.name }</td>
 								<td>${vo.lecture_limit}</td>
 								<td>${vo.lecture_personnel}</td>
-								<td id="${vo.lectureclass_no}"><a href="javascript:void(0);" onclick="request('${vo.lectureclass_no}','${vo.lecture_no }');">신청</a></td>
+								<td><a href="javascript:void(0);" onclick="request('${vo.lectureclass_no}','${vo.lecture_no }');">신청</a></td>
 								<td><a href="javascript:void(0);" onclick="pop('${vo.lecture_no}', '${ vo.lectureclass_class}');">보기</a></td>
 							</tr>
 							</c:forEach>
 						</tbody>					
 				</table>
 			
-			<c:if test="${keyword !='' }">
-			<button class="button" onclick="location.href='registration'">
-					<span>목록</span>
-			</button>
-			</c:if>
-			
-			<div class="regis_page">
-			<c:if test="${startPage != 1 }">
-	   			<a href="<%=request.getContextPath() %>/registration?page=${startPage-1}&keyword=${keyword}">이전</a>
-			</c:if>
-			<c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
-	 			<c:if test="${p eq currentPage}">
-	 				<font color="#6A60A9" size="4"><b>[${p}]</b></font>
-	 			</c:if>
-	 			<c:if test="${p ne currentPage}">
-	 				<c:url var="listWorkChk" value="registration?keyword=${keyword}">
-	 				<c:param name="page" value="${p}" />
-	 				</c:url>
-	 				<a href="${listWorkChk}">${p}</a>
-	 			</c:if>
-	 		</c:forEach>
-			<c:if test="${endPage < pageCnt }">
-	   			<a href="<%=request.getContextPath() %>/registration?page=${endPage+1}&keyword=${keyword}">다음</a>
-			</c:if>
+				<c:if test="${keyword !='' }">
+				<button class="button" onclick="location.href='registration'">
+						<span>목록</span>
+				</button>
+				</c:if>
+				
+				<div class="regis_page">
+				<c:if test="${startPage != 1 }">
+		   			<a href="<%=request.getContextPath() %>/registration?page=${startPage-1}&keyword=${keyword}">이전</a>
+				</c:if>
+				<c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
+		 			<c:if test="${p eq currentPage}">
+		 				<font color="#6A60A9" size="4"><b>[${p}]</b></font>
+		 			</c:if>
+		 			<c:if test="${p ne currentPage}">
+		 				<c:url var="listWorkChk" value="registration?keyword=${keyword}">
+		 				<c:param name="page" value="${p}" />
+		 				</c:url>
+		 				<a href="${listWorkChk}">${p}</a>
+		 			</c:if>
+		 		</c:forEach>
+				<c:if test="${endPage < pageCnt }">
+		   			<a href="<%=request.getContextPath() %>/registration?page=${endPage+1}&keyword=${keyword}">다음</a>
+				</c:if>
+				</div>
+				<div id="calendar"></div>
+				<div class="warning">
+				<p>안내문</p>
+				<ul>
+					<li>안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</li>
+					<li>주의사항주의사항주의사항주의사항주의사항</li>
+					<li>주의사항주의사항주의사항주의사항주의사항</li>
+					<li>주의사항주의사항주의사항주의사항주의사항</li>
+				</ul>
+				</div>
 			</div>
-			<div id="calendar"></div>
-			<p>안내문</p>
-			<ul>
-				<li>안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</li>
-				<li>주의사항주의사항주의사항주의사항주의사항</li>
-				<li>주의사항주의사항주의사항주의사항주의사항</li>
-				<li>주의사항주의사항주의사항주의사항주의사항</li>
-			</ul>
-			</div>
 			
 			
 			
-			<div class="LC_content">
+			<div class="LC_content" id="LC_cont2">
+				<c:if test="${empty list2}">
+					<p class="warn">등록된 강의가 없습니다.</p>
+				</c:if>
+				<c:if test="${not empty list2}">
 				<table class="table">
 					<thead>
 							<tr>
@@ -134,18 +140,22 @@
 							</c:forEach>
 						</tbody>					
 				</table>
-			<br><br>
-			<div id="calendar2"></div>
-			<p>안내문</p>
-			<ul>
-				<li>안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</li>
-				<li>주의사항주의사항주의사항주의사항주의사항</li>
-				<li>주의사항주의사항주의사항주의사항주의사항</li>
-				<li>주의사항주의사항주의사항주의사항주의사항</li>
-			</ul>
+				</c:if>
+				<br><br>
+				<div id="calendar2"></div>
+				<div class="warning">
+					<p>안내문</p>
+					<ul>
+						<li>안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요</li>
+						<li>주의사항주의사항주의사항주의사항주의사항</li>
+						<li>주의사항주의사항주의사항주의사항주의사항</li>
+						<li>주의사항주의사항주의사항주의사항주의사항</li>
+					</ul>
+				</div>
 			</div>
 </div>
 <script>
+	/* 강의계획서 새창 출력 기능 */
 	function pop(num, num1){
 		var w = 800;
 		var h = 700;
@@ -153,6 +163,8 @@
 		var height = (window.screen.height-h) / 2;
 		window.open("lecturePlan?lecture_no="+num+"&lectureclass_class="+num1, "lecturePlan", "width="+w+", height="+h+", left="+width+", top="+height);
 	}
+	
+	/* 신청 클릭시 강의 신청 기능 */
 	function request(number, number1){
 		$.ajax({
     	url : "registrationAdd",
@@ -170,13 +182,17 @@
     	
     	}); 
 	}
+	
+	/* 탭메뉴 기능 */	
 	$(".LC_title_cont").click(function(){
 		var btn = $(this).index();
 		$(".LC_content").each(function(index, element){
 			if(btn ==index){
 				$(element).css("display","block");
+				/* $(element).show("fast"); */
 			}else{
 				$(element).css("display","none");
+				/* $(element).hide("fast"); */
 			}
 		});
 		$(".LC_title_cont").each(function(index, element){
@@ -189,8 +205,7 @@
 		});
 	});
 	
-    /* document.addEventListener('DOMContentLoaded', function() { */
-     /*  document.onload = function(){ */
+   	  /* 캘린더 출력 */
       var calendarEl = document.getElementById('calendar');
       var calendarEl2 = document.getElementById('calendar2');
     
@@ -222,11 +237,11 @@
 	    					var startdate=moment(element.lecture_start).format('YYYY-MM-DD');
 	    					var enddate=moment(enddate).format('YYYY-MM-DD');
 	    					var starttime = element.lectureclass_start;
-	    					var endtime = element.lectureclass_end;
 	    					events.push({
 	    						title: element.lecture_title,
+	    						color: "#6A60A9",
 	    						start: startdate+"T"+starttime,
-	    						end: enddate+"T"+endtime
+	    						end: enddate
 	    					});
 	    				});
 	    			}
@@ -237,10 +252,11 @@
       });
       var calendar2 = new FullCalendar.Calendar(calendarEl2, {
 	        businessHours: true,
+	        dayMaxEvents: true, // allow "more" link when too many events
 	    	locale: 'ko',
 	    	height: 550,
 	    	headerToolbar: {
-	    	        left: '',
+	    		 	left: 'dayGridMonth',
 	    	        center: 'title',
 	    	        right: 'prev,next today'
 	    	      },
@@ -261,9 +277,11 @@
 	    					}
 	    					var startdate=moment(element.lecture_start).format('YYYY-MM-DD');
 	    					var enddate=moment(enddate).format('YYYY-MM-DD');
+	    					var starttime = element.starttime;
 	    					events.push({
 	    						title: element.lecture_title,
-	    						start: startdate,
+	    						color: "#6A60A9",
+	    						start: startdate+"T"+starttime,
 	    						end: enddate
 	    					});
 	    				});
@@ -276,8 +294,7 @@
     
       calendar.render();
       calendar2.render();
-    /* }); */
-   /*  } */
+      $("#LC_cont2").hide("fast");
 </script>
 <jsp:include page="../common/footer.jsp"></jsp:include>
 </body>

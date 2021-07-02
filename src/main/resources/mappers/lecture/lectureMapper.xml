@@ -79,4 +79,15 @@
 		CALL pro_scheduled()
 	</select>
 	
+	<!-- 강의계획서 -->
+	<select id="addLecturePlan" resultType="Lecture" parameterType="Lecture">
+		select a.lecture_no, a.lecture_title, a.lecture_limit, a.lecture_major, 
+			a.lecture_reference, a.lecture_target, a.lecture_start, a.lecture_end,
+			b.lectureclass_class, to_char(b.lectureclass_start,'hh24:mi') lectureclass_start,
+			to_char(b.lectureclass_end,'hh24:mi') lectureclass_end, c.name, c.email
+		from lecture a 
+		inner join lectureclass b on a.lecture_no = b.lecture_no 
+		inner join teacher c on a.teacher_number = c.teacher_number
+		where a.lecture_no = #{lecture_no} and b.lectureclass_class = #{lectureclass_class}
+	</select>
 </mapper>

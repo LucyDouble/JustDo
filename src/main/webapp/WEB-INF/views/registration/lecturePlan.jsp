@@ -32,9 +32,9 @@
 							</tr>
 							<tr>
 								<th>교직원</th>
-								<td>${view.teacher_number}</td>
+								<td>${view.name}</td>
 								<th>E-mail</th>
-								<td>${view.teacher_number}</td>
+								<td>${view.email}</td>
 							</tr>
 							<tr>
 								<th>제한인원</th>

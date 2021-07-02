@@ -41,8 +41,14 @@ public class RegistrationController {
 			@RequestParam(name="page", defaultValue = "1") int page,
 			@RequestParam(name="keyword", defaultValue = "") String keyword) {
 		System.out.println("@@@@@@@@여기@@@@@@@@");
-		Student st= (Student)request.getSession().getAttribute("DTO");
-		int student_number=st.getStudent_number();
+		int student_number = 0;
+		try {
+			Student st= (Student)request.getSession().getAttribute("DTO");
+			student_number=st.getStudent_number();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("-----------수강목록, 신청 리스트 출력할때 학생 세션 오류------------");
+		}
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("keyword", keyword);
 		
@@ -81,8 +87,8 @@ public class RegistrationController {
 
 	// 강의계획서
 	@RequestMapping(value = "lecturePlan", method = RequestMethod.GET)
-	public String editLecture(Lecture lecture, Model m) {
-		m.addAttribute("view", LService.viewLectureClass(lecture));
+	public String addLecturePlan(Lecture lecture, Model m) {
+		m.addAttribute("view", LService.addLecturePlan(lecture));
 		return "/registration/lecturePlan";
 	}
 
@@ -105,9 +111,15 @@ public class RegistrationController {
 	@RequestMapping(value = "calendarAdd", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Registration> calendarAdd(HttpServletRequest request, HttpServletResponse response) {
-		Student st= (Student)request.getSession().getAttribute("DTO");
-		int student_number=st.getStudent_number();
-		System.out.println(RService.calendarAdd(student_number));
+		int student_number = 0;
+		try {
+			Student st= (Student)request.getSession().getAttribute("DTO");
+			student_number=st.getStudent_number();
+			System.out.println(RService.calendarAdd(student_number));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("-------캘린더 목록출력때 학생 정보 세션 오류---------");
+		} 
 		return RService.calendarAdd(student_number);
 	}
 	

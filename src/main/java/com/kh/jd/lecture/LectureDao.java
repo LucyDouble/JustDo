@@ -58,4 +58,7 @@ public class LectureDao {
 		sqlSession.selectOne("Lecture.scheduleState");
 	}
 	
+	public Lecture addLecturePlan(Lecture lecture) {
+		return sqlSession.selectOne("Lecture.addLecturePlan", lecture);
+	}
 }

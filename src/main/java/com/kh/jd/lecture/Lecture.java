@@ -24,6 +24,7 @@ public class Lecture {
 	private int lectureclass_no;
 	private String name;
 	private int rnum;
+	private String email;
 	
 	@Override
 	public String toString() {
@@ -34,7 +35,7 @@ public class Lecture {
 				+ lecture_end + ", lecture_state=" + lecture_state + ", lecture_check=" + lecture_check
 				+ ", lectureclass_class=" + lectureclass_class + ", lectureclass_start=" + lectureclass_start
 				+ ", lectureclass_end=" + lectureclass_end + ", lectureclass_no=" + lectureclass_no + ", name=" + name
-				+ ", rnum=" + rnum + "]";
+				+ ", rnum=" + rnum + ", email=" + email + "]";
 	}
 
 	public int getLecture_no() {
@@ -179,6 +180,14 @@ public class Lecture {
 
 	public void setRnum(int rnum) {
 		this.rnum = rnum;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }
