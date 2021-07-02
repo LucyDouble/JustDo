@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/jd/main.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/jd/aboutJD.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/common/header.css"/>">
+<script type="text/javascript" src="<c:url value="/resources/js/header.js"/>"></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
 </head>
 <body>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>

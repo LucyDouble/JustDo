@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <title>JD 교육원</title>
 <link rel="stylesheet"
-	href="<c:url value="/resources/css/common/main.css"/>">
+	href="<c:url value="/resources/css/jd/main.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/common/header.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
