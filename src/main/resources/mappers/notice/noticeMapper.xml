@@ -67,4 +67,5 @@
 			update notice set hit = hit+1
 			where notice_no = #{notice_no}
 		</update>
+		
 </mapper>
