@@ -78,10 +78,11 @@
 	<delete id="deleteTeacher">
 		DELETE FROM TEACHER WHERE ID=#{id}
 	</delete>
-	<update id="acceptTeacher" parameterType="hashmap">
+	<update id="acceptTeacher" parameterType="Teacher">
 		UPDATE TEACHER SET
 		ACCEPT = 1 where id = #{id}
 	</update>
+
 	<select id="notAcceptTeacher" parameterType="Teacher"
 		resultMap="TeacherMap">
 		SELECT * FROM TEACHER WHERE ACCEPT = 2 ORDER BY NAME

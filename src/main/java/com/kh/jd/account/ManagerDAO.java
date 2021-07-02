@@ -48,6 +48,12 @@ public class ManagerDAO {
 	public void acceptTeacher(String teacher_id) {
 		sqlSession.update("acceptTeacher", teacher_id);
 	}
+	
+	//교직원 승인 거부
+	public void denyTeacher(String teacher_id) {
+		sqlSession.update("deleteTeacher", teacher_id);
+	}
+	
 	//비승인 교직원 조회
 	public List<Teacher> teacherList(){
 		return sqlSession.selectList("Teacher.notAcceptTeacher");

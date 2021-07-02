@@ -132,6 +132,12 @@ public class AccountController {
 		model.addAttribute("list", list);
 		return "account/acceptPage";
 	}
+	@RequestMapping(value="denyTeacher", method = RequestMethod.GET)
+	public @ResponseBody String denyTeacher(Teacher teacherVO) {
+		String teacher_id = teacherVO.getId();
+		mService.denyTeacher(teacher_id);
+		return "account/acceptPage";
+	}
 	
 	@RequestMapping(value = "acceptTeacher", method = RequestMethod.GET)
 	public @ResponseBody String acceptTeacher(Teacher teacherVO) {

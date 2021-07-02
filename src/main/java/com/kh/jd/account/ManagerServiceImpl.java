@@ -46,6 +46,11 @@ ManagerDAO dao;
 		dao.acceptTeacher(teacher_id);
 		
 	}
+
+	@Override
+	public void denyTeacher(String teacher_id) {
+		dao.denyTeacher(teacher_id);
+	}
 	
 	
 

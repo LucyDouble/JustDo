@@ -26,4 +26,7 @@ public interface ManagerService {
 	
 	//교직원 승인
 	public void acceptTeacher(String teacher_id);
+	
+	//교직원 승인 거부
+	public void denyTeacher(String teacher_id);
 }

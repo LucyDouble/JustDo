@@ -78,6 +78,9 @@
 							<c:if
 								test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
 								<a href="editTeacherForm">교직원 정보수정</a>
+								</c:if>
+							<c:if test="${sessionScpoe.student_id == null && sessionScope.teacher_id == null && sessionScope.manager_id != null}">
+							<a href="acceptTeacherForm">교직원 승인</a>
 							</c:if>
 						</c:otherwise>
 					</c:choose>

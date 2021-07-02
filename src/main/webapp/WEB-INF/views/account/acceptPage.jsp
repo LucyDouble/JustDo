@@ -40,6 +40,7 @@
 	<br>
 </body>
 	<button id="acceptBtn" name="acceptBtn" value="승인">승인</button>
+	<button id="denyBtn" name="denyBtn" value="거절">거절</button>
 <script type="text/javascript">
 $("#acceptBtn").click(function(){
 		var frm = document.getElementById("acceptFrm");
@@ -50,8 +51,22 @@ $("#acceptBtn").click(function(){
 			frm.method="GET";
 			frm.submit();
 		}else{
-			alert("체크를 확인해주세요")
+			alert("체크를 확인해주세요");
 		}
+});
+$("#denyBtn").click(function(){
+	var frm = document.getElementById("acceptFrm");
+	var check = $("input:radio[name='id']").is(":checked");
+	if(check==true){
+		alert("삭제되었습니다.");
+		frm.action="denyTeacher";
+		frm.method="GET";
+		frm.submit();
+	}else{
+			alert("체크를 확인해주세요");
+		}
+		
+	
 });
 
 </script>
