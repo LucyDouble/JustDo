@@ -12,7 +12,7 @@
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src ="https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script> 
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/addWork.css"/>">
@@ -37,19 +37,22 @@
     </div>
     <br>
     <div class="choice_form">
-    	강의 선택 : 
+    	강의 선택 :
+		<div class="selectbox3">
+		<label for="lecture_no">${workDto.lecture_title }</label>  
     	<select name="lecture_no" id="lecture_no">
     		<option value="${workDto.lecture_no} " >${workDto.lecture_title }</option>
     		<c:forEach items="${lecturechk }" var="i">
     		<option value="${i.lecture_no }">${i.lecture_title }</option>
     		</c:forEach>
     	</select>
+    	</div>
     	<br>
           과제 시작 : 
-	<input type="date" name="work_start"  id="work_start" value="${workDto.work_start }"> 
+	<input type="date" name="work_start"  id="work_start" value="${workDto.work_start }"  class="selectbox2"> 
 	<br>
 	마감 날짜 : 
-	<input type="date" name="work_end" id="work_end"  value="${workDto.work_end }">
+	<input type="date" name="work_end" id="work_end"  value="${workDto.work_end }"  class="selectbox2">
     </div>
     <br>
     <div id="editor" class="form-group">
@@ -71,6 +74,35 @@
     <button type="button" class="button" id="cancle"><span>취소</span></button>
   </form>
   <script type="text/javascript">
+  $(document).ready(function() { 
+		var selectTarget = $('.selectbox3 select'); 
+		selectTarget.change(function(){ 
+			var select_name = $(this).children('option:selected').text(); 
+			$(this).siblings('label').text(select_name);
+			}); 
+		});
+	$(function() {
+		  var selectTarget = $('.selectbox3 select');
+
+		  // focus 가 되었을 때와 focus 를 잃었을 때
+		  selectTarget.on({
+		    'focus': function() {
+		      $(this).parent().addClass('focus');
+		    },
+		    'blur': function() {
+		      $(this).parent().removeClass('focus');
+		    }
+		  });
+
+		  selectTarget.change(function() {
+		    var select_name = $(this).children('option:selected').text();
+		    $(this).siblings('label').text(select_name);
+		    $(this).parent().removeClass('focus');
+		  });
+		});
+
+  
+  
 	  $("#edit").click(function(){
 	  	var frm=document.getElementById("frm");
 	  	var work_subject=document.getElementById("work_subject");
@@ -80,21 +112,22 @@
 	  	var work_content = document.getElementById("work_content");
 	  	
 	  	if(work_subject.value==""){
-	  		alert("제목을 입력해 주세요.");
+	  		swal("EMPTY TITLE","제목을 입력해 주세요.","warning");
 	  		return false;
 	  	}
 	  	else if(lecture_no.value=="back"){
-	  		alert("강의를 선택해 주세요.");
+	  		swal("EMPTY LECTURE","강의를 선택해 주세요.","warning");
 	  		return false;
 	  	}
 	  	else if(work_start.value=="" ||work_end.value==""){
-	  		alert("체출기간을 선택해 주세요."+work_start.value);
+	  		swal("EMPTY DATE","체출기간을 선택해 주세요.","warning");
 	  		return false;
 	  	}
 	  	else if(work_start.value>work_end.value){
-	  		alert("마감날짜는 "+work_start.value+"(시작날짜) 이후로 설정 해 주시길 바랍니다.");
+	  		swal("DATE ERROR","마감날짜는 "+work_start.value+"(시작날짜) 이후로 설정 해 주시길 바랍니다.","warning");
 	  		return false;
 	  	}
+	  	
 	  	frm.action="editWork";
 	      frm.method="POST";
 	      frm.submit();

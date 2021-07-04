@@ -11,7 +11,7 @@
 <!-- <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script> -->
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src ="https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/addWork.css"/>">
@@ -34,21 +34,24 @@
     </div>
     <br>
     <div class="choice_form">
-    	강의 선택 : 
+    	강의 선택 :
+		<div class="selectbox3">
+		<label for="lecture_no">${workDto.lecture_title }</label> 
     	<select name="lecture_no" id="lecture_no">
     		<option value="${examDto.lecture_no} " >${examDto.lecture_title }</option>
     		<c:forEach items="${lecturechk }" var="i">
     		<option value="${i.lecture_no }">${i.lecture_title }</option>
     		</c:forEach>
     	</select>
+    	</div>
     	<br>
       시험 날 : 
-	<input type="date" name="exam_date" id="exam_date" value="${examDto.exam_date }"> 
+	<input type="date" name="exam_date" id="exam_date" value="${examDto.exam_date }" class="selectbox2"> 
 	<br>
 	시험 시작 : 
-	<input type="time" name="exam_start" id="exam_start" value="${examDto.exam_start }">
+	<input type="time" name="exam_start" id="exam_start" value="${examDto.exam_start }" class="selectbox4">
 	시험 종료 : 
-	<input type="time" name="exam_end" id="exam_end" value="${examDto.exam_end }">
+	<input type="time" name="exam_end" id="exam_end" value="${examDto.exam_end }" class="selectbox4">
     </div>
     <br>
     <div id="editor" class="form-group">
@@ -81,6 +84,33 @@
     <button type="button" class="button" id="cancle"><span>취소</span></button>
   </form>
   <script type="text/javascript">
+  $(document).ready(function() { 
+		var selectTarget = $('.selectbox3 select'); 
+		selectTarget.change(function(){ 
+			var select_name = $(this).children('option:selected').text(); 
+			$(this).siblings('label').text(select_name);
+			}); 
+		});
+	$(function() {
+		  var selectTarget = $('.selectbox3 select');
+
+		  // focus 가 되었을 때와 focus 를 잃었을 때
+		  selectTarget.on({
+		    'focus': function() {
+		      $(this).parent().addClass('focus');
+		    },
+		    'blur': function() {
+		      $(this).parent().removeClass('focus');
+		    }
+		  });
+
+		  selectTarget.change(function() {
+		    var select_name = $(this).children('option:selected').text();
+		    $(this).siblings('label').text(select_name);
+		    $(this).parent().removeClass('focus');
+		  });
+		});  
+  
 	  $("#edit").click(function(){
 		  var frm=document.getElementById("frm");
 		  	var exam_subject=document.getElementById("exam_subject");
@@ -90,19 +120,19 @@
 		  	var exam_end = document.getElementById("exam_end");
 		  	var exam_content = document.getElementById("exam_content");
 		  	if(exam_subject.value==""){
-		  		alert("제목을 입력해 주세요.");
+		  		swal("EMPTY TITLE","제목을 입력해 주세요.","warning");
 		  		return false;
 		  	}
 		  	else if(lecture_no.value=="back"){
-		  		alert("강의를 선택해 주세요.");
+		  		swal("EMPTY LECTURE","강의를 선택해 주세요.","warning");
 		  		return false;
 		  	}
 		  	else if(exam_date.value==""||exam_start.value=="" ||exam_end.value==""){
-		  		alert("시험 일자(시간)을 선택해 주세요.");
+		  		swal("EMPTY DATE","시험기간을 선택해 주세요.","warning");
 		  		return false;
 		  	}
 		  	else if(exam_start.value>exam_end.value){
-		  		alert("종료 시간은 시작 시작 이후로 설정 해 주시길 바랍니다.");
+		  		swal("TIMR ERROR","종료 시간은 시작 시작 이후로 설정 해 주시길 바랍니다.","warning");
 		  		return false;
 		  	}
 	  	frm.action="editExam";

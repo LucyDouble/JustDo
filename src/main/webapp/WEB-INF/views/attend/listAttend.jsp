@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src ="https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
@@ -16,99 +16,23 @@
 <script type="text/javascript"
 	src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/listWork.css"/>">
-<script src="https://kit.fontawesome.com/afd6aa68df.js"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/common/header.css"/>">
-<script type="text/javascript"
-	src="<c:url value="/resources/js/header.js"/>"></script>
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/common/footer.css"/>">
-<style>
-.container {
-	display: none;
-	top: 150px;
-	width: 500px;
-	height: 500px;
-	z-index: 1;
-	position: fixed;
-}
+<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/listAttend.css"/>">
+<script src="https://kit.fontawesome.com/afd6aa68df.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/common/header.css"/>">
+<script type="text/javascript" src="<c:url value="/resources/js/header.js"/>"></script>
+<link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
 
-.selectbox {
-	display: inline-block;
-	position: relative;
-	width: 320px;
-	height: 30px;
-	line-height: 30px;
-	background:
-		url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
-		no-repeat 95% 50%;
-	border: 1px solid #DEDCEE;
-	z-index: 1;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
-		ease-in-out .15s;
-	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
-		.15s;
-	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-}
-
-.selectbox label {
-	position: absolute;
-	top: 0px;
-	left: 5px;
-	height: 30px;
-	line-height: 30px;
-	color: #999;
-	z-index: -1;
-	border-radius: 3px;
-}
-
-.selectbox select {
-	width: 100%;
-	height: 30px;
-	line-height: 30px;
-	font-family: inherit;
-	border: 0;
-	opacity: 0;
-	border-radius: 3px;
-	filter: alpha(opacity = 0);
-	-webkit-appearance: none; /* 네이티브 외형 감추기 */
-	-moz-appearance: none;
-	appearance: none;
-}
-/* focus 효과 */
-.selectbox.focus {
-  border-color: #66afe9;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
-}
-.chbutton {
-	display: inline-block;
-	border-radius: 7px;
-	background-color: #6A60A9;
-	border: none;
-	color: #FFFFFF;
-	text-align: center;
-	font-size: 15px;
-	width: 70px;
-	height: 35px;
-	transition: all 0.5s;
-	cursor: pointer;
-	margin: 5px;
-}
-</style>
 </head>
 <body>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div class="ln_page">
-
-		<p class="ln_title">출석하기</p>
+		<c:if test="${empty attendList }">
+			<p class="ln_title">출석하기</p>
+		</c:if>
+		<c:if test="${not empty attendList }">
+			<p class="ln_title">${lecture_title }</p>
+		</c:if>
 		<hr>
 		<div>
 			<form id="choiceFrm">
@@ -128,30 +52,48 @@
 		<hr>
 
 <c:if test="${not empty attendList }">
-
+		<input type="hidden" id="stu_no2" value="${stu_no}">
+		<input type="hidden" id="lecture_no2" value="${lecture_no}">
 		<div>
-			<input id="content" type="text" name="content" /> 
+			<input id="content" type="hidden" name="content" value="${content }"/>
 			<input type="button" id="check" class="chbutton" value="입실하기" /> 
 			<input type="button" id="execute" class="chbutton" value="QR생성" /> 
 			<input type="button" id="check" class="chbutton" value="퇴실하기" /> 
-			<img id="img" style="display: none; width: 250px; height: 250px;" onload="this.style.display = 'block'" />
+			<!-- <img id="img" style="display: none; width: 250px; height: 250px;" onload="this.style.display = 'block'" /> -->
 		</div>
 
 
 		<HR>
-
-		<div class="container" id="container">
+<div class="videoModal">
+		<div class="container" id="container" >
 			<p id="closeScan">&#10006;</p>
-			<div class="col-md-6">
+			<div class="col-md-6" style="width: 100%;">
 				<video id="preview" width="100%"></video>
 			</div>
 		</div>
-		<div class="scan_con">
+</div>
+	<br>
+		<div class="scan_con" style="display: none;">
 			<label>SCAN QR CODE</label> <input type="text" name="text" id="text"
 				readonyy="" placeholder="scan qrcode" class="form-control">
 		</div>
 
-		<hr>
+
+	<div class="rc_background2">
+		<div class="popup2">
+			<div class="cd-popup-container2">
+				<div class="rc_cont2">
+			<img id="img" style=" width: 350px; height: 350px;" onload="this.style.display = 'inline-block'" />
+				</div>
+				<ul id="close2" class="cd-buttons2">
+					<li class="rc_li2"><a class="rc_a2" id="rc_close2">닫기</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+
 		<table class="table">
 				<thead>
 					<tr>
@@ -194,7 +136,7 @@
 		var frm = document.getElementById("choiceFrm");
 		var lecture_no = document.getElementById("lecture_no");
 		if(lecture_no.value=="back"){
-	  		alert("강의를 선택해 주세요.");
+			swal("EMPTY TITLE","제목을 입력해 주세요.","warning");
 	  		return false;
 	  	}
 			frm.action="listAttend";
@@ -246,48 +188,76 @@
         console.error(e);
     });
 
-    scanner.addListener('scan',function(c){
+     scanner.addListener('scan',function(c){
     	var content = $("#content").val();
     	var container = document.getElementById("container");
         document.getElementById('text').value=c;
         if(content==c){
-        	alert("출석이 되었습니다.")
-        	container.style.display ="none"
+        	swal("출석이 되었습니다.","퇴실 인증을 안할 시 결석으로 처리 됩니다.","success");
+        	/* alert("출석이 되었습니다.") */
+        	document.querySelector(".videoModal").className = "videoModal";
         }else{
-        	alert("올바른 qr을 입력해주세요.")
-        	container.style.display ="none"
+        	swal("Fail","올바른 qr을 입력해주세요.","warning");
+        	/* alert("올바른 qr을 입력해주세요.") */
+        	document.querySelector(".videoModal").className = "videoModal";
         }
-    });
-	
-	
-  
-	
+    }); 
+
 	
 		$("#execute").click(function(){
-			alert("s");
-			
+			document.querySelector(".rc_background2").className = "rc_background2 show2";
 			url="qr";
+		
+			var stu_no = $("#stu_no2").val();
+			var lecture_no = $("#lecture_no2").val();
+			$("#img").attr("src",url+"?stu_no="+stu_no+"&lecture_no="+lecture_no);
+			$.ajax({
+				url:'qr2'
+		 			,type:'post'
+		 			,data: {stu_no:stu_no
+		 						,lecture_no:lecture_no }
+		 			,success :function(data){
+		 					$("#content").val(data);	
+		 			
+		 			}
+			});
 			
-			var content = $("#content").val();
-			$("#img").attr("src",url+"?content="+content);
 		});
+		document.querySelector("#rc_close2").addEventListener("click", removeclose);
+		
+		function removeclose() {
+	        document.querySelector(".rc_background2").className = "rc_background2";
+	      }
+/* 		$("#execute").click(function(){
+			url="qr";
+		
+			var stu_no = $("#stu_no2").val();
+			var lecture_no = $("#lecture_no2").val();
+			$("#img").attr("src",url+"?stu_no="+stu_no+"&lecture_no="+lecture_no);
+			$.ajax({
+				url:'qr2'
+		 			,type:'post'
+		 			,data: {stu_no:stu_no
+		 						,lecture_no:lecture_no }
+		 			,success :function(data){
+		 					$("#content").val(data);	
+		 			
+		 			}
+			});
+			
+		}); */
 
 
 		$("#check").click(function(){
-			alert("스캐너야 열려라잉");
-			var content = $("#content").val();
-			var container = document.getElementById("container");
-	        var close = document.getElementById("closeScan");
-	        if(container.style.display ="none"){
-	        	container.style.display ="block"
-	         }
-
-	        close.onclick = function(){
-	        	container.style.display = "none";
-	        }
+			document.querySelector(".videoModal").className = "videoModal show";
 	        
 	        
 		});
+		document.querySelector("#closeScan").addEventListener("click", removeclose2);
+		
+		function removeclose2() {
+	        document.querySelector(".videoModal").className = "videoModal";
+	      }
 </script>
 </body>
 </html>
