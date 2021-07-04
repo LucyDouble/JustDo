@@ -10,4 +10,5 @@ public interface LectureClassService {
 	public List<LectureClass> listJoinClass(int startPage, int limit,Map<String, Object> map);
 	public int getlistCount(Map<String, Object> map);
 	public List<LectureClass> listCalendarClass(Map<String, Object> map);
+	public int addPersonnel(int lectureclass_no);
 }

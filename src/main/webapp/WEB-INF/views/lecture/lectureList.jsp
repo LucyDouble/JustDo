@@ -35,7 +35,6 @@
 								<th>강의기간</th>
 								<th>교직원</th>
 								<th>인원제한</th>
-								<th>수강인원</th>
 								<th>&nbsp;&nbsp;</th>
 							</tr>
 						</thead>
@@ -53,7 +52,6 @@
 									<td>${vo.lecture_start} ~ ${vo.lecture_end}</td>
 									<td>${vo.name}</td>
 									<td>${vo.lecture_limit}</td>
-									<td>${vo.lecture_personnel}</td>
 									<td><label class="checkbox">
 									<input type="radio" name="lectureNo" value="${vo.lecture_no}" class="checkbox"><span class="icon"></span></label></td>
 								</tr>

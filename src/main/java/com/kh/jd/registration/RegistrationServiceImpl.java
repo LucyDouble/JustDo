@@ -17,8 +17,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 
 	@Override
-	public Registration checkStudent(String number) {
-		return Rdao.checkStudent(number);
+	public Registration checkStudent(Registration registration) {
+		return Rdao.checkStudent(registration);
 	}
 
 	@Override

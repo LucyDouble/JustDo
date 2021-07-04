@@ -11,7 +11,6 @@ public class Lecture {
 	private String lecture_title;
 	private int lecture_limit;
 	private String lecture_major;
-	private int lecture_personnel;
 	private String lecture_reference;
 	private String lecture_target;
 	private Date lecture_start;
@@ -30,7 +29,7 @@ public class Lecture {
 	public String toString() {
 		return "Lecture [lecture_no=" + lecture_no + ", teacher_number=" + teacher_number + ", lecture_title="
 				+ lecture_title + ", lecture_limit=" + lecture_limit + ", lecture_major=" + lecture_major
-				+ ", lecture_personnel=" + lecture_personnel + ", lecture_reference=" + lecture_reference
+				+ ", lecture_reference=" + lecture_reference
 				+ ", lecture_target=" + lecture_target + ", lecture_start=" + lecture_start + ", lecture_end="
 				+ lecture_end + ", lecture_state=" + lecture_state + ", lecture_check=" + lecture_check
 				+ ", lectureclass_class=" + lectureclass_class + ", lectureclass_start=" + lectureclass_start
@@ -76,14 +75,6 @@ public class Lecture {
 
 	public void setLecture_major(String lecture_major) {
 		this.lecture_major = lecture_major;
-	}
-
-	public int getLecture_personnel() {
-		return lecture_personnel;
-	}
-
-	public void setLecture_personnel(int lecture_personnel) {
-		this.lecture_personnel = lecture_personnel;
 	}
 
 	public String getLecture_reference() {

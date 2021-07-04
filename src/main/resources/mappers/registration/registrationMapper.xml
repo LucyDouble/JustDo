@@ -10,25 +10,25 @@
 	<!-- 수강신청 -->
 	<insert id="addRegistration" parameterType="Registration">
 		INSERT INTO REGISTRATION VALUES(
-			SEQ_REGISTRATION.NEXTVAL, #{lectureclass_no}, #{student_number}
+			SEQ_REGISTRATION.NEXTVAL, #{lectureclass_no}, #{student_number}, 0
 		)
 	</insert>
 	
 	<!-- 수강인원 체크 -->
-	<select id="checkStudent" resultMap="RegistrationResult" parameterType="string">
-		SELECT COUNT(registration_no) FROM REGISTRATION WHERE lectureclass_no = #{lectureclass_no}
+	<select id="checkStudent" parameterType="Registration" resultType="Registration">
+		SELECT * FROM REGISTRATION WHERE  lectureclass_no = #{lectureclass_no} and student_number = #{student_number}
 	</select>
 	
 	<!-- 수강신청 시 캘린더에 출력 -->
 	<select id="addCalendar" parameterType="int" resultType="Registration">
-		select rownum rnum, R.*, o.lectureclass_class, to_char(o.lectureclass_start,'hh24:mi') starttime, o.lectureclass_end, o.lecture_title, o.lecture_reference, o.lecture_target, o.lecture_start, o.lecture_end 
+		select rownum rnum, R.*, o.lectureclass_class, to_char(o.lectureclass_start,'hh24:mi') starttime, to_char(o.lectureclass_end,'hh24:mi') endtime, o.lectureclass_end, o.lecture_title, o.lecture_reference, o.lecture_target, o.lecture_start, o.lecture_end 
 		from registration R join (select * from lectureclass LT join lecture L on lt.lecture_no = l.lecture_no) O
 		on r.lectureclass_no = O.lectureclass_no where student_number = #{student_number}
 	</select>
 	
 	<!-- 수강 목록 -->
 	<select id="listRegistration" parameterType="int" resultType="Registration">
-		select rownum rnum, R.*, b.lectureclass_class, to_char(b.lectureclass_start, 'hh24:mi') starttime, to_char(b.lectureclass_end, 'hh24:mi') endtime, b.lecture_title, b.lecture_reference, b.lecture_target, b.lecture_start, b.lecture_end, b.lecture_limit, b.lecture_personnel, b.name from registration R join 
+		select rownum rnum, R.*, b.lectureclass_class, to_char(b.lectureclass_start, 'hh24:mi') starttime, to_char(b.lectureclass_end, 'hh24:mi') endtime, b.lecture_title, b.lecture_reference, b.lecture_target, b.lecture_start, b.lecture_end, b.lecture_limit, b.lectureclass_personnel, b.name from registration R join 
 		(select * from lectureclass LC join (select * from lecture L join teacher T on L.teacher_number = T.teacher_number) A on LC.lecture_no = A.lecture_no) B
 		on r.lectureclass_no = B.lectureclass_no where student_number = #{student_number} order by rnum desc
 	</select>

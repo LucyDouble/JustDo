@@ -10,6 +10,7 @@ public class Registration {
 	private int registration_no;
 	private int lectureclass_no;
 	private int student_number;
+	private int registration_state;
 	private int lectureclass_class;
 	private Date lectureclass_start;
 	private Date lectureclass_end;
@@ -21,19 +22,20 @@ public class Registration {
 	private int rnum;
 	private String name;
 	private int lecture_limit;
-	private int lecture_personnel;
+	private int lectureclass_personnel;
 	private String starttime;
 	private String endtime;
 	
 	@Override
 	public String toString() {
 		return "Registration [registration_no=" + registration_no + ", lectureclass_no=" + lectureclass_no
-				+ ", student_number=" + student_number + ", lectureclass_class=" + lectureclass_class
-				+ ", lectureclass_start=" + lectureclass_start + ", lectureclass_end=" + lectureclass_end
-				+ ", lecture_title=" + lecture_title + ", lecture_reference=" + lecture_reference + ", lecture_target="
-				+ lecture_target + ", lecture_start=" + lecture_start + ", lecture_end=" + lecture_end + ", rnum="
-				+ rnum + ", name=" + name + ", lecture_limit=" + lecture_limit + ", lecture_personnel="
-				+ lecture_personnel + ", starttime=" + starttime + ", endtime=" + endtime + "]";
+				+ ", student_number=" + student_number + ", registration_state=" + registration_state
+				+ ", lectureclass_class=" + lectureclass_class + ", lectureclass_start=" + lectureclass_start
+				+ ", lectureclass_end=" + lectureclass_end + ", lecture_title=" + lecture_title + ", lecture_reference="
+				+ lecture_reference + ", lecture_target=" + lecture_target + ", lecture_start=" + lecture_start
+				+ ", lecture_end=" + lecture_end + ", rnum=" + rnum + ", name=" + name + ", lecture_limit="
+				+ lecture_limit + ", lectureclass_personnel=" + lectureclass_personnel + ", starttime=" + starttime + ", endtime="
+				+ endtime + "]";
 	}
 
 	public int getRegistration_no() {
@@ -58,6 +60,14 @@ public class Registration {
 
 	public void setStudent_number(int student_number) {
 		this.student_number = student_number;
+	}
+
+	public int getRegistration_state() {
+		return registration_state;
+	}
+
+	public void setRegistration_state(int registration_state) {
+		this.registration_state = registration_state;
 	}
 
 	public int getLectureclass_class() {
@@ -148,12 +158,12 @@ public class Registration {
 		this.lecture_limit = lecture_limit;
 	}
 
-	public int getLecture_personnel() {
-		return lecture_personnel;
+	public int getLectureclass_personnel() {
+		return lectureclass_personnel;
 	}
 
-	public void setLecture_personnel(int lecture_personnel) {
-		this.lecture_personnel = lecture_personnel;
+	public void setLectureclass_personnel(int lectureclass_personnel) {
+		this.lectureclass_personnel = lectureclass_personnel;
 	}
 
 	public String getStarttime() {
@@ -171,5 +181,6 @@ public class Registration {
 	public void setEndtime(String endtime) {
 		this.endtime = endtime;
 	}
+	
 	
 }

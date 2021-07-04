@@ -43,4 +43,7 @@ public class LectureClassDao {
 	public List<LectureClass> listCalendarClass(Map<String, Object> map){
 		return sqlSession.selectList("LectureClass.listCalendarClass", map);
 	}
+	public int addPersonnel(int lectureclass_no) {
+		return sqlSession.update("LectureClass.addPersonnel", lectureclass_no);
+	}
 }

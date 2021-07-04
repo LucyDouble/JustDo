@@ -11,6 +11,7 @@ public class LectureClass {
 	private int lectureclass_class;
 	private String lectureclass_start;
 	private String lectureclass_end;
+	private int lectureclass_personnel;
 	private int rnum;
 	private String lecture_title;
 	private int lecture_limit;
@@ -28,11 +29,12 @@ public class LectureClass {
 	public String toString() {
 		return "LectureClass [lectureclass_no=" + lectureclass_no + ", lecture_no=" + lecture_no
 				+ ", lectureclass_class=" + lectureclass_class + ", lectureclass_start=" + lectureclass_start
-				+ ", lectureclass_end=" + lectureclass_end + ", rnum=" + rnum + ", lecture_title=" + lecture_title
-				+ ", lecture_limit=" + lecture_limit + ", lecture_major=" + lecture_major + ", lecture_personnel="
-				+ lecture_personnel + ", lecture_reference=" + lecture_reference + ", lecture_target=" + lecture_target
-				+ ", lecture_start=" + lecture_start + ", lecture_end=" + lecture_end + ", lecture_state="
-				+ lecture_state + ", lecture_check=" + lecture_check + ", name=" + name + "]";
+				+ ", lectureclass_end=" + lectureclass_end + ", lectureclass_personnel=" + lectureclass_personnel
+				+ ", rnum=" + rnum + ", lecture_title=" + lecture_title + ", lecture_limit=" + lecture_limit
+				+ ", lecture_major=" + lecture_major + ", lecture_personnel=" + lecture_personnel
+				+ ", lecture_reference=" + lecture_reference + ", lecture_target=" + lecture_target + ", lecture_start="
+				+ lecture_start + ", lecture_end=" + lecture_end + ", lecture_state=" + lecture_state
+				+ ", lecture_check=" + lecture_check + ", name=" + name + "]";
 	}
 
 	public int getLectureclass_no() {
@@ -73,6 +75,14 @@ public class LectureClass {
 
 	public void setLectureclass_end(String lectureclass_end) {
 		this.lectureclass_end = lectureclass_end;
+	}
+
+	public int getLectureclass_personnel() {
+		return lectureclass_personnel;
+	}
+
+	public void setLectureclass_personnel(int lectureclass_personnel) {
+		this.lectureclass_personnel = lectureclass_personnel;
 	}
 
 	public int getRnum() {

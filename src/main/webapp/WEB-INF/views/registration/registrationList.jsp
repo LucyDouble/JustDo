@@ -52,7 +52,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="vo" items="${list}">
+							<c:forEach var="vo" items="${list}" varStatus="status">
 							<tr>
 								<td>${vo.rnum }</td>
 								<td>${vo.lectureclass_class }</td>
@@ -60,8 +60,13 @@
 								<td>${vo.lectureclass_start } ~ ${vo.lectureclass_end }</td>
 								<td>${vo.name }</td>
 								<td>${vo.lecture_limit}</td>
-								<td>${vo.lecture_personnel}</td>
+								<td>${vo.lectureclass_personnel}</td>
+								<c:if test="${vo.lectureclass_personnel < 30}">
 								<td><a href="javascript:void(0);" onclick="request('${vo.lectureclass_no}','${vo.lecture_no }');">신청</a></td>
+								</c:if>
+								<c:if test="${vo.lectureclass_personnel eq 30}">
+								<td style="color: red; font-weight: bold;">마감</td>
+								</c:if>
 								<td><a href="javascript:void(0);" onclick="pop('${vo.lecture_no}', '${ vo.lectureclass_class}');">보기</a></td>
 							</tr>
 							</c:forEach>
@@ -134,8 +139,8 @@
 								<td>${vo.starttime} ~ ${vo.endtime}</td>
 								<td>${vo.name }</td>
 								<td>${vo.lecture_limit}</td>
-								<td>${vo.lecture_personnel}</td>
-								<td><button>신청</button></td>
+								<td>${vo.lectureclass_personnel}</td>
+								<td><a href="" onclick="">수강취소</a></td>
 							</tr>
 							</c:forEach>
 						</tbody>					
@@ -168,13 +173,15 @@
 	function request(number, number1){
 		$.ajax({
     	url : "registrationAdd",
-    	method: "POST",
+    	type: "POST",
     	data : {
 					lectureclass_no : number,
 					lecture_no : number1
     	},
+    	dataType:"json",
     	success: function(data){
-    		
+    		alert(data.result);
+    		location.href="registration";
     	},
     	error : function(){
     		
@@ -211,9 +218,9 @@
     
       var calendar = new FullCalendar.Calendar(calendarEl, {
 	        businessHours: true,
-	        dayMaxEvents: true, // allow "more" link when too many events
+	        /* dayMaxEvents: true, // allow "more" link when too many events */
 	    	locale: 'ko',
-	    	height: 550,
+	    	height: 'auto',
 	    	headerToolbar: {
 	    	        left: 'dayGridMonth',
 	    	        center: 'title',
@@ -237,12 +244,23 @@
 	    					var startdate=moment(element.lecture_start).format('YYYY-MM-DD');
 	    					var enddate=moment(enddate).format('YYYY-MM-DD');
 	    					var starttime = element.lectureclass_start;
-	    					events.push({
-	    						title: element.lecture_title,
-	    						color: "#6A60A9",
-	    						start: startdate+"T"+starttime,
-	    						end: enddate
-	    					});
+	    					var endtime = element.lectureclass_end;
+	    					var myClass = element.lectureclass_class;
+	    					if(myClass==1){
+		    					events.push({
+		    						title: element.lecture_title+' ('+starttime+' ~ '+endtime+')',
+		    						color: "#6A60A9",
+		    						start: startdate,
+		    						end: enddate
+		    					});
+	    					}else{
+	    						events.push({
+		    						title: element.lecture_title+' ('+starttime+' ~ '+endtime+')',
+		    						color: "black",
+		    						start: startdate,
+		    						end: enddate
+		    					});
+	    					}
 	    				});
 	    			}
 	    			successCallback(events);
@@ -278,12 +296,23 @@
 	    					var startdate=moment(element.lecture_start).format('YYYY-MM-DD');
 	    					var enddate=moment(enddate).format('YYYY-MM-DD');
 	    					var starttime = element.starttime;
-	    					events.push({
-	    						title: element.lecture_title,
-	    						color: "#6A60A9",
-	    						start: startdate+"T"+starttime,
-	    						end: enddate
-	    					});
+	    					var endtime = element.endtime;
+	    					var myClass = element.lectureclass_class;
+	    					if(myClass==1){
+		    					events.push({
+		    						title: element.lecture_title+' ('+starttime+' ~ '+endtime+')',
+		    						color: "#6A60A9",
+		    						start: startdate,
+		    						end: enddate
+		    					});
+	    					}else{
+	    						events.push({
+		    						title: element.lecture_title+' ('+starttime+' ~ '+endtime+')',
+		    						color: "black",
+		    						start: startdate,
+		    						end: enddate
+		    					});
+	    					}
 	    				});
 	    			}
 	    			successCallback(events);

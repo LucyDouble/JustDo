@@ -15,8 +15,8 @@ public class RegistrationDao {
 		return sqlSession.insert("Registration.addRegistration", registration);
 	}
 
-	public Registration checkStudent(String number) {
-		return sqlSession.selectOne("Registration.checkStudent", number);
+	public Registration checkStudent(Registration registration) {
+		return sqlSession.selectOne("Registration.checkStudent", registration);
 	}
 	
 	public List<Registration> calendarAdd(int student_number) {

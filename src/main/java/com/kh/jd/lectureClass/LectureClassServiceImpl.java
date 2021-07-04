@@ -42,5 +42,10 @@ public class LectureClassServiceImpl implements LectureClassService {
 	public List<LectureClass> listCalendarClass(Map<String, Object> map) {
 		return LCdao.listCalendarClass(map);
 	}
+
+	@Override
+	public int addPersonnel(int lectureclass_no) {
+		return LCdao.addPersonnel(lectureclass_no);
+	}
 	
 }

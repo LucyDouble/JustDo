@@ -7,15 +7,17 @@
 	<result column="lectureclass_class" property="lectureclass_class"/>
 	<result column="lectureclass_start" property="lectureclass_start"/>
 	<result column="lectureclass_end" property="lectureclass_end"/>
+	<result column="lectureclass_personnel" property="lectureclass_personnel"/>
 </resultMap>
 
 <insert id="addLectureClass" parameterType="java.util.Map">
-	INSERT INTO LECTURECLASS(lectureclass_no ,lecture_no, lectureclass_class, lectureclass_start, lectureclass_end)
+	INSERT INTO LECTURECLASS(lectureclass_no ,lecture_no, lectureclass_class, lectureclass_start, lectureclass_end, lectureclass_personnel)
 	SELECT SEQ_LECTURECLASS.nextval, A.* from( 
 	<foreach collection="list" item="i" separator="UNION ALL ">
 	SELECT #{i.lecture_no} as lecture_no, #{i.lectureclass_class} as lectureclass_class,
 			to_date(#{i.lectureclass_start},'hh24:mi') as lectureclass_start,
-			to_date(#{i.lectureclass_end},'hh24:mi') as lectureclass_end
+			to_date(#{i.lectureclass_end},'hh24:mi') as lectureclass_end,
+			0
 	FROM dual
 	</foreach>) A
 </insert>
@@ -31,7 +33,8 @@
 <!-- 분반포함 목록 조회 -->
 <select id="listJoinClass" resultType="LectureClass" parameterType="hashMap">
 select rownum rnum, le.lecture_no, le.lectureclass_class, le.lectureclass_no, to_char(le.lectureclass_start,'hh24:mi') lectureclass_start, to_char(le.lectureclass_end,'hh24:mi') lectureclass_end,
-	lt.lecture_title, lt.lecture_limit, lt.lecture_major, lt.lecture_personnel, lt.lecture_reference, lt.lecture_target, 
+	le.lectureclass_personnel,
+	lt.lecture_title, lt.lecture_limit, lt.lecture_major, lt.lecture_reference, lt.lecture_target, 
 	lt.lecture_start, lt.lecture_end, lt.lecture_state, lt.lecture_check, lt.name
 from lectureclass LE join (select * from lecture L join teacher T on l.teacher_number = t.teacher_number) LT 
 on le.lecture_no= lt.lecture_no 
@@ -50,7 +53,8 @@ order by rnum desc
 <!-- 캘린더에 출력할 분반포함 목록 조회 -->
 <select id="listCalendarClass" resultType="LectureClass" parameterType="hashMap">
 select rownum rnum, le.lecture_no, le.lectureclass_class, le.lectureclass_no, to_char(le.lectureclass_start,'hh24:mi') lectureclass_start, to_char(le.lectureclass_end,'hh24:mi') lectureclass_end,
-	lt.lecture_title, lt.lecture_limit, lt.lecture_major, lt.lecture_personnel, lt.lecture_reference, lt.lecture_target, 
+	lectureclass_personnel,
+	lt.lecture_title, lt.lecture_limit, lt.lecture_major, lt.lecture_reference, lt.lecture_target, 
 	lt.lecture_start, lt.lecture_end, lt.lecture_state, lt.lecture_check, lt.name
 from lectureclass LE join (select * from lecture L join teacher T on l.teacher_number = t.teacher_number) LT 
 on le.lecture_no= lt.lecture_no 
@@ -58,5 +62,9 @@ where (lt.lecture_title like '%'||#{keyword}||'%' or lt.name like '%'||#{keyword
 order by rnum desc
 </select>
 
+<!-- 수강신청 시 인원수 추가 -->
+<update id="addPersonnel" parameterType="int">
+	update lectureclass set lectureclass_personnel=lectureclass_personnel+1 where lectureclass_no = #{lectureclass_no}
+</update>
 </mapper>
 
