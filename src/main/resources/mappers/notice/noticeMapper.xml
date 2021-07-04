@@ -50,7 +50,8 @@
 			update notice set notice_sub = #{notice_sub},
 							  notice_con = #{notice_con},
 							  notice_date = sysdate,
-							  notice_file = #{notice_file}
+							  notice_filepath = #{notice_filepath},
+							  notice_filename = #{notice_filename}
 			where
 				notice_no = ${notice_no}
 		</update>
@@ -68,4 +69,8 @@
 			where notice_no = #{notice_no}
 		</update>
 		
+		<!-- 파일삭제 셀렉 -->
+		<select id="checkNotice" parameterType="Notice" resultType="Notice">
+			select * from notice where notice_no = #{notice_no}
+		</select>
 </mapper>

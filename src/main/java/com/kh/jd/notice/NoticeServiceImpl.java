@@ -16,8 +16,6 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Override
 	//목록조회
-//	public List<Notice> listNotice() {
-//		return noticeDao.listNotice();
 	public List<Notice> listNotice(int startPage, int limit, Map<String, Object> map) {
 			return noticeDao.listNotice(startPage, limit, map);
 	}
@@ -49,5 +47,10 @@ public class NoticeServiceImpl implements NoticeService {
 	//페이징
 	public int getListCount(Map<String, Object> map) {
 		return noticeDao.getListCount(map);
+	}
+	@Override
+	public Notice checkNotice(Notice notice) {
+		//삭제셀렉문 
+		return noticeDao.checkNotice(notice);
 	}
 }

@@ -149,14 +149,38 @@ body {
 	float: right;
 }
 
+.file_label {
+	display: inline-block;
+	border-radius: 7px;
+	background-color: #6A60A9;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 15px;
+	width: 70px;
+	height: 35px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	float: right;
+}
+.file_label span {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+	top: 6px;
+}
+
 .button span {
 	cursor: pointer;
 	display: inline-block;
 	position: relative;
 	transition: 0.5s;
+	
 }
 
-.button span:after {
+.button span:after, .file_label span:after{
 	content: '*';
 	position: absolute;
 	opacity: 0;
@@ -165,11 +189,11 @@ body {
 	transition: 0.2s;
 }
 
-.button:hover span {
+.button:hover span, .file_label:hover span {
 	padding-right: 10px;
 }
 
-.button:hover span:after {
+.button:hover span:after, .file_label:hover span:after {
 	opacity: 1;
 	right: 0;
 }
@@ -214,6 +238,12 @@ body {
 	opacity: 1;
 	right: 0;
 }
+
+.file_del_btn{
+	width: 18px;
+    margin-left: 5px;
+}
+
 
 .ln_cont, .vn_cont {
 	text-align: left;
@@ -555,4 +585,7 @@ i{
 .lc_search_box:hover i{
     opacity: 0;
     z-index: -1;
+}
+.file_label{
+	float:left;
 }

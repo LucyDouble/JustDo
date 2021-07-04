@@ -50,4 +50,8 @@ public class NoticeDao {
 	public void hit(int notice_no) {
 		sqlSession.update("Notice.hit", notice_no);
 	}
+	// 삭제 셀렉문 
+	public Notice checkNotice(Notice notice) {
+		return sqlSession.selectOne("Notice.checkNotice", notice);
+	}
 }

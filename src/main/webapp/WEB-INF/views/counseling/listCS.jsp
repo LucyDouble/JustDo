@@ -16,8 +16,8 @@
 <script type="text/javascript" src="<c:url value="/resources/js/header.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://kit.fontawesome.com/afd6aa68df.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/afd6aa68df.js" crossorigin="anonymous"></script>
+<script src ="https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script> 
 </head>
 <body>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
@@ -108,7 +108,7 @@
 		//삭제 버튼 클릭시 모달팝업
 		function btnRemoveClick(){
 			if ($('input').is(":checked") == false){
-				alert("체크박스 선택 후 삭제 해주세요.");
+				swal ("NOT CHECKBOX","체크박스 선택 후 삭제 해주세요.", "warning");
 			} 
 			else{
 			document.querySelector(".rc_background").className = "rc_background show";

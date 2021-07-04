@@ -7,6 +7,7 @@
 <head>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.1/standard-all/ckeditor.js"></script>
+<script src ="https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script>
 <!-- 클래식 -->
 <!-- <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script> -->
 
@@ -73,8 +74,12 @@
 							"전송완료");
 				</script>
 			</div>
-			<br> <input type="file" name="notice_filepath" value="파일첨부"
-				style="float: left;">
+			<br> 
+			<input type="file" id="input-file" name="notice_filepath" value="파일첨부" style="float: left;">
+			<!-- <label for="input-file" class="file_label" ><span>파일</span></label>
+			<input type="file" id="input-file" name="notice_filepath" value="파일첨부" style="display:none"> -->
+			<!-- <label class="reg_file" style="margin:10px; float:left;">fileName</label> -->
+			
 		</form>
 		<button id="submitBtn" class="button" onclick="submitBtn();">
 			<span>등록</span>
@@ -88,20 +93,25 @@
 			var value = CKEDITOR.instances.editor1.getData();
 			console.log($("#subject").val());
 			console.log(value);
+			
 			if ($("#subject").val() == "") {
-				alert("작성된 제목이 없습니다.");
+				swal("THERE IS NO TITLE","작성된 제목이 없습니다.","warning");
 				return false;
 			}
 			if (value == "") {
-				alert("작성된 내용이 없습니다.");
+				swal("THERE IS NO CONTENT","작성된 내용이 없습니다.","warning");
 				return false;
-			}
+			} 
+			/* if (!$("#subject").val() == ""||!value == ""){
+				swal("글등록이 완료되었습니다.")
+			} */
 			var frm = document.getElementById("addForm");
 			frm.action = "addNotice";
 			frm.method = "POST";
 			frm.enctype = "multipart/form-data";
 			frm.submit();
 		}
+		
 	</script>
 
 

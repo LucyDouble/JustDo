@@ -33,6 +33,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -116,6 +117,7 @@ public class NoticeController {
 		String n_sub = "";
 		String n_con = "";
 		int hit = 0;
+		
 		t_no = request.getParameter("teacher_number");
 		m_no = request.getParameter("manager_number");
 		n_sub = request.getParameter("notice_sub");
@@ -128,17 +130,20 @@ public class NoticeController {
 		map.put("hit", hit);
 
 		try {
-			if (multiFile != null && !multiFile.equals("")) {
+			if (multiFile != null) {
+				if (multiFile.getSize() > 0) {
 //				String path = "resources\\fileUpload\\";   <- 이건 잘못된 방식임
-				String path = request.getServletContext().getRealPath("fileUpload/");
-				File filePath = new File(path); // 만약 fileUpload 폴더가 없다면 폴더생성해줌
-				if(!filePath.exists()) {
-					filePath.mkdirs();
+					String path = request.getServletContext().getRealPath("fileUpload/");
+					File filePath = new File(path); // 만약 fileUpload 폴더가 없다면 폴더생성해줌
+					
+					if (!filePath.exists()) {
+						filePath.mkdirs();
+					}
+					File files = new File(path, multiFile.getOriginalFilename());
+					FileCopyUtils.copy(multiFile.getBytes(), files);
+					map.put("notice_filename", multiFile.getOriginalFilename());
+					map.put("notice_filepath", path);
 				}
-				File files = new File(path, multiFile.getOriginalFilename());
-				FileCopyUtils.copy(multiFile.getBytes(), files);
-				map.put("notice_filename", multiFile.getOriginalFilename());
-				map.put("notice_filepath", path);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -154,6 +159,14 @@ public class NoticeController {
 		return mv;
 	}
 
+	// 파일 이름 변경
+//	@RequestMapping(value="/editName")
+//	@ResponseBody
+//	public String editName(@RequestParam(name="filename") String notice_filename ) {
+//		System.out.println("notice_filename =" + notice_filename);
+//		return notice_filename;
+//	}
+	
 	// 파일 다운로드
 	@RequestMapping(value = "/fileDownload", method = RequestMethod.GET)
 	public void fileDownload(Notice vo, HttpServletRequest req, HttpServletResponse res, @RequestParam(name = "n_no") int notice_no  ) throws Exception {
@@ -229,27 +242,91 @@ public class NoticeController {
 
 	// 글수정
 	@RequestMapping(value = "/editNotice", method = RequestMethod.POST)
-	public ModelAndView editNotice(HttpServletRequest request, MultipartFile multiFile) {
+	public ModelAndView editNotice(HttpServletRequest request, @RequestParam(name = "notice_filepath", required = false) MultipartFile multiFile) throws IOException {
 		ModelAndView mv = new ModelAndView(); // mv 객체 생성
 		Map<String, Object> map = new HashMap<String, Object>();
 		String n_no = "";
 		String n_sub = "";
 		String n_con = "";
-		String n_file = null;
+		
 		n_no = request.getParameter("n_no");
 		n_sub = request.getParameter("n_sub");
 		n_con = request.getParameter("editor1");
-		n_file = request.getParameter("n_file");
 
 		map.put("notice_no", n_no);
 		map.put("notice_sub", n_sub);
 		map.put("notice_con", n_con);
 
-		System.out.println("컨트롤러 map : " + map);
-		noticeService.editNotice(map);
-		mv.setViewName("redirect:/viewNotice?n_no=" + n_no);
+		
+		//첨부파일 추가
+		try {
+			if (multiFile != null) {
+				if (multiFile.getSize() > 0) {
+//				String path = "resources\\fileUpload\\";   <- 이건 잘못된 방식임
+					String path = request.getServletContext().getRealPath("fileUpload/");
+					System.out.println("path ="+path);
+					File filePath = new File(path); // 만약 fileUpload 폴더가 없다면 폴더생성해줌
+					System.out.println("filePath ="+filePath);
+					if (!filePath.exists()) {
+						filePath.mkdirs();
+					}
+					File files = new File(path, multiFile.getOriginalFilename());
+					FileCopyUtils.copy(multiFile.getBytes(), files);
+					map.put("notice_filename", multiFile.getOriginalFilename());
+					map.put("notice_filepath", path);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("파일 저장에 실패했습니다");
+		}
+		try {
+			System.out.println("수정 map : " + map);
+			noticeService.editNotice(map);
+			mv.setViewName("redirect:/listNotice");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mv;
-	}
+	} 
+	
+	// 첨부파일 삭제
+    @RequestMapping(value = "/delFile", method=RequestMethod.POST)
+    @ResponseBody
+    public void delFile(HttpServletRequest req, HttpServletResponse res, @RequestParam (name = "no") int notice_no, Notice no) {
+    	System.out.println("들어왔나영?");
+//        Map<String, Object> resultMap = new HashMap<String, Object>();
+        
+        try {
+//    		String path2 = req.getParameter("n_no");	//여기서 다시 게시그 ㄹ수정하는 sevice 태워서 데이터 가져와 list로 받아서
+        	System.out.println("notice_no ="+ notice_no);
+        	no.setNotice_no(notice_no);
+        	System.out.println("no ="+ no);
+    		Notice vo = noticeService.checkNotice(no);
+    		System.out.println("vo ="+ vo);
+    		String filepath = vo.getNotice_filepath();
+    		String filename = vo.getNotice_filename();
+    		String fileFull = filepath + filename;
+    		
+    		System.out.println("fileFull="+ fileFull);
+//    		
+    		File file = new File(fileFull);	//data list로 받아온거에서 path랑 filename 가져와서 여기서 지우고 (근데 안지워도 된다 이런건..)
+//    		//그냥 쓰레기 데이터로 남기는 개념 + 히스토리 용으로 파일은 안지움
+    		
+    		if(file.exists()==true) {
+    			file.delete();
+    		}
+    		//여기서 update 구문 실행 위에 select 하는거처럼 똑같이가서 update 날리고 결과값을 string으로 받아오셈
+    		// or 그냥 성공했다 치고 success 이런걸로 보내도 됨..
+        	// String success = prodService.yakDupCheck(commandMap.getMap());
+
+        	// resultMap.put("result", "success");	//대충 요런식으로?
+
+        	} catch (Exception e) {
+        		e.printStackTrace();
+        	} 
+//        		resultMap.put("result", "error");
+    }
 
 	// 글삭제
 	@RequestMapping(value = "/removeNotice", method = RequestMethod.GET)
@@ -307,6 +384,7 @@ public class NoticeController {
 							json.addProperty("fileName", fileName);
 							json.addProperty("url", fileUrl);
 							printWriter.println(json);
+							
 						}
 					} catch (IOException e) {
 						e.printStackTrace();
