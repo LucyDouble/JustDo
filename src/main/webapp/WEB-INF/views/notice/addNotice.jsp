@@ -31,7 +31,7 @@
 		<p class="an_title">공지사항 작성</p>
 		<br>
 		<form id="addForm" method="post" class="addForm"
-			enctype="multipart/form-data">
+			enctype="multipart/form-data" accept-charset="UTF-8">
 			<input type="hidden" name="manager_number" value="null"> <input
 				type="hidden" name="teacher_number" value="${DTO.teacher_number}">
 			<div class="form-group">
@@ -75,11 +75,12 @@
 				</script>
 			</div>
 			<br> 
-			<input type="file" id="input-file" name="notice_filepath" value="파일첨부" style="float: left;">
-			<!-- <label for="input-file" class="file_label" ><span>파일</span></label>
-			<input type="file" id="input-file" name="notice_filepath" value="파일첨부" style="display:none"> -->
+			<!-- <input type="file" id="input-file" name="notice_filepath" value="파일첨부" style="float: left;"> -->
+			<label for="input-file" class="file_label" ><span>파일</span></label>
+			<input type="file" id="input-file" class="input-file" name="notice_filepath" onchange="loadFile(this)">
 			<!-- <label class="reg_file" style="margin:10px; float:left;">fileName</label> -->
-			
+			<!-- <p style="margin:10px; float:left;">FILE NAME: </p> -->
+             <p id="fileName" class="fileName"></p>
 		</form>
 		<button id="submitBtn" class="button" onclick="submitBtn();">
 			<span>등록</span>
@@ -112,6 +113,12 @@
 			frm.submit();
 		}
 		
+		function loadFile(input) {
+		    var file = input.files[0];
+
+		    var name = document.getElementById('fileName');
+		    name.textContent = file.name;
+		}
 	</script>
 
 

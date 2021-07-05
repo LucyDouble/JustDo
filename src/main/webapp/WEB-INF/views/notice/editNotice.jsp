@@ -24,7 +24,7 @@
 	<div class="en_page">
 		<p class="en_title">게시글 수정</p>
 		<br>
-		<form action="editNotice" class="addForm" name="form" method="post">
+		<form id="editForm" method="post" class="editForm" enctype="multipart/form-data" accept-charset="UTF-8">
 		<input type="hidden" id="n_no" name="n_no" value="${notice.notice_no }" />	
 		<input type="hidden" id="n_filepath"  value="${notice.notice_filepath }" />	
 		<input type="hidden" id="n_filename"  value="${notice.notice_filename }" />	
@@ -53,23 +53,27 @@
 				<br>
 			</div>
 			
-			<%-- <c:if test="${empty notice.notice_filename  }" > --%>
 			<div id="sampel1">
 			<label for="input-file" class="file_label" ><span>파일</span></label>
-			<input type="file" id="input-file" name="n_file" style="display:none;">
+			<input type="file" id="input-file" class="input-file" name="notice_filepath" onchange="loadFile(this)">
 			</div>
-			<%-- </c:if> --%>
 			
-			<%-- <c:if test="${not empty notice.notice_filename }" > --%>
 			<div id="sample2">
-			<label  id="file_name" class="reg_file" style="margin:10px; float:left;">${notice.notice_filename }<img class="file_del_btn" src="resources/images/cross.png"></label>
+			<c:if test="${empty notice.notice_filename }">
+			<label  id="file_name" class="reg_file">${notice.notice_filename }
+			<input type="hidden" id="val0" value="0">
+			</label>
+			</c:if>
+			<c:if test="${!empty notice.notice_filename }">
+			<label  id="file_name" class="reg_file">${notice.notice_filename }
+			<img class="file_del_btn" src="resources/images/cross.png">
+			<input type="hidden" id="val0" value="1">
+			</label>
+			</c:if>
 			</div>
-			<%-- </c:if> --%>
 			
-			
-			
-			<button type="submit" id="btnUpdate" class="button"><span>수정</span></button>
 		</form>
+			<button id="btnUpdate" class="button" onclick="submitBtn()"><span>완료</span></button>
 		<button type="submit" class="button" onclick="location.href='listNotice'">
 			<span>취소</span>
 		</button>
@@ -77,52 +81,67 @@
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 <script>
-			// 첨부파일이 없을때 x버튼 안보이게 하기		
-			/* $("#file_name").val()==null){
-				$("#file_del_btn").hide();
-			} */
-			
-			//function aa(delFile){
-					$('.file_del_btn').click(function(){
-						var result = confirm("등록된 첨부파일을 삭제하시겠습니까?");
-						var n_no = $('#n_no').val(); 
-						console.log(n_no);
-						if(result){
-								/* 여기다가 그러치~~ 여기다가 ajax 쓰는게 좋겠지? */ 
-								$.ajax({
-									url:"delFile",
-									type:"post",
-									data:{ no : n_no},										
-									success: function(data) {
-									$('#file_name').empty();
-								}, error:function(data){
-									alert ("삭제에 실패했습니다.")
-								}
-								//머 대충 이렇게 될꺼임
-								// 여기서부터 소스
-								 /* if (data.result == "success"){
-									 $("#sample1").show();		//show 또는 아래처럼 style(display, inline 등 명령어로 처리)
-									 $("#sample2").hide();
-								 }else{
-									 alert(실패);
-								 } */
-									});
-								}
-							});
-				/* 	$(".file_label").click(function() {
-						$.ajax({
-							url:"editName",
-							type:"post",
-							data:{filename:  $("#input-file").val()},
-							success:function(data){
-								console.log()
-								var file = data.filename;
-								$("#file_name").empty().html(file)
-							}, error:function(data) {
-								alert("파일이름 변경 실패")
-							}
-						});					
-					}); */
-			//}
+	
+	$('.file_label').click(function() {
+		var fn = $("#val0").val();
+		console.log(fn);
+		if (fn == 1 ) {
+			var result = confirm("등록된 첨부파일을 변경하시겠습니까?"); 
+		} else if (fn == 0 ){
+			return true;
+			} 
+		 	if (!result) {
+			return false;
+		}
+	}); 
+	
+ 	$('.file_label').click(function() {
+		var fn = $("#val0").val();
+		console.log(fn);
+		if (fn == 1 ) {
+			var result = swal("등록된 첨부파일을 변경하시겠습니까?"); 
+		} else if (fn == 0 ){
+			return true;
+			} 
+		 	if (!result) {
+			return false;
+		}
+	});
+	
+	function submitBtn() {
+		var frm = document.getElementById("editForm");
+		frm.action = "editNotice";
+		frm.method = "POST";
+		frm.enctype = "multipart/form-data";
+		frm.submit();
+	}
+
+ 	$('.file_del_btn').click(function() {
+		var result = confirm("등록된 첨부파일을 삭제하시겠습니까?");
+		var n_no = $('#n_no').val();
+		console.log(n_no);
+		if (result) {
+			$.ajax({
+				url : "delFile",
+				type : "post",
+				data : {
+					no : n_no
+				},
+				success : function(data) {
+					$('#file_name').empty();
+				},
+				error : function(data) {
+					alert("삭제에 실패했습니다.")
+				}
+			});
+		}
+	});
+	
+	function loadFile(input) {
+		var file = input.files[0];
+
+		var name = document.getElementById('file_name');
+		name.textContent = file.name;
+	}
 </script>
 </html>

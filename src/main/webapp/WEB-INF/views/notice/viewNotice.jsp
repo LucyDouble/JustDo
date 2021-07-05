@@ -38,7 +38,8 @@
                 <td class="vn_cont"><p class="vn_cont_p">첨부파일</p>&nbsp;&nbsp;<a href="fileDownload?n_no=${notice.notice_no }">${notice.notice_filename }</a>  </td>
             </tr>
             <tr class="cont3">
-                <td class="vn_cont"><img src="${notice.notice_filepath}${notice.notice_filename}" >${notice.notice_con }</td>
+                <%-- <td class="vn_cont"><img src="${notice.notice_filepath}${notice.notice_filename}" >${notice.notice_con }</td> --%>
+                <td class="vn_cont">${notice.notice_con }</td>
             </tr>
 			 <tr>
                 <td class="vn_cont">댓글박스</td>

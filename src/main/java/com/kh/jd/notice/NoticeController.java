@@ -93,7 +93,10 @@ public class NoticeController {
 	public ModelAndView viewNotice(ModelAndView mv, @RequestParam(name = "n_no") int notice_no) {
 		Notice vo = new Notice();
 		vo = noticeService.viewNotice(notice_no);
+		
 		System.out.println("컨트롤러 vo=" + vo);
+		// addObject 하기전에 notice_filename 변수에 set해주기  
+		// notice_filename = new String(notice_filename.getBytes("UTF-8"), "ISO-8859-1");
 		mv.addObject("notice", vo);
 		mv.setViewName("notice/viewNotice");
 		return mv;
@@ -158,14 +161,6 @@ public class NoticeController {
 		}
 		return mv;
 	}
-
-	// 파일 이름 변경
-//	@RequestMapping(value="/editName")
-//	@ResponseBody
-//	public String editName(@RequestParam(name="filename") String notice_filename ) {
-//		System.out.println("notice_filename =" + notice_filename);
-//		return notice_filename;
-//	}
 	
 	// 파일 다운로드
 	@RequestMapping(value = "/fileDownload", method = RequestMethod.GET)
@@ -273,7 +268,9 @@ public class NoticeController {
 					File files = new File(path, multiFile.getOriginalFilename());
 					FileCopyUtils.copy(multiFile.getBytes(), files);
 					map.put("notice_filename", multiFile.getOriginalFilename());
+					System.out.println("수정 multiFile.getOriginalFilename() : " + multiFile.getOriginalFilename());
 					map.put("notice_filepath", path);
+					System.out.println("수정 path : " + path);
 				}
 			}
 		} catch (Exception e) {
@@ -291,42 +288,33 @@ public class NoticeController {
 	} 
 	
 	// 첨부파일 삭제
-    @RequestMapping(value = "/delFile", method=RequestMethod.POST)
-    @ResponseBody
-    public void delFile(HttpServletRequest req, HttpServletResponse res, @RequestParam (name = "no") int notice_no, Notice no) {
-    	System.out.println("들어왔나영?");
-//        Map<String, Object> resultMap = new HashMap<String, Object>();
-        
-        try {
-//    		String path2 = req.getParameter("n_no");	//여기서 다시 게시그 ㄹ수정하는 sevice 태워서 데이터 가져와 list로 받아서
-        	System.out.println("notice_no ="+ notice_no);
-        	no.setNotice_no(notice_no);
-        	System.out.println("no ="+ no);
-    		Notice vo = noticeService.checkNotice(no);
-    		System.out.println("vo ="+ vo);
-    		String filepath = vo.getNotice_filepath();
-    		String filename = vo.getNotice_filename();
-    		String fileFull = filepath + filename;
-    		
-    		System.out.println("fileFull="+ fileFull);
-//    		
-    		File file = new File(fileFull);	//data list로 받아온거에서 path랑 filename 가져와서 여기서 지우고 (근데 안지워도 된다 이런건..)
-//    		//그냥 쓰레기 데이터로 남기는 개념 + 히스토리 용으로 파일은 안지움
-    		
-    		if(file.exists()==true) {
-    			file.delete();
-    		}
-    		//여기서 update 구문 실행 위에 select 하는거처럼 똑같이가서 update 날리고 결과값을 string으로 받아오셈
-    		// or 그냥 성공했다 치고 success 이런걸로 보내도 됨..
-        	// String success = prodService.yakDupCheck(commandMap.getMap());
+	@RequestMapping(value = "/delFile", method = RequestMethod.POST)
+	@ResponseBody
+	public void delFile(HttpServletRequest req, HttpServletResponse res, @RequestParam(name = "no") int notice_no,
+			Notice no) {
+		System.out.println("들어왔나영?");
 
-        	// resultMap.put("result", "success");	//대충 요런식으로?
+		try {
+			System.out.println("notice_no =" + notice_no);
+			no.setNotice_no(notice_no);
+			System.out.println("no =" + no);
+			Notice vo = noticeService.checkNotice(no);
+			System.out.println("vo =" + vo);
+			String filepath = vo.getNotice_filepath();
+			String filename = vo.getNotice_filename();
+			String fileFull = filepath + filename;
 
-        	} catch (Exception e) {
-        		e.printStackTrace();
-        	} 
-//        		resultMap.put("result", "error");
-    }
+			System.out.println("fileFull=" + fileFull);
+
+			File file = new File(fileFull);
+
+			if (file.exists() == true) {
+				file.delete();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	// 글삭제
 	@RequestMapping(value = "/removeNotice", method = RequestMethod.GET)

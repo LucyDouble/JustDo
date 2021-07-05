@@ -589,3 +589,15 @@ i{
 .file_label{
 	float:left;
 }
+.input-file{
+	visibility: hidden;
+	margin: 10px;
+	float:left;
+}
+.fileName, .reg_file{
+	display:block;
+	position:absolute;
+	margin:10px;
+	float:left;
+	margin-left: 90px;
+}
