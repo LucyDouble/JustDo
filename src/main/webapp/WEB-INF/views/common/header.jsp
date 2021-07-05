@@ -22,7 +22,7 @@
 		<ul>
 			<li class="aboutJD"><a id="aboutJD" href="#">JD안내</a>
 				<div id="drop_content">
-					<a href="aboutJD">JD 소개</a> <a href="#">이용방법</a> <a href="#">오시는
+					<a href="aboutJD">JD 소개</a> <a href="knowhow">이용방법</a> <a href="#">오시는
 						길</a>
 				</div></li>
 			<li class=""><a href="#">강사소개</a>
@@ -63,13 +63,17 @@
 							test="${sessionScope.student_id == null && sessionScope.teacher_id ==null && sessionScope.manager_id == null}">
 							<a href="login" id="login">로그인</a>
 							<a href="signUp">회원가입</a>
-							<a href="<%=request.getContextPath()%>/lecture">수강과목</a>
+							<a href="login">수강신청</a>
 						</c:when>
 						<c:otherwise>
 							<a href="logout" id="logout">로그아웃</a>
 							<c:if
 								test="${sessionScope.student_id !=null && sessionScope.teacher_id == null && sessionScope.manager_id == null && sessionScope.manager_id == null}">
 								<a href="editStudentForm">수강생 정보수정</a>
+							</c:if>
+							<c:if
+								test="${sessionScope.student_id !=null && sessionScope.teacher_id == null && sessionScope.manager_id == null && sessionScope.manager_id == null}">
+								<a href="registration">수강신청</a>
 							</c:if>
 							<c:if
 								test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
