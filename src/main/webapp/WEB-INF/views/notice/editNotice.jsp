@@ -60,14 +60,12 @@
 			
 			<div id="sample2">
 			<c:if test="${empty notice.notice_filename }">
-			<label  id="file_name" class="reg_file">${notice.notice_filename }
-			<input type="hidden" id="val0" value="0">
+			<label  id="file_name" class="reg_file">
 			</label>
 			</c:if>
 			<c:if test="${!empty notice.notice_filename }">
 			<label  id="file_name" class="reg_file">${notice.notice_filename }
-			<img class="file_del_btn" src="resources/images/cross.png">
-			<input type="hidden" id="val0" value="1">
+			<img class="file_del_btn" onclick="delFile();" src="resources/images/cross.png">
 			</label>
 			</c:if>
 			</div>
@@ -77,12 +75,18 @@
 		<button type="submit" class="button" onclick="location.href='listNotice'">
 			<span>취소</span>
 		</button>
+
+		<form id="delFile" action="delFile" method="post">
+			<p>
+				 <input type="hidden"	name="no" value="${notice.notice_no }" /> 
+			</p>
+		</form>
 	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 <script>
 	
-	$('.file_label').click(function() {
+ 	/* $('.file_label').click(function() {
 		var fn = $("#val0").val();
 		console.log(fn);
 		if (fn == 1 ) {
@@ -93,30 +97,21 @@
 		 	if (!result) {
 			return false;
 		}
-	}); 
+	}); */
 	
  	$('.file_label').click(function() {
-		var fn = $("#val0").val();
+		var fn = $("#file_name").val();
 		console.log(fn);
-		if (fn == 1 ) {
-			var result = swal("등록된 첨부파일을 변경하시겠습니까?"); 
-		} else if (fn == 0 ){
-			return true;
-			} 
+		if (fn != null ) {
+			var result = confirm("등록된 첨부파일을 변경하시겠습니까?"); 
+		} 
 		 	if (!result) {
 			return false;
 		}
 	});
 	
-	function submitBtn() {
-		var frm = document.getElementById("editForm");
-		frm.action = "editNotice";
-		frm.method = "POST";
-		frm.enctype = "multipart/form-data";
-		frm.submit();
-	}
-
- 	$('.file_del_btn').click(function() {
+ 	// ajax로 x아이콘클릭시 삭제 바로 구현
+ 	/*  $('.file_del_btn').click(function() {
 		var result = confirm("등록된 첨부파일을 삭제하시겠습니까?");
 		var n_no = $('#n_no').val();
 		console.log(n_no);
@@ -135,11 +130,29 @@
 				}
 			});
 		}
-	});
+	});  */
+ 	
+	function submitBtn() {
+		var frm = document.getElementById("editForm");
+		frm.action = "editNotice";
+		frm.method = "POST";
+		frm.enctype = "multipart/form-data";
+		frm.submit();
+	}
+	
+ 	function delFile() {
+		var chk = confirm("등록된 첨부파일을 삭제하시겠습니까?");
+			if (chk==true) {
+				$('#file_name').empty();
+				var form = document.getElementById("delFile");
+				frm.action = "delFile";
+				frm.method = "POST";
+			    form.submit();
+		    }
+	}
 	
 	function loadFile(input) {
 		var file = input.files[0];
-
 		var name = document.getElementById('file_name');
 		name.textContent = file.name;
 	}
