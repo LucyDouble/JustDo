@@ -58,8 +58,8 @@
 				</section>
 				<section class="Easy-sgin-in-wrap">
 				<div class = "link_box">
-					<a href="studentSearch" class="findPwLink">회원정보 찾기</a>
-					<a href="signUp" class="signUpLink">| 회원 가입</a>
+<!-- 					<a href="studentSearch" class="findPwLink">회원정보 찾기</a>
+ -->					<a href="signUp" class="signUpLink"> 회원 가입</a>
 				</div>
 				</section>
 

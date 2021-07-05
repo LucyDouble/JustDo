@@ -63,14 +63,14 @@
 							test="${sessionScope.student_id == null && sessionScope.teacher_id ==null && sessionScope.manager_id == null}">
 							<a href="login" id="login">로그인</a>
 							<a href="signUp">회원가입</a>
+							<a href="login">수강신청</a>
 							<div class="find">
 								<a href="#" id="find">아이디 | 패스워드 찾기</a>
 								<div id="drop_content2">
-									<a href="#">학생</a>
-									<a href="#">교직원</a>
+									<a href="studentSearch">학생</a>
+									<a href="teacherSearch">교직원</a>
 								</div>
 							</div>
-							<a href="login">수강신청</a>
 						</c:when>
 						<c:otherwise>
 							<a href="logout" id="logout">로그아웃</a>
@@ -89,6 +89,10 @@
 							<c:if
 								test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
 								<a href="editTeacherForm">교직원 정보수정</a>
+							</c:if>
+							<c:if
+								test="${sessionScpoe.student_id == null && sessionScope.teacher_id == null && sessionScope.manager_id != null}">
+								<a href="acceptTeacherForm">교직원 승인</a>
 							</c:if>
 						</c:otherwise>
 					</c:choose>

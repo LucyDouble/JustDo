@@ -83,6 +83,15 @@ public class TeacherServiceImpl implements TeacherService {
 		dao.acceptCheck(teacher_id);
 		return result;
 	}
+	@Override
+	public String teacher_searchId(String teacher_name, String teacher_email) {
+		return dao.teacher_searchId(teacher_name, teacher_email);
+	}
+
+	@Override
+	public void sendPassword(String teacher_id, String teacher_email) {
+		dao.sendPassword(teacher_id, teacher_email);
+	}
 	
 
 

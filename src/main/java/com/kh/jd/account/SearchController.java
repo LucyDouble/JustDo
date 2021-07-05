@@ -23,7 +23,7 @@ public class SearchController {
 		return "account/studentSearch";
 	}
 	
-	@RequestMapping(value="account/searchId", method=RequestMethod.POST)
+	@RequestMapping(value="searchId", method=RequestMethod.POST)
 	@ResponseBody
 	public String studentIdSearch(@RequestParam("inputName_1") String student_name, @RequestParam("inputEmail_1") String student_email) {
 		String result = sService.student_searchId(student_name, student_email);
@@ -31,12 +31,33 @@ public class SearchController {
 		return result;
 	}
 	
-	@RequestMapping(value="account/searchPassword", method=RequestMethod.GET)
+	@RequestMapping(value="searchPassword", method=RequestMethod.GET)
 	@ResponseBody
 	public String studentPwSearch(@RequestParam(name = "inputId") String student_id, @RequestParam(name = "inputEmail_2") String student_email) {
 		sService.sendPassword(student_id, student_email);
 		System.out.println(student_id);
 		System.out.println(student_email);
+		return "account/studentSearchPassword";
+	}
+	
+	@RequestMapping(value="teacherSearch", method=RequestMethod.GET)
+	public String teacherSearch() {
+		return "account/teacherSearch";
+	}
+	
+	@RequestMapping(value="searchTeacherId", method=RequestMethod.POST)
+	@ResponseBody
+	public String teacherIdSearch(@RequestParam("inputName_1") String teacher_name, @RequestParam("inputEmail_1") String teacher_email) {
+		String result = tService.teacher_searchId(teacher_name, teacher_email);
+		System.out.println(result);
+		return result;
+	}
+	@RequestMapping(value="searchTeacherPassword", method=RequestMethod.GET)
+	@ResponseBody
+	public String teacherPwSearch(@RequestParam(name = "inputId") String teacher_id, @RequestParam(name = "inputEmail_2") String teacher_email) {
+		tService.sendPassword(teacher_id, teacher_email);
+		System.out.println(teacher_id);
+		System.out.println(teacher_email);
 		return "account/studentSearchPassword";
 	}
 }

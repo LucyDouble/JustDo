@@ -81,7 +81,7 @@ body {
 		<div class="container">
 			<div class="area_inputs wow fadeIn">
 				<div class="sub_title font-weight-bold text-black">
-					<h5>수강생 아이디/비밀번호 찾기</h5>
+					<h5>교직원 아이디/비밀번호 찾기</h5>
 				</div>
 				<div style="margin-bottom: 10px;"
 					class="custom-control custom-radio custom-control-inline">
@@ -178,7 +178,7 @@ body {
 		
 		$.ajax({
 			type:"POST",
-			url:"${pageContext.request.contextPath}/searchId?inputName_1="
+			url:"${pageContext.request.contextPath}/searchTeacherId?inputName_1="
 					+$('#inputName_1').val()+"&inputEmail_1="+$('#inputEmail_1').val(),
 			success:function(data){
 				console.log(data);
@@ -202,11 +202,11 @@ body {
 		console.log($('#inputEmail_2').val());
 		$.ajax({
 			type : "get",
-			url : "${pageContext.request.contextPath}/searchPassword?inputId="
+			url : "${pageContext.request.contextPath}/searchTeacherPassword?inputId="
 					+ $('#inputId').val() + "&inputEmail_2=" + $('#inputEmail_2').val(),
 			success : function(data){
-						alert("해당 이메일로 임시 비밀번호를 발송하였습니다.");
 					
+						alert("해당 이메일로 임시 비밀번호를 발송하였습니다.");
 			}
 			
 		});

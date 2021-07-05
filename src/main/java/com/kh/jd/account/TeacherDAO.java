@@ -1,12 +1,20 @@
 package com.kh.jd.account;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -14,7 +22,11 @@ public class TeacherDAO {
 
 	@Autowired
 	SqlSession sqlSession;
-
+	@Autowired
+	SqlSessionTemplate sqlSessionTemplate;
+	@Autowired
+	JavaMailSender mailSender;
+	
 	// 아이디 체크
 	public int idCheck(String teacher_id) {
 		System.out.println("idCheck");
@@ -105,5 +117,68 @@ public class TeacherDAO {
 	public void deleteTeacher(String teacher_id) {
 		sqlSession.delete("Teacher.deleteTeacher", teacher_id);
 	}
+	
+	// 아이디 찾기
+		public String teacher_searchId(String teacher_name, String teacher_email) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("name", teacher_name);
+			map.put("email", teacher_email);
+			String result = "";
+			try {
+				result = sqlSession.selectOne("Teacher.searchTeacherId", map);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return result;
+		}
+
+		// 비밀번호 찾기 이메일 발송
+		public void sendPassword(String teacher_id, String teacher_email) {
+			// 난수 생성
+			String key = "";
+			while (true) {
+				byte[] bytes = new byte[4];
+				SecureRandom random = new SecureRandom();
+				random.nextBytes(bytes);
+
+				try {
+					key = new String(Base64.encodeBase64(bytes, false), "UTF-8").replace("==", "");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (key.matches("[a-zA-Z0-9]*$")) {
+					break;
+				}
+			}
+
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("id", teacher_id);
+			map.put("email", teacher_email);
+			HashMap<String, String> map2 = new HashMap<String, String>();
+			map2.put("id", teacher_id);
+			map2.put("password", key);
+			System.out.println(teacher_id);
+			System.out.println(teacher_email);
+			sqlSession.update("Teacher.tempPassword", map2);
+
+			Student teacher = sqlSession.selectOne("Teacher.infoTeacher2", teacher_id);
+			String name = teacher.getName();
+			MimeMessage mail = mailSender.createMimeMessage();
+			String cert_msg = "<h2>안녕하세요 '" + name + "' 선생님</h2><br><br>" + "<p>JD교육원 임시 비밀번호를 발급해드렸습니다.</p>"
+					+ "<p>임시로 발급 드린 비밀번호는 <h2 style='color : blue'>'" + key
+					+ "'</h2>이며 로그인 후 마이페이지에서 비밀번호를 변경해주시면 됩니다.</p><br>"
+					+ "<h3><a href='http://localhost:8090/jd/jdHome'> 교육원 접속</a></h3><br><br>"
+					+ "(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
+			try {
+				mail.setSubject("[JD 교육원] 임시 비밀번호가 발급되었습니다", "utf-8");
+				mail.setText(cert_msg, "utf-8", "html");
+				mail.addRecipient(RecipientType.TO, new InternetAddress(teacher_email));
+				mailSender.send(mail);
+				;
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+		}
+
 
 }

@@ -21,7 +21,7 @@
 
 	<form id="form" class="form" action="signUp" method="POST">
 		<a href="<%=request.getContextPath()%>/jdHome?command=main"><img
-			class="logo" src="resources/images/logo.png"></a> <br> <br>
+			class="logo" src="resources/images/logo4.png"></a> <br> <br>
 		<div class="select">
 			<input type="radio" id="select" name="signUpSelect" checked="checked"
 				value="student"><label for="select">수강생</label> <input
@@ -32,7 +32,7 @@
 		<!-- 아이디 -->
 		<div class="id-group">
 			<label for="id">아이디</label> <br> <input type="text"
-				style="width: 250px; height: 30px" class="form-control" id="id"
+				style="width: 350px; height: 50px" class="form-control" id="id"
 				name="id" placeholder="ID" required>
 			<div class="check_font" id="id_check"></div>
 			<br>
@@ -40,8 +40,8 @@
 		<!-- 비밀번호 -->
 		<div class="password-group">
 			<label for="password">비밀번호</label> <br> <input type="password"
-				style="width: 250px; height: 30px" class="form-control"
-				id="password" name="password" placeholder="PASSWORD" required>
+				style="width: 350px; height: 50px" class="form-control"
+				id="password" name="password" placeholder=" 숫자, 문자, 특수문자 모두포함 8~16자리 " required>
 			<div class="check_font" id="pw_check"></div>
 			<br>
 		</div>
@@ -49,7 +49,7 @@
 		<div class="passwordCheck-group">
 			<label for="password2">비밀번호 확인</label> <br> <input
 				type="password" class="form-control" id="password2" name="password2"
-				style="width: 250px; height: 30px" placeholder="Confirm Password"
+				style="width: 350px; height: 50px" placeholder="Confirm Password"
 				required>
 			<div class="check_font" id="pw2_check"></div>
 			<br>
@@ -57,19 +57,22 @@
 		<!-- 이름 -->
 		<div class="name-group">
 			<label for="name">이름</label><br> <input type="text"
-				style="width: 250px; height: 30px" class="form-control" id="name"
+				style="width: 350px; height: 50px" class="form-control" id="name"
 				name="name" placeholder="Name" required>
 			<div class="check_font" id="name_check"></div>
-			<br>
 		</div>
+		<br>
 		<div class="address_group">
-			<label for="address">주소</label><input type="button" id="post_btn"
-				onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-			<input type="text" style="width: 250px; height: 30px" id="address"
+			<label for="address">주소</label><br>
+			<input type="text" style="width: 350px; height: 50px" id="address"
 				name="address" placeholder="주소를 입력해주세요"><br> <span
-				id="guide" style="color: #999; display: none"></span> <br>
+				id="guide" style="color: #999; display: none"></span>
 		</div>
-
+		<div class="post_btn">
+		<input type="button" id="post_btn"
+				onclick="sample4_execDaumPostcode()" value="찾기">
+		</div>
+		<br><br>
 
 		<!-- 본인확인 이메일 -->
 		<div class="mail-group">
@@ -78,18 +81,19 @@
 			</div>
 			<div class="mail_input_box">
 				<input class="email" name="email" id="email"
-					style="width: 250px; height: 30px">
+					style="width: 350px; height: 50px">
+			</div>
+			<div class="mail_check_button">
+				<!-- <button class="btn email_submit" id="email_submit">인증번호전송</button> -->
+				<input type="button" class="btn email_submit" id="email_submit" value="전송" />
+				<div class="clearfix"></div>
 			</div>
 			<div class="check_font" id="email_check">
 				<br>
 			</div>
-			<div class="mail_check_button">
-				<button class="email_submit" id="email_submit">인증번호전송</button>
-				<div class="clearfix"></div>
-			</div>
 			<div class="mail_check_wrap">
 				<div class="mail_check_input_box">
-					<input class="mail_check_input" style="width: 250px; height: 30px"
+					<input class="mail_check_input" style="width: 350px; height: 50px"
 						disabled="disabled">
 				</div>
 				<div class="clearfix"></div>
@@ -100,7 +104,7 @@
 		<!-- 휴대전화 -->
 		<div class="phone-group">
 			<label for="phone">휴대전화</label><br> <input type="text"
-				style="width: 250px; height: 30px" class="form-control" id="phone"
+				style="width: 350px; height: 50px" class="form-control" id="phone"
 				name="phone" placeholder="Phone Number" required>
 			<div class="check_font" id="phone_check"></div>
 		</div>
@@ -112,7 +116,7 @@
 			<!-- 			<button class="btn btn-primary px-3" id="reg_submit">
  -->
 			<input type="submit" class="btn btn-primary px-3" id="reg_submit"
-				value="가입하기" /> <br> <br> <br> <br> <br> <br>
+				value="가입" /> <br> <br> <br> <br> <br> <br>
 			<br> <br>
 		</div>
 	</form>
@@ -159,7 +163,7 @@
 								// 1 : 아이디가 중복되는 문구
 								$("#id_check").text("사용중인 아이디입니다 :(");
 								$("#id_check").css("color", "red");
-								$("#id_check").css("font-size", "5px");
+								$("#id_check").css("font-size", "15px");
 								$("#reg_submit").attr("disabled", true);
 							} else {
 
@@ -167,14 +171,14 @@
 									// 0 : 아이디 길이 / 문자열 검사
 									$("#id_check").text("사용 가능한 아이디입니다 :)");
 									$("#id_check").css("color", "blue");
-									$("#id_check").css("font-size", "5px");
+									$("#id_check").css("font-size", "15px");
 									$("#reg_submit").attr("disabled", false);
 
 								} else if (id == "") {
 
 									$('#id_check').text('아이디를 입력해주세요');
 									$('#id_check').css('color', 'red');
-									$("#id_check").css("font-size", "5px");
+									$("#id_check").css("font-size", "15px");
 									$("#reg_submit").attr("disabled", true);
 
 								} else {
@@ -183,7 +187,7 @@
 											"아이디는 영어와 숫자 4~12자리만 가능합니다.");
 									$('#id').val("");
 									$('#id_check').css('color', 'red');
-									$('#id_check').css('font-size', '5px')
+									$('#id_check').css('font-size', '15px')
 									$("#reg_submit").attr("disabled", true);
 								}
 
@@ -200,7 +204,7 @@
 						} else {
 							$('#name_check').text('이름은 한글 2~8자리만 입력 가능합니다.');
 							$('#name_check').css('color', 'red');
-							$('#name_check').css('font-size', '5px');
+							$('#name_check').css('font-size', '15px');
 						}
 					});
 				});
@@ -215,7 +219,7 @@
 			} else if (password == "") {
 				$('#pw_check').text('비밀번호를 입력해주세요');
 				$('#pw_check').css('color', 'red');
-				$("#pw_check").css('font-size', '5px');
+				$("#pw_check").css('font-size', '15px');
 				$("#reg_submit").attr("disabled", true);
 
 			} else {
@@ -223,7 +227,8 @@
 
 				$('#pw_check').text('비밀번호는 숫자, 문자, 특수문자 조합 8~16자리만 가능합니다. :(')
 				$('#pw_check').css('color', 'red');
-				$('#pw_check').css('font-size', '5px');
+				$('#pw_check').css('font-size', '10px');
+				$('#pw_check').css('font-weight', 'bold');
 				$('#password').val("");
 			}
 		});
@@ -235,7 +240,7 @@
 			if ($('#password').val() != $(this).val()) {
 				$('#pw2_check').text('비밀번호가 일치하지 않습니다 :(');
 				$('#pw2_check').css('color', 'red');
-				$('#pw2_check').css('font-size', '5px')
+				$('#pw2_check').css('font-size', '15px')
 				console.log(password2);
 
 			} else {
@@ -268,7 +273,7 @@
 												$("#email_check").css("color",
 														"red");
 												$("#email_check").css(
-														'font-size', '5px');
+														'font-size', '15px');
 												$("#reg_submit").attr(
 														"disabled", true);
 												$("#email_submit").hide();
@@ -284,7 +289,7 @@
 													$('#email_check').css(
 															'color', 'blue');
 													$("#email_check").css(
-															'font-size', '5px');
+															'font-size', '15px');
 													$("#email_submit").show();
 												} else {
 													$('#email_check').text(
@@ -292,7 +297,7 @@
 													$('#email_check').css(
 															'color', 'red');
 													$("#email_check").css(
-															'font-size', '5px');
+															'font-size', '15px');
 													$("#reg_submit").attr(
 															"disabled", true);
 													$("#email_submit").hide();
@@ -334,12 +339,12 @@
 			if (inputCode == code) {
 				checkResult.html("인증번호가 일치합니다.");
 				checkResult.attr("class", "correct");
-				$(".correct").css('font-size', '5px');
+				$(".correct").css('font-size', '15px');
 				$(".correct").css('color', 'blue');
 			} else {
 				checkResult.html("인증번호를 다시 확인해주세요.");
 				checkResult.attr("class", "incorrect");
-				$(".incorrect").css('font-size', '5px');
+				$(".incorrect").css('font-size', '15px');
 				$(".incorrect").css('color', 'red');
 			}
 		});
@@ -370,7 +375,7 @@
 												$("#phone_check").css("color",
 														"red");
 												$("#phone_check").css(
-														'font-size', '5px');
+														'font-size', '15px');
 												$("#reg_submit").attr(
 														"disabled", true);
 												$("#phone").val("");
@@ -386,12 +391,12 @@
 													$('#phone_check').css(
 															'color', 'blue');
 													$("#phone_check").css(
-															'font-size', '5px');
+															'font-size', '15px');
 												} else {
 													$('#phone_check').text(
 															'번호를 입력해주세요');
 													$("#phone_check").css(
-															'font-size', '5px');
+															'font-size', '15px');
 													$("#reg_submit").attr(
 															"disabled", true);
 												}
