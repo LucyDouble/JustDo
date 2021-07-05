@@ -11,4 +11,5 @@ public interface LectureClassService {
 	public int getlistCount(Map<String, Object> map);
 	public List<LectureClass> listCalendarClass(Map<String, Object> map);
 	public int addPersonnel(int lectureclass_no);
+	public int removePersonnel(int lectureclass_no);
 }

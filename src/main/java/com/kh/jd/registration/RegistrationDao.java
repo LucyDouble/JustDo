@@ -26,4 +26,7 @@ public class RegistrationDao {
 	public List<Registration> listRegistration(int student_number) {
 		return sqlSession.selectList("Registration.listRegistration", student_number);
 	}
+	public int removeRegistration(Registration registration) {
+		return sqlSession.delete("Registration.removeRegistration", registration);
+	}
 }

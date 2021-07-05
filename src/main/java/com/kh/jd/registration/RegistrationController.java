@@ -157,5 +157,20 @@ public class RegistrationController {
 		return LCService.listCalendarClass(map);
 	}
 	
+	// 수강 신청 취소
+	@RequestMapping(value = "registrationRemove", method = RequestMethod.POST)
+	@ResponseBody
+	public String registrationRemove(HttpServletRequest request, HttpServletResponse response,
+			Registration re) {
+		int lectureclass_no = Integer.parseInt(request.getParameter("lectureclass_no"));
+		Student st= (Student)request.getSession().getAttribute("DTO");
+		int student_number=st.getStudent_number();
+		re.setLectureclass_no(lectureclass_no);
+		re.setStudent_number(student_number);
+		RService.removeRegistration(re);
+		LCService.removePersonnel(lectureclass_no);
+		return "registration";
+	}
+	
 	
 }

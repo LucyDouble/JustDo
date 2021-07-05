@@ -30,6 +30,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 	public List<Registration> listRegistration(int student_number) {
 		return Rdao.listRegistration(student_number);
 	}
+
+	@Override
+	public int removeRegistration(Registration registration) {
+		return Rdao.removeRegistration(registration);
+	}
 	
 	
 }

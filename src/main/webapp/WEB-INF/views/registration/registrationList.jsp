@@ -140,7 +140,7 @@
 								<td>${vo.name }</td>
 								<td>${vo.lecture_limit}</td>
 								<td>${vo.lectureclass_personnel}</td>
-								<td><a href="" onclick="">수강취소</a></td>
+								<td><a href="javascript:void(0);" onclick="lectureRemove('${vo.lectureclass_no}');">수강취소</a></td>
 							</tr>
 							</c:forEach>
 						</tbody>					
@@ -160,9 +160,24 @@
 			</div>
 </div>
 <script>
+	/* 수강취소 기능 */
+	function lectureRemove(num){
+		$.ajax({
+			url:"registrationRemove",
+			type:"post",
+			data: { lectureclass_no : num },
+			success:function(data){
+				location.reload();
+			},
+			error:function(){
+				
+			}
+		});
+	}
+
 	/* 강의계획서 새창 출력 기능 */
 	function pop(num, num1){
-		var w = 800;
+		var w = 900;
 		var h = 700;
 		var width = (window.screen.width-w) / 2;
 		var height = (window.screen.height-h) / 2;
@@ -181,7 +196,7 @@
     	dataType:"json",
     	success: function(data){
     		alert(data.result);
-    		location.href="registration";
+    		location.reload();
     	},
     	error : function(){
     		
@@ -270,7 +285,7 @@
       });
       var calendar2 = new FullCalendar.Calendar(calendarEl2, {
 	        businessHours: true,
-	        dayMaxEvents: true, // allow "more" link when too many events
+	       /*  dayMaxEvents: true, // allow "more" link when too many events */
 	    	locale: 'ko',
 	    	height: 550,
 	    	headerToolbar: {

@@ -46,4 +46,7 @@ public class LectureClassDao {
 	public int addPersonnel(int lectureclass_no) {
 		return sqlSession.update("LectureClass.addPersonnel", lectureclass_no);
 	}
+	public int removePersonnel(int lectureclass_no) {
+		return sqlSession.update("LectureClass.removePersonnel", lectureclass_no);
+	}
 }

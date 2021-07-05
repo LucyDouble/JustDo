@@ -47,5 +47,10 @@ public class LectureClassServiceImpl implements LectureClassService {
 	public int addPersonnel(int lectureclass_no) {
 		return LCdao.addPersonnel(lectureclass_no);
 	}
+
+	@Override
+	public int removePersonnel(int lectureclass_no) {
+		return LCdao.removePersonnel(lectureclass_no);
+	}
 	
 }

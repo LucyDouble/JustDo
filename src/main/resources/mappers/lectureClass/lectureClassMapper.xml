@@ -66,5 +66,10 @@ order by rnum desc
 <update id="addPersonnel" parameterType="int">
 	update lectureclass set lectureclass_personnel=lectureclass_personnel+1 where lectureclass_no = #{lectureclass_no}
 </update>
+
+<!-- 수강취소 시 인원수 감소 -->
+<update id="removePersonnel" parameterType="int">
+	update lectureclass set lectureclass_personnel=lectureclass_personnel-1 where lectureclass_no = #{lectureclass_no}
+</update>
 </mapper>
 
