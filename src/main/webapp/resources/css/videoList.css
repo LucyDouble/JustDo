@@ -21,3 +21,181 @@ body {
 	clear: both;
 	margin-bottom: 50px;
 }
+
+
+.an_label, .en_label {
+	width: 1000px;
+	height: 41.5px;
+	text-align: left;
+	font-size: 18px;
+	color: #fff;
+	line-height: 2.4;
+	background-color: #6A60A9;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	margin: 0px;
+	padding-left:15px;
+	padding-right:15px;
+}
+
+.form-control {
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	min-height: 60px;
+	box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
+	-webkit-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
+	-o-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
+	-ms-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+
+.button {
+	display: inline-block;
+	border-radius: 7px;
+	background-color: #6A60A9;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 15px;
+	width: 70px;
+	height: 35px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	float: right;
+}
+
+.file_label {
+	display: inline-block;
+	border-radius: 7px;
+	background-color: #6A60A9;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 15px;
+	width: 70px;
+	height: 35px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	float: left;
+}
+.file_label span {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+	top: 6px;
+}
+
+.button span {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+	
+}
+
+.button span:after, .file_label span:after{
+	content: '*';
+	position: absolute;
+	opacity: 0;
+	top: -5px;
+	right: -10px;
+	transition: 0.2s;
+}
+
+.button:hover span, .file_label:hover span {
+	padding-right: 10px;
+}
+
+.button:hover span:after, .file_label:hover span:after {
+	opacity: 1;
+	right: 0;
+}
+
+.fileBtn {
+	display: inline-block;
+	border-radius: 7px;
+	background-color: #6A60A9;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 15px;
+	width: 70px;
+	height: 35px;
+	transition: all 0.5s;
+	cursor: pointer;
+	margin: 5px;
+	float: left;
+}
+
+.fileBtn span {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	transition: 0.5s;
+}
+
+.fileBtn span:after {
+	content: '*';
+	position: absolute;
+	opacity: 0;
+	top: -5px;
+	right: -10px;
+	transition: 0.2s;
+}
+
+.fileBtn:hover span {
+	padding-right: 10px;
+}
+
+.fileBtn:hover span:after {
+	opacity: 1;
+	right: 0;
+}
+
+.file_del_btn{
+	width: 18px;
+    margin-left: 5px;
+}
+
+
+.ln_cont, .vn_cont {
+	text-align: left;
+	max-width:1000px;
+}
+.vn_cont p img{
+	max-width:100%;
+}
+#editor1{
+	padding-left: 10px;
+}
+.ln_cont:hover, .lc_cont:hover{
+	font-weight: bold;
+	cursor:pointer;
+    color: #EE2560;
+
+	
+	/* transform: scale(1.03); */
+	/* transition: all 0.5s */
+	/* ease-in-out; */
+}
+.input-file{
+	visibility: hidden;
+	margin: 10px;
+	float:left;
+}
+.fileName, .reg_file{
+	display:block;
+	position:absolute;
+	margin:10px;
+	float:left;
+	margin-left: 90px;
+}
+input::placeholder { /* Chrome, Safari, Firefox */
+  color: #9a92d3;
+}
