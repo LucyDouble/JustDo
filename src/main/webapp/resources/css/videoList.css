@@ -1,0 +1,23 @@
+@charset "UTF-8";
+body {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	/* width: 1400px */
+	margin: auto;
+	font-family: SCDream4;
+	overflow-y: scroll;
+	height: auto;
+	min-height: 100%;
+	
+}
+.ln_page, .vn_page, .en_page, .an_page {
+	margin: 0 auto;
+	width: 1000px;
+}
+.ln_title {
+	font-size: 25px;
+	font-weight: bold;
+	clear: both;
+	margin-bottom: 50px;
+}
