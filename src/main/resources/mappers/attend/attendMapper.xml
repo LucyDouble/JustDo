@@ -10,24 +10,74 @@
 		      on r.lectureclass_no=lc.lectureclass_no
 		      where student_number=#{student_number}) rlc join lecture l 
 		on rlc.lecture_no=l.lecture_no
+		where sysdate >=lecture_start and lecture_end>=sysdate
 	</select>
 <!-- 스케줄러 사용 프로시저 호출 -->
 	<select id="scheduleAttend" >
-		execute SCHEDULEATTEND()
+		CALL SCHEDULEATTEND()
 	</select>
 	<select id="listAttend" parameterType="Attend" resultType="Attend">
-		select lectureclass_no,attend_no,attend_date,to_date(attend_start,'hh24:miss') as attend_start,
-		       to_date(attend_end,'hh24:miss') as attend_end,attend_progress,
-		       l.lecture_no, to_char(lectureclass_start,'hh24:mi:ss') as lectureclass_start,
-		       to_char(lectureclass_end,'hh24:mi:ss') as lectureclass_end ,
+		select lectureclass_no,attend_no,attend_date,to_char(attend_start,'hh24:mi:ss') as attend_start,
+		       to_char(attend_end,'hh24:mi:ss') as attend_end,attend_progress,
+		       l.lecture_no, to_char(lectureclass_start,'hh24:mi') as lectureclass_start,
+		       to_char(lectureclass_end,'hh24:mi') as lectureclass_end ,
 		       to_char(lectureclass_start,'hh24miss') as lectureclassStart,
 		       to_char(lectureclass_end,'hh24miss') as lectureclassEnd,
-		       lecture_title,lecture_start,lecture_end
+		       lecture_title,to_char(lecture_start,'yyyy-mm-dd') as lecture_start,
+		       to_char(lecture_end,'yyyy-mm-dd') as lecture_end
 		from (select * 
 		      from attend a join lectureclass lc 
 		      using(lectureclass_no) 
 		      where student_number=${student_number} and lecture_no=#{lecture_no} ) alc join lecture l 
 		on alc.lecture_no=l.lecture_no
 		order by attend_date desc	
+	</select>
+	<select id="getlistAttendCount" resultType="int" parameterType="Attend">
+		select count(*)
+		from (select * 
+		      from attend a join lectureclass lc 
+		      using(lectureclass_no) 
+		      where student_number=${student_number} and lecture_no=#{lecture_no} ) alc join lecture l 
+		on alc.lecture_no=l.lecture_no
+		order by attend_date desc	
+	</select>
+	 <update id="editAttend" parameterType="Attend">
+		update attend 
+		set attend_start=to_date(#{attend_start},'hh24:mi:ss')
+		where attend_no=(select max(attend_no) 
+					                from attend 
+					                where lectureclass_no=#{lectureclass_no} and student_number=#{student_number}	)
+	</update>
+	<update id="editAttendExit" parameterType="Attend">
+		update attend 
+		set attend_end=to_date(#{attend_end},'hh24:mi:ss')
+		where attend_no=(select max(attend_no) 
+					                from attend 
+					                where lectureclass_no=#{lectureclass_no} and student_number=#{student_number}	)
+	</update>
+	<select id="startCheck" parameterType="Attend" resultType="int">
+		select  count(attend_start)
+		from attend		
+		where attend_no=(select max(attend_no) 
+							        from attend 
+							        where lectureclass_no=#{lectureclass_no} and student_number=#{student_number})	
+	</select>
+	<select id="endCheck" parameterType="Attend" resultType="int">
+		select  count(attend_end)
+		from attend		
+		where attend_no=(select max(attend_no) 
+							        from attend 
+							        where lectureclass_no=#{lectureclass_no} and student_number=#{student_number})	
+	</select>
+	<update id="editAttendPro" parameterType="Attend">
+		update attend 
+		set attend_progress=#{attend_progress}
+		where attend_no=(select max(attend_no) 
+					                from attend 
+					                where lectureclass_no=#{lectureclass_no} and student_number=#{student_number}	)
+	</update>
+	<!-- 스케줄러 사용 출결상태 프로시저 호출 -->
+	<select id="attendprogress" >
+		CALL attendprogress()
 	</select>
 </mapper>

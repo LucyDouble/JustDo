@@ -20,4 +20,22 @@ public class AttendDao {
 	public List<Attend> listAttend(Attend vo){
 		return sqlSession.selectList("attend.listAttend", vo);
 	}
+	public void editAttend(Attend vo) {
+		sqlSession.update("attend.editAttend",vo);
+	}
+	public void editAttendExit(Attend vo) {
+		sqlSession.update("attend.editAttendExit",vo);
+	}
+	public int getlistAttendCount(Attend vo) {
+		return sqlSession.selectOne("attend.getlistAttendCount",vo);
+	}
+	public int startCheck(Attend vo) {
+		return sqlSession.selectOne("attend.startCheck",vo);
+	}
+	public int endCheck(Attend vo) {
+		return sqlSession.selectOne("attend.endCheck",vo);
+	}
+	public void attendprogress() {
+		sqlSession.selectOne("attend.attendprogress");
+	}
 }

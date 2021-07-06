@@ -22,7 +22,6 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/common/header.css"/>">
 <script type="text/javascript" src="<c:url value="/resources/js/header.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
-
 </head>
 <body>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
@@ -50,35 +49,92 @@
 			</form>
 		</div>
 		<hr>
-
 <c:if test="${not empty attendList }">
-		<input type="hidden" id="stu_no2" value="${stu_no}">
-		<input type="hidden" id="lecture_no2" value="${lecture_no}">
-		<div>
-			<input id="content" type="hidden" name="content" value="${content }"/>
-			<input type="button" id="check" class="chbutton" value="입실하기" /> 
-			<input type="button" id="execute" class="chbutton" value="QR생성" /> 
-			<input type="button" id="check" class="chbutton" value="퇴실하기" /> 
-			<!-- <img id="img" style="display: none; width: 250px; height: 250px;" onload="this.style.display = 'block'" /> -->
-		</div>
+	<c:if test="${not empty msg  }">
+	<script type="text/javascript">
+		var msg = '${msg}';
+		var msg1 = '${msg1}';
+		swal(msg1,msg,"success");
+	</script>
+	</c:if>
+	<c:if test="${not empty warning  }">
+	<script type="text/javascript">
+		var warning = '${warning}';
+		var warning1 = '${warning1}';
+		swal(warning1,warning,"warning");
+	</script>
+	</c:if>
+			<table class="table table2">
+				<thead>
+					<tr>
+						<th>강의기간</th>
+						<th >강의시간</th>
+					</tr>
+				</thead>
+				<tbody>
+						<tr>
+							<td>${lecture_start } ~ ${lecture_end }</td>
+							<td >${lectureclass_start } ~ ${lectureclass_end }</td>
 
-
+						</tr>
+				</tbody>
+			</table>
+	<form id="frm">
+	
+		<input type="hidden" id="lectureclass_start" name="lectureclass_start" value="${lectureclass_start}">
+		<input type="hidden" id="lectureclass_end" name="lectureclass_end" value="${lectureclass_end}">
+		<input type="hidden" id="stu_no2" name="stu_no2" value="${stu_no}">
+		<input type="hidden" id="lecture_no2" name="lecture_no2" value="${lecture_no}">
+		<input type="hidden" id="lectureclass_no" name="lectureclass_no" value="${lectureclass_no}">
+		<c:if test="${endCh =='0' }">
+			<div>
+				<input id="content" type="hidden" name="content" value="${content }"/>
+				<c:if test="${startCh=='0' }">
+					<input type="button" id="check"  class="chbutton" value="입실하기" /> 
+				</c:if>   
+				<c:if test="${startCh=='1' }">
+					<input type="button" id="checkEarly"  class="chbutton" value="조퇴하기" /> 
+				</c:if>   
+				<input type="button" id="execute"  class="chbutton" value="QR생성" /> 
+				<input type="button" id="checkExit"  class="chbutton" value="퇴실하기" /> 
+			</div>
+		</c:if>
 		<HR>
-<div class="videoModal">
+	<!-- 입실 video -->
+	<div class="videoModal">
 		<div class="container" id="container" >
 			<p id="closeScan">&#10006;</p>
 			<div class="col-md-6" style="width: 100%;">
 				<video id="preview" width="100%"></video>
 			</div>
 		</div>
-</div>
+	</div>
 	<br>
+	<!-- 퇴실 video -->
+	<div class="videoModalExit">
+		<div class="containerExit" id="containerExit" >
+			<p id="closeScanExit">&#10006;</p>
+			<div class="col-md-6Exit" style="width: 100%;">
+				<video id="previewExit" width="100%"></video>
+			</div>
+		</div>
+	</div>
+ 	<!-- 조퇴 video -->
+	<div class="videoModalEarly">
+		<div class="containerEarly" id="containerExit" >
+			<p id="closeScanEarly">&#10006;</p>
+			<div class="col-md-6Early" style="width: 100%;">
+				<video id="previewEarly" width="100%"></video>
+			</div>
+		</div>
+	</div>
+	<!-- 받아들인 qr 값-->
 		<div class="scan_con" style="display: none;">
 			<label>SCAN QR CODE</label> <input type="text" name="text" id="text"
 				readonyy="" placeholder="scan qrcode" class="form-control">
 		</div>
 
-
+	<!-- qr박스 -->
 	<div class="rc_background2">
 		<div class="popup2">
 			<div class="cd-popup-container2">
@@ -91,6 +147,7 @@
 			</div>
 		</div>
 	</div>
+	</form>
 
 
 
@@ -109,24 +166,54 @@
 							<td>${i.attend_date}</td>
 							<td >${i.attend_start }</td>
 							<td>${i.attend_end }</td>
-							<td>기다려</td>
+							<td>
+							<c:if test="${i.attend_progress =='0' }">결석</c:if>
+							<c:if test="${i.attend_progress =='1' }">지각</c:if>
+							<c:if test="${i.attend_progress =='2' }">조퇴</c:if>
+							<c:if test="${i.attend_progress =='3' }">지각+결석</c:if>
+							<c:if test="${i.attend_progress =='4' }">출석</c:if>
+							</td>
 
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-</c:if>
 
 
 
 
-		<sciprt src="js/jqurey-3.1.1.js"></sciprt>
-		<sciprt src="js/bootstrap.js"></sciprt>
 
+		
+
+	<br>
+	<br>
+	<br>
+	
+	
+	<c:if test="${startPage != 1 }">
+	   <a
+		  href="<%=request.getContextPath() %>/listAttend?page=${startPage-1}">이전</a>
+	</c:if>
+	<c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
+	 	<c:if test="${p eq currentPage}">
+	 		<font color="#6A60A9" size="4"><b>[${p}]</b></font>
+	 	</c:if>
+	 	<c:if test="${p ne currentPage}">
+	 		<c:url var="listAttendChk" value="listAttend">
+	 			<c:param name="page" value="${p}" />
+	 		</c:url>
+	 		<a href="${listAttendChk}">${p}</a>
+	 	</c:if>
+	 </c:forEach>
+	<c:if test="${endPage < pageCnt }">
+	   <a
+		  href="<%=request.getContextPath() %>/listAttend?page=${endPage+1}">다음</a>
+	</c:if>
+</c:if>	
 	</div>
-	<br>
-	<br>
-	<br>
+	<br><br><br>
+	<sciprt src="js/jqurey-3.1.1.js"></sciprt>
+	<sciprt src="js/bootstrap.js"></sciprt>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 
 	<script type="text/javascript">
@@ -136,7 +223,7 @@
 		var frm = document.getElementById("choiceFrm");
 		var lecture_no = document.getElementById("lecture_no");
 		if(lecture_no.value=="back"){
-			swal("EMPTY TITLE","제목을 입력해 주세요.","warning");
+			swal("EMPTY LECTURE","강의를 선택해 주세요.","warning");
 	  		return false;
 	  	}
 			frm.action="listAttend";
@@ -145,7 +232,7 @@
 	});
 	
 	
-	
+	/* select창 */
 	$(document).ready(function() { 
 		var selectTarget = $('.selectbox select'); 
 		selectTarget.change(function(){ 
@@ -153,6 +240,7 @@
 			$(this).siblings('label').text(select_name);
 			}); 
 		});
+	/* select창 */
 	$(function() {
 		  var selectTarget = $('.selectbox select');
 
@@ -175,6 +263,19 @@
 
 	
 	
+	/* 입실video모달창 */
+	$("#check").click(function(){
+		document.querySelector(".videoModal").className = "videoModal show";
+        
+        
+	
+	/* 입실video모달창 닫기 */
+	document.querySelector("#closeScan").addEventListener("click", removeclose2);
+	function removeclose2() {
+        document.querySelector(".videoModal").className = "videoModal";
+      }
+	
+	/* 입실video 키기 */
 	var content = $("#content").val();
 	let scanner = new Instascan.Scanner({ video: document.getElementById('preview')});
     Instascan.Camera.getCameras().then(function(cameras){
@@ -188,26 +289,32 @@
         console.error(e);
     });
 
+    /* 입실scan하고 출석 조지기*/
      scanner.addListener('scan',function(c){
     	var content = $("#content").val();
     	var container = document.getElementById("container");
         document.getElementById('text').value=c;
         if(content==c){
-        	swal("출석이 되었습니다.","퇴실 인증을 안할 시 결석으로 처리 됩니다.","success");
-        	/* alert("출석이 되었습니다.") */
         	document.querySelector(".videoModal").className = "videoModal";
+        	attend();
         }else{
         	swal("Fail","올바른 qr을 입력해주세요.","warning");
         	/* alert("올바른 qr을 입력해주세요.") */
         	document.querySelector(".videoModal").className = "videoModal";
         }
     }); 
-
-	
-		$("#execute").click(function(){
-			document.querySelector(".rc_background2").className = "rc_background2 show2";
+	});
+    /* 일실 update */
+	function attend(){
+		var frm = document.getElementById("frm");
+		frm.action = "editAttend";
+		frm.method = "POST";
+		frm.submit();
+	};
+     /* qr생성하기 */
+ 		$("#execute").click(function(){
+ 			/* document.querySelector(".rc_background2").className = "rc_background2 show2"; */
 			url="qr";
-		
 			var stu_no = $("#stu_no2").val();
 			var lecture_no = $("#lecture_no2").val();
 			$("#img").attr("src",url+"?stu_no="+stu_no+"&lecture_no="+lecture_no);
@@ -217,47 +324,135 @@
 		 			,data: {stu_no:stu_no
 		 						,lecture_no:lecture_no }
 		 			,success :function(data){
+		 				if($("#content").val() == ""){
 		 					$("#content").val(data);	
-		 			
+		 				}
 		 			}
-			});
-			
-		});
+			}); 
+			document.querySelector(".rc_background2").className = "rc_background2 show2";
+		}); 
+	     
+		/* qr창 닫기 */
 		document.querySelector("#rc_close2").addEventListener("click", removeclose);
-		
 		function removeclose() {
 	        document.querySelector(".rc_background2").className = "rc_background2";
 	      }
-/* 		$("#execute").click(function(){
-			url="qr";
-		
-			var stu_no = $("#stu_no2").val();
-			var lecture_no = $("#lecture_no2").val();
-			$("#img").attr("src",url+"?stu_no="+stu_no+"&lecture_no="+lecture_no);
-			$.ajax({
-				url:'qr2'
-		 			,type:'post'
-		 			,data: {stu_no:stu_no
-		 						,lecture_no:lecture_no }
-		 			,success :function(data){
-		 					$("#content").val(data);	
-		 			
-		 			}
-			});
-			
-		}); */
 
-
-		$("#check").click(function(){
-			document.querySelector(".videoModal").className = "videoModal show";
-	        
-	        
-		});
-		document.querySelector("#closeScan").addEventListener("click", removeclose2);
 		
-		function removeclose2() {
-	        document.querySelector(".videoModal").className = "videoModal";
+		
+		
+		
+		
+		/* 퇴실video모달창 닫기 */
+		document.querySelector("#closeScanExit").addEventListener("click", removecloseExit);
+		function removecloseExit() {
+	        document.querySelector(".videoModalExit").className = "videoModalExit";
 	      }
+		
+		/* 퇴실video모달창 */
+		$("#checkExit").click(function(){
+			document.querySelector(".videoModalExit").className = "videoModalExit showExit";
+	        
+	        
+		
+		/* 퇴실video 키기 */
+		var content = $("#content").val();
+		let scanner = new Instascan.Scanner({ video: document.getElementById('previewExit')});
+	    Instascan.Camera.getCameras().then(function(cameras){
+	        if(cameras.length > 0 ){
+	            scanner.start(cameras[0]);
+	        } else{
+	            alert('No cameras found');
+	        }
+
+	    }).catch(function(e) {
+	        console.error(e);
+	    });
+
+	    /* 퇴실scan하고 출석 조지기*/
+	     scanner.addListener('scan',function(c){
+	    	var content = $("#content").val();
+	    	var container = document.getElementById("containerExit");
+	        document.getElementById('text').value=c;
+	        if(content==c){
+	        	
+	        	document.querySelector(".videoModalExit").className = "videoModalExit";
+	        	exit();
+	        }else{
+	        	swal("Fail","올바른 qr을 입력해주세요.","warning");
+	
+	        	document.querySelector(".videoModalExit").className = "videoModalExit";
+	        }
+	    }); 
+		});
+	    /* 퇴실 update */
+		function exit(){
+			var frm = document.getElementById("frm");
+			frm.action = "editAttendExit";
+			frm.method = "POST";
+			frm.submit(); 
+		};
+		
+		
+		
+		
+		
+		/* 조퇴video모달창 닫기 */
+		document.querySelector("#closeScanEarly").addEventListener("click", removecloseEarly);
+		function removecloseEarly() {
+	        document.querySelector(".videoModalEarly").className = "videoModalEarly";
+	      }
+		
+		/* 조퇴video모달창 */
+		$("#checkEarly").click(function(){
+			document.querySelector(".videoModalEarly").className = "videoModalEarly showEarly";
+	        
+	        
+		
+		/* 조퇴video 키기 */
+		var content = $("#content").val();
+		let scanner = new Instascan.Scanner({ video: document.getElementById('previewEarly')});
+	    Instascan.Camera.getCameras().then(function(cameras){
+	        if(cameras.length > 0 ){
+	            scanner.start(cameras[0]);
+	        } else{
+	            alert('No cameras found');
+	        }
+
+	    }).catch(function(e) {
+	        console.error(e);
+	    });
+
+	    /* 조퇴scan하고 출석 조지기*/
+	     scanner.addListener('scan',function(c){
+	    	var content = $("#content").val();
+	    	var container = document.getElementById("containerEarly");
+	        document.getElementById('text').value=c;
+	        if(content==c){
+	        	
+	        	document.querySelector(".videoModalEarly").className = "videoModalEarly";
+	        	Early();
+	        }else{
+	        	swal("Fail","올바른 qr을 입력해주세요.","warning");
+	        	
+	        	document.querySelector(".videoModalEarly").className = "videoModalEarly";
+	        }
+	    }); 
+		});
+	    /* 조퇴 update */
+		function Early(){
+			var frm = document.getElementById("frm");
+			frm.action = "editAttendEarly";
+			frm.method = "POST";
+			frm.submit(); 
+		};
+		
+
+		
+		
+		
+		
+
 </script>
 </body>
 </html>

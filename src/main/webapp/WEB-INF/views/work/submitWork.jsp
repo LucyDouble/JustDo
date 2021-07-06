@@ -76,7 +76,10 @@
     
     </form>
     </div>
-
+	<br><br><br>
+	<sciprt src="js/jqurey-3.1.1.js"></sciprt>
+	<sciprt src="js/bootstrap.js"></sciprt>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
     <%-- <jsp:include page="../common/footer.jsp"></jsp:include> --%>
 </html>
