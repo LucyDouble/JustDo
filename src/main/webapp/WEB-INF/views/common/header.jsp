@@ -103,6 +103,7 @@
 						test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
 						<a href="listNotice">공지사항</a>
 						<a href="listCS">상담신청</a>
+						<a href="http://pf.kakao.com/_xjxmxcws">카카오톡채널</a>
 					</c:if>
 				</div></li>
 		</ul>

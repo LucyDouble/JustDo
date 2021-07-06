@@ -60,13 +60,13 @@
 			
 			<div id="sample2">
 			<c:if test="${empty notice.notice_filename }">
-			<label  id="file_name" class="reg_file">
-			</label>
+			<label  id="file_name" class="reg_file"></label>
+			<input type="hidden" id="val0" value="0">
 			</c:if>
 			<c:if test="${!empty notice.notice_filename }">
 			<label  id="file_name" class="reg_file">${notice.notice_filename }
-			<img class="file_del_btn" onclick="delFile();" src="resources/images/cross.png">
-			</label>
+			<img class="file_del_btn" onclick="delFile();" src="resources/images/cross.png"></label>
+			<input type="hidden" id="val0" value="1">
 			</c:if>
 			</div>
 			
@@ -86,7 +86,7 @@
 </body>
 <script>
 	
- 	/* $('.file_label').click(function() {
+ 	$('.file_label').click(function() {
 		var fn = $("#val0").val();
 		console.log(fn);
 		if (fn == 1 ) {
@@ -97,18 +97,20 @@
 		 	if (!result) {
 			return false;
 		}
-	}); */
+	}); 
 	
- 	$('.file_label').click(function() {
+ 	/* $('.file_label').click(function() {
 		var fn = $("#file_name").val();
 		console.log(fn);
-		if (fn != null ) {
+		if (fn != null) {
 			var result = confirm("등록된 첨부파일을 변경하시겠습니까?"); 
-		} 
+		} else if (fn == null){
+			return true;
+		}
 		 	if (!result) {
 			return false;
 		}
-	});
+	}); */
 	
  	// ajax로 x아이콘클릭시 삭제 바로 구현
  	/*  $('.file_del_btn').click(function() {
