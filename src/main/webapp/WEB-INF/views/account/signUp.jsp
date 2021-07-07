@@ -119,7 +119,19 @@
 		</div>
 	</form>
 
-
+<%
+ String strReferer = request.getHeader("referer");
+ 
+ if(strReferer == null){
+%>
+ <script language="javascript">
+  alert("정상적인 경로를 통해 다시 접근해 주십시오.");
+  document.location.href="../index.jsp";
+ </script>
+<%
+  return;
+ }
+%>
 
 
 
@@ -127,6 +139,7 @@
 
 
 	<script type="text/javascript">
+	
 		//모든 공백 체크 정규식
 		var empCheck = /\s/g;
 		//아이디 정규식
