@@ -10,7 +10,7 @@
 			<c:when
 				test="${sessionScope.student_id == null && sessionScope.teacher_id ==null && sessionScope.manager_id == null}">
 				<a href="login">로그인</a>
-				<a href="signUp" id="signUp">회원가입</a>
+				<a href="agreeSignUp" id="signUp">회원가입</a>
 			</c:when>
 			<c:otherwise>
 				<a href="logout">로그아웃</a>
@@ -62,7 +62,7 @@
 						<c:when
 							test="${sessionScope.student_id == null && sessionScope.teacher_id ==null && sessionScope.manager_id == null}">
 							<a href="login" id="login">로그인</a>
-							<a href="signUp">회원가입</a>
+							<a href="agreeSignUp">회원가입</a>
 							<a href="login">수강신청</a>
 							<div class="find">
 								<a href="#" id="find">아이디 | 패스워드 찾기</a>

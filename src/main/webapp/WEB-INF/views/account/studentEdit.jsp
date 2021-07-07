@@ -33,9 +33,9 @@
 						<th>이름</th>
 						<td><input type="text" name="name" id="studentMyPage_name"
 							value="${DTO.name }" readonly>
-							<p id="edit_name" class="edit"
+							<!-- <p id="edit_name" class="edit"
 								style="float: right; font-size: 18px; margin-top: 10px; margin-right: 30px;"
-								onclick="edit('name')">수정하기</p>
+								onclick="edit('name')">수정하기</p> -->
 							<p id="errorName"
 								style="display: none; margin-left: 70px; color: #6A60A9; font-size: 15px; margin-bottom: 0px;"></p></td>
 					</tr>
@@ -119,14 +119,14 @@ $(document).ready(function(){
     		$('#edit_' + e).text("수정완료").attr("id", "edit_" + e + "Ok").attr("onclick", "editOk(" + "'" + e + "'" + ")");
 	  	}
 	// 유효성검사 정규식
-	var nameP =  /^[0-9a-zA-Z가-힣]{2,20}$/;
+/* 	var nameP =  /^[0-9a-zA-Z가-힣]{2,20}$/; */
 	var phoneP = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 	var emailP = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	var birthP = /^[0-9]{8}$/;
 	var passwordP = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/;
 	///////////수정확인 버튼을 눌렀을 경우/////////////
 	function editOk(e){ 
-    	if(e == "name"){
+    /* 	if(e == "name"){
     		if(nameP.test($('#studentMyPage_name').val())){
     			$('#errorName').css("display","none");
     			editFinish(e);
@@ -134,7 +134,7 @@ $(document).ready(function(){
     			console.log(($('#studentMyPage_name').val()));
     			$('#errorName').show().html("한글과 영문 대 소문자를 사용하세요. (특수기호, 공백 사용 불가)");
     		}
-    	} else if (e == "phone"){
+    	} */ if (e == "phone"){
     		if(phoneP.test($('#studentMyPage_phone').val())){
     			$('#errorPhone').css("display","none");
     			editFinish(e);

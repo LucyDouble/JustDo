@@ -113,8 +113,6 @@
 
 
 		<div class="reg_button">
-			<!-- 			<button class="btn btn-primary px-3" id="reg_submit">
- -->
 			<input type="submit" class="btn btn-primary px-3" id="reg_submit"
 				value="가입" /> <br> <br> <br> <br> <br> <br>
 			<br> <br>
@@ -450,11 +448,8 @@
 						}
 					}
 					if (validAll) {
+							alert('회원가입을 축하합니다.');
 
-						/* 	alert('회원가입을 축하합니다.');
-							form.action = "account/signUp";
-							form.method = "post";
-							form.submit(); */
 					} else {
 						alert('입력한 정보들을 다시 확인해주세요.');
 					}

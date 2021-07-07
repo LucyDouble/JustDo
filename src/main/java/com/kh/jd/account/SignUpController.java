@@ -27,7 +27,10 @@ public class SignUpController {
 	private JavaMailSender mailSender;
 
 	private static final Logger logger = LoggerFactory.getLogger(SignUpController.class);
-
+	@RequestMapping(value="/agreeSignUp")
+	public String agreeSignUp() {
+		return "account/agreeSignUp";
+	}
 	@RequestMapping(value = "/signUp", method=RequestMethod.GET)
 	public String signUpPage() {
 		logger.info("get register");
