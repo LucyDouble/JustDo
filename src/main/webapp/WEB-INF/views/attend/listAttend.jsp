@@ -22,8 +22,23 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/common/header.css"/>">
 <script type="text/javascript" src="<c:url value="/resources/js/header.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
+<style type="text/css">
+.graph_liAttend { margin: 0; padding: 0; text-align: left;}
+.graphAttend  { width: 450px; list-style: none;margin: 0; padding: 0; clear: both; }
+.graphAttend li   { position: relative; padding: 1px 0; white-space:nowrap; }
+.graphAttend li span  { display: inline-block; position: relative; height: 30px; line-height: 30px; background: #DEDCEE;}
+.graphAttend li em    { position: absolute; top: 0px; right: -40px; font-family: arial; color: #000; font-size: 14px;}
+.graph_titleAttend{
+	font :bold;
+	text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	float : left; 
+}
+</style>
 </head>
 <body>
+
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div class="ln_page">
 		<c:if test="${empty attendList }">
@@ -32,7 +47,7 @@
 		<c:if test="${not empty attendList }">
 			<p class="ln_title">${lecture_title }</p>
 		</c:if>
-		<hr>
+		<!--<hr>-->
 		<div>
 			<form id="choiceFrm">
 				강의 선택:
@@ -48,7 +63,8 @@
 				<button type="button" class="chbutton"  id="chbutton"><span>출결하기</span></button>
 			</form>
 		</div>
-		<hr>
+		<br>
+		<!--<hr>-->
 <c:if test="${not empty attendList }">
 	<c:if test="${not empty msg  }">
 	<script type="text/javascript">
@@ -99,7 +115,16 @@
 				<input type="button" id="checkExit"  class="chbutton" value="퇴실하기" /> 
 			</div>
 		</c:if>
-		<HR>
+		<br>
+		
+	<div class="graph_titleAttend">&nbsp;&nbsp;&nbsp;평균 출석률</div>
+	<br>
+	<ul id="g1Attend" class="graphAttend">
+        <li class="graph_liAttend">&nbsp;&nbsp;&nbsp;<span class="grape_span" style="width: ${myPro}%" >나<em>${myPro}%</em></span></li>
+        <li class="graph_liAttend">&nbsp;&nbsp;&nbsp;<span class="grape_span" style="width: ${classPro}%">우리반<em>${classPro}%</em></span></li>
+    </ul>
+		<!--<hr>-->
+		
 	<!-- 입실 video -->
 	<div class="videoModal">
 		<div class="container" id="container" >
@@ -170,7 +195,7 @@
 							<c:if test="${i.attend_progress =='0' }">결석</c:if>
 							<c:if test="${i.attend_progress =='1' }">지각</c:if>
 							<c:if test="${i.attend_progress =='2' }">조퇴</c:if>
-							<c:if test="${i.attend_progress =='3' }">지각+결석</c:if>
+							<c:if test="${i.attend_progress =='3' }">지각+조퇴</c:if>
 							<c:if test="${i.attend_progress =='4' }">출석</c:if>
 							</td>
 
@@ -216,7 +241,49 @@
 	<sciprt src="js/bootstrap.js"></sciprt>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 
+
+<script type="text/javascript">
+
+
+	drawGraph(document.getElementById("g1Attend"));
+
+function drawGraph(obj) {
+    this.gages = obj.getElementsByClassName("grape_span");
+    this.values = obj.getElementsByTagName("em");
+
+    for(var i = 0; i < this.gages.length; i ++) {
+        (function(idx) {
+            var current_value = 0;
+            var gage_object = this.gages[idx];
+            var gage_value = this.values[idx];
+            var gage_width = parseInt(gage_object.style.width);
+            var timer = null;
+
+            timer = setInterval(function() {
+                if(current_value <= gage_width) {
+                    current_value += Math.ceil((gage_width - current_value) / 15);
+                    if(current_value==0){
+                    	gage_object.style.width = 11 + "%";
+                    }else{
+                    gage_object.style.width = current_value+11 + "%";
+                    }
+                    gage_value.innerHTML = current_value + "%";
+                } else {
+                    clearInterval(timer);
+                }
+            }, 10);
+        })(i);
+    }
+} 
+</script>
 	<script type="text/javascript">
+	
+	
+
+	
+	
+	
+	
 	
 	
 	$("#chbutton").click(function(){

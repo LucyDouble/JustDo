@@ -19,7 +19,7 @@ public class AttendServiceImpl implements AttendService {
 	@Scheduled(cron = "0 9 0 * * 1,2,3,4,5") // 0~6 일~토
 	public void scheduleAttend() {
 		System.out.println("출석 날짜 삽입==권용휘 컴퓨터서만 실행");
-		/* attendDao.scheduleAttend(); */
+//		 attendDao.scheduleAttend(); 
 	}
 	@Override
 	public List<Attend> listAttend(Attend vo) {
@@ -50,6 +50,38 @@ public class AttendServiceImpl implements AttendService {
 	public void attendprogress() {
 		System.out.println("출석상태 삽입==권용휘 컴퓨터서만 실행");
 		/* attendDao.attendprogress(); */
+	}
+	@Override
+	public int progressTotal(Attend vo) {
+		return attendDao.progressTotal(vo);
+	}
+	@Override
+	public int progressAttend(Attend vo) {
+		return attendDao.progressAttend(vo);
+	}
+	@Override
+	public int progressLate(Attend vo) {
+		return attendDao.progressLate(vo);
+	}
+	@Override
+	public int progressSoLate(Attend vo) {
+		return attendDao.progressSoLate(vo);
+	}
+	@Override
+	public int progressClassTotal(Attend vo) {
+		return attendDao.progressClassTotal(vo);
+	}
+	@Override
+	public int progressClassAttend(Attend vo) {
+		return attendDao.progressClassAttend(vo);
+	}
+	@Override
+	public int progressClassLate(Attend vo) {
+		return attendDao.progressClassLate(vo);
+	}
+	@Override
+	public int progressClassSoLate(Attend vo) {
+		return attendDao.progressClassSoLate(vo);
 	}
 
 }

@@ -22,7 +22,7 @@
 		<ul>
 			<li class="aboutJD"><a id="aboutJD" href="#">JD안내</a>
 				<div id="drop_content">
-					<a href="aboutJD">JD 소개</a> <a href="knowhow">이용방법</a> <a href="#">오시는
+					<a href="aboutJD">JD 소개</a> <a href="knowhow">이용방법</a> <a href="aboutAdress">오시는
 						길</a>
 				</div></li>
 			<li class=""><a href="#">강사소개</a>

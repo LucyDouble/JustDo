@@ -12,4 +12,12 @@ public interface AttendService {
 	public int startCheck(Attend vo) ;
 	public int endCheck(Attend vo) ;
 	public void attendprogress();
+	public int progressTotal(Attend vo) ;
+	public int progressAttend(Attend vo) ;
+	public int progressLate(Attend vo) ;
+	public int progressSoLate(Attend vo) ;
+	public int progressClassTotal(Attend vo) ;
+	public int progressClassAttend(Attend vo) ;
+	public int progressClassLate(Attend vo) ;
+	public int progressClassSoLate(Attend vo) ;
 }

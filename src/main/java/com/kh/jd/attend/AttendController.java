@@ -125,8 +125,27 @@ public class AttendController {
 				endCh=3;
 			}
 			
+			int proTotal = attendService.progressTotal(vo);
+			int proAttend = attendService.progressAttend(vo);
+			int proLate = attendService.progressLate(vo);
+			int proSoLate = attendService.progressSoLate(vo);
 			
+			System.out.println("총 :"+proTotal+"출석 :"+proAttend+"지각+조퇴"+proLate+"제일 나쁜넘"+proSoLate);
+			int myPro = ((proAttend+proLate+proSoLate)-(proLate/3+proSoLate*2/3))*100/proTotal;
 			
+			int proClassTotal = attendService.progressClassTotal(vo);
+			int proClassAttend = attendService.progressClassAttend(vo);
+			int proClassLate = attendService.progressClassLate(vo);
+			int proClassSoLate = attendService.progressClassSoLate(vo);
+			
+			System.out.println("19나와야 함"+vo.getLectureclass_no());
+			System.out.println("총 :"+proClassTotal+"출석 :"+proClassAttend+"지각+조퇴"+proClassLate+"제일 나쁜넘"+proClassSoLate);
+			
+			int classPro = ((proClassAttend+proClassLate+proClassSoLate)-(proClassLate/3+proClassSoLate*2/3))*100/proClassTotal;
+					
+			
+			mv.addObject("classPro", classPro);
+			mv.addObject("myPro", myPro);
 			mv.addObject("endCh", endCh);
 			mv.addObject("startCh", startCh);
 			mv.addObject("lecture_start",lecture_start );

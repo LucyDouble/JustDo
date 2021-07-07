@@ -80,4 +80,68 @@
 	<select id="attendprogress" >
 		CALL attendprogress()
 	</select>
+	<select id="progressTotal" parameterType="Attend" resultType="int">
+	    select count(*)
+		from (select * 
+		      from attend a join lectureclass lc 
+		      using(lectureclass_no) 
+		      where student_number=${student_number} and lecture_no=#{lecture_no}) alc join lecture l 
+		on alc.lecture_no=l.lecture_no
+	</select>
+	<select id="progressAttend" parameterType="Attend" resultType="int">
+        select count(*)
+		from (select * 
+		      from attend a join lectureclass lc 
+		      using(lectureclass_no) 
+		      where student_number=${student_number} and lecture_no=#{lecture_no} and attend_progress=4) alc join lecture l 
+		on alc.lecture_no=l.lecture_no
+	</select>
+	<select id="progressLate" parameterType="Attend" resultType="int">
+        select count(*)
+		from (select * 
+		      from attend a join lectureclass lc 
+		      using(lectureclass_no) 
+		      where student_number=${student_number} and lecture_no=#{lecture_no} and (attend_progress=1 or attend_progress=2)) alc join lecture l 
+		on alc.lecture_no=l.lecture_no
+	</select>
+	<select id="progressSoLate" parameterType="Attend" resultType="int">
+        select count(*)
+		from (select * 
+		      from attend a join lectureclass lc 
+		      using(lectureclass_no) 
+		      where student_number=${student_number} and lecture_no=#{lecture_no} and attend_progress=3) alc join lecture l 
+		on alc.lecture_no=l.lecture_no
+	</select>
+	<select id="progressClassTotal" parameterType="Attend" resultType="int">
+        select count(*)
+		from (select * 
+		      from attend a join lectureclass lc 
+		      using(lectureclass_no) 
+		      where lectureclass_no=#{lectureclass_no} ) alc join lecture l 
+		on alc.lecture_no=l.lecture_no order by attend_date
+	</select>
+	<select id="progressClassAttend" parameterType="Attend" resultType="int">
+        select count(*)
+		from (select * 
+		      from attend a join lectureclass lc 
+		      using(lectureclass_no) 
+		      where lectureclass_no=#{lectureclass_no} and attend_progress=4 ) alc join lecture l 
+		on alc.lecture_no=l.lecture_no order by attend_date
+	</select>
+	<select id="progressClassLate" parameterType="Attend" resultType="int">
+        select count(*)
+		from (select * 
+		      from attend a join lectureclass lc 
+		      using(lectureclass_no) 
+		      where lectureclass_no=#{lectureclass_no} and (attend_progress=1 or attend_progress=2) ) alc join lecture l 
+		on alc.lecture_no=l.lecture_no order by attend_date
+	</select>
+	<select id="progressClassSoLate" parameterType="Attend" resultType="int">
+        select count(*)
+		from (select * 
+		      from attend a join lectureclass lc 
+		      using(lectureclass_no) 
+		      where lectureclass_no=#{lectureclass_no} and attend_progress=3 ) alc join lecture l 
+		on alc.lecture_no=l.lecture_no order by attend_date
+	</select>
 </mapper>
