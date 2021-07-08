@@ -25,7 +25,7 @@
 					<a href="aboutJD">JD 소개</a> <a href="knowhow">이용방법</a> <a href="#">오시는
 						길</a>
 				</div></li>
-			<li class=""><a href="#">강사소개</a>
+			<li class=""><a href="aboutTeacher">강사소개</a>
 				<div id="drop_content">
 					<a href="#">강남 교육원</a> <a href="#">종각 교육원</a> <a href="#">부평
 						교육원</a>
