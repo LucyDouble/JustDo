@@ -9,7 +9,7 @@ public class Video {
 	private int lectureclass_no;
 	private String video_title;
 	private String video_content;
-	private Date video_date;
+	private String video_date;
 	private String video_file;
 	private String video_path;
 	private String video_image;
@@ -53,11 +53,11 @@ public class Video {
 		this.video_content = video_content;
 	}
 
-	public Date getVideo_date() {
+	public String getVideo_date() {
 		return video_date;
 	}
 
-	public void setVideo_date(Date video_date) {
+	public void setVideo_date(String video_date) {
 		this.video_date = video_date;
 	}
 

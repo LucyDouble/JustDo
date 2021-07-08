@@ -56,21 +56,23 @@ public class VideoController {
 		int student_number = 0;
 		int teacher_number = 0;
 		try {
-//			st= (Student)request.getSession().getAttribute("DTO");
-//			student_number=st.getStudent_number();
-			te= (Teacher)request.getSession().getAttribute("DTO");
-			teacher_number=te.getTeacher_number();
+			String ss = request.getSession().getAttribute("DTO").toString();
+			String[] str = ss.split(" ");
+			if(str[0]=="Teacher" || str[0].equals("Teacher")) {
+				te= (Teacher)request.getSession().getAttribute("DTO");
+				teacher_number=te.getTeacher_number();
+				re.setTeacher_number(teacher_number);
+				request.setAttribute("user", teacher_number);
+			}else {
+				st= (Student)request.getSession().getAttribute("DTO");
+				student_number=st.getStudent_number();
+				re.setStudent_number(student_number);
+				request.setAttribute("user", student_number);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		if(st!=null) {
-//			System.out.println("학생 로그인 들어왔따");
-//			re.setStudent_number(student_number);
-//		}
-//		if(te!=null) {
-//			System.out.println("선생 로그인 들어왔따");
-//		}
-		re.setTeacher_number(teacher_number);
+		
 		list = RService.listRegistration(re);
 		System.out.println(list);
 		m.addAttribute("list", list);
@@ -87,7 +89,7 @@ public class VideoController {
 	
 	// 학습동영상 썸네일 출력
 	@ResponseBody
-	@RequestMapping(value = "listThumbnail", method = RequestMethod.POST)
+	@RequestMapping(value = "listThumbnail", method = RequestMethod.POST, produces = "application/text; charset=UTF-8")
 	public String listThumbnail(HttpServletRequest request, @RequestParam(name="lectureclass_no") int lectureclass_no) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", VService.listVideo(lectureclass_no));

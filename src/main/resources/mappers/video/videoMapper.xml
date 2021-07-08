@@ -4,7 +4,8 @@
 
 <!-- 학습동영상 리스트 -->
 <select id="listVideo" resultType="Video" parameterType="int">
-	select * from video where lectureclass_no = #{lectureclass_no}
+	SELECT video_no, lectureclass_no, video_title, video_content, to_char(video_date,'yyyy-mm-dd') video_date, video_file, video_image, video_path 
+	from video where lectureclass_no = #{lectureclass_no}
 </select>
 <!-- 학습동영상 등록 -->
 <insert id="addVideo" parameterType="Video">
