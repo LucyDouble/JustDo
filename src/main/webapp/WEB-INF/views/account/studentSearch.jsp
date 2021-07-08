@@ -9,8 +9,7 @@
 <meta charset="UTF-8">
 <title>JD 교육원</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <link rel="stylesheet" href="resources/css/fonts.css" />
 <link rel="stylesheet" href="resources/css/common/header.css" />
 <link rel="stylesheet" href="resources/css/common/footer.css" />
@@ -24,17 +23,11 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.13/css/mdb.min.css"
 	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Righteous&amp;subset=latin-ext"
-	rel="stylesheet">
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript"
+
+<!-- <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 <script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.13/js/mdb.min.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.13/js/mdb.min.js"></script> -->
 
 
 </head>
@@ -42,7 +35,6 @@
 	<%@ include file="/WEB-INF/views/account/studentIdSearchModal.jsp"%>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 
-	<div class="full">
 		<div class="container">
 			<div class="area_inputs wow fadeIn">
 				<div class="sub_title font-weight-bold text-black">
@@ -109,7 +101,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 
 </body>

@@ -7,12 +7,14 @@
 <html>
 <link rel="stylesheet"
 	href="<c:url value="resources/css/account/signup.css"/>">
+	<link rel="stylesheet" href="resources/css/fonts.css"/>
 <head>
 <meta charset="UTF-8">
 <title>회원 가입</title>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	
 
 
 </head>
@@ -125,8 +127,8 @@
  if(strReferer == null){
 %>
  <script language="javascript">
-  alert("정상적인 경로를 통해 다시 접근해 주십시오.");
-  document.location.href="../index.jsp";
+  alert("잘못된 접근입니다. 이전 페이지로 다시 돌아갑니다.");
+  document.location.href="agreeSignUp";
  </script>
 <%
   return;

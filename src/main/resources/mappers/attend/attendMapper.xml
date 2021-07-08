@@ -10,7 +10,8 @@
 		      on r.lectureclass_no=lc.lectureclass_no
 		      where student_number=#{student_number}) rlc join lecture l 
 		on rlc.lecture_no=l.lecture_no
-		where sysdate >=lecture_start and lecture_end>=sysdate
+		where sysdate >=lecture_start
+		<!-- where sysdate >=lecture_start and lecture_end>=sysdate -->
 	</select>
 <!-- 스케줄러 사용 프로시저 호출 -->
 	<select id="scheduleAttend" >
@@ -24,7 +25,7 @@
 		       to_char(lectureclass_start,'hh24miss') as lectureclassStart,
 		       to_char(lectureclass_end,'hh24miss') as lectureclassEnd,
 		       lecture_title,to_char(lecture_start,'yyyy-mm-dd') as lecture_start,
-		       to_char(lecture_end,'yyyy-mm-dd') as lecture_end
+		       to_char(lecture_end,'yyyy-mm-dd') as lecture_end,lecture_state
 		from (select * 
 		      from attend a join lectureclass lc 
 		      using(lectureclass_no) 

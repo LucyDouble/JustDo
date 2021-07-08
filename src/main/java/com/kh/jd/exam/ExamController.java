@@ -245,7 +245,7 @@ public class ExamController {
 		mv.addObject("total", total);
 		
 		List<Exam> listExam = examService.listExamResult(currentPage, LIMIT2,map);
-
+		System.out.println(listExam);
 		mv.addObject("listExam", listExam);
 		mv.setViewName("examResult/listExamResult");
 		

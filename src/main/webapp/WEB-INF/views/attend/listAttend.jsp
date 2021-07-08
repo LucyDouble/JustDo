@@ -35,6 +35,18 @@
 	font-size: 16px;
 	float : left; 
 }
+.ln_title_end {
+	font-size: 25px;
+	font-weight: bold;
+	clear: both;
+}
+.an_sub {
+	font-size: 12px;
+	font-weight: bold;
+	clear: both;
+	margin-bottom: 20px;
+	color: #5b5b5b;
+}
 </style>
 </head>
 <body>
@@ -45,7 +57,14 @@
 			<p class="ln_title">출석하기</p>
 		</c:if>
 		<c:if test="${not empty attendList }">
-			<p class="ln_title">${lecture_title }</p>
+			<c:if test="${lecture_state ==1 }">
+				<p class="ln_title">${lecture_title }</p>
+			</c:if>
+			<c:if test="${lecture_state !=1 }">
+				<p class="ln_title_end">${lecture_title }</p>
+				<p class="an_sub">종료된 강의입니다.</p>
+			</c:if>
+			
 		</c:if>
 		<!--<hr>-->
 		<div>
@@ -105,14 +124,16 @@
 		<c:if test="${endCh =='0' }">
 			<div>
 				<input id="content" type="hidden" name="content" value="${content }"/>
-				<c:if test="${startCh=='0' }">
-					<input type="button" id="check"  class="chbutton" value="입실하기" /> 
-				</c:if>   
-				<c:if test="${startCh=='1' }">
-					<input type="button" id="checkEarly"  class="chbutton" value="조퇴하기" /> 
-				</c:if>   
-				<input type="button" id="execute"  class="chbutton" value="QR생성" /> 
-				<input type="button" id="checkExit"  class="chbutton" value="퇴실하기" /> 
+				<c:if test="${lecture_state ==1 }">
+					<c:if test="${startCh=='0' }">
+						<input type="button" id="check"  class="chbutton" value="입실하기" /> 
+					</c:if>   
+					<c:if test="${startCh=='1' }">
+						<input type="button" id="checkEarly"  class="chbutton" value="조퇴하기" /> 
+					</c:if>   
+					<input type="button" id="execute"  class="chbutton" value="QR생성" /> 
+					<input type="button" id="checkExit"  class="chbutton" value="퇴실하기" /> 
+				</c:if>
 			</div>
 		</c:if>
 		<br>

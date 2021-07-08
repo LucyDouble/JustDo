@@ -601,3 +601,14 @@ i{
 	float:left;
 	margin-left: 90px;
 }
+.writer_name{
+	float:left;
+}
+.comment_text{
+	float : left
+}
+#comment_box{
+	padding: 30px;
+	
+}
+
