@@ -73,10 +73,8 @@
 		                where e.exam_no=#{exam_no})el join student s 
 		          on el.student_number=s.student_number order by name asc )) df join exam_result er 
 		     on df.registration_no= er.registration_no
-		where er.exam_no=#{exam_no}
-		<if test='keyword !=null || !keyword.equals("")'>
-			 and name like '%'||#{keyword}||'%'
-		</if>
+		where er.exam_no=#{exam_no} and name like '%'||#{keyword}||'%'
+		order by rnum asc
 	</select>
 	<select id="getlistExamResultCount" resultType="int" parameterType="Map">
 		select count(*)

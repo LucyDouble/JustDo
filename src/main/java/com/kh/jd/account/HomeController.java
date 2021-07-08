@@ -33,10 +33,10 @@ public class HomeController {
 
         return "common/knowhow";
     }
-    @RequestMapping(value = "/aboutAdress", method = RequestMethod.GET)
+    @RequestMapping(value = "/aboutAddress", method = RequestMethod.GET)
     public String aboutAdress(Locale locale, Model model) {
     	
-    	return "common/aboutAdress";
+    	return "common/aboutAddress";
     }
 	
 	
