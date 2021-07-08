@@ -209,7 +209,6 @@
 		}
 		
 		<!-- Channel Plugin Scripts -->
-		<script>
 		  (function() {
 		    var w = window;
 		    if (w.ChannelIO) {
@@ -248,8 +247,7 @@
 		  ChannelIO('boot', {
 		    "pluginKey": "66102113-a998-4b82-8776-737ca1110d32"
 		  });
-		</script>
 		<!-- End Channel Plugin -->
-	</script>
+		</script>
 </body>
 </html>
