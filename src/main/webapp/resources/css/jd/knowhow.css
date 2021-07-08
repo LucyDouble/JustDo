@@ -1,0 +1,355 @@
+@charset "UTF-8";
+
+#contentArea {
+	width: 1300px;
+	margin: 0 auto;
+	padding-top: 50px;
+	line-height: 1.4;
+	letter-spacing: -0.05em;
+}
+
+#contentKnow {
+	min-height: 1100px;
+}
+
+#contentArea>h3 {
+	font-size: 28px;
+	color: black;
+    font-weight: bold;
+}
+
+#knowCont {
+	position: relative;
+	width: 100%;
+    height: auto;
+	word-break: break-all;
+}
+
+#studentCont {
+	float: left;
+	width: 48%;
+	padding-top: 40px;
+}
+
+.student_title {
+    min-height: 120px;
+    margin-bottom: 20px;
+}
+
+.student_img {
+    float: left;
+    width: 20%;
+    background: url(https://cls1.edunet.net/images/common/ico_estudy2_01.png) center top no-repeat;
+}
+
+.student_name {
+	display: block;
+    padding: 90px 0 0;
+    text-align: center;
+    color: #0250b5;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.student_txt {
+	float: right;
+    width: 76%;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.05em;
+    color: #666;
+    font-weight: bold;
+}
+
+.student_txt .top_txt {
+	display: block;
+    color: black;
+    font-size: 18px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.student_txt .point_txt {
+	color: #0250b5;
+}
+
+.student_list {
+	clear: both;
+    width: 100%;
+    min-height: 150px;
+    height: auto;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.student_list p {
+	float: left;
+    width: 38%;
+}
+
+.student_list p img {
+	max-width: 100%;
+}
+
+.student_list ul {
+    float: right;
+    width: 56%;
+}
+
+.tit {
+	font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.tit>div {
+	display: inline-block;
+    margin-left: 20px;
+}
+
+.student_list ul .pos {
+	padding: 10px;
+    background-color: #0250b5;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+    margin-bottom: 3px;
+}
+
+.student_list ul .pos span {
+    display: inline-block;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.student_list ul li.exp {
+	font-size: 14px;
+    line-height: 20px;
+    color: #666;
+    padding-left: 10px;
+}
+
+.exp span {
+	display: block;
+    color: #0250b5;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.student_list02 {
+    clear: both;
+    width: 100%;
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+.student_list02 dl dt {
+    display: block;
+    font-size: 22px;
+    color: #000;
+    font-weight: bold;
+}
+
+.student_list02 dl dt img {
+    vertical-align: middle;
+    margin-right: 10px;
+    max-width: 100%;
+}
+
+.student_list02 dl dt span.point {
+    line-height: 36px;
+    color: #0250b5;
+}
+
+.student_list02 dl dd {
+    font-size: 16px;
+    color: #666;
+}
+
+.student_list02 dd {
+   	display: block;	
+}
+
+.student_list02 dl dd ul li {
+    display: block;
+    line-height: 24px;
+    background: url(https://cls1.edunet.net/images/common/ico_blue_check.gif) left 5px no-repeat;
+    padding-left: 20px;
+    margin: 0 0 5px 57px;
+    font-weight: 400;
+}
+
+.student_list02 dl dd ul li.img {
+    background: none;
+    padding-left: 0;
+}
+
+#teacherCont {
+	float: right;
+	width: 48%;
+	padding-top: 40px;
+}
+
+.teacher_title {
+    clear: both;
+    width: 100%;
+    min-height: 120px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.teacher_title li.img {
+    float: left;
+    width: 20%;
+    background: url(https://cls1.edunet.net/images/common/ico_estudy2_02.png) center top no-repeat;
+}
+
+.teacher_title li.img span.name {
+    display: block;
+    padding: 90px 0 0;
+    text-align: center;
+    color: #177b63;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.teacher_txt {
+    float: right;
+    width: 76%;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.05em;
+    color: #666;
+    font-weight: bold;
+}
+
+.teacher_txt .top_txt {
+	display: block;
+    color: black;
+    font-size: 18px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.point_txt {
+	color: #177b63;
+}
+
+.teacher_list {
+    clear: both;
+    width: 100%;
+    min-height: 150px;
+    height: auto;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+#teacherCont  .teacher_list p {
+    float: left;
+    width: 38%;
+}
+
+#teacherCont .teacher_list p img {
+	max-width: 100%;
+}
+
+#teacherCont .teacher_list ul {
+    float: right;
+    width: 56%;
+}
+
+#teacherCont .teacher_list ul li.tit {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+#teacherCont .teacher_list ul li.pos {
+	padding: 10px;
+    background-color: #177b63;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+    margin-bottom: 3px;
+}
+
+#teacherCont .teacher_list ul .pos span {
+    display: inline-block;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#teacherCont .teacher_list ul li.exp {
+	font-size: 14px;
+    line-height: 20px;
+    color: #666;
+    padding-left: 10px;
+}
+
+
+#teacherCont .teacher_list ul li.exp span {
+	display: block;
+    color: #177b63;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.teacher_list02 {
+    clear: both;
+    width: 100%;
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+.teacher_list02 dl dt {
+    display: block;
+    font-size: 22px;
+    color: #000;
+    font-weight: bold;
+}
+
+.teacher_list02 dl dt img {
+    vertical-align: middle;
+    margin-right: 10px;
+    max-width: 100%;
+}
+
+.teacher_list02 dl dt span.point {
+    line-height: 36px;
+    color: #0250b5;
+}
+
+.teacher_list02 dl dd {
+    font-size: 16px;
+    color: #666;
+}
+
+.teacher_list02 dd {
+   	display: block;	
+}
+
+.teacher_list02 dl dd ul li {
+    display: block;
+    line-height: 24px;
+    background: url(https://cls1.edunet.net/images/common/ico_blue_check.gif) left 5px no-repeat;
+    padding-left: 20px;
+    margin: 0 0 5px 57px;
+    font-weight: 400;
+}
+
+.teacher_list02 dl dd ul li.img {
+    background: none;
+    padding-left: 0;
+}
+
+

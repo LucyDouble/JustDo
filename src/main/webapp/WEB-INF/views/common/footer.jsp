@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <footer id="footer">
     <div id="footer_main">
-        <img src="resources/images/footer.png">
+        <a href="registration "><img src="resources/images/footer.png"></a>
     </div>
     <div id="footer_container">
         <section id="footer_menu1">
