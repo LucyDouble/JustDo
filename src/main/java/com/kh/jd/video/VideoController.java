@@ -284,4 +284,19 @@ public class VideoController {
 			
 			return "redirect:/listVideo";
 		}
+	// 삭제 기능
+		@RequestMapping(value = "removeVideo", method = RequestMethod.GET)
+		public String removeVideo(Model m,HttpServletRequest request) {
+				int video_no = Integer.parseInt(request.getParameter("cheakVNo"));
+				VService.removeVideo(video_no);
+				System.out.println(video_no);
+				return "redirect:/listVideo";
+		}
+		// 학습동영상 조회
+		@RequestMapping(value = "viewVideo", method = RequestMethod.GET)
+		public String viewVideo(Model m,HttpServletRequest request, @RequestParam(name="video_no") int video_no) {
+			System.out.println(video_no);
+			m.addAttribute("view", VService.viewVideo(video_no));
+			return "video/viewVideo";
+		}
 }

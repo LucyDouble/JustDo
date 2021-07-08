@@ -15,61 +15,6 @@
 <link rel="stylesheet" href="resources/css/common/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="resources/js/header.js"></script>
-<style>
-	.studio{
-		width: 1000px;
-		height: auto;
-	}
-	.videoImg{
-		width: 300px;
-		height: 200px;
-	}
-	.playBtn{
-		position: absolute;
-		left: 118px;
-		top: 70px;
-	}
-	.cover{
-		width: 300px;
-		height: 200px;
-		padding: 0;
-		margin-right: 16px;
-		margin-top: 50px;
-		margin-bottom: 50px;
-		margin-left: 16px;
-		float: left;
-	}
-	.imgcover{
-		position:relative;
-		width: 300px;
-		height: 200px;
-		clear: both;
-	}
-	.thumcover{
-		width: 300px;
-		height: 200px;
-		opacity: 0.4;
-		background: #000;
-		position: absolute;
-		top:0;
-	}
-	.videoDate{
-		margin: 0;
-		text-align: left;
-		font-size: 13px;
-		color: #ccc;
-	}
-	.videoTitle{
-		margin: 0;
-		text-align: left;
-	}
-	.selectLc{
-		margin-bottom: 25px;
-	}
-	.cheakVNo{
-		float: right;
-	}
-</style>
 </head>
 <body>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
@@ -89,16 +34,20 @@
 				<c:if test="${100000 < user}">
 				<button class="button" onclick="goAdd()"><span>등록</span></button>
 				<button class="button" id="editVideo"><span>수정</span></button>
-				<button class="button"><span>삭제</span></button>
+				<button class="button" id="removeVideo"><span>삭제</span></button>
 				</c:if>
 			</div>
 			<form id="frm">
 			<div class="studio">
+				<p>강의를 선택해주세요.</p>
 			</div>
 			</form>
 	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 	<script>
+		function viewVideo(num){
+			location.href="viewVideo?video_no="+num;
+		}
 		// 셀릭트 선택 시 과목 출력
 		function goTitle(){
 			var opt = document.getElementById("listTitle");
@@ -118,7 +67,7 @@
 				success:function(data){
 					var listVideo = data.list;
 					$.each(listVideo, function(i, item){
-						list += "<ul class='cover'><c:if test='${100000< user}'><label class='checkbox'><input type='radio' class='cheakVNo checkbox' name='cheakVNo' value='"+item.video_no+"'><span class='icon'></span></label></c:if><li class='imgcover'><a href='#####'><img class='videoImg' src='"+item.video_image
+						list += "<ul class='cover'><c:if test='${100000< user}'><label class='checkbox'><input type='radio' class='cheakVNo checkbox' name='cheakVNo' value='"+item.video_no+"'><span class='icon'></span></label></c:if><li class='imgcover'><a href='javascript:void(0);' onclick='viewVideo("+item.video_no+");'><img class='videoImg' src='"+item.video_image
 								+"'><div class='thumcover'></div><img class='playBtn' src='resources/images/play_btn.png'></a></li>"
 								+"<p class='videoDate''>"+item.video_date+"</p><p class='videoTitle'>"+item.video_title+"</p>"
 								+"</ul>"
@@ -149,5 +98,6 @@
 			}
 		});
 	</script>
+	<jsp:include page="../video/removeVideo.jsp"></jsp:include>
 </body>
 </html>

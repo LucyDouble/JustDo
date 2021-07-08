@@ -9,4 +9,5 @@ public interface VideoService {
 	public int videoCount(Map<String, Object> map);
 	public Video viewVideo(int video_no);
 	public int editVideo(Video video);
+	public int removeVideo(int video_no);
 }

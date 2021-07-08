@@ -35,4 +35,9 @@ public class VideoServiceImpl implements VideoService {
 	public int editVideo(Video video) {
 		return Vdao.editVideo(video);
 	}
+
+	@Override
+	public int removeVideo(int video_no) {
+		return Vdao.removeVideo(video_no);
+	}
 }

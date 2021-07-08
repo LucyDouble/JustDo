@@ -28,4 +28,7 @@ public class VideoDao {
 	public int editVideo(Video video) {
 		return sqlSession.update("Video.editVideo", video);
 	}
+	public int removeVideo(int video_no) {
+		return sqlSession.delete("Video.removeVideo", video_no);
+	}
 }
