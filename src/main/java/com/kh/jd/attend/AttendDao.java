@@ -20,4 +20,46 @@ public class AttendDao {
 	public List<Attend> listAttend(Attend vo){
 		return sqlSession.selectList("attend.listAttend", vo);
 	}
+	public void editAttend(Attend vo) {
+		sqlSession.update("attend.editAttend",vo);
+	}
+	public void editAttendExit(Attend vo) {
+		sqlSession.update("attend.editAttendExit",vo);
+	}
+	public int getlistAttendCount(Attend vo) {
+		return sqlSession.selectOne("attend.getlistAttendCount",vo);
+	}
+	public int startCheck(Attend vo) {
+		return sqlSession.selectOne("attend.startCheck",vo);
+	}
+	public int endCheck(Attend vo) {
+		return sqlSession.selectOne("attend.endCheck",vo);
+	}
+	public void attendprogress() {
+		sqlSession.selectOne("attend.attendprogress");
+	}
+	public int progressTotal(Attend vo) {
+		return sqlSession.selectOne("attend.progressTotal",vo);
+	}
+	public int progressAttend(Attend vo) {
+		return sqlSession.selectOne("attend.progressAttend",vo);
+	}
+	public int progressLate(Attend vo) {
+		return sqlSession.selectOne("attend.progressLate",vo);
+	}
+	public int progressSoLate(Attend vo) {
+		return sqlSession.selectOne("attend.progressSoLate",vo);
+	}
+	public int progressClassTotal(Attend vo) {
+		return sqlSession.selectOne("attend.progressClassTotal",vo);
+	}
+	public int progressClassAttend(Attend vo) {
+		return sqlSession.selectOne("attend.progressClassAttend",vo);
+	}
+	public int progressClassLate(Attend vo) {
+		return sqlSession.selectOne("attend.progressClassLate",vo);
+	}
+	public int progressClassSoLate(Attend vo) {
+		return sqlSession.selectOne("attend.progressClassSoLate",vo);
+	}
 }

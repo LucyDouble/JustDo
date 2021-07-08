@@ -43,8 +43,14 @@ public interface TeacherService {
 	// 교직원 탈퇴
 	public void deleteTeacher(String teacher_id);
 
-	
 	//승인 체크
 	public int acceptCheck(String teacher_id);
+	
+	//교직원 아이디 찾기
+	public String teacher_searchId(String teacher_name, String teacher_email);
+	
+	//교직원 비밀번호 찾기
+	public void sendPassword(String teacher_id, String teacher_email);
+
 
 }

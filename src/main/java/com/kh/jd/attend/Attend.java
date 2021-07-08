@@ -9,9 +9,9 @@ public class Attend {
 	private int attend_no;
 	private int lecture_no;
 	private int student_number;
-	private Date attend_start;
+	private String attend_start;
 	private int attendStart;
-	private Date attend_end;
+	private String attend_end;
 	private int attendEnd;
 	private int attend_progress;
 	private int lectureclass_no;
@@ -23,6 +23,9 @@ public class Attend {
 	private String lectureclass_end;
 	private int lectureclassEnd;
 	private Date attend_date;
+	private String lecture_start;
+	private String lecture_end;
+	
 	
 	
 	@Override
@@ -33,8 +36,26 @@ public class Attend {
 				+ lectureclass_no + ", lecture_title=" + lecture_title + ", registration_no=" + registration_no
 				+ ", lectureclass_class=" + lectureclass_class + ", lectureclass_start=" + lectureclass_start
 				+ ", lectureclassStart=" + lectureclassStart + ", lectureclass_end=" + lectureclass_end
-				+ ", lectureclassEnd=" + lectureclassEnd + ", attend_date=" + attend_date + "]";
+				+ ", lectureclassEnd=" + lectureclassEnd + ", attend_date=" + attend_date + ", lecture_start="
+				+ lecture_start + ", lecture_end=" + lecture_end + "]";
 	}
+
+	public String getLecture_start() {
+		return lecture_start;
+	}
+
+	public void setLecture_start(String lecture_start) {
+		this.lecture_start = lecture_start;
+	}
+
+	public String getLecture_end() {
+		return lecture_end;
+	}
+
+	public void setLecture_end(String lecture_end) {
+		this.lecture_end = lecture_end;
+	}
+
 	public Date getAttend_date() {
 		return attend_date;
 	}
@@ -59,10 +80,10 @@ public class Attend {
 	public void setStudent_number(int student_number) {
 		this.student_number = student_number;
 	}
-	public Date getAttend_start() {
+	public String getAttend_start() {
 		return attend_start;
 	}
-	public void setAttend_start(Date attend_start) {
+	public void setAttend_start(String attend_start) {
 		this.attend_start = attend_start;
 	}
 	public int getAttendStart() {
@@ -71,10 +92,10 @@ public class Attend {
 	public void setAttendStart(int attendStart) {
 		this.attendStart = attendStart;
 	}
-	public Date getAttend_end() {
+	public String getAttend_end() {
 		return attend_end;
 	}
-	public void setAttend_end(Date attend_end) {
+	public void setAttend_end(String attend_end) {
 		this.attend_end = attend_end;
 	}
 	public int getAttendEnd() {

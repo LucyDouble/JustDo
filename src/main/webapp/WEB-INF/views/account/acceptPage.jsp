@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>교직원 승인</title>
 <link rel="stylesheet" href="resources/css/fonts.css"/>
 <link rel="stylesheet" href="resources/css/common/header.css"/>
 <link rel="stylesheet" href="resources/css/common/footer.css"/>
@@ -20,8 +20,9 @@
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div class="accept_page">
 	<h2 style="text-align: center;">회원목록</h2>
+	<br><br>
 	<div>
-	<form id="acceptFrm">
+	<form id="acceptFrm" >
 		<table class="list">
 			<tr class="index">
 				<td >승인</td>
@@ -59,7 +60,7 @@ $("#acceptBtn").click(function(){
 		if(check==true){
 			alert("승인되었습니다.");
 			frm.action="acceptTeacher";
-			frm.method="GET";
+			frm.method="POST";
 			frm.submit();
 		}else{
 			alert("체크를 확인해주세요");
@@ -71,8 +72,9 @@ $("#denyBtn").click(function(){
 	if(check==true){
 		alert("삭제되었습니다.");
 		frm.action="denyTeacher";
-		frm.method="GET";
+		frm.method="POST";
 		frm.submit();
+		
 	}else{
 			alert("체크를 확인해주세요");
 		}

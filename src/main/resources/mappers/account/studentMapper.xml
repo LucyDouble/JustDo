@@ -20,6 +20,10 @@
 		union all
 		SELECT
 		ID FROM TEACHER WHERE ID =
+		#{id}
+		union all
+		SELECT 
+		ID FROM MANAGERS WHERE ID=
 		#{id})
 	</select>
 	<insert id="signUp" parameterType="Student">

@@ -114,6 +114,7 @@
 			document.querySelector(".rc_background").className = "rc_background show";
 				}
 			}
+		
 	</script>
 
 	<jsp:include page="../counseling/removeCS.jsp"></jsp:include>

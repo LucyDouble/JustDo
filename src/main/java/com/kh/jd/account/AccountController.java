@@ -132,18 +132,18 @@ public class AccountController {
 		model.addAttribute("list", list);
 		return "account/acceptPage";
 	}
-	@RequestMapping(value="denyTeacher", method = RequestMethod.GET)
-	public @ResponseBody String denyTeacher(Teacher teacherVO) {
+	@RequestMapping(value="denyTeacher", method = RequestMethod.POST)
+	public String denyTeacher(Teacher teacherVO) {
 		String teacher_id = teacherVO.getId();
 		mService.denyTeacher(teacher_id);
-		return "account/acceptPage";
+		return "redirect:/acceptTeacherForm";
 	}
 	
-	@RequestMapping(value = "acceptTeacher", method = RequestMethod.GET)
-	public @ResponseBody String acceptTeacher(Teacher teacherVO) {
+	@RequestMapping(value = "acceptTeacher", method = RequestMethod.POST)
+	public String  acceptTeacher(Teacher teacherVO) {
 		String teacher_id = teacherVO.getId();
 		mService.acceptTeacher(teacher_id);
-		return "account/acceptPage";
+		return "redirect:/acceptTeacherForm";
 	}
 	
 }

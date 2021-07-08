@@ -169,7 +169,6 @@
 	
 	
 	drawGraph(document.getElementById("g1"));
-	drawGraph(document.getElementById("g2"));
 
 	function drawGraph(obj) {
 	    this.gages = obj.getElementsByTagName("span");
@@ -187,7 +186,7 @@
 	                if(current_value < gage_width) {
 	                    current_value += Math.ceil((gage_width - current_value) / 15);
 	                    gage_object.style.width = current_value + "%";
-	                    gage_value.innerHTML = current_value + "%";
+	                    gage_value.innerHTML = current_value + "점";
 	                } else {
 	                    clearInterval(timer);
 	                }
