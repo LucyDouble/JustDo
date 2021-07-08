@@ -38,7 +38,7 @@
 							<img src="resources/images/knowJD/checkLecture.png">
 						</p>
 						<ul>
-                            <li class="tit"><span><img src="https://cls1.edunet.net/images/common/img_no1_blue.gif" alt="no.1"></span>수강 신청하기</li>
+                            <li class="tit"><span><img src="https://cls1.edunet.net/images/common/img_no1_blue.gif" alt="no.1"></span><div>수강 신청하기</div></li>
                             <li class="pos"><span>메인화면 &gt; 수강 &gt; 출석</span></li>
                             <li class="exp">원하는 강의를 수강 시청할 수 있다.</li>
                         </ul>
@@ -48,7 +48,7 @@
 							<img src="resources/images/knowJD/attend.png">
 						</p>
 						<ul>
-                            <li class="tit"><span><img src="https://cls1.edunet.net/images/common/img_no2_blue.gif" alt="no.2"></span>출석하기</li>
+                            <li class="tit"><span><img src="https://cls1.edunet.net/images/common/img_no2_blue.gif" alt="no.2"></span><div>출석하기</div></li>
                             <li class="pos"><span>메인화면 &gt; 수강 신청</span></li>
                             <li class="exp">수강 시작 5분 전부터 QR 출석을 할 수 있다 .
                                 <span>※수강 시작 5분 후 지각 처리</span> 
@@ -61,7 +61,7 @@
 							<img src="resources/images/knowJD/playClass.png">
 						</p>
 						<ul>
-                            <li class="tit"><span><img src="https://cls1.edunet.net/images/common/img_no3_blue.gif" alt="no.3"></span>수강 하기</li>
+                            <li class="tit"><span><img src="https://cls1.edunet.net/images/common/img_no3_blue.gif" alt="no.3"></span><div>수강 하기</div></li>
                             <li class="pos"><span>메인화면 &gt; 마이페이지&gt; 수강 조회</span></li>
                             <li class="exp">수강중인 강의를 확인하고, 강의를 수강할 수 있다.
                                 <span>※학습 동영상은 일정 기간동안 재수강 가능하다.</span> 
@@ -73,7 +73,7 @@
 							<img src="resources/images/knowJD/exam.png">
 						</p>
 						<ul>
-                            <li class="tit"><span><img src="resources/images/knowJD/b4.png" alt="no.4"></span>과제/시험 보기</li>
+                            <li class="tit"><span><img src="resources/images/knowJD/b4.png" alt="no.4"></span><div>과제/시험 보기</div></li>
                             <li class="pos"><span>메인화면 &gt; 마이페이지&gt; 수강과목&gt; 과제/시험</span></li>
                             <li class="exp">해당 수강 과목 중 과제와 시험을 수행할 수 있다.</li>
                         </ul>
@@ -102,7 +102,7 @@
 					<div class="teacher_list">
 	                     <p><img src="resources/images/knowJD/addClass.png"></p>
 	                     <ul>
-	                         <li class="tit"><span><img src="https://cls1.edunet.net/images/common/img_no1_green.gif" alt="no.1"></span>강의 개설하기</li>
+	                         <li class="tit"><span><img src="https://cls1.edunet.net/images/common/img_no1_green.gif" alt="no.1"></span><div>강의 개설하기</div></li>
 	                         <li class="pos"><span>매인화면 &gt; 마이페이지 &gt; 강의 개설</span></li>
 	                         <li class="exp">
 					                             학생들의 학습 과정을 관리할 수 있는 강의를 개설할 수 있다.
@@ -114,7 +114,7 @@
 							<img src="resources/images/knowJD/mgStudent.png">
 						</p>
 						<ul>
-                            <li class="tit"><span><img src="https://cls1.edunet.net/images/common/img_no2_green.gif" alt="no.2"></span>학생 관리하기</li>
+                            <li class="tit"><span><img src="https://cls1.edunet.net/images/common/img_no2_green.gif" alt="no.2"></span><div>학생 관리하기</div></li>
                             <li class="pos"><span>메인화면 &gt; 분반</span></li>
                             <li class="exp">현재 개설한 분반 정보를 제공한다. 여러 분반을 개설할 수 있다.</li>
                         </ul>
@@ -124,7 +124,7 @@
 							<img src="resources/images/knowJD/addVedio.png">
 						</p>
 						<ul>
-                            <li class="tit"><span><img src="https://cls1.edunet.net/images/common/img_no3_green.gif" alt="no.3"></span>학습 동영상 등록하기</li>
+                            <li class="tit"><span><img src="https://cls1.edunet.net/images/common/img_no3_green.gif" alt="no.3"></span><div>학습 동영상 등록하기</div></li>
                             <li class="pos"><span>메인화면 &gt; 분반&gt; 학습 동영상</span></li>
                             <li class="exp">해당 분반별 강의에서 학습 동영상을 등록할 수 있다.
                                 <span>※분반별 학습 동영상 수강 진행상태 조회가 가능하다.</span> 
@@ -136,14 +136,14 @@
 							<img src="resources/images/knowJD/addExam.png">
 						</p>
 						<ul>
-                            <li class="tit"><span><img src="resources/images/knowJD/g4.png" alt="no.4"></span>과제/시험 출제하기</li>
+                            <li class="tit"><span><img src="resources/images/knowJD/g4.png" alt="no.4"></span><div>과제/시험 출제하기</div></li>
                             <li class="pos"><span>메인화면 &gt; 마이페이지&gt; 수강과목&gt; 과제/시험</span></li>
                             <li class="exp">해당 분반별 강의에서 과제와 시험을 출제할 수 있다.</li>
                         </ul>
 					</div>
 					<div class="teacher_list02">
 	                   <dl>
-	                       <dt><img src="https://cls1.edunet.net/images/common/ico_estudy2_04.png" alt="자율학습">효율적인 학생관리를 위한<span class="point">온라인 수업 운영</span></dt>
+	                       <dt><img src="https://cls1.edunet.net/images/common/ico_estudy2_04.png" alt="자율학습">효율적인 학생관리를 위한 <span class="point">온라인 수업 운영</span></dt>
 	                       <dd>
 	                           <ul>
 	                               <li>분반별 학생들을 관리하는 방식</li>
