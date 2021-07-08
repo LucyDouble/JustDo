@@ -53,6 +53,10 @@
 					test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
 					<a href="listExam">시험 조회</a>
 				</c:if>
+				<c:if
+					test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
+					<a href="listManagement">학생 관리</a>
+				</c:if>
 				</div>
 			</li>
 

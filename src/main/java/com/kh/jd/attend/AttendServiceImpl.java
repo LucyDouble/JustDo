@@ -49,7 +49,7 @@ public class AttendServiceImpl implements AttendService {
 	@Scheduled(cron = "0 30 22 * * 1,2,3,4,5") // 0~6 일~토
 	public void attendprogress() {
 		System.out.println("출석상태 삽입==권용휘 컴퓨터서만 실행");
-		/* attendDao.attendprogress(); */
+//		attendDao.attendprogress(); 
 	}
 	@Override
 	public int progressTotal(Attend vo) {

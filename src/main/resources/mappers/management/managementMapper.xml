@@ -1,4 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="management">
+	<select id="listManagemenr" parameterType="management"
+		resultType="Management">
+		select *
+		from (select *
+		from(select rownum
+		rnum,student_number,registration_no,att,lectureclass_class,name
+		from (select student_number,registration_no,att,lectureclass_class,name
+		from (select
+		student_number,registration_no,round((late+late2+solate+attend-trunc((late+late2)/3)-trunc(solate*2/3))*100/total)
+		as att,lectureclass_class
+		from(select student_number,registration_no,count(attend_no) as total,count(case
+		when attend_progress='1' then 1 end) as late
+		,count(case when attend_progress='2' then 1 end) as late2,count(case when
+		attend_progress='3' then 1 end) as solate
+		,count(case when attend_progress='4' then 1 end) as attend,lectureclass_class
+		from (select *
+		from registration l join lectureclass lc
+		using(lectureclass_no)
+		where lc.lecture_no=#{lecture_no}) le join attend a
+		using(student_number)
+		group by student_number,registration_no,lectureclass_class)) attend join
+		student stu
+		using(student_number)
+		order by name asc)
+		order by rnum) reatt join (select registration_no,round(avg(exam_grade)) as
+		avg_grade,lecture_no
+		from (select *
+		from lecture l join exam e
+		using(lecture_no)
+		where lecture_no=#{lecture_no}) le join exam_result er
+		using(exam_no)
+		group by registration_no,lecture_no ) regr using(registration_no)) yong
+		join (select registration_no,
+		round(count(work_submit)*100/count(work_no)) as work_progress
+		from (select *
+		from lecture l join works w
+		using(lecture_no)
+		where lecture_no=#{lecture_no}) lw join works_result wr using(work_no)
+		group by registration_no) hwi
+		using(registration_no
+
+	</select>
+
 </mapper>
