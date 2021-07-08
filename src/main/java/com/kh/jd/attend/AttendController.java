@@ -93,6 +93,7 @@ public class AttendController {
 			int lecture_no=attendList.get(0).getLecture_no();
 			String lecture_title=attendList.get(0).getLecture_title();
 			int lectureclass_no=attendList.get(0).getLectureclass_no();
+			int lecture_state=attendList.get(0).getLecture_state();
 			vo.setLectureclass_no(lectureclass_no);
 			java.sql.Date attend_date = attendList.get(0).getAttend_date();
 			re.getSession().setAttribute("attend_date", attend_date);
@@ -144,6 +145,7 @@ public class AttendController {
 			int classPro = ((proClassAttend+proClassLate+proClassSoLate)-(proClassLate/3+proClassSoLate*2/3))*100/proClassTotal;
 					
 			
+			mv.addObject("lecture_state", lecture_state);
 			mv.addObject("classPro", classPro);
 			mv.addObject("myPro", myPro);
 			mv.addObject("endCh", endCh);

@@ -25,6 +25,9 @@ public class Attend {
 	private Date attend_date;
 	private String lecture_start;
 	private String lecture_end;
+	private int lecture_state;
+	
+	
 	
 	
 	
@@ -37,7 +40,15 @@ public class Attend {
 				+ ", lectureclass_class=" + lectureclass_class + ", lectureclass_start=" + lectureclass_start
 				+ ", lectureclassStart=" + lectureclassStart + ", lectureclass_end=" + lectureclass_end
 				+ ", lectureclassEnd=" + lectureclassEnd + ", attend_date=" + attend_date + ", lecture_start="
-				+ lecture_start + ", lecture_end=" + lecture_end + "]";
+				+ lecture_start + ", lecture_end=" + lecture_end + ", lecture_state=" + lecture_state + "]";
+	}
+
+	public int getLecture_state() {
+		return lecture_state;
+	}
+
+	public void setLecture_state(int lecture_state) {
+		this.lecture_state = lecture_state;
 	}
 
 	public String getLecture_start() {

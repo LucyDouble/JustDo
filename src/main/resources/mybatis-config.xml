@@ -20,6 +20,7 @@
 	 	<typeAlias type="com.kh.jd.counseling.Counseling" alias="Counseling"/>
 		<typeAlias type="com.kh.jd.notice.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.jd.comment.Comment" alias="Comment"/>
+		<typeAlias type="com.kh.jd.management.Management" alias="Management"/>
 		
 	</typeAliases>
 	<mappers>
@@ -38,5 +39,6 @@
 		<mapper resource="mappers/counseling/counselingMapper.xml"/>
 		<mapper resource="mappers/notice/noticeMapper.xml"/>	
 		<mapper resource="mappers/comment/commentMapper.xml"/>	
+		<mapper resource="mappers/management/managementMapper.xml"/>	
 	</mappers>
 </configuration>
