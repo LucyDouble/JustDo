@@ -3,7 +3,7 @@
 <mapper namespace="Video">
 
 <!-- 학습동영상 리스트 -->
-<select id="listVideo" resultType="Video" parameterType="int">
+<select id="listVideo" resultType="Video" parameterType="hashMap">
 	SELECT video_no, lectureclass_no, video_title, video_content, to_char(video_date,'yyyy-mm-dd') video_date, video_file, video_image, video_path 
 	from video where lectureclass_no = #{lectureclass_no}
 </select>
@@ -12,4 +12,17 @@
 	insert into video values(
 	SEQ_VIDEO.nextval, #{lectureclass_no}, #{video_title}, #{video_content}, sysdate, #{video_file}, #{video_path}, #{video_image})
 </insert>
+<!-- 페이징 처리 -->
+<select id="videoCount" resultType="int" parameterType="Map">
+	select count(*) from video where video_title like '%'||#{keyword}||'%' and lectureclass_no = #{lectureclass_no}
+</select>
+<!-- 하나만 조회 -->
+<select id="viewVideo" parameterType="int" resultType="Video">
+	select * from video where video_no = #{video_no}
+</select>
+<!-- 수정 기능 -->
+<update id="editVideo" parameterType="Video">
+	update video set video_title = #{video_title}, video_content = #{video_content}, video_date = sysdate,
+		video_file = #{video_path}, video_path = #{video_path}, video_image = #{video_image} where video_no = #{video_no}
+</update>
 </mapper>

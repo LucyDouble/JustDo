@@ -42,6 +42,8 @@ import com.kh.jd.registration.RegistrationService;
 
 @Controller
 public class VideoController {
+	public static final int LIMIT = 6;
+	public static final int pageBlock = 5;
 	@Autowired
 	private RegistrationService RService;
 	@Autowired
@@ -89,11 +91,12 @@ public class VideoController {
 	
 	// 학습동영상 썸네일 출력
 	@ResponseBody
-	@RequestMapping(value = "listThumbnail", method = RequestMethod.POST, produces = "application/text; charset=UTF-8")
+	@RequestMapping(value = "listThumbnail", produces = "application/text; charset=UTF-8")
 	public String listThumbnail(HttpServletRequest request, @RequestParam(name="lectureclass_no") int lectureclass_no) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", VService.listVideo(lectureclass_no));
-		
+		map.put("lectureclass_no", lectureclass_no);
+		List<Video> list = VService.listVideo(map);
+		map.put("list", list);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String jsonOutput = gson.toJson(map);
 		return jsonOutput;
@@ -153,7 +156,7 @@ public class VideoController {
 			System.out.println("파일 업로드 실패~~~~~~~~~~~~~~~~~~~");
 		}
 //		video.setVideo_file(videoName);
-		video.setVideo_file(url);
+		video.setVideo_file(videoName);
 		video.setVideo_path(url);
 //		video.setVideo_image(imgName);
 		video.setVideo_image(url2);
@@ -213,4 +216,72 @@ public class VideoController {
 	        return null;      
 	    }
 	}
+	// 수정 폼
+	@RequestMapping(value = "editVideo", method = RequestMethod.GET)
+	public String editVideo(Model m,HttpServletRequest request) {
+			int number = Integer.parseInt(request.getParameter("cheakVNo"));
+			m.addAttribute("view", VService.viewVideo(number));
+			System.out.println(number);
+			return "video/editVideo";
+	}
+		// 수정 기능
+	@RequestMapping(value = "editVideo", method = RequestMethod.POST)
+	public String editVideo(HttpServletRequest request, Video video, @RequestParam(name="video_file_org") MultipartFile multipartFile) {
+		String path = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = path + "\\video";
+		File folder = new File(savePath);
+			
+		if(!folder.exists()) {
+			folder.mkdirs();
+		}
+		
+		String videoName = multipartFile.getOriginalFilename(); // 동영상 파일 이름
+		String filePath = null;
+		String filePath2 = null;
+		String imgName ="";
+		String url = "";
+		String url2 = "";
+		try {
+			System.out.println(videoName +"을 저장합니다.");
+			System.out.println("저장 경로 : "+savePath);
+			
+			filePath = folder + "\\" + videoName;
+			multipartFile.transferTo(new File(filePath)); // 파일 저장
+				
+			imgName = getMovieThumbnail(filePath, videoName); // 추출한 썸네일 이름
+			System.out.println(imgName);
+			filePath2 = folder + "\\" + imgName;
+			Map config = new HashMap();
+		    config.put("cloud_name", "jdec");
+		    config.put("api_key", "865597575541279");
+	        config.put("api_secret", "SUUC6_OahrI__kqYY808AVXDOco");
+	        Cloudinary cloudinary = new Cloudinary(config);
+	        Map res = cloudinary.uploader().upload(new File(filePath), ObjectUtils.asMap("resource_type", "video",
+	        	    "public_id", videoName.replace(".mp4", ""),
+	        	    "eager", Arrays.asList(
+           	        new EagerTransformation().width(300).height(300).crop("pad").audioCodec("none"),
+        	        new EagerTransformation().width(160).height(100).crop("crop").gravity("south").audioCodec("none")),
+		       	    "eager_async", true,
+		       	    "eager_notification_url", "https://mysite.example.com/notify_endpoint"));
+		        Map res1 = cloudinary.uploader().upload(new File(filePath2), ObjectUtils.emptyMap());
+		        url = res.get("url") == null ? "" : res.get("url").toString();
+		        url2 = res1.get("url") == null ? "" : res1.get("url").toString();
+		        System.out.println("파일 명 : " + videoName);
+		        System.out.println("파일 경로 : " + filePath);
+		        System.out.println("파일 전송이 완료되었습니다.");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("파일 업로드 실패~~~~~~~~~~~~~~~~~~~");
+			}
+	//			video.setVideo_file(videoName);
+				video.setVideo_file(videoName);
+				video.setVideo_path(url);
+	//			video.setVideo_image(imgName);
+				video.setVideo_image(url2);
+				System.out.println(video);
+				VService.editVideo(video);
+			
+			return "redirect:/listVideo";
+		}
 }

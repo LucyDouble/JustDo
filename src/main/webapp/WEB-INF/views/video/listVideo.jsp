@@ -88,13 +88,14 @@
 				강의 평균 진도율 : <progress></progress>
 				<c:if test="${100000 < user}">
 				<button class="button" onclick="goAdd()"><span>등록</span></button>
-				<button class="button"><span>수정</span></button>
+				<button class="button" id="editVideo"><span>수정</span></button>
 				<button class="button"><span>삭제</span></button>
 				</c:if>
 			</div>
+			<form id="frm">
 			<div class="studio">
 			</div>
-			
+			</form>
 	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 	<script>
@@ -135,6 +136,18 @@
 			var optVal = opt.options[opt.selectedIndex].value; // lectureclass 번호 값
 			location.href="addVideo?lectureclass_no="+optVal;
 		}
+		// 수정 버튼 클릭 시 
+		$("#editVideo").click(function(){
+			var frm = document.getElementById("frm");
+			var check = $("input:radio[name='cheakVNo']").is(":checked");
+			if(check==true){
+				frm.action="editVideo";
+			    frm.method="GET";
+			    frm.submit();
+			} else{
+				alert("수정할려면 박스에 체크해주세요");
+			}
+		});
 	</script>
 </body>
 </html>
