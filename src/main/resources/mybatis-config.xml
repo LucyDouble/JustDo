@@ -19,6 +19,7 @@
 		<typeAlias type="com.kh.jd.video.Video" alias="Video"/>
 	 	<typeAlias type="com.kh.jd.counseling.Counseling" alias="Counseling"/>
 		<typeAlias type="com.kh.jd.notice.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.jd.comment.Comment" alias="Comment"/>
 		
 	</typeAliases>
 	<mappers>
@@ -36,5 +37,6 @@
 		<mapper resource="mappers/video/videoMapper.xml"/>	
 		<mapper resource="mappers/counseling/counselingMapper.xml"/>
 		<mapper resource="mappers/notice/noticeMapper.xml"/>	
+		<mapper resource="mappers/comment/commentMapper.xml"/>	
 	</mappers>
 </configuration>
