@@ -15,6 +15,12 @@
 <link rel="stylesheet" href="resources/css/common/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="resources/js/header.js"></script>
+<style>
+	.videoImg{
+		width: 300px;
+		height: 200px;
+	}
+</style>
 </head>
 <body>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
@@ -47,6 +53,9 @@
 			var optText = opt.options[opt.selectedIndex].text;
 			var optVal = opt.options[opt.selectedIndex].value; // lectureclass 번호 값
 			$("#lecTitle").text(optText);
+			var list = "";
+			var ulClass = $(".thum");
+			ulClass.empty();
 			$.ajax({
 				url:"listThumbnail",
 				type:"POST",
@@ -55,8 +64,11 @@
 				},
 				dataType:"json",
 				success:function(data){
-					var list = "";
-					
+					var listVideo = data.list;
+					$.each(listVideo, function(i, item){
+						list += "<li><a href='#####'><img class='videoImg' src='"+item.video_image+"'></a></li>"
+					});
+					ulClass.append(list);
 				},
 				error:function(){
 					

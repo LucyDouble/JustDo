@@ -27,10 +27,12 @@
 	</select>
 	
 	<!-- 수강 목록 -->
-	<select id="listRegistration" parameterType="int" resultType="Registration">
-		select rownum rnum, R.*, b.lectureclass_class, to_char(b.lectureclass_start, 'hh24:mi') starttime, to_char(b.lectureclass_end, 'hh24:mi') endtime, b.lecture_title, b.lecture_reference, b.lecture_target, b.lecture_start, b.lecture_end, b.lecture_limit, b.lectureclass_personnel, b.name from registration R join 
-		(select * from lectureclass LC join (select * from lecture L join teacher T on L.teacher_number = T.teacher_number) A on LC.lecture_no = A.lecture_no) B
-		on r.lectureclass_no = B.lectureclass_no where student_number = #{student_number} order by rnum desc
+	<select id="listRegistration" parameterType="Registration" resultType="Registration">
+		select rownum rnum, R.*, b.lectureclass_class, to_char(b.lectureclass_start, 'hh24:mi') starttime, to_char(b.lectureclass_end, 'hh24:mi') endtime, 
+        b.lecture_title, b.lecture_reference, b.lecture_target, b.lecture_start, b.lecture_end, b.lecture_limit, b.lectureclass_personnel, b.name, b.teacher_number from registration R 
+		join (select * from lectureclass LC 
+		join (select l.lecture_title, l.lecture_reference, l.lecture_target, l.lecture_end, l.lecture_start, l.lecture_limit, t.name, t.teacher_number, l.lecture_no
+from lecture L join teacher T on L.teacher_number = T.teacher_number) A on LC.lecture_no = A.lecture_no) B 	on r.lectureclass_no = B.lectureclass_no where student_number = #{student_number} or b.teacher_number = #{teacher_number} order by rnum desc
 	</select>
 	
 	<!-- 수강신청 취소 -->

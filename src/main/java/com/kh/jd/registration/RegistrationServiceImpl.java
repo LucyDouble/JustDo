@@ -27,8 +27,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 
 	@Override
-	public List<Registration> listRegistration(int student_number) {
-		return Rdao.listRegistration(student_number);
+	public List<Registration> listRegistration(Registration registration) {
+		return Rdao.listRegistration(registration);
 	}
 
 	@Override

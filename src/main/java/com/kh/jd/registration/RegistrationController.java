@@ -42,7 +42,7 @@ public class RegistrationController {
 	
 	// 수강 목록, 신청
 	@RequestMapping(value = "registration", method = RequestMethod.GET)
-	public ModelAndView listLecture(ModelAndView mv, HttpServletRequest request, HttpSession session,
+	public ModelAndView listLecture(ModelAndView mv, HttpServletRequest request, HttpSession session, Registration re,
 			@RequestParam(name="page", defaultValue = "1") int page,
 			@RequestParam(name="keyword", defaultValue = "") String keyword) {
 		System.out.println("@@@@@@@@여기@@@@@@@@");
@@ -50,6 +50,7 @@ public class RegistrationController {
 		try {
 			Student st= (Student)request.getSession().getAttribute("DTO");
 			student_number=st.getStudent_number();
+			re.setStudent_number(student_number);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("-----------수강목록, 신청 리스트 출력할때 학생 세션 오류------------");
@@ -83,7 +84,7 @@ public class RegistrationController {
 		mv.addObject("listCount", listCount);
 		List<LectureClass> list = LCService.listJoinClass(startPage, LIMIT, map);
 		mv.addObject("list", list);
-		List<Registration> list2 = RService.listRegistration(student_number);
+		List<Registration> list2 = RService.listRegistration(re);
 		System.out.println("수강신청 리스트"+ list2);
 		mv.addObject("list2", list2);
 		mv.setViewName("registration/registrationList");

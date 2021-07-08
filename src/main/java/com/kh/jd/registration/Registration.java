@@ -25,6 +25,7 @@ public class Registration {
 	private int lectureclass_personnel;
 	private String starttime;
 	private String endtime;
+	private int teacher_number;
 	
 	@Override
 	public String toString() {
@@ -34,8 +35,8 @@ public class Registration {
 				+ ", lectureclass_end=" + lectureclass_end + ", lecture_title=" + lecture_title + ", lecture_reference="
 				+ lecture_reference + ", lecture_target=" + lecture_target + ", lecture_start=" + lecture_start
 				+ ", lecture_end=" + lecture_end + ", rnum=" + rnum + ", name=" + name + ", lecture_limit="
-				+ lecture_limit + ", lectureclass_personnel=" + lectureclass_personnel + ", starttime=" + starttime + ", endtime="
-				+ endtime + "]";
+				+ lecture_limit + ", lectureclass_personnel=" + lectureclass_personnel + ", starttime=" + starttime
+				+ ", endtime=" + endtime + ", teacher_number=" + teacher_number + "]";
 	}
 
 	public int getRegistration_no() {
@@ -180,6 +181,14 @@ public class Registration {
 
 	public void setEndtime(String endtime) {
 		this.endtime = endtime;
+	}
+
+	public int getTeacher_number() {
+		return teacher_number;
+	}
+
+	public void setTeacher_number(int teacher_number) {
+		this.teacher_number = teacher_number;
 	}
 	
 	

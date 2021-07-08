@@ -1,8 +1,10 @@
 package com.kh.jd.video;
 
-import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImage; 
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +29,13 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.EagerTransformation;
+import com.cloudinary.utils.ObjectUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.jd.account.Student;
+import com.kh.jd.account.Teacher;
 import com.kh.jd.registration.Registration;
 import com.kh.jd.registration.RegistrationService;
 
@@ -43,10 +49,30 @@ public class VideoController {
 	
 	// 학습동영상 리스트
 	@RequestMapping(value = "listVideo", method = RequestMethod.GET)
-	public String listVideo(Model m, HttpServletRequest request) {
-		Student st= (Student)request.getSession().getAttribute("DTO");
-		int student_number=st.getStudent_number();
-		List<Registration> list = RService.listRegistration(student_number);
+	public String listVideo(Model m, HttpServletRequest request, Registration re) {
+		Student st = new Student();
+		Teacher te = new Teacher();
+		List<Registration> list = null;
+		int student_number = 0;
+		int teacher_number = 0;
+		try {
+//			st= (Student)request.getSession().getAttribute("DTO");
+//			student_number=st.getStudent_number();
+			te= (Teacher)request.getSession().getAttribute("DTO");
+			teacher_number=te.getTeacher_number();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+//		if(st!=null) {
+//			System.out.println("학생 로그인 들어왔따");
+//			re.setStudent_number(student_number);
+//		}
+//		if(te!=null) {
+//			System.out.println("선생 로그인 들어왔따");
+//		}
+		re.setTeacher_number(teacher_number);
+		list = RService.listRegistration(re);
+		System.out.println(list);
 		m.addAttribute("list", list);
 		return "/video/listVideo";
 	}
@@ -75,31 +101,60 @@ public class VideoController {
 	@RequestMapping(value = "addVideo", method = RequestMethod.POST)
 	public String addVideo(Model m, @RequestParam(name="video_file_org") MultipartFile multipartFile
 			,HttpServletRequest request, Video video) {
-		String path = request.getServletContext().getRealPath("videoUpload/");
-		File filePath = new File(path);
+		String path = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = path + "\\video";
+		File folder = new File(savePath);
 		
-		if(!filePath.exists()) {
-			filePath.mkdirs();
+		if(!folder.exists()) {
+			folder.mkdirs();
 		}
 		
 		File targetFile = new File(path + multipartFile.getOriginalFilename());  // TODO
-		String name = multipartFile.getOriginalFilename(); // 동영상 파일 이름
-		String fullName = path + multipartFile.getOriginalFilename(); // 경로 + 동영상 파일 이름
+		String videoName = multipartFile.getOriginalFilename(); // 동영상 파일 이름
+		String fullName = videoName + multipartFile.getOriginalFilename(); // 경로 + 동영상 파일 이름
+		String filePath = null;
+		String filePath2 = null;
 		String imgName ="";
+		String url = "";
+		String url2 = "";
 		try {
-			InputStream fileStream = multipartFile.getInputStream();
-			FileUtils.copyInputStreamToFile(fileStream, targetFile);
-			System.out.println("파일 업로드 성공~~~~~~~~~~~~~~~~~~~");
-			imgName = getMovieThumbnail(fullName, name); // 추출한 썸네일 이름
+			System.out.println(videoName +"을 저장합니다.");
+			System.out.println("저장 경로 : "+savePath);
+			
+			filePath = folder + "\\" + videoName;
+			multipartFile.transferTo(new File(filePath)); // 파일 저장
+			
+			imgName = getMovieThumbnail(filePath, videoName); // 추출한 썸네일 이름
 			System.out.println(imgName);
+			filePath2 = folder + "\\" + imgName;
+			Map config = new HashMap();
+	        config.put("cloud_name", "jdec");
+	        config.put("api_key", "865597575541279");
+	        config.put("api_secret", "SUUC6_OahrI__kqYY808AVXDOco");
+	        Cloudinary cloudinary = new Cloudinary(config);
+	        Map res = cloudinary.uploader().upload(new File(filePath), ObjectUtils.asMap("resource_type", "video",
+	        	    "public_id", videoName.replace(".mp4", ""),
+	        	    "eager", Arrays.asList(
+	        	        new EagerTransformation().width(300).height(300).crop("pad").audioCodec("none"),
+	        	        new EagerTransformation().width(160).height(100).crop("crop").gravity("south").audioCodec("none")),
+	        	    "eager_async", true,
+	        	    "eager_notification_url", "https://mysite.example.com/notify_endpoint"));
+	        Map res1 = cloudinary.uploader().upload(new File(filePath2), ObjectUtils.emptyMap());
+	        url = res.get("url") == null ? "" : res.get("url").toString();
+	        url2 = res1.get("url") == null ? "" : res1.get("url").toString();
+	        System.out.println("파일 명 : " + videoName);
+	        System.out.println("파일 경로 : " + filePath);
+	        System.out.println("파일 전송이 완료되었습니다.");
+
 		} catch (Exception e) {
-			FileUtils.deleteQuietly(targetFile);
 			e.printStackTrace();
 			System.out.println("파일 업로드 실패~~~~~~~~~~~~~~~~~~~");
 		}
-		video.setVideo_file(name);
-		video.setVideo_path(path);
-		video.setVideo_image(imgName);
+//		video.setVideo_file(videoName);
+		video.setVideo_file(url);
+		video.setVideo_path(url);
+//		video.setVideo_image(imgName);
+		video.setVideo_image(url2);
 		System.out.println(video);
 		VService.addVideo(video);
 		return "redirect:/listVideo";
@@ -116,9 +171,9 @@ public class VideoController {
 	    return ext;
 	}
 	// 썸네일 추출 함수
-	public String getMovieThumbnail(String fullName, String name) throws Exception {
+	public String getMovieThumbnail(String filePath, String name) throws Exception {
 	     
-	    File videoFile=new File(fullName);     
+	    File videoFile=new File(filePath);     
 	    String fileName = videoFile.getAbsolutePath();
 	    String baseName =fileName.substring(fileName.lastIndexOf("\\") + 1, fileName.lastIndexOf("."));
 	    String savePath = fileName.substring(0, fileName.lastIndexOf("\\"));

@@ -23,8 +23,8 @@ public class RegistrationDao {
 		return sqlSession.selectList("Registration.addCalendar", student_number);
 	}
 	
-	public List<Registration> listRegistration(int student_number) {
-		return sqlSession.selectList("Registration.listRegistration", student_number);
+	public List<Registration> listRegistration(Registration registration) {
+		return sqlSession.selectList("Registration.listRegistration", registration);
 	}
 	public int removeRegistration(Registration registration) {
 		return sqlSession.delete("Registration.removeRegistration", registration);
