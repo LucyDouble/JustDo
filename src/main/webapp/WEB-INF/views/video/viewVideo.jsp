@@ -45,6 +45,9 @@
 </head>
 <body>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
+		<form id="timefrm">
+		<input type="hidden" id="nowTime" name="nowTime">
+		</form>
 		<div class="ln_page">
 			<p class="ln_title v_title">학습동영상</p>
 			<div class="viewVideo_tile">
@@ -52,13 +55,40 @@
 				<p class="viewVideo_tile_right">${view.video_date}</p>
 			</div>
 			<div class="viewVideo_main">
-				<video controls="controls" height="600" width="1000" poster="${view.video_image}">
+				<video id="LVideo" controls="controls" height="600" width="1000" poster="${view.video_image}">
 				<source src="${view.video_path}" type="video/mp4">
 			</video>
 			</div>
 			<div class="viewVideo_cont">${view.video_content}
 			</div>
 		</div>
+	<script>
+		var video = document.getElementById("LVideo");
+		
+		var playtime = "";
+		
+		video.addEventListener('timeupdate', function gg(){
+			// 현재 재생 시간 (초 단위 절삭)
+			var playtime = Math.floor(video.currentTime);
+				// ajax update db where 
+				// where  현재 진행률이 70% 다시 들어와서 볼때 현재보다 낮을땐 업데이트 안되다가 현재진행률 보다 높아졌을때 업데이트 
+				$.ajax({
+					url:"Addprogress",
+					type:"post",
+					data: {
+						progress : playtime
+					},
+					success:function(data){
+						
+					},
+					error : function(){
+						
+					}
+				});
+			}, false);
+		
+		
+	</script>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

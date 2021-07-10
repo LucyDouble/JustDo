@@ -13,12 +13,14 @@ public class Video {
 	private String video_file;
 	private String video_path;
 	private String video_image;
+	private String video_alltime;
 	
 	@Override
 	public String toString() {
 		return "Video [video_no=" + video_no + ", lectureclass_no=" + lectureclass_no + ", video_title=" + video_title
 				+ ", video_content=" + video_content + ", video_date=" + video_date + ", video_file=" + video_file
-				+ ", video_path=" + video_path + ", video_image=" + video_image + "]";
+				+ ", video_path=" + video_path + ", video_image=" + video_image + ", video_alltime=" + video_alltime
+				+ "]";
 	}
 
 	public int getVideo_no() {
@@ -84,6 +86,13 @@ public class Video {
 	public void setVideo_image(String video_image) {
 		this.video_image = video_image;
 	}
-	
+
+	public String getVideo_alltime() {
+		return video_alltime;
+	}
+
+	public void setVideo_alltime(String video_alltime) {
+		this.video_alltime = video_alltime;
+	}
 	
 }

@@ -4,14 +4,14 @@
 
 <!-- 학습동영상 리스트 -->
 <select id="listVideo" resultType="Video" parameterType="hashMap">
-	SELECT video_no, lectureclass_no, video_title, video_content, to_char(video_date,'yyyy-mm-dd') video_date, video_file, video_image, video_path 
+	SELECT video_no, lectureclass_no, video_title, video_content, to_char(video_date,'yyyy-mm-dd') video_date, video_file, video_image, video_path, video_alltime 
 	from video where lectureclass_no = #{lectureclass_no}
 </select>
 
 <!-- 학습동영상 등록 -->
 <insert id="addVideo" parameterType="Video">
 	insert into video values(
-	SEQ_VIDEO.nextval, #{lectureclass_no}, #{video_title}, #{video_content}, sysdate, #{video_file}, #{video_path}, #{video_image})
+	SEQ_VIDEO.nextval, #{lectureclass_no}, #{video_title}, #{video_content}, sysdate, #{video_file}, #{video_path}, #{video_image}, #{video_alltime})
 </insert>
 
 <!-- 페이징 처리 -->
@@ -27,7 +27,7 @@
 <!-- 수정 기능 -->
 <update id="editVideo" parameterType="Video">
 	update video set video_title = #{video_title}, video_content = #{video_content}, video_date = sysdate,
-		video_file = #{video_path}, video_path = #{video_path}, video_image = #{video_image} where video_no = #{video_no}
+		video_file = #{video_path}, video_path = #{video_path}, video_image = #{video_image}, video_alltime =#{video_alltime} where video_no = #{video_no}
 </update>
 
 <!-- 삭제 기능 -->

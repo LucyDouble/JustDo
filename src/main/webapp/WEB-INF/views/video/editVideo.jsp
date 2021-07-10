@@ -24,6 +24,7 @@
 		<form id="editForm" class="addForm" enctype="multipart/form-data">
 			<input type="hidden" value="${view.lectureclass_no}" name="lectureclass_no">
 			<input type="hidden" value="${view.video_no}" name="video_no">
+			<input type="hidden" name="video_alltime" id="video_alltime">
 			<div class="form-group">
 				<label class="an_label" for="video_title">제목</label>
 				<input type="text" class="form-control" id="subject" name="video_title" placeholder="제목을 입력하세요." value="${view.video_title }">
@@ -57,14 +58,40 @@
 	</div>
 	
 	<script>
-		// ckeditor
-		
-		// 인풋파일이름 출력
-		function loadFile(input) {
-		    var file = input.files[0];
+	// 총 재생시간 추출
+	var myVideos = [];
+	
+	window.URL = window.URL || window.webkitURL;
+	
+	document.getElementById('input-file').onchange = setFileInfo;
+	
+	function setFileInfo() {
+		  var files = this.files;
+		  myVideos.push(files[0]);
+		  var video = document.createElement('video');
+		  video.preload = 'metadata';
 
-		    var name = document.getElementById('fileName');
-		    name.textContent = file.name;
+		  video.onloadedmetadata = function() {
+		    window.URL.revokeObjectURL(video.src);
+		    var duration = video.duration;
+		    myVideos[myVideos.length - 1].duration = duration;
+		    updateInfos();
+		  }
+
+		  video.src = URL.createObjectURL(files[0]);
+	}
+	
+	function updateInfos() {
+		var videoTime = "";
+		var videoName = "";
+		var name = document.getElementById('fileName');
+		  for (var i = 0; i < myVideos.length; i++) {
+		   videoTime = myVideos[i].duration;
+		   videoName = myVideos[i].name;
+		  }
+		  var allTime = Math.round(videoTime);
+		  name.textContent = videoName;
+		  $("#video_alltime").val(allTime);
 		}
 		// 등록 버튼
 		$("#editVideo").click(function(){
