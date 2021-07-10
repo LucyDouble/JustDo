@@ -601,7 +601,7 @@ i{
 	float:left;
 	margin-left: 90px;
 }
-.writer_name{
+/* .writer_name{
 	float:left;
 }
 .comment_text{
@@ -610,5 +610,7 @@ i{
 #comment_box{
 	padding: 30px;
 	
+} */
+.comments{
+	float:left;
 }
-

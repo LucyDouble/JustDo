@@ -47,24 +47,9 @@
     <button class="button" onclick="location.href='listNotice'"><span>목록</span></button>
     <button id="btnUpdate" class="button" onclick="location.href='editNoticeForm?n_no=${notice.notice_no}'"><span>수정</span></button>
     <button id="btnRemove" class="button"><span>삭제</span></button>
-    <br>
-      <div id="comment_box">
-        	<div class ="comment-line" style="margin-top : 5px; margin-bottom : 5px;">
-        	<hr></div>
-        	<div class = "writer_info">
-        		<p class = "writer_name">
-        			<b>Name</b>
-        			<span>Date</span>
-        		</p>
-        	</div>
-        	<br><br>
-        	<div class ="comment_text num">
-        		<p class = "comment_text">
-        		<b>내용</b>
-        		</p>
-        	</div>
-        </div>
+   
     </div>
+    <div class="wrapper"><jsp:include page="../comment/noticeComment.jsp"></jsp:include></div>
     
     <script>
     </script>

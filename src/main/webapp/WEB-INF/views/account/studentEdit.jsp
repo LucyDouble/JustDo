@@ -20,6 +20,8 @@
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div class="container">
 		<h1 class="studentMyPage_title">마이 페이지</h1>
+		ㅇㅇㅇ ${sessionScope.DTO.getEmail()}
+		ㄷㄷㄷ
 		<br>
 		<div class="studentMyPage_studentInfo">
 			<form id="studentMyPage_myForm">

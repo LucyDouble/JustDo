@@ -2,30 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Comment">
 	<resultMap type="Comment" id="CommentMap">
+		<result property="comment_number" column="COMMENT_NUMBER" />
 		<result property="manager_number" column="MANAGER_NUMBER" />
 		<result property="student_number" column="STUDENT_NUMBER" />
 		<result property="teacher_number" column="TEACHER_NUMBER" />
 		<result property="notice_no" column="NOTICE_NO" />
 		<result property="video_no" column="VIDEO_NO" />
 		<result property="write_date" column="WRITE_DATE" />
-		
+		<result property="comment_con" column="COMMENT_CON" />
+
 
 	</resultMap>
-	<select id="commentList" resultType="Comment">
-		SELECT NOTICE_NO FROM COMMENT
+	<!-- -->
+	<select id="countNoticeComment" parameterType="String"
+		resultType="int">
+		SELECT count(*) FROM COMMENTS WHERE NOTICE_NO =#{notice_no}
 	</select>
-<insert id="teacherNoticeCommentInsert" parameterType="Comment">
-		insert into comments(comment_number, teacher_number, notice_no, write_date) values
+	<select id="noticeCommentList" resultType="Comment">
+		SELECT * FROM COMMENTS
+		WHERE NOTICE_NO=#{notice_no} ORDER BY WRITE_DATE
+	</select>
+	<insert id="teacherNoticeCommentInsert" parameterType="Comment">
+		insert
+		into comments(comment_number, teacher_number, notice_no, write_date,
+		comment_con) values
 		((SELECT nvl(max(COMMENT_NUMBER), 0) + 1 FROM
 		COMMENTS) , #{teacher_number},
-		3,  TO_DATE(SYSDATE, 'yyyy/mm/dd hh24:mi'));
-</insert>
-<insert id="studentNoticeCommentInsert" parameterType="Comment">
-		insert into comments(comment_number, student_number, notice_no, write_date) values
+		#{notice_no}, TO_DATE(SYSDATE,
+		'yyyy/mm/dd hh24:mi'), #{comment_con});
+	</insert>
+	<insert id="studentNoticeCommentInsert" parameterType="Comment">
+		insert
+		into comments(comment_number, student_number, notice_no, write_date,
+		comment_con) values
 		((SELECT nvl(max(COMMENT_NUMBER), 0) + 1 FROM
 		COMMENTS) , #{student_number},
-		3,  TO_DATE(SYSDATE, 'yyyy/mm/dd hh24:mi'));
-</insert>
+		#{notice_no}, TO_DATE(SYSDATE,
+		'yyyy/mm/dd hh24:mi'), #{comment_con});
+	</insert>
+	<insert id="noticeCommentInsert" parameterType="Comment">
+		insert into comments(comment_number, notice_no, write_date, comment_con)
+		values
+		((SELECT nvl(max(COMMENT_NUMBER), 0) + 1 FROM
+		COMMENTS) ,
+		#{notice_no}, TO_DATE(SYSDATE, 'yyyy/mm/dd hh24:mi'), #{comment_con});
 
-
+	</insert>
+	<delete id="noticeCommentDelete" parameterType="Comment">
+		DELETE FROM COMMENTS WHERE COMMENT_NUMBER = #{comment_number}
+	</delete>
+	<update id="noticeCommentUpdate" parameterType="HashMap">
+		UPDATE COMMENTS SET COMMENT_CON WHERE COMMENT_NUMBER = #{comment_number}
+	</update>
 </mapper>

@@ -14,12 +14,23 @@ public class Comment {
 	private int teacher_number;
 	private int notice_no;
 	private Date write_date;
+	private String comment_con;
+
+	
 
 	@Override
 	public String toString() {
 		return "Comment [comment_number=" + comment_number + ", manager_number=" + manager_number + ", student_number="
 				+ student_number + ", teacher_number=" + teacher_number + ", notice_no=" + notice_no + ", write_date="
-				+ write_date + "]";
+				+ write_date + ", comment_con=" + comment_con + "]";
+	}
+
+	public String getComment_con() {
+		return comment_con;
+	}
+
+	public void setComment_con(String comment_con) {
+		this.comment_con = comment_con;
 	}
 
 	public int getComment_number() {

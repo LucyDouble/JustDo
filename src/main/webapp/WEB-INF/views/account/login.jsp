@@ -67,6 +67,19 @@
 		</div>
 	</form>
 </body>
+<%
+ String strReferer = request.getHeader("referer");
+ 
+ if(strReferer == null){
+%>
+ <script language="javascript">
+  alert("잘못된 접근입니다. 이전 페이지로 다시 돌아갑니다.");
+  document.location.href="jdHome";
+ </script>
+<%
+  return;
+ }
+%>
 <script type="text/javascript">
 	$('#login').click(function() {
 
