@@ -40,7 +40,7 @@
 	<insert id="addCS" parameterType="Counseling">
 		<![CDATA[
 	        insert into counseling values((	        
-	        	select nvl(max(counseling_no),0)+1 cnt from counseling), ${manager_number}, #{counseling_name}, #{counseling_phone}, #{counseling_email}, to_date(#{counseling_date},'yyyy-mm-dd hh24:mi' ) 
+	        	select nvl(max(counseling_no),0)+1 cnt from counseling), ${manager_number}, #{counseling_name}, #{counseling_phone}, #{counseling_email}, to_date(#{counseling_date},'yyyy-mm-dd hh24:mi:ss' ))
 		]]>
 	</insert>
 
