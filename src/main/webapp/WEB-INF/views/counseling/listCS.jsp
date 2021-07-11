@@ -22,16 +22,30 @@
 <body>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div class="lc_page">
-		<p class="lc_title">상담신청 게시판</p>
+		<p class="lc_title"><a href="listCS">상담신청 게시판</a></p>
 		<br>
-
-		<div class="lc_search_box">
+		
+		<!-- 서치바1 -->
+		<!-- <div class="lc_search_box">
 			<form name="lc_search" action="#" method="get">
 				<input class="lc_search_input" type="text" name="keyword"
 					placeholder="검색" onmouseout="document.search.keyword.value = ''">
 			</form>
 			<i class="fas fa-search"></i>
+		</div> -->
+		
+		<div class="lc_search_box2">
+			<form name="lc_search" action="#" method="get">
+			<label for="inp" class="inp"> <input type="text" id="inp" placeholder="&nbsp;" name="keyword"> 
+			<span class="label">Search here *</span>
+				<svg	width="120px" height="26px" viewBox="0 0 120 26">
+    			<path d="M0,25 C21,25 46,25 74,25 C102,25 118,25 120,25"></path>
+		  		</svg> 
+		  	<span class="lc_border"></span>
+			</label>
+			</form>
 		</div>
+		
 		<form id="lc_form">
 			<table class="table">
 				<thead>
@@ -114,7 +128,6 @@
 			document.querySelector(".rc_background").className = "rc_background show";
 				}
 			}
-		
 	</script>
 
 	<jsp:include page="../counseling/removeCS.jsp"></jsp:include>

@@ -25,6 +25,8 @@
 		SELECT
 		COUNT(*)
 		from counseling
+		where	(counseling_name like '%'||#{keyword}||'%' or counseling_phone like '%'||#{keyword}||'%' or counseling_email like '%'||#{keyword}||'%' or counseling_date like '%'||#{keyword}||'%')
+			order by counseling_no desc
 	</select>
 
 	<!-- 상세조회 -->
@@ -56,7 +58,7 @@
 		set counseling_name = #{counseling_name},
 		counseling_phone = #{counseling_phone},
 		counseling_email = #{counseling_email},
-		counseling_date =  to_date(#{counseling_date},'yyyy-mm-dd hh24:mi')
+		counseling_date =  to_date(#{counseling_date},'yyyy-mm-dd hh24:mi:ss')
 		where
 		counseling_no = ${counseling_no}
 		]]>
