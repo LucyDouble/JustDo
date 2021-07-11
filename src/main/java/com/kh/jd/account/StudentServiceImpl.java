@@ -30,6 +30,7 @@ public class StudentServiceImpl implements StudentService {
 		boolean result = dao.loginCheck(dto);
 		if (result == true) {
 			session.setAttribute("student_id", dto.getId());
+			
 		}
 		return result;
 	}

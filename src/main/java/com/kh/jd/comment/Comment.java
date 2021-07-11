@@ -15,15 +15,45 @@ public class Comment {
 	private int notice_no;
 	private Date write_date;
 	private String comment_con;
-
+	private String student_name;
+	private String teacher_name;
+	private String manager_name;
 	
-
+	
 	@Override
 	public String toString() {
 		return "Comment [comment_number=" + comment_number + ", manager_number=" + manager_number + ", student_number="
 				+ student_number + ", teacher_number=" + teacher_number + ", notice_no=" + notice_no + ", write_date="
-				+ write_date + ", comment_con=" + comment_con + "]";
+				+ write_date + ", comment_con=" + comment_con + ", student_name=" + student_name + ", teacher_name="
+				+ teacher_name + ", manager_name=" + manager_name + "]";
 	}
+
+	public String getStudent_name() {
+		return student_name;
+	}
+
+
+	public void setStudent_name(String student_name) {
+		this.student_name = student_name;
+	}
+
+	public String getTeacher_name() {
+		return teacher_name;
+	}
+
+	public void setTeacher_name(String teacher_name) {
+		this.teacher_name = teacher_name;
+	}
+
+	public String getManager_name() {
+		return manager_name;
+	}
+
+	public void setManager_name(String manager_name) {
+		this.manager_name = manager_name;
+	}
+
+
 
 	public String getComment_con() {
 		return comment_con;

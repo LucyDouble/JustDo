@@ -19,8 +19,10 @@
 		SELECT count(*) FROM COMMENTS WHERE NOTICE_NO =#{notice_no}
 	</select>
 	<select id="noticeCommentList" resultType="Comment">
-		SELECT * FROM COMMENTS
-		WHERE NOTICE_NO=#{notice_no} ORDER BY WRITE_DATE
+		<!-- SELECT * FROM COMMENTS
+		WHERE NOTICE_NO=#{notice_no} ORDER BY WRITE_DATE -->
+		SELECT c.*,s.name as student_name,t.name as teacher_name,m.name as manager_name FROM COMMENTS c left outer join student s on c.student_number=s.student_number left outer join teacher t on c.teacher_number=t.teacher_number left outer join managers m on c.manager_number=m.manager_number
+		WHERE NOTICE_NO = #{notice_no} ORDER BY WRITE_DATE
 	</select>
 	<insert id="teacherNoticeCommentInsert" parameterType="Comment">
 		insert

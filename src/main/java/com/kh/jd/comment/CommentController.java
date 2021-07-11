@@ -16,10 +16,12 @@ public class CommentController {
 	 @Autowired 
 	 CommentService cService;
 	 // 댓글 리스트
-	 @RequestMapping(value = "/listNotice/commentList", method = RequestMethod.GET)
+	 @RequestMapping(value = "/listNotice/commentList/{notice_no}", method = RequestMethod.GET)
+	 @ResponseBody
 	 public List<Comment> getCommentList(@PathVariable("notice_no") int notice_no){
 		 System.out.println("List");
 		 List<Comment> commentList = cService.getCommentList(notice_no);
+		 System.out.println(notice_no);
 		 return commentList;
 	 }
 	 //댓글 등록

@@ -49,7 +49,7 @@
     <button id="btnRemove" class="button"><span>삭제</span></button>
    
     </div>
-    <div class="wrapper"><jsp:include page="../comment/noticeComment.jsp"></jsp:include></div>
+    <div class="comment_Wrapper"><jsp:include page="../comment/noticeComment.jsp"></jsp:include></div>
     
     <script>
     </script>

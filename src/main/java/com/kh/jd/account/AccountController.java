@@ -56,12 +56,15 @@ public class AccountController {
 				list = sService.infoStudent(sDto);
 				System.out.println(list);
 				request.getSession().setAttribute("DTO", list);
+				request.getSession().setAttribute("student_number", list.getStudent_number());
+				
 			} else {
 				if (accept == 1) {
 					Teacher list = new Teacher();
 					list = tService.infoTeacher(tDto);
 					System.out.println(list);
 					request.getSession().setAttribute("DTO", list);
+					request.getSession().setAttribute("teacher_number", list.getTeacher_number());
 				} else {
 					System.out.println(accept);
 					model.addAttribute("msg", "승인대기");
@@ -118,6 +121,7 @@ public class AccountController {
 			list = mService.infoManager(aDto);
 			System.out.println(list);
 			request.getSession().setAttribute("DTO", list);
+			request.getSession().setAttribute("manager_number", list.getManager_number());
 		} else {
 			System.out.println(result);
 			model.addAttribute("msg", "실패");

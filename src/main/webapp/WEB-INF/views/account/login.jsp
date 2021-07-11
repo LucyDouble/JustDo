@@ -30,11 +30,11 @@
 				<section class="login-input-section-wrap">
 
 					<div class="login-input-wrap">
-						<input name="id" id="id" placeholder="아이디" type="text"></input>
+						<input name="id" id="id" placeholder="아이디" type="text" required></input>
 					</div>
 					<div class="login-input-wrap password-wrap">
 						<input name="password" id="password" placeholder="비밀번호"
-							type="password"></input>
+							type="password" required></input>
 					</div>
 					<div class="form-group">
 						<label for="category"></label><br> <input type="radio"
@@ -58,8 +58,7 @@
 				</section>
 				<section class="Easy-sgin-in-wrap">
 				<div class = "link_box">
-<!-- 					<a href="studentSearch" class="findPwLink">회원정보 찾기</a>
- -->					<a href="signUp" class="signUpLink"> 회원 가입</a>
+					<a href="signUp" class="signUpLink"> 회원 가입</a>
 				</div>
 				</section>
 
