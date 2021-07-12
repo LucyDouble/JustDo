@@ -50,23 +50,24 @@ public class NoticeDao {
 	public void hit(int notice_no) {
 		sqlSession.update("Notice.hit", notice_no);
 	}
-	// 삭제 셀렉문(단일업로드때썼음) 
+	//삭제 셀렉문(단일업로드때썼음) 
 	public Notice checkNotice(Notice notice) {
 		return sqlSession.selectOne("Notice.checkNotice", notice);
 	}
-	// 파일업로드
+	//파일업로드
 	public int addFile(Map<String, Object> map) {
 		return sqlSession.insert("Notice.addFile", map);
 	}
-	// 파일리스트
+	//파일리스트
 	public List<Notice> listFile(int notice_no){
 		return sqlSession.selectList("Notice.listFile", notice_no);
 	}
-	// 첨부파일수정
+	//첨부파일수정
 	public int editFile(Map<String, Object> map) {
 		return sqlSession.insert("Notice.editFile", map);
 	}
-	public int delFile(Map<String, Object> map) {
-		return sqlSession.insert("Notice.delFile", map);
+	//첨부파일삭제
+	public int delFile(int notice_no) {
+		return sqlSession.delete("Notice.delFile", notice_no);
 	}
 }

@@ -87,15 +87,15 @@
 								<a href="registration">수강신청</a>
 							</c:if>
 							<c:if
-								test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
+								test="${sessionScope.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
 								<a href="lecture">강의등록</a>
 							</c:if>
 							<c:if
-								test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
+								test="${sessionScope.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
 								<a href="editTeacherForm">교직원 정보수정</a>
 							</c:if>
 							<c:if
-								test="${sessionScpoe.student_id == null && sessionScope.teacher_id == null && sessionScope.manager_id != null}">
+								test="${sessionScope.student_id == null && sessionScope.teacher_id == null && sessionScope.manager_id != null}">
 								<a href="acceptTeacherForm">교직원 승인</a>
 							</c:if>
 						</c:otherwise>
@@ -104,7 +104,7 @@
 			<li class="aboutJD"><a href="#">상담센터</a>
 				<div id="drop_content">
 					<c:if
-						test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
+						test="${sessionScope.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
 						<a href="listNotice">공지사항</a>
 						<a href="listCS">상담신청</a>
 						<a href="http://pf.kakao.com/_xjxmxcws">카카오톡채널</a>

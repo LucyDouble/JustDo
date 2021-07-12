@@ -145,8 +145,9 @@
  	function delFile() {
 		var chk = confirm("등록된 첨부파일을 삭제하시겠습니까?");
 			if (chk==true) {
-//				$('#file_name').empty(); // 라벨에 파일이름뿌린거 지우기
-				$(${i.notice_filename }).empty(); // 라벨에 파일이름뿌린거 지우기
+				$('#file_name').empty(); // 라벨에 파일이름뿌린거 지우기
+				//var thisfile = ${i.notice_filename };
+				//thisfile.empty(); // 라벨에 파일이름뿌린거 지우기
 				var form = document.getElementById("delFile");
 				frm.action = "delFile";
 				frm.method = "POST";

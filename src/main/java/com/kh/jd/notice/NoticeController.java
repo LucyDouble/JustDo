@@ -99,8 +99,6 @@ public class NoticeController {
 		vo = noticeService.viewNotice(notice_no);
 		
 		System.out.println("컨트롤러 vo=" + vo);
-		// addObject 하기전에 notice_filename 변수에 set해주기  
-		// notice_filename = new String(notice_filename.getBytes("UTF-8"), "ISO-8859-1");
 		mv.addObject("notice", vo);
 		mv.setViewName("notice/viewNotice");
 		List<Notice> listFile = noticeService.listFile(notice_no);
@@ -126,37 +124,26 @@ public class NoticeController {
 		String n_sub =  request.getParameter("notice_sub");
 		String n_con = request.getParameter("notice_con");
 		
-//		t_no = request.getParameter("teacher_number");
-//		m_no = request.getParameter("manager_number");
-//		n_sub = request.getParameter("notice_sub");
-//		n_con = request.getParameter("notice_con");
-//		List<Notice> addFile = new ArrayList<Notice>();
-		
 		map.put("teacher_number", t_no);
 		map.put("manager_number", m_no);
 		map.put("notice_sub", n_sub);
 		map.put("notice_con", n_con);
 		
-		
 		String path = request.getServletContext().getRealPath("fileUpload/");
 		File filePath = new File(path); // 만약 fileUpload 폴더가 없다면 폴더생성
-		// 단일파일 업로드
-		// 포문돌려................
+
 		map.put("notice_filepath", path);
 		noticeService.addNotice(map);	 
 		
 				try {
 					for(int i=0; i<multiFile.length; i++) {
 					if (multiFile[i] != null) {
-//							String path = "c://aaa";  
-
 							if (!filePath.exists()) {
 								filePath.mkdirs();
 							}
 							File files = new File(path, multiFile[i].getOriginalFilename()); // 파일생성
 							FileCopyUtils.copy(multiFile[i].getBytes(), files);					// 파일복사
 							map.put("notice_filename", multiFile[i].getOriginalFilename());
-//							map.put("notice_filepath", path);
 							noticeService.addFile(map);
 							}
 						}
@@ -168,55 +155,20 @@ public class NoticeController {
 				}
 				try {
 					System.out.println("map : " + map);
-//					noticeService.addNotice(map);	 	
 					mv.setViewName("redirect:/listNotice");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				return mv;
 			}
-			
-			// 다중파일 업로드 퍼온거
-//			@RequestMapping(value = "requestupload2")
-//			public String requestupload2(MultipartHttpServletRequest mtfRequest) {
-//				List<MultipartFile> fileList = mtfRequest.getFiles("file");
-//				Map<String, Object> map = new HashMap<String, Object>();
-//				String src = mtfRequest.getParameter("src");
-//				System.out.println("src value : " + src);
-		//
-//				String path = "C:\\image\\";
-		//
-//				for (MultipartFile mf : fileList) {
-//					String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-//					long fileSize = mf.getSize(); // 파일 사이즈
-		//
-//					System.out.println("originFileName : " + originFileName);
-//					System.out.println("fileSize : " + fileSize);
-		//
-//					String safeFile = path + System.currentTimeMillis() + originFileName;
-//					try {
-//						mf.transferTo(new File(safeFile));
-//						noticeService.addFile(map);
-//					} catch (IllegalStateException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					} catch (IOException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//				}
-//				return "redirect:/";
-//			}
 	
 	// 파일 다운로드
 	@RequestMapping(value = "/fileDownload", method = RequestMethod.GET)
 	public void fileDownload(Notice vo, HttpServletRequest req, HttpServletResponse res, @RequestParam(name = "n_no") int notice_no  ) throws Exception {
 
-//			vo = noticeService.viewNotice(notice_no);
 			Notice noticeVO =  noticeService.viewNotice(notice_no); 
 			System.out.println("vo = "+vo);
 			
-//			HttpSession session 	= req.getSession();
 	    	String filePath 			= noticeVO.getNotice_filepath();//"여기 vo에서 파일패스가져오기"
 	    	String fileName 		= vo.getNotice_filename();
 		 	String fileFullPath 	= filePath + fileName;
@@ -315,7 +267,6 @@ public class NoticeController {
 		try {
 			for(int i=0; i<multiFile.length; i++) {
 			if (multiFile[i] != null) {
-//					String path = "c://aaa";  
 
 					if (!filePath.exists()) {
 						filePath.mkdirs();
@@ -323,7 +274,6 @@ public class NoticeController {
 					File files = new File(path, multiFile[i].getOriginalFilename()); // 파일생성
 					FileCopyUtils.copy(multiFile[i].getBytes(), files);					// 파일복사
 					map.put("notice_filename", multiFile[i].getOriginalFilename());
-//					map.put("notice_filepath", path);
 					noticeService.editFile(map);
 					}
 				}
@@ -335,7 +285,6 @@ public class NoticeController {
 		}
 		try {
 			System.out.println("map : " + map);
-//			noticeService.addNotice(map);	 	
 			mv.setViewName("redirect:/listNotice");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -343,52 +292,19 @@ public class NoticeController {
 		return mv;
 	}
 		
-		//첨부파일 추가
-//		try {
-//			if (multiFile != null) {
-//				if (multiFile.getSize() > 0) {
-////				String path = "resources\\fileUpload\\";   <- 이건 잘못된 방식임
-//					String path = request.getServletContext().getRealPath("fileUpload/");
-//					System.out.println("path ="+path);
-//					File filePath = new File(path); // 만약 fileUpload 폴더가 없다면 폴더생성해줌
-//					System.out.println("filePath ="+filePath);
-//					if (!filePath.exists()) {
-//						filePath.mkdirs();
-//					}
-//					File files = new File(path, multiFile.getOriginalFilename());
-//					FileCopyUtils.copy(multiFile.getBytes(), files);
-//					map.put("notice_filename", multiFile.getOriginalFilename());
-//					System.out.println("수정 multiFile.getOriginalFilename() : " + multiFile.getOriginalFilename());
-//					map.put("notice_filepath", path);
-//					System.out.println("수정 path : " + path);
-//				}
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("파일 저장에 실패했습니다");
-//		}
-//		try {
-//			System.out.println("수정 map : " + map);
-//			noticeService.editNotice(map);
-//			mv.setViewName("redirect:/listNotice");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return mv;
-//	} 
-	
 	// 첨부파일 삭제
 	@RequestMapping(value = "/delFile", method = RequestMethod.POST)
 	@ResponseBody
-	public void delFile(HttpServletRequest req, HttpServletResponse res, @RequestParam(name = "no") int notice_no,
-			Notice no) {
+	public void delFile(HttpServletRequest req, HttpServletResponse res, @RequestParam(name = "no") int notice_no, Notice no) {
 		System.out.println("들어왔나영?");
 
+		Notice vo = new Notice();
+		vo = noticeService.delFile(no);
 		try {
 			System.out.println("notice_no =" + notice_no);
 			no.setNotice_no(notice_no);
 			System.out.println("no =" + no);
-			Notice vo = noticeService.checkNotice(no);
+//			Notice vo = noticeService.checkNotice(no);
 			System.out.println("vo =" + vo);
 			String filepath = vo.getNotice_filepath();
 			String filename = vo.getNotice_filename();

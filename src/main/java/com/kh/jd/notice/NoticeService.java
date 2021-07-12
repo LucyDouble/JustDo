@@ -25,5 +25,6 @@ public interface NoticeService {
 	public List<Notice> listFile(int notice_no);
 	//파일수정
 	public int editFile(Map<String, Object> map);
-	
+	//파일삭제
+	public int delFile(int noice_no);
 }

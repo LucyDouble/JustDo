@@ -67,6 +67,12 @@
 		where notice_no = #{notice_no}
 		</select>
 		
+		<!-- 파일삭제 -->
+		<select id="delFile" parameterType="Notice">
+			delete * from filelist 
+			where  notice_filename = #{notice_filename}
+		</select>
+		
 		<!-- 글수정 -->
 		<update id="editNotice" parameterType="Notice" >
 			update notice set notice_sub = #{notice_sub},

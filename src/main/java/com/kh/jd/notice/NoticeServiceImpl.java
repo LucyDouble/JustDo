@@ -70,8 +70,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	@Override
 	//첨부파일삭제
-	public int delFile(Map<String,Object> map) {
-		return noticeDao.delFile(map);
+	public int delFile(int noice_no) {
+		return noticeDao.delFile(noice_no);
 	}
 	
 }
