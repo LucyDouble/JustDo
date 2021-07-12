@@ -12,8 +12,8 @@
 }
 
 #logo_position>a>.logo {
-	width: 260px;
-    height: 150px;
+	width: 350px;
+    height: 175px;
 }
 
 label {
@@ -41,7 +41,7 @@ label {
     border: none;
     color: #FFFFFF;
     text-align: center;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
     width: 80px;
     height: 35px;
