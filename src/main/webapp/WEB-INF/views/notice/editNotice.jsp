@@ -55,17 +55,17 @@
 			
 			<div id="sampel1">
 			<label for="input-file" class="file_label" ><span>파일</span></label>
-			<input type="file" id="input-file" class="input-file" name="notice_filepath" onchange="loadFile(this)">
+			<input type="file" id="input-file" class="input-file" name="notice_filepath" multiple="multiple">
 			</div>
 			
 			<div id="sample2">
-			<c:if test="${empty notice.notice_filename }">
+			<c:if test="${empty listFile }">
 			<label  id="file_name" class="reg_file"></label>
 			<input type="hidden" id="val0" value="0">
 			</c:if>
-			<c:if test="${!empty notice.notice_filename }">
-			<label  id="file_name" class="reg_file">${notice.notice_filename }
-			<img class="file_del_btn" onclick="delFile();" src="resources/images/cross.png"></label>
+			<c:if test="${not empty listFile }">
+			<label  id="file_name" class="reg_file"><c:forEach items="${listFile }" var="i">${i.notice_filename }<img class="file_del_btn" onclick="delFile();" src="resources/images/cross.png">&nbsp;&nbsp;</c:forEach>
+			</label>
 			<input type="hidden" id="val0" value="1">
 			</c:if>
 			</div>
@@ -145,18 +145,28 @@
  	function delFile() {
 		var chk = confirm("등록된 첨부파일을 삭제하시겠습니까?");
 			if (chk==true) {
-				$('#file_name').empty();
+//				$('#file_name').empty(); // 라벨에 파일이름뿌린거 지우기
+				$(${i.notice_filename }).empty(); // 라벨에 파일이름뿌린거 지우기
 				var form = document.getElementById("delFile");
 				frm.action = "delFile";
 				frm.method = "POST";
 			    form.submit();
 		    }
 	}
+		
+		// input file 이름 라벨로 뿌리기
+		 window.onload = function(){
+		        target = document.getElementById('input-file');
+		        target.addEventListener('change', function(){
+		            fileList = "";
+		            for(i = 0; i < target.files.length; i++){
+		                fileList += target.files[i].name + '&nbsp;&nbsp;';
+		            }
+		            target2 = document.getElementById('file_name');
+		            target2.innerHTML = fileList;
+		        });
+		    }
 	
-	function loadFile(input) {
-		var file = input.files[0];
-		var name = document.getElementById('file_name');
-		name.textContent = file.name;
-	}
+	
 </script>
 </html>

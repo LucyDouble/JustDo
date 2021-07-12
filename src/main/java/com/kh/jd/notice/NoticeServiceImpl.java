@@ -50,7 +50,28 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	@Override
 	public Notice checkNotice(Notice notice) {
-		//삭제셀렉문 
-		return noticeDao.checkNotice(notice);
+	//삭제셀렉문 
+	return noticeDao.checkNotice(notice);
 	}
+	@Override
+	//파일업로드
+	public int addFile(Map<String,Object> map) {
+		return noticeDao.addFile(map);
+	}
+	@Override
+	//파일리스트
+	public List<Notice> listFile(int notice_no) {
+		return noticeDao.listFile(notice_no);
+	}
+	@Override
+	//첨부파일수정
+	public int editFile(Map<String,Object> map) {
+		return noticeDao.editFile(map);
+	}
+	@Override
+	//첨부파일삭제
+	public int delFile(Map<String,Object> map) {
+		return noticeDao.delFile(map);
+	}
+	
 }

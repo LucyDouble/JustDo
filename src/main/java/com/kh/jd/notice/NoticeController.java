@@ -15,16 +15,20 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +103,8 @@ public class NoticeController {
 		// notice_filename = new String(notice_filename.getBytes("UTF-8"), "ISO-8859-1");
 		mv.addObject("notice", vo);
 		mv.setViewName("notice/viewNotice");
+		List<Notice> listFile = noticeService.listFile(notice_no);
+		mv.addObject("listFile", listFile);
 		return mv;
 	}
 
@@ -111,66 +117,107 @@ public class NoticeController {
 	// 글등록
 	@RequestMapping(value = "/addNotice", method = RequestMethod.POST)
 	public ModelAndView addNotice(HttpServletResponse response, HttpServletRequest request,
-			@RequestParam(name = "notice_filepath", required = false) MultipartFile multiFile) throws IOException {
+			@RequestParam(name = "notice_filepath", required = false) MultipartFile[] multiFile) throws IOException {
 
 		ModelAndView mv = new ModelAndView();
 		Map<String, Object> map = new HashMap<String, Object>();
-		String t_no = "";
-		String m_no = "";
-		String n_sub = "";
-		String n_con = "";
-		int hit = 0;
+		String t_no = request.getParameter("teacher_number");
+		String m_no = request.getParameter("manager_number");
+		String n_sub =  request.getParameter("notice_sub");
+		String n_con = request.getParameter("notice_con");
 		
-		t_no = request.getParameter("teacher_number");
-		m_no = request.getParameter("manager_number");
-		n_sub = request.getParameter("notice_sub");
-		n_con = request.getParameter("notice_con");
-
+//		t_no = request.getParameter("teacher_number");
+//		m_no = request.getParameter("manager_number");
+//		n_sub = request.getParameter("notice_sub");
+//		n_con = request.getParameter("notice_con");
+//		List<Notice> addFile = new ArrayList<Notice>();
+		
 		map.put("teacher_number", t_no);
 		map.put("manager_number", m_no);
 		map.put("notice_sub", n_sub);
 		map.put("notice_con", n_con);
-		map.put("hit", hit);
+		
+		
+		String path = request.getServletContext().getRealPath("fileUpload/");
+		File filePath = new File(path); // 만약 fileUpload 폴더가 없다면 폴더생성
+		// 단일파일 업로드
+		// 포문돌려................
+		map.put("notice_filepath", path);
+		noticeService.addNotice(map);	 
+		
+				try {
+					for(int i=0; i<multiFile.length; i++) {
+					if (multiFile[i] != null) {
+//							String path = "c://aaa";  
 
-		try {
-			if (multiFile != null) {
-				if (multiFile.getSize() > 0) {
-//				String path = "resources\\fileUpload\\";   <- 이건 잘못된 방식임
-					String path = request.getServletContext().getRealPath("fileUpload/");
-					File filePath = new File(path); // 만약 fileUpload 폴더가 없다면 폴더생성해줌
-					
-					if (!filePath.exists()) {
-						filePath.mkdirs();
-					}
-					File files = new File(path, multiFile.getOriginalFilename());
-					FileCopyUtils.copy(multiFile.getBytes(), files);
-					map.put("notice_filename", multiFile.getOriginalFilename());
-					map.put("notice_filepath", path);
+							if (!filePath.exists()) {
+								filePath.mkdirs();
+							}
+							File files = new File(path, multiFile[i].getOriginalFilename()); // 파일생성
+							FileCopyUtils.copy(multiFile[i].getBytes(), files);					// 파일복사
+							map.put("notice_filename", multiFile[i].getOriginalFilename());
+//							map.put("notice_filepath", path);
+							noticeService.addFile(map);
+							}
+						}
+				} catch (
+
+				Exception e) {
+					e.printStackTrace();
+					System.out.println("파일 저장에 실패했습니다");
 				}
+				try {
+					System.out.println("map : " + map);
+//					noticeService.addNotice(map);	 	
+					mv.setViewName("redirect:/listNotice");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return mv;
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("파일 저장에 실패했습니다");
-		}
-		try {
-			System.out.println("map : " + map);
-			noticeService.addNotice(map);
-			mv.setViewName("redirect:/listNotice");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return mv;
-	}
+			
+			// 다중파일 업로드 퍼온거
+//			@RequestMapping(value = "requestupload2")
+//			public String requestupload2(MultipartHttpServletRequest mtfRequest) {
+//				List<MultipartFile> fileList = mtfRequest.getFiles("file");
+//				Map<String, Object> map = new HashMap<String, Object>();
+//				String src = mtfRequest.getParameter("src");
+//				System.out.println("src value : " + src);
+		//
+//				String path = "C:\\image\\";
+		//
+//				for (MultipartFile mf : fileList) {
+//					String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+//					long fileSize = mf.getSize(); // 파일 사이즈
+		//
+//					System.out.println("originFileName : " + originFileName);
+//					System.out.println("fileSize : " + fileSize);
+		//
+//					String safeFile = path + System.currentTimeMillis() + originFileName;
+//					try {
+//						mf.transferTo(new File(safeFile));
+//						noticeService.addFile(map);
+//					} catch (IllegalStateException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					} catch (IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//				}
+//				return "redirect:/";
+//			}
 	
 	// 파일 다운로드
 	@RequestMapping(value = "/fileDownload", method = RequestMethod.GET)
 	public void fileDownload(Notice vo, HttpServletRequest req, HttpServletResponse res, @RequestParam(name = "n_no") int notice_no  ) throws Exception {
 
-			vo = noticeService.viewNotice(notice_no);
+//			vo = noticeService.viewNotice(notice_no);
+			Notice noticeVO =  noticeService.viewNotice(notice_no); 
 			System.out.println("vo = "+vo);
 			
-			HttpSession session 	= req.getSession();
-	    	String filePath 			= vo.getNotice_filepath();//"여기 vo에서 파일패스가져오기"
+//			HttpSession session 	= req.getSession();
+	    	String filePath 			= noticeVO.getNotice_filepath();//"여기 vo에서 파일패스가져오기"
 	    	String fileName 		= vo.getNotice_filename();
 		 	String fileFullPath 	= filePath + fileName;
 	    	
@@ -232,60 +279,103 @@ public class NoticeController {
 		System.out.println("vo : " + vo);
 		mv.addObject("notice", vo);
 		mv.setViewName("notice/editNotice");
+		List<Notice> listFile = noticeService.listFile(notice_no);
+		mv.addObject("listFile", listFile);
 		return mv;
 	}
 
 	// 글수정
 	@RequestMapping(value = "/editNotice", method = RequestMethod.POST)
-	public ModelAndView editNotice(HttpServletRequest request, @RequestParam(name = "notice_filepath", required = false) MultipartFile multiFile) throws IOException {
+	public ModelAndView editNotice(HttpServletRequest request, @RequestParam(name = "notice_filepath", required = false) MultipartFile[] multiFile) throws IOException {
 		ModelAndView mv = new ModelAndView(); // mv 객체 생성
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		String n_no = "";
 		String n_sub = "";
 		String n_con = "";
-		
 		n_no = request.getParameter("n_no");
+		int notice_no = Integer.parseInt(n_no);
 		n_sub = request.getParameter("n_sub");
 		n_con = request.getParameter("editor1");
-
+		List<Notice> listFile = noticeService.listFile(notice_no);
+		System.out.println("listFile = "+ listFile);
+		System.out.println("notice_no ="+notice_no);
+		mv.addObject("listFile", listFile);
 		map.put("notice_no", n_no);
 		map.put("notice_sub", n_sub);
 		map.put("notice_con", n_con);
 
+		String path = request.getServletContext().getRealPath("fileUpload/");
+		File filePath = new File(path); // 만약 fileUpload 폴더가 없다면 폴더생성
+
+		map.put("notice_filepath", path);
+		noticeService.editNotice(map);	 
 		
-		//첨부파일 추가
+		
 		try {
-			if (multiFile != null) {
-				if (multiFile.getSize() > 0) {
-//				String path = "resources\\fileUpload\\";   <- 이건 잘못된 방식임
-					String path = request.getServletContext().getRealPath("fileUpload/");
-					System.out.println("path ="+path);
-					File filePath = new File(path); // 만약 fileUpload 폴더가 없다면 폴더생성해줌
-					System.out.println("filePath ="+filePath);
+			for(int i=0; i<multiFile.length; i++) {
+			if (multiFile[i] != null) {
+//					String path = "c://aaa";  
+
 					if (!filePath.exists()) {
 						filePath.mkdirs();
 					}
-					File files = new File(path, multiFile.getOriginalFilename());
-					FileCopyUtils.copy(multiFile.getBytes(), files);
-					map.put("notice_filename", multiFile.getOriginalFilename());
-					System.out.println("수정 multiFile.getOriginalFilename() : " + multiFile.getOriginalFilename());
-					map.put("notice_filepath", path);
-					System.out.println("수정 path : " + path);
+					File files = new File(path, multiFile[i].getOriginalFilename()); // 파일생성
+					FileCopyUtils.copy(multiFile[i].getBytes(), files);					// 파일복사
+					map.put("notice_filename", multiFile[i].getOriginalFilename());
+//					map.put("notice_filepath", path);
+					noticeService.editFile(map);
+					}
 				}
-			}
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			e.printStackTrace();
 			System.out.println("파일 저장에 실패했습니다");
 		}
 		try {
-			System.out.println("수정 map : " + map);
-			noticeService.editNotice(map);
+			System.out.println("map : " + map);
+//			noticeService.addNotice(map);	 	
 			mv.setViewName("redirect:/listNotice");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return mv;
-	} 
+	}
+		
+		//첨부파일 추가
+//		try {
+//			if (multiFile != null) {
+//				if (multiFile.getSize() > 0) {
+////				String path = "resources\\fileUpload\\";   <- 이건 잘못된 방식임
+//					String path = request.getServletContext().getRealPath("fileUpload/");
+//					System.out.println("path ="+path);
+//					File filePath = new File(path); // 만약 fileUpload 폴더가 없다면 폴더생성해줌
+//					System.out.println("filePath ="+filePath);
+//					if (!filePath.exists()) {
+//						filePath.mkdirs();
+//					}
+//					File files = new File(path, multiFile.getOriginalFilename());
+//					FileCopyUtils.copy(multiFile.getBytes(), files);
+//					map.put("notice_filename", multiFile.getOriginalFilename());
+//					System.out.println("수정 multiFile.getOriginalFilename() : " + multiFile.getOriginalFilename());
+//					map.put("notice_filepath", path);
+//					System.out.println("수정 path : " + path);
+//				}
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("파일 저장에 실패했습니다");
+//		}
+//		try {
+//			System.out.println("수정 map : " + map);
+//			noticeService.editNotice(map);
+//			mv.setViewName("redirect:/listNotice");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return mv;
+//	} 
 	
 	// 첨부파일 삭제
 	@RequestMapping(value = "/delFile", method = RequestMethod.POST)

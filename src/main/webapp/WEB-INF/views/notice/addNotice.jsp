@@ -77,7 +77,7 @@
 			<br> 
 			<!-- <input type="file" id="input-file" name="notice_filepath" value="파일첨부" style="float: left;"> -->
 			<label for="input-file" class="file_label" ><span>파일</span></label>
-			<input type="file" id="input-file" class="input-file" name="notice_filepath" onchange="loadFile(this)">
+			<input type="file" id="input-file" class="input-file" name="notice_filepath" multiple="multiple">
 			<!-- <label class="reg_file" style="margin:10px; float:left;">fileName</label> -->
 			<!-- <p style="margin:10px; float:left;">FILE NAME: </p> -->
              <p id="fileName" class="fileName"></p>
@@ -113,12 +113,27 @@
 			frm.submit();
 		}
 		
-		function loadFile(input) {
+		// input file 이름 라벨로 뿌리기(단일)
+		/* function loadFile(input) {
 		    var file = input.files[0];
 
 		    var name = document.getElementById('fileName');
 		    name.textContent = file.name;
-		}
+		} */
+		
+		// input file 이름 라벨로 뿌리기(다중)
+		 window.onload = function(){
+		        target = document.getElementById('input-file');
+		        target.addEventListener('change', function(){
+		            fileList = "";
+		            for(i = 0; i < target.files.length; i++){
+		                fileList += target.files[i].name + '&nbsp;&nbsp;';
+		            }
+		            target2 = document.getElementById('fileName');
+		            target2.innerHTML = fileList;
+		        });
+		    }
+	
 	</script>
 
 

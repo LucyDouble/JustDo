@@ -42,8 +42,30 @@
 		  		select nvl(max(notice_no),0)+1 cnt from notice
 			</selectKey>
 	        insert into notice values(	        
-	        	${numbc}, ${manager_number}, ${teacher_number}, #{notice_sub}, #{notice_con}, sysdate, #{notice_filepath}, #{hit}, #{notice_filename} )
+	        	${numbc}, ${manager_number}, ${teacher_number}, #{notice_sub}, #{notice_con}, sysdate, #{notice_filepath}, default, null )
 		</insert>
+		
+		<!-- 파일업로드 -->
+		<insert id="addFile" parameterType="Notice">
+		<selectKey keyProperty="numbc" resultType="integer" order="BEFORE" >
+		  		select nvl(max(notice_no),0) cnt from notice
+			</selectKey>
+		insert into filelist values (
+				${numbc}, #{notice_filename} 
+		)
+		</insert>
+		
+		<!-- 파일수정 -->
+		<insert id="editFile" parameterType="Notice" >
+		insert into filelist values (
+				#{notice_no}, #{notice_filename} 
+		</insert>
+		
+		<!-- 파일리스트 -->
+		<select id="listFile" parameterType="int" resultType="Notice">
+		select * from filelist 
+		where notice_no = #{notice_no}
+		</select>
 		
 		<!-- 글수정 -->
 		<update id="editNotice" parameterType="Notice" >

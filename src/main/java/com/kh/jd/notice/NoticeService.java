@@ -19,4 +19,11 @@ public interface NoticeService {
 	public int editNotice(Map<String, Object> map);
 	//삭제셀렉문
 	public Notice checkNotice(Notice notice);
+	//파일업로드
+	public int addFile(Map<String, Object> map);
+	//파일리스트
+	public List<Notice> listFile(int notice_no);
+	//파일수정
+	public int editFile(Map<String, Object> map);
+	
 }
