@@ -16,7 +16,6 @@ a:hover {
 
 #footer {
     clear: both;
-    /* position: absolute; */
     bottom: 0;
     height: 250px;
     text-align: center;
@@ -48,18 +47,15 @@ a:hover {
     text-align: center;
 }
 
-#footer_menu1 {
+#footer_menu1>a>span {
     position: relative;
     text-align: center ;
+    padding: 0px 30px;
     color: #44576C;
 }
 
-#footer_menu1>span {
-    padding: 0px 30px;
-}
 
-
-.footer_m1 {
+a>span.footer_m1 {
     letter-spacing: 1px;
     font-size: 15px;
     font-weight: bold;
