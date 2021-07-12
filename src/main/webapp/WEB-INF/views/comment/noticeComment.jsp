@@ -62,14 +62,14 @@ function getCommentList() {
 				
 				
 					//수정삭제버튼
-					if("${sessionScope.student_number}" != ""){
+					if("${sessionScope.student_number}" != "" && "${sessionScope.managerNumber}" != ""){
 						if ("${sessionScope.student_number}" == item.student_number)  {
 							comment_con += '<button type="button" >ㅇㅇㅇ</button>';
 							
 						}
 					}
 					
-					if("${sessionScope.teacher_number}" != ""){
+					if("${sessionScope.teacher_number}" != "" && "${sessionScope.managerNumber}" != ""){
 						if("${sessionScope.teacher_number}" == item.teacher_number){
 							comment_con += '<button type="button" >ㄴㄴㄴ</button>';
 							/* comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="commentDeleteBtn('+ item.comment_number + ')" type="button" class="btn btn-danger px-3 float-right"><i class="fa fa-trash" aria-hidden="true"></i></button>';
@@ -99,19 +99,68 @@ function getCommentList() {
 		}
 	});
 }
-/* var comment_con = $('#writeComment').val();
-var student_id = "";
-if("${sessionScope.student_id != null}"){
-    comment_student_id = "${sessionScope.DTO.getName()}"; 
-} else if("${sessionScope.teacher_id != null}"){
-    comment_teacher_id = "${sessionScope.DTO.getName()}"; 
-} else{
-    comment_admin_id="${sessionScope.DTO.getName()}";
-    if(comment_con){
-    	$.ajax({
-    		type : 'POST',
-    		url : 
-    	})
-    	}
-    } */
+$('#commentSubmit').click(function(){
+	if("${sessionScope.student_number}" != ""){
+		writer_name = "${sessionScope.student_name}";
+	}else if("${sessionScope.teacher_number}" != ""){
+		writer_name = "${sessionScope.teacher_name}";
+	}else if("${sessionScope.manager_number}" != ""){
+		writer_name = "${sessionScope.manager_name}";
+	}
+	
+	if(comment_con){
+		$.ajax({
+			type : 'post',
+			url : '${pageContext.request.contextPath}"/listNotice/writeComment',
+			dataType : 'text',
+			data : {
+				notice_no : notice_no,
+				writer_name : writer_name,
+				comment_con : comment_con
+			},
+			success : function(data){
+				console.log(writer_name);
+				console.log('댓글 작성 성공');
+				getCommentList();
+			}
+			
+		});
+	}else{
+		alert("댓글을 입력해주세요.");
+	}
+});
+
+function deleteComment(comment_number){
+	if(confirm("삭제하시겠습니까?") == true){
+		$.ajax({
+			type :'delete',
+			url : '/listNotice/deleteComment/' + comment_number,
+			success : function(data){
+				console.log('삭제 성공');
+				getCommentList();
+			}
+		});
+	}
+};
+function updateComment(comment_number){
+	if(confirm("수정하시겠습니까?") == true){
+		$.ajax({
+			type:'put',
+			url : '${pageContext.request.contextPath}"/listNotice/updateComment/' + comment_number,
+			header : {
+				"content-Type" : "application/json",
+				"X-HTTP-Method-Override" : "put"
+			},
+			data : JSON.stringify({
+				comment_con : comment_con
+			}),
+			success : function(data){
+				console.log('수정 성공');
+				getCommentList();
+			}
+		})
+	}
+}
+
+/* function updateComment */
 </script>

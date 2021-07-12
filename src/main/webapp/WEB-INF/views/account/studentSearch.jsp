@@ -23,7 +23,11 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.13/css/mdb.min.css"
 	rel="stylesheet">
+<style>
+.form-group{
 
+}
+</style>
 <!-- <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 <script type="text/javascript"
@@ -35,7 +39,7 @@
 	<%@ include file="/WEB-INF/views/account/studentIdSearchModal.jsp"%>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 
-		<div class="container">
+		<div class="container" style = "height : 600px; width : 1000px;">
 			<div class="area_inputs wow fadeIn">
 				<div class="sub_title font-weight-bold text-black">
 					<h5>수강생 아이디/비밀번호 찾기</h5>

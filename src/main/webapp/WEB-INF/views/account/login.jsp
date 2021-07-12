@@ -22,7 +22,7 @@
 					<div class="sel-lang-wrap"></div>
 					<div class="logo-wrap">
 						<a href="<%=request.getContextPath()%>/jdHome?command=main"><img
-							src="resources/images/logo.png"></a>
+							src="resources/images/logo4.png"></a>
 					</div>
 
 				</header>
@@ -32,12 +32,12 @@
 				<section class="login-input-section-wrap">
 					<div class="form-group">
 						<ul>
-							<li><input type="radio" id="student" name="loginSelect"
+							<li><input type="radio" id="student" name="loginSelect" value="student"
 								checked="checked"> <label for="student">수강생</label>
 								<div class="check"></div>
 							</li>
 
-							<li><input type="radio" id="teacher" name="loginSelect">
+							<li><input type="radio" id="teacher" name="loginSelect" value="teacher">
 								<label for="teacher">교직원</label>
 								<div class="check">
 									<div class="inside"></div>

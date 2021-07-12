@@ -43,7 +43,7 @@ public class AccountController {
 
 		if (check == "student" || check.equals("student")) {
 			result = sService.loginCheck(sDto, session);
-		} else {
+		} else if(check =="teacher" || check.equals("teacher")){
 			result = tService.loginCheck(tDto, session);
 			accept = tService.acceptCheck(teacher_id);
 		}

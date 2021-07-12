@@ -44,7 +44,7 @@ public class CommentController {
 		 return cService.updateNoticeComment(comment_number, comment_con);
 	 }
 	 //댓글 삭제
-	 @RequestMapping(value="/listNotice/deleteStudentComment/{comment_number}", method = RequestMethod.POST)
+	 @RequestMapping(value="/listNotice/deleteComment/{comment_number}", method = RequestMethod.POST)
 	 @ResponseBody
 	 public int deleteStudentComment(int comment_number) {
 		 return cService.deleteNoticeComment(comment_number);
