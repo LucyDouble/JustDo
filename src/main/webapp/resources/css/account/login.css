@@ -31,10 +31,6 @@ body{
 	
 }
 
-/* .main-container .main-wrap .logo-wrap{
-	padding-top:55px;
-} */
-
 .main-container .main-wrap .logo-wrap img
 {
 	width: 300px;
@@ -52,7 +48,7 @@ body{
 	align-items: center;
 }
 .login-input-section-wrap{
-	padding-top: 60px;
+	padding-top: 30px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -112,16 +108,13 @@ body{
 cursor : pointer;
 }
 .Easy-sgin-in-wrap{
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding-top: 40px;
 
 }
-.Easy-sgin-in-wrap h2{
-	font-size: 20px;
-}
+
 .Easy-sgin-in-wrap .sign-button-list
 {
 	padding-top:25px;
@@ -156,19 +149,17 @@ cursor : pointer;
 	padding-top: 10px;
 
 }
+
 footer{
    
 	padding-top: 95px;
 	padding-bottom: 15px;
-
 	display:flex;
 	flex-direction:column;
 	align-items:center;
 	width:768px;
-
-
-
 }
+
 .copyright-wrap{
 
 	display: flex;
@@ -191,31 +182,7 @@ footer .copyright-wrap span{
 	font-size:5px;
 	color : red;
 }
-/* .select input[type=radio]{
-    display: none;
-}
-.select input[type=radio]+label{
-    display: inline-block;
-    cursor: pointer;
-    height: 20px;
-    width: 100px;
-    border: 1px solid #6A60A9;
-    line-height: 20px;
-    text-align: center;
-    font-weight:bold;
-    font-size: 20px;
-    border-radius: 7px 7px 7px 7px;
-}
-.select input[type=radio]+label{
-    background-color: #fff;
-    color: #333;
-}
-.select input[type=radio]:checked+label{
-    background-color: #6A60A9;
-    color: #fff;
-} */
 
-/* lucy 추가 csss */
 .form-group>ul {
   list-style: none;
   margin: 0;

@@ -5,25 +5,24 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet"
-	href="<c:url value="resources/css/account/signup.css"/>">
-	<link rel="stylesheet" href="resources/css/fonts.css"/>
-<head>
 <meta charset="UTF-8">
-<title>회원 가입</title>
+<head>
+<link rel="stylesheet" href="<c:url value="resources/css/account/signup.css"/>">
+<link rel="stylesheet" href="resources/css/fonts.css"/>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	
-
-
+<script	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<title>회원 가입</title>
 </head>
-
 <body>
-
 	<form id="form" class="form" action="signUp" method="POST">
-		<a href="<%=request.getContextPath()%>/jdHome?command=main"><img
-			class="logo" src="resources/images/logo4.png"></a> <br> <br>
+		<div id="logo_position">
+			<a href="<%=request.getContextPath()%>/jdHome?command=main">
+				<img class="logo" src="resources/images/logo4.png">
+			</a>
+		</div>
+		<div style="text-align: center;width:100%;">
+			<p style="font-size: 30px;">회원가입</p>
+		</div>
 		<div class="select">
 			<input type="radio" id="select" name="signUpSelect" checked="checked"
 				value="student"><label for="select">수강생</label> <input
@@ -33,16 +32,16 @@
 		<br>
 		<!-- 아이디 -->
 		<div class="id-group">
-			<label for="id">아이디</label> <br> <input type="text"
-				style="width: 350px; height: 50px" class="form-control" id="id"
-				name="id" placeholder="ID" required>
+			<label for="id">아이디</label> <br> 
+			<input type="text" style="width: 350px;height: 30px;margin-top: 10px;" class="form-control" id="id"
+				name="id" placeholder="아이디" required>
 			<div class="check_font" id="id_check"></div>
 			<br>
 		</div>
 		<!-- 비밀번호 -->
 		<div class="password-group">
 			<label for="password">비밀번호</label> <br> <input type="password"
-				style="width: 350px; height: 50px" class="form-control"
+				style="width: 350px;height: 30px;margin-top: 10px;" class="form-control"
 				id="password" name="password" placeholder=" 숫자, 문자, 특수문자 모두포함 8~16자리 " required>
 			<div class="check_font" id="pw_check"></div>
 			<br>
@@ -51,7 +50,7 @@
 		<div class="passwordCheck-group">
 			<label for="password2">비밀번호 확인</label> <br> <input
 				type="password" class="form-control" id="password2" name="password2"
-				style="width: 350px; height: 50px" placeholder="Confirm Password"
+				style="width: 350px;height: 30px;margin-top: 10px;" placeholder="비밀번호 확인"
 				required>
 			<div class="check_font" id="pw2_check"></div>
 			<br>
@@ -59,66 +58,73 @@
 		<!-- 이름 -->
 		<div class="name-group">
 			<label for="name">이름</label><br> <input type="text"
-				style="width: 350px; height: 50px" class="form-control" id="name"
-				name="name" placeholder="Name" required>
+				style="width: 350px;height: 30px;margin-top: 10px;" class="form-control" id="name"
+				name="name" placeholder="이름" required>
 			<div class="check_font" id="name_check"></div>
 		</div>
 		<br>
 		<div class="address_group">
 			<label for="address">주소</label><br>
-			<input type="text" style="width: 350px; height: 50px" id="address"
-				name="address" placeholder="주소를 입력해주세요"><br> <span
+			<input type="text" style="width: 350px;height: 30px;margin-top: 10px;" id="address"
+				name="address" placeholder="주소"><br> <span
 				id="guide" style="color: #999; display: none"></span>
 		</div>
 		<div class="post_btn">
-		<input type="button" id="post_btn"
-				onclick="sample4_execDaumPostcode()" value="찾기">
+		<input type="button" id="post_btn" class="fp_btn"
+				onclick="sample4_execDaumPostcode()" value="주소찾기">
 		</div>
 		<br><br>
 
 		<!-- 본인확인 이메일 -->
-		<div class="mail-group">
+		<div id="mail-group">
 			<div class="mail_name">
 				<label for="email">이메일</label>
 			</div>
 			<div class="mail_input_box">
 				<input class="email" name="email" id="email"
-					style="width: 350px; height: 50px">
+					style="width: 350px;height: 30px;margin-top: 10px;" placeholder="이메일">
 			</div>
 			<div class="mail_check_button">
 				<!-- <button class="btn email_submit" id="email_submit">인증번호전송</button> -->
-				<input type="button" class="btn email_submit" id="email_submit" value="전송" />
+				<input type="button" class="btn email_submit fp_btn" id="email_submit" value="전송" />
 				<div class="clearfix"></div>
 			</div>
 			<div class="check_font" id="email_check">
 				<br>
 			</div>
 			<div class="mail_check_wrap">
+				<div class="mail_name">
+					<label for="email">인증번호</label>
+				</div>
 				<div class="mail_check_input_box">
-					<input class="mail_check_input" style="width: 350px; height: 50px"
+					<input class="mail_check_input" style="width: 350px;height: 30px;margin-top: 10px;"
 						disabled="disabled">
 				</div>
 				<div class="clearfix"></div>
 				<span id="mail_check_input_box_warn"></span>
 			</div>
 		</div>
-
+		<br>
 		<!-- 휴대전화 -->
 		<div class="phone-group">
 			<label for="phone">휴대전화</label><br> <input type="text"
-				style="width: 350px; height: 50px" class="form-control" id="phone"
-				name="phone" placeholder="Phone Number" required>
+				style="width: 350px;height: 30px;margin-top: 10px;" class="form-control" id="phone"
+				name="phone" placeholder="휴대전화" required>
 			<div class="check_font" id="phone_check"></div>
 		</div>
-		<br>
-
+		<br><br>
 
 
 		<div class="reg_button">
 			<input type="submit" class="btn btn-primary px-3" id="reg_submit"
-				value="가입" /> <br> <br> <br> <br> <br> <br>
+				value="회원가입" /> <br> <br> <br> <br> <br> <br>
 			<br> <br>
 		</div>
+		<section class="easy-login-in-wrap">
+			<div class="link_box">
+				이미 JD 회원이신가요? <a href="login" class="login_btn"> 로그인</a>
+			</div>
+		</section>
 	</form>
 
 <%

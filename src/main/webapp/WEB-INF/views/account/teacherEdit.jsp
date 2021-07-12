@@ -14,7 +14,6 @@
 <body>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div class="container">
-	
 		<h3 class="teacherMyPage_title">마이 페이지</h3>
 		<div class="teacherMyPage_teacherInfo">
 			<form id="teacherMyPage_myForm">
@@ -88,7 +87,7 @@
 		</div>
 
 	</div>
-		<jsp:include page="../common/footer.jsp"></jsp:include>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 <script>
 $(document).ready(function(){

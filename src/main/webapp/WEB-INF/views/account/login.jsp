@@ -26,9 +26,11 @@
 					</div>
 
 				</header>
-				
+				<div style="text-align: center;width:100%;/* height:30px; *//* line-height: 30px; */">
+					<p style="font-size: 30px;">로그인</p>
+				</div>
 				<section class="login-input-section-wrap">
-					<!-- <div class="form-group">
+					<div class="form-group">
 						<ul>
 							<li><input type="radio" id="student" name="loginSelect"
 								checked="checked"> <label for="student">수강생</label>
@@ -41,15 +43,8 @@
 									<div class="inside"></div>
 								</div>
 							</li>
-
-							<li><input type="radio" id="manager" name="loginSelect">
-								<label for="manager">관리자</label>
-								<div class="check">
-									<div class="inside"></div>
-								</div>
-							</li>
 						</ul>
-					</div> -->
+					</div>
 					<div class="login-input-wrap">
 						<input name="id" id="id" placeholder="아이디" type="text" required></input>
 					</div>
@@ -57,34 +52,7 @@
 						<input name="password" id="password" placeholder="비밀번호"
 							type="password" required></input>
 					</div>
-					<!-- <div class="form-group">
-						<label for="category"></label><br> <input type="radio"
-							name="loginSelect" checked="checked" value="student">수강생
-						<input type="radio" name="loginSelect" value="teacher">교직원
-					</div> -->
-					
-<div class="form-group">
-						<ul>
-							<li><input type="radio" id="student" name="loginSelect"
-								checked="checked"> <label for="student">수강생</label>
-								<div class="check"></div>
-							</li>
 
-							<li><input type="radio" id="teacher" name="loginSelect">
-								<label for="teacher">교직원</label>
-								<div class="check">
-									<div class="inside"></div>
-								</div>
-							</li>
-
-							<!-- <li><input type="radio" id="manager" name="loginSelect">
-								<label for="manager">관리자</label>
-								<div class="check">
-									<div class="inside"></div>
-								</div>
-							</li> -->
-						</ul>
-					</div>
 					<div class="login-button-wrap">
 						<button id="login" value="로그인">로그인</button>
 					</div>
@@ -101,8 +69,7 @@
 				</section>
 				<section class="Easy-sgin-in-wrap">
 					<div class="link_box">
-						<!-- 					<a href="studentSearch" class="findPwLink">회원정보 찾기</a>-->
-						아직 JD 회원이 아니신가요? <a href="signUp" class="signUpLink"> 회원 가입</a>
+						아직 JD 회원이 아니신가요? <a href="agreeSignUp" class="signUpLink"> 회원 가입</a>
 					</div>
 				</section>
 			</div>
