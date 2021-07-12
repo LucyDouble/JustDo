@@ -55,12 +55,6 @@
 		)
 		</insert>
 		
-		<!-- 파일수정 -->
-		<insert id="editFile" parameterType="Notice" >
-		insert into filelist values (
-				#{notice_no}, #{notice_filename} 
-		</insert>
-		
 		<!-- 파일리스트 -->
 		<select id="listFile" parameterType="int" resultType="Notice">
 		select * from filelist 
@@ -68,9 +62,9 @@
 		</select>
 		
 		<!-- 파일삭제 -->
-		<select id="delFile" parameterType="Notice">
-			delete * from filelist 
-			where  notice_filename = #{notice_filename}
+		<select id="delFile" parameterType="int">
+			delete from filelist 
+			where  notice_no = #{notice_no}
 		</select>
 		
 		<!-- 글수정 -->
@@ -78,7 +72,6 @@
 			update notice set notice_sub = #{notice_sub},
 							  notice_con = #{notice_con},
 							  notice_date = sysdate,
-							  notice_filepath = #{notice_filepath},
 							  notice_filename = #{notice_filename}
 			where
 				notice_no = ${notice_no}

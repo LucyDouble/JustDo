@@ -64,14 +64,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDao.listFile(notice_no);
 	}
 	@Override
-	//첨부파일수정
-	public int editFile(Map<String,Object> map) {
-		return noticeDao.editFile(map);
+	public void delFile(int notice_no) {
+		noticeDao.delFile(notice_no);
 	}
-	@Override
-	//첨부파일삭제
-	public int delFile(int noice_no) {
-		return noticeDao.delFile(noice_no);
-	}
-	
 }

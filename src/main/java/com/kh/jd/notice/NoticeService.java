@@ -23,8 +23,6 @@ public interface NoticeService {
 	public int addFile(Map<String, Object> map);
 	//파일리스트
 	public List<Notice> listFile(int notice_no);
-	//파일수정
-	public int editFile(Map<String, Object> map);
 	//파일삭제
-	public int delFile(int noice_no);
+	public void delFile(int noice_no);
 }

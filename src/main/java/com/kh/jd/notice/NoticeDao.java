@@ -13,12 +13,10 @@ public class NoticeDao {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
 	//목록 조회
 //	public List<Notice> listNotice(){
 //		return sqlSession.selectList("Notice.listNotice");
 	public List<Notice> listNotice(int startPage, int limit,Map<String, Object> map){
-			
 			int startRow = (startPage - 1) * limit;
 			RowBounds row = new RowBounds(startRow, limit);
 			return sqlSession.selectList("Notice.listNotice", map, row);
@@ -27,17 +25,14 @@ public class NoticeDao {
 	public int getListCount(Map<String, Object> map) {
 		return sqlSession.selectOne("Notice.getlistCount",map);
 	}
-	
 	//글조회
 	public Notice viewNotice(int notice_no) {
 		return sqlSession.selectOne("Notice.viewNotice", notice_no);
 	}
-	
 	//글등록
 	public int addNotice(Map<String, Object> map) {
 		return sqlSession.insert("Notice.addNotice", map);
 	}
-	
 	//글삭제
 	public int removeNotice(int notice_no) {
 		return sqlSession.delete("Notice.removeNotice", notice_no);
@@ -62,12 +57,8 @@ public class NoticeDao {
 	public List<Notice> listFile(int notice_no){
 		return sqlSession.selectList("Notice.listFile", notice_no);
 	}
-	//첨부파일수정
-	public int editFile(Map<String, Object> map) {
-		return sqlSession.insert("Notice.editFile", map);
-	}
 	//첨부파일삭제
-	public int delFile(int notice_no) {
-		return sqlSession.delete("Notice.delFile", notice_no);
+	public void delFile(int notice) {
+		sqlSession.delete("Notice.delFile", notice);
 	}
 }

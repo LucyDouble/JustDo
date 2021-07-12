@@ -141,9 +141,9 @@ public class NoticeController {
 							if (!filePath.exists()) {
 								filePath.mkdirs();
 							}
-							File files = new File(path, multiFile[i].getOriginalFilename()); // 파일생성
-							FileCopyUtils.copy(multiFile[i].getBytes(), files);					// 파일복사
-							map.put("notice_filename", multiFile[i].getOriginalFilename());
+							File files = new File(path, multiFile[i].getOriginalFilename()); 	// 파일생성
+							FileCopyUtils.copy(multiFile[i].getBytes(), files);						// 파일복사
+							map.put("notice_filename", multiFile[i].getOriginalFilename());	// 파일이름 맵에 담기
 							noticeService.addFile(map);
 							}
 						}
@@ -262,19 +262,26 @@ public class NoticeController {
 
 		map.put("notice_filepath", path);
 		noticeService.editNotice(map);	 
+		System.out.println("map =" + map);
 		
+//		delete from filelist where notice_no=#{notice_no} ;
+//		noticeService.delFile(notice_no); // 삭제
 		
 		try {
+			if (multiFile[0].getOriginalFilename().length() != 0) {
+				noticeService.delFile(notice_no); 
 			for(int i=0; i<multiFile.length; i++) {
-			if (multiFile[i] != null) {
 
 					if (!filePath.exists()) {
 						filePath.mkdirs();
 					}
 					File files = new File(path, multiFile[i].getOriginalFilename()); // 파일생성
+					System.out.println("권용휘"+ multiFile[i].getOriginalFilename());
 					FileCopyUtils.copy(multiFile[i].getBytes(), files);					// 파일복사
 					map.put("notice_filename", multiFile[i].getOriginalFilename());
-					noticeService.editFile(map);
+					System.out.println("컨트롤러 수정 map ="+map);
+					noticeService.addFile(map);
+					
 					}
 				}
 		} catch (
@@ -295,16 +302,15 @@ public class NoticeController {
 	// 첨부파일 삭제
 	@RequestMapping(value = "/delFile", method = RequestMethod.POST)
 	@ResponseBody
-	public void delFile(HttpServletRequest req, HttpServletResponse res, @RequestParam(name = "no") int notice_no, Notice no) {
+	public void delFile(HttpServletRequest req, HttpServletResponse res, @RequestParam(name = "no") int notice_no,
+			Notice vo) {
 		System.out.println("들어왔나영?");
-
-		Notice vo = new Notice();
-		vo = noticeService.delFile(no);
+		
 		try {
 			System.out.println("notice_no =" + notice_no);
-			no.setNotice_no(notice_no);
-			System.out.println("no =" + no);
-//			Notice vo = noticeService.checkNotice(no);
+			vo.setNotice_no(notice_no);
+			System.out.println("no =" + vo);
+			noticeService.delFile(notice_no); // 디비에서 삭제하기
 			System.out.println("vo =" + vo);
 			String filepath = vo.getNotice_filepath();
 			String filename = vo.getNotice_filename();

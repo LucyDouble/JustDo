@@ -53,7 +53,7 @@
 				<br>
 			</div>
 			
-			<div id="sampel1">
+			<div id="sampel1" class="en_file_input">
 			<label for="input-file" class="file_label" ><span>파일</span></label>
 			<input type="file" id="input-file" class="input-file" name="notice_filepath" multiple="multiple">
 			</div>
@@ -64,7 +64,7 @@
 			<input type="hidden" id="val0" value="0">
 			</c:if>
 			<c:if test="${not empty listFile }">
-			<label  id="file_name" class="reg_file"><c:forEach items="${listFile }" var="i">${i.notice_filename }<img class="file_del_btn" onclick="delFile();" src="resources/images/cross.png">&nbsp;&nbsp;</c:forEach>
+			<label  id="file_name" class="reg_file"><c:forEach items="${listFile }" var="i">${i.notice_filename }<img class="file_del_btn" onclick="delFile();" src="resources/images/cross.png"><br></c:forEach>
 			</label>
 			<input type="hidden" id="val0" value="1">
 			</c:if>
@@ -161,7 +161,8 @@
 		        target.addEventListener('change', function(){
 		            fileList = "";
 		            for(i = 0; i < target.files.length; i++){
-		                fileList += target.files[i].name + '&nbsp;&nbsp;';
+		                fileList += target.files[i].name + "<br />";
+		                /* fileList += target.files[i].name + '&nbsp;&nbsp;'; */
 		            }
 		            target2 = document.getElementById('file_name');
 		            target2.innerHTML = fileList;
