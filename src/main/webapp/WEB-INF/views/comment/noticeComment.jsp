@@ -20,10 +20,10 @@ float : left;
     	</section>
     	<!-- 댓글 출력 -->
     	<div id="md-form mt-4">
-    		<label for="writeComment">댓글 입력</label>
+    		<label for="writeComment" style ="float: left">댓글 입력</label>
     		<textarea class="form-control md-textarea" id="writeComment" rows="1"></textarea>
     	<div class="text-center my-4">
-    		<button id="commentSubmit" class="btn btn-default btn-sm btn-rounded">입력</button>
+    		<button id="commentSubmit" style="float:right" class="btn btn-default btn-sm btn-rounded">입력</button>
     	</div>
     	</div>
 </body>
@@ -72,8 +72,8 @@ function getCommentList() {
 					if("${sessionScope.teacher_number}" != "" && "${sessionScope.managerNumber}" != ""){
 						if("${sessionScope.teacher_number}" == item.teacher_number){
 							comment_con += '<button type="button" >ㄴㄴㄴ</button>';
-							/* comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="commentDeleteBtn('+ item.comment_number + ')" type="button" class="btn btn-danger px-3 float-right"><i class="fa fa-trash" aria-hidden="true"></i></button>';
-							comment_con += '<button id="commentEditBtn'	+ item.comment_number + '" onclick="commentEditBtn(' + item.comment_number + ')" type="button" class="btn btn-primary px-3 float-right"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>'; */
+						/* 	comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="commentDeleteBtn('+ item.comment_number + ')" type="button" class="btn btn-danger px-3 float-right"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+							comment_con += '<button id="commentEditBtn'	+ item.comment_number + '" onclick="commentEditBtn(' + item.comment_number + ')" type="button" class="btn btn-primary px-3 float-right"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>';  */
 
 						}
 					}
@@ -99,34 +99,48 @@ function getCommentList() {
 		}
 	});
 }
+
 $('#commentSubmit').click(function(){
+	
+	var comment_con = $('#writeComment').val();
+	var writer_number = "";
 	if("${sessionScope.student_number}" != ""){
-		writer_name = "${sessionScope.student_name}";
+		writer_number = "${sessionScope.student_number}";
 	}else if("${sessionScope.teacher_number}" != ""){
-		writer_name = "${sessionScope.teacher_name}";
+		writer_number = "${sessionScope.teacher_number}";
 	}else if("${sessionScope.manager_number}" != ""){
-		writer_name = "${sessionScope.manager_name}";
+		writer_number = "${sessionScope.manager_number}";
+	}else{
+		alert("로그인 후 이용해주세요");
 	}
+	console.log(writer_number + 'aaa');
+	console.log(comment_con + 'bbb');
+	console.log(notice_no + 'ccc');
 	
 	if(comment_con){
 		$.ajax({
 			type : 'post',
-			url : '${pageContext.request.contextPath}"/listNotice/writeComment',
+			url : '${pageContext.request.contextPath}/listNotice/writeComment',
 			dataType : 'text',
 			data : {
 				notice_no : notice_no,
-				writer_name : writer_name,
+				writer_number : writer_number,
 				comment_con : comment_con
 			},
 			success : function(data){
-				console.log(writer_name);
+				
 				console.log('댓글 작성 성공');
 				getCommentList();
+				$('#writeComment').val('');
 			}
 			
 		});
 	}else{
 		alert("댓글을 입력해주세요.");
+		console.log(writer_number);
+		console.log(comment_con);
+		console.log(notice_no);
+		console.log(writer_date);
 	}
 });
 
@@ -142,7 +156,7 @@ function deleteComment(comment_number){
 		});
 	}
 };
-function updateComment(comment_number){
+function updateCommentCheck(comment_number){
 	if(confirm("수정하시겠습니까?") == true){
 		$.ajax({
 			type:'put',
@@ -157,10 +171,13 @@ function updateComment(comment_number){
 			success : function(data){
 				console.log('수정 성공');
 				getCommentList();
+				$('#writeComment').val('');
 			}
 		})
 	}
 }
+function updateComment(id){
+	$('')
+}
 
-/* function updateComment */
 </script>
