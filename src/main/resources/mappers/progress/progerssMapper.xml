@@ -2,10 +2,78 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="Progress">
 
-<update id="">
-	<selectKey resultType="Progress" keyProperty="beforePro" order="BEFORE" >
-		select progress from progress where progress_no = #{progress_no}
-	</selectKey>
+<update id="updateProgress" parameterType="Progress">
+	<![CDATA[
+	update progress set progress = #{progress} where progress_no = #{progress_no} and progress <= #{progress}
+	]]>
 </update>
 
+<select id="vidwProgress" resultType="Progress" parameterType="Progress">
+	select * from progress where student_number = #{student_number} and video_no = #{video_no}
+</select>
+
+<insert id="addProgress" parameterType="Progress">
+	insert INTO progress VALUES (SEQ_PROGRESS.nextval, #{video_no}, #{student_number}, 0)
+</insert>
+<!-- 강의 전체 진도율 -->
+<select id="avgProgress" parameterType="int" resultType="int">
+	select nvl(b.video_alltime, 0) video_alltime from lecture a 
+	full outer join video b on a.lecture_no = b.lecture_no 
+	full outer join progress c on b.video_no = c.video_no
+	full outer join lectureclass d on b.lecture_no = d.lecture_no
+	where a.lecture_no = #{lecture_no}
+</select>
+
+<select id="avgProgress1" parameterType="int" resultType="int">
+	select nvl(c.progress,0) progress from lecture a 
+	full outer join video b on a.lecture_no = b.lecture_no 
+	full outer join progress c on b.video_no = c.video_no
+	full outer join lectureclass d on b.lecture_no = d.lecture_no
+	where a.lecture_no = #{lecture_no}
+</select>
+
+<!-- 나의 전체 진도율 -->
+<select id="myProgress" parameterType="Progress" resultType="int">
+	select nvl(b.video_alltime,0) video_alltime from lecture a join video b on a.lecture_no = b.lecture_no 
+	full outer join progress c on b.video_no = c.video_no where a.lecture_no = #{lecture_no} and c.student_number=#{student_number}
+</select>
+
+<select id="myProgress1" parameterType="Progress" resultType="int">
+	select nvl(c.progress,0) progress from lecture a join video b on a.lecture_no = b.lecture_no 
+	full outer join progress c on b.video_no = c.video_no where a.lecture_no = #{lecture_no} and c.student_number=#{student_number}
+</select>
+
+<!-- 1반 평균 진도율 -->
+<select id="classProgress" parameterType="int" resultType="int">
+	select nvl(b.video_alltime, 0) video_alltime from lecture a 
+	full outer join video b on a.lecture_no = b.lecture_no 
+	full outer join progress c on b.video_no = c.video_no
+	full outer join lectureclass d on b.lecture_no = d.lecture_no
+	where a.lecture_no = #{lecture_no} and lectureclass_class = 1
+</select>
+
+<select id="classProgress1" parameterType="int" resultType="int">
+	select nvl(c.progress,0) progress from lecture a 
+	full outer join video b on a.lecture_no = b.lecture_no 
+	full outer join progress c on b.video_no = c.video_no
+	full outer join lectureclass d on b.lecture_no = d.lecture_no
+	where a.lecture_no = #{lecture_no} and lectureclass_class = 1
+</select>
+
+<!-- 2반 평균 진도율 -->
+<select id="class2Progress" parameterType="int" resultType="int">
+	select nvl(b.video_alltime, 0) video_alltime from lecture a 
+	full outer join video b on a.lecture_no = b.lecture_no 
+	full outer join progress c on b.video_no = c.video_no
+	full outer join lectureclass d on b.lecture_no = d.lecture_no
+	where a.lecture_no = #{lecture_no} and lectureclass_class = 2
+</select>
+
+<select id="class2Progress1" parameterType="int" resultType="int">
+	select nvl(c.progress,0) progress from lecture a 
+	full outer join video b on a.lecture_no = b.lecture_no 
+	full outer join progress c on b.video_no = c.video_no
+	full outer join lectureclass d on b.lecture_no = d.lecture_no
+	where a.lecture_no = #{lecture_no} and lectureclass_class = 2
+</select>
 </mapper>

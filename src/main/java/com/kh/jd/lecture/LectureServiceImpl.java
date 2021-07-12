@@ -77,5 +77,13 @@ public class LectureServiceImpl implements LectureService{
 	public Lecture addLecturePlan(Lecture lecture) {
 		return Ldao.addLecturePlan(lecture);
 	}
+	@Override
+	public List<Lecture> listTeacherVideo(int teacher_number) {
+		return Ldao.listTeacherVideo(teacher_number);
+	}
+	@Override
+	public List<Lecture> listStudentVideo(int student_number) {
+		return Ldao.listStudentVideo(student_number);
+	}
 
 }

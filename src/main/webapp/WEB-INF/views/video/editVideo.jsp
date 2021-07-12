@@ -22,7 +22,7 @@
 	<div class="ln_page">
 		<p class="ln_title">학습동영상 수정</p>
 		<form id="editForm" class="addForm" enctype="multipart/form-data">
-			<input type="hidden" value="${view.lectureclass_no}" name="lectureclass_no">
+			<input type="hidden" value="${view.lecture_no}" name="lecture_no">
 			<input type="hidden" value="${view.video_no}" name="video_no">
 			<input type="hidden" name="video_alltime" id="video_alltime">
 			<div class="form-group">

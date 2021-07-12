@@ -15,17 +15,6 @@
 <link rel="stylesheet" href="resources/css/common/footer.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="resources/js/header.js"></script>
-<style>
-	.durationTime{
-		position: absolute;
-		bottom: 4px;
-		right: 0;
-		padding: 4px;
-		font-size: 13px;
-		background: #000;
-		color: #fff;
-	}
-</style>
 </head>
 <body>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
@@ -36,12 +25,18 @@
 				<select name="title" onchange="goTitle()" id="listTitle">
 					<option>강의목록</option>
 					<c:forEach var="vo" items="${list}">
-					<option value="${vo.lectureclass_no}">${vo.lecture_title} Class:${vo.lectureclass_class}</option>
+					<option value="${vo.lecture_no}">${vo.lecture_title}</option>
 					</c:forEach>
 				</select>
 				<p id="lecTitle"></p>
-				전체 평균 진도율 : <progress></progress>
-				강의 평균 진도율 : <progress></progress>
+				<c:if test="${100000 > user}">
+				<div class="graph_title"><p>진도율 현황</p>
+					<ul id="g1" class="graph">
+					</ul>
+				</div>
+				</c:if>
+				
+			    
 				<c:if test="${100000 < user}">
 				<button class="button" onclick="goAdd()"><span>등록</span></button>
 				<button class="button" id="editVideo"><span>수정</span></button>
@@ -56,8 +51,8 @@
 	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 	<script>
-		function viewVideo(num){
-			location.href="viewVideo?video_no="+num;
+		function viewVideo(num, num1){
+			location.href="viewVideo?video_no="+num+"&lecture_no="+num1;
 		}
 		// 셀릭트 선택 시 과목 출력
 		function goTitle(){
@@ -72,16 +67,18 @@
 				url:"listThumbnail",
 				type:"POST",
 				data:{
-					lectureclass_no : optVal
+					lecture_no : optVal
 				},
 				dataType:"json",
 				success:function(data){
 					var listVideo = data.list;
+					var number = data.lecture_no;
+					console.log(number);
 					$.each(listVideo, function(i, item){
 						var format = toMMSS(item.video_alltime);
 						list += "<ul class='cover'><c:if test='${100000< user}'><label class='checkbox'><input type='radio' class='cheakVNo checkbox' name='cheakVNo' value='"
 								+item.video_no+"'><span class='icon'></span></label></c:if><li class='imgcover'><a href='javascript:void(0);' onclick='viewVideo("
-								+item.video_no+");'><img class='videoImg' src='"+item.video_image
+								+item.video_no+","+number+");'><img class='videoImg' src='"+item.video_image
 								+"'><div class='thumcover'></div><img class='playBtn' src='resources/images/play_btn.png'>"
 								+"<span class='durationTime'>"+format+"</span></a></li>"
 								+"<p class='videoDate''>"+item.video_date+"</p><p class='videoTitle'>"+item.video_title+"</p>"
@@ -93,12 +90,51 @@
 					
 				}
 			});
+			$.ajax({
+				url:"avgProgress",
+				type:"POST",
+				data:{
+					lecture_no : optVal
+				},
+				dataType:"json",
+				success:function(data){
+					var avgUl = $("#g1");
+					avgUl.empty();
+					var avgData = data.avg;
+					var myAvg = data.myavg;
+					var class1Avg = data.class1Avg;
+					var class2Avg = data.class2Avg;
+					var goLi = "";
+					var goLi2 = "";
+					var goLi3 = "";
+					var goLi4 = "";
+					if(isNaN(avgData)){
+						goLi = "<p class='proError'>학습중인 동영상이 없어 데이터가 없습니다.</p>"
+					}else{
+						goLi = "<li class='graph_li'><span id='graphTitle'>강의 전체 진도율</span>&nbsp;&nbsp;<span style='width: "+avgData+"%'>"
+						+"<em>"+avgData+"%</em></span></li>";
+						goLi2 = "<li class='graph_li'><span id='graphTitle'>나의 전체 진도율</span>&nbsp;&nbsp;<span style='width: "+myAvg+"%'>"
+						+"<em>"+myAvg+"%</em></span></li>";
+						goLi3 = "<li class='graph_li'><span id='avgli'>1반 평균 진도율 </span>&nbsp;&nbsp;<span style='width: "+class1Avg+"%'>"
+						+"<em>"+class1Avg+"%</em></span></li>";
+						goLi4 = "<li class='graph_li'><span id='avgli'>2반 평균 진도율 </span>&nbsp;&nbsp;<span style='width: "+class2Avg+"%'>"
+						+"<em>"+class2Avg+"%</em></span></li>";
+					}
+					avgUl.append(goLi);
+					avgUl.append(goLi2);
+					avgUl.append(goLi3);
+					avgUl.append(goLi4);
+				},
+				error:function(){
+					
+				}
+			});
 		}
 		// 등록 폼으로 이동
 		function goAdd(){
 			var opt = document.getElementById("listTitle");
 			var optVal = opt.options[opt.selectedIndex].value; // lectureclass 번호 값
-			location.href="addVideo?lectureclass_no="+optVal;
+			location.href="addVideo?lecture_no="+optVal;
 		}
 		// 수정 버튼 클릭 시 
 		$("#editVideo").click(function(){

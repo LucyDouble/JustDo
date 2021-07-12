@@ -91,4 +91,16 @@
 		inner join teacher c on a.teacher_number = c.teacher_number
 		where a.lecture_no = #{lecture_no} and b.lectureclass_class = #{lectureclass_class}
 	</select>
+	
+	<!-- 강사버전 동영상 리스트 -->
+	<select id="listTeacherVideo" resultType="Lecture" parameterType="int">
+		select a.lecture_no, a.lecture_title, a.lecture_start, a.lecture_end from lecture a join teacher d on a.teacher_number = d.teacher_number where a.teacher_number = #{teacher_number}
+	</select>
+	
+	<!-- 학생버전 동영상 리스트 -->
+	<select id="listStudentVideo" resultType="Lecture" parameterType="int">
+		select a.lecture_no, a.lecture_title, a.lecture_start, a.lecture_end from lecture a 
+		join lectureclass b on a.lecture_no = b.lecture_no
+		join registration c on b.lectureclass_no = c.lectureclass_no where c.student_number = #{student_number}
+	</select>
 </mapper>

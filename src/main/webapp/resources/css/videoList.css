@@ -355,7 +355,8 @@ ol,.cd-buttons {
 
 .studio{
 		width: 1000px;
-		height: auto;
+		height: 100%;
+		clear: both;
 	}
 .videoImg{
 	width: 300px;
@@ -401,8 +402,42 @@ ol,.cd-buttons {
 	text-align: left;
 }
 .selectLc{
-	margin-bottom: 25px;
+	margin-bottom: 45px;
+	height: 300px;
 }
 .cheakVNo{
 	float: right;
+}
+
+
+.graph_li { margin: 0; padding: 0; text-align: left;}
+.graph  { width: 450px; list-style: none;margin: 0; padding: 0; float: left; height: 20px;}
+.graph li   { position: relative; padding: 1px 0; white-space:nowrap; left: 225px;}
+.graph li span  { display: inline-block; position: relative; height: 20px; line-height: 20px; background: #DEDCEE;}
+.graph li em    { position: absolute; top: 0px; right: -65px; font-family: arial; color: #000; font-size: 18px;}
+.graph_title{
+
+	
+	font-size: 17px;
+}
+.proError{
+	position: relative;
+	left: 280px;
+}
+
+.durationTime{
+	position: absolute;
+	bottom: 4px;
+	right: 0;
+	padding: 4px;
+	font-size: 13px;
+	background: #000;
+	color: #fff;
+}
+#graphTitle{
+	background: white;
+}
+#avgli{
+	background: white;
+	margin-right: 6px;
 }

@@ -36,6 +36,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.jd.account.Student;
 import com.kh.jd.account.Teacher;
+import com.kh.jd.lecture.Lecture;
+import com.kh.jd.lecture.LectureService;
+import com.kh.jd.progress.Progress;
+import com.kh.jd.progress.ProgressService;
 import com.kh.jd.registration.Registration;
 import com.kh.jd.registration.RegistrationService;
 
@@ -48,13 +52,16 @@ public class VideoController {
 	private RegistrationService RService;
 	@Autowired
 	private VideoService VService;
-	
+	@Autowired
+	private ProgressService PService;
+	@Autowired
+	private LectureService LService;
 	// 학습동영상 리스트
 	@RequestMapping(value = "listVideo", method = RequestMethod.GET)
 	public String listVideo(Model m, HttpServletRequest request, Registration re) {
 		Student st = new Student();
 		Teacher te = new Teacher();
-		List<Registration> list = null;
+		List<Lecture> list = null;
 		int student_number = 0;
 		int teacher_number = 0;
 		try {
@@ -65,17 +72,17 @@ public class VideoController {
 				teacher_number=te.getTeacher_number();
 				re.setTeacher_number(teacher_number);
 				request.setAttribute("user", teacher_number);
+				list = LService.listTeacherVideo(teacher_number);
 			}else {
 				st= (Student)request.getSession().getAttribute("DTO");
 				student_number=st.getStudent_number();
 				re.setStudent_number(student_number);
 				request.setAttribute("user", student_number);
+				list = LService.listStudentVideo(student_number);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		list = RService.listRegistration(re);
 		System.out.println(list);
 		m.addAttribute("list", list);
 		return "/video/listVideo";
@@ -84,7 +91,7 @@ public class VideoController {
 	// 등록 폼
 	@RequestMapping(value = "addVideo", method = RequestMethod.GET)
 	public String addVideo(Model m,HttpServletRequest request) {
-		String number = request.getParameter("lectureclass_no");
+		String number = request.getParameter("lecture_no");
 		m.addAttribute("number", number);
 		return "video/addVideo";
 	}
@@ -92,9 +99,9 @@ public class VideoController {
 	// 학습동영상 썸네일 출력
 	@ResponseBody
 	@RequestMapping(value = "listThumbnail", produces = "application/text; charset=UTF-8")
-	public String listThumbnail(HttpServletRequest request, @RequestParam(name="lectureclass_no") int lectureclass_no) {
+	public String listThumbnail(HttpServletRequest request, @RequestParam(name="lecture_no") int lecture_no) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("lectureclass_no", lectureclass_no);
+		map.put("lecture_no", lecture_no);
 		List<Video> list = VService.listVideo(map);
 		map.put("list", list);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -294,8 +301,46 @@ public class VideoController {
 		}
 		// 학습동영상 조회
 		@RequestMapping(value = "viewVideo", method = RequestMethod.GET)
-		public String viewVideo(Model m,HttpServletRequest request, @RequestParam(name="video_no") int video_no) {
-			System.out.println(video_no);
+		public String viewVideo(Model m,HttpServletRequest request, @RequestParam(name="video_no") int video_no, 
+				@RequestParam(name="lecture_no") int lecture_no, Progress pro) {
+			
+			Student st = new Student();
+			Teacher te = new Teacher();
+			int student_number = 0;
+			int teacher_number = 0;
+			try {
+				String ss = request.getSession().getAttribute("DTO").toString();
+				String[] str = ss.split(" ");
+				if(str[0]=="Teacher" || str[0].equals("Teacher")) {
+					te= (Teacher)request.getSession().getAttribute("DTO");
+					teacher_number=te.getTeacher_number();
+					
+					
+				}else {
+					st= (Student)request.getSession().getAttribute("DTO");
+					student_number=st.getStudent_number();
+					System.out.println(video_no);
+					System.out.println(lecture_no);
+					pro.setStudent_number(student_number);
+					pro.setVideo_no(video_no);
+					
+					if(PService.vidwProgress(pro) == null) {
+						System.out.println("널일떄");
+						PService.addProgress(pro);
+						m.addAttribute("Pro",PService.vidwProgress(pro));
+					}else {
+						System.out.println("널이 아닐때");
+						m.addAttribute("Pro",PService.vidwProgress(pro));
+					}
+					
+					
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			System.out.println(PService.vidwProgress(pro));
 			m.addAttribute("view", VService.viewVideo(video_no));
 			return "video/viewVideo";
 		}

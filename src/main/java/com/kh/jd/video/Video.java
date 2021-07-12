@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Video {
 	private int video_no;
-	private int lectureclass_no;
+	private int lecture_no;
 	private String video_title;
 	private String video_content;
 	private String video_date;
@@ -17,7 +17,7 @@ public class Video {
 	
 	@Override
 	public String toString() {
-		return "Video [video_no=" + video_no + ", lectureclass_no=" + lectureclass_no + ", video_title=" + video_title
+		return "Video [video_no=" + video_no + ", lecture_no=" + lecture_no + ", video_title=" + video_title
 				+ ", video_content=" + video_content + ", video_date=" + video_date + ", video_file=" + video_file
 				+ ", video_path=" + video_path + ", video_image=" + video_image + ", video_alltime=" + video_alltime
 				+ "]";
@@ -31,12 +31,12 @@ public class Video {
 		this.video_no = video_no;
 	}
 
-	public int getLectureclass_no() {
-		return lectureclass_no;
+	public int getLecture_no() {
+		return lecture_no;
 	}
 
-	public void setLectureclass_no(int lectureclass_no) {
-		this.lectureclass_no = lectureclass_no;
+	public void setLecture_no(int lecture_no) {
+		this.lecture_no = lecture_no;
 	}
 
 	public String getVideo_title() {
@@ -94,5 +94,6 @@ public class Video {
 	public void setVideo_alltime(String video_alltime) {
 		this.video_alltime = video_alltime;
 	}
+	
 	
 }

@@ -14,4 +14,6 @@ public interface LectureService {
 	public int checkLectureClass(int lecture_no);
 	public void scheduleState();
 	public Lecture addLecturePlan(Lecture lecture);
+	public List<Lecture> listTeacherVideo(int teacher_number);
+	public List<Lecture> listStudentVideo(int student_number);
 }

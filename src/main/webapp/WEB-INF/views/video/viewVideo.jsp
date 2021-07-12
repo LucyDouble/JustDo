@@ -45,9 +45,8 @@
 </head>
 <body>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
-		<form id="timefrm">
-		<input type="hidden" id="nowTime" name="nowTime">
-		</form>
+		<input type="hidden" id="progress_no" name="progress_no" value="${Pro.progress_no}">
+
 		<div class="ln_page">
 			<p class="ln_title v_title">학습동영상</p>
 			<div class="viewVideo_tile">
@@ -67,16 +66,21 @@
 		
 		var playtime = "";
 		
+		var number = $("#progress_no").val();
+		console.log(number);
+		if(number != ""){
 		video.addEventListener('timeupdate', function gg(){
 			// 현재 재생 시간 (초 단위 절삭)
 			var playtime = Math.floor(video.currentTime);
+			
 				// ajax update db where 
 				// where  현재 진행률이 70% 다시 들어와서 볼때 현재보다 낮을땐 업데이트 안되다가 현재진행률 보다 높아졌을때 업데이트 
 				$.ajax({
 					url:"Addprogress",
 					type:"post",
 					data: {
-						progress : playtime
+						progress : playtime,
+						progress_no : number
 					},
 					success:function(data){
 						
@@ -86,8 +90,7 @@
 					}
 				});
 			}, false);
-		
-		
+		}
 	</script>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>

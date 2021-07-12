@@ -61,4 +61,12 @@ public class LectureDao {
 	public Lecture addLecturePlan(Lecture lecture) {
 		return sqlSession.selectOne("Lecture.addLecturePlan", lecture);
 	}
+	
+	public List<Lecture> listTeacherVideo(int teacher_number) {
+		return sqlSession.selectList("Lecture.listTeacherVideo", teacher_number);
+	}
+	
+	public List<Lecture> listStudentVideo(int student_number) {
+		return sqlSession.selectList("Lecture.listStudentVideo", student_number);
+	}
 }

@@ -22,7 +22,7 @@
 	<div class="ln_page">
 		<p class="ln_title">학습동영상 등록</p>
 		<form id="addForm" class="addForm" enctype="multipart/form-data">
-			<input type="hidden" value="${number}" name="lectureclass_no">
+			<input type="hidden" value="${number}" name="lecture_no">
 			<input type="hidden" id="video_alltime" name="video_alltime">
 			<div class="form-group">
 				<label class="an_label" for="video_title">제목</label>
