@@ -1,169 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JD 교육원</title>
+<link rel="stylesheet" href="<c:url value="resources/css/account/teacherEdit.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/common/header.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-
-<style>
-<
-style>.teacherMyPage_teacherInfo {
-	margin: 30px 20px;
-	position: relative;
-}
-
-.teacherMyPage_teacherTable th {
-	color: black;
-	width: 240px;
-	height: 80px;
-	font-size: 25px;
-	padding: 10px 40px;
-	border-top: 2px solid darkgray;
-	border-bottom: 2px solid darkgray;
-	border-right: 2px solid darkgray;
-}
-
-.teacherMyPage_teacherTable td {
-	width: 600px;
-	color: black;
-	border-top: 2px solid darkgray;
-	border-bottom: 2px solid darkgray;
-	background-color: #white;
-}
-
-.teacherMyPage_teacherTable input[type=text] {
-	width: 400px;
-	height: 50px;
-	margin-left: 70px;
-	border-radius: 7px;
-	border: 1px solid ivory;
-	background-color: #eee;
-	padding-left: 20px;
-	font-size: 20px;
-}
-
-.teacherMyPage_title {
-	margin-top: 30px;
-}
-
-.teacherMyPage_deleteBtn {
-	border: none;
-	background-color: #212121;
-	width: 130px;
-	height: 50px;
-	color: white;
-	margin-left: 190px;
-	font-size: 20px;
-	border-radius: 10px;
-	background-color: red;
-}
-
-.teacherMyPage_deleteBtn:hover {
-	background-color: palevioletred;
-	cursor: pointer;
-}
-
-.teacherMyPage_deleteModal {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	left: 0px;
-	top: 0px;
-	z-index: 1;
-	background-color: rgba(0, 0, 0, 0.4);
-	display: none;
-}
-
-.teacherMyPage_deleteDiv {
-	position: absolute;
-	top: 20%;
-	left: 35%;
-	width: 500px;
-	height: 200px;
-	background-color: #eee;
-	text-align: center;
-	border-radius: 10px;
-}
-
-.teacherMyPage_deleteDiv p {
-	margin-top: 30px;
-	margin-bottom: 30px;
-	font-size: 35px;
-}
-
-.teacherMyPage_deleteOkBtn, .teacherMyPage_deleteCancelBtn {
-	background-color: red;
-	border: none;
-	width: 130px;
-	height: 50px;
-	color: white;
-	margin-left: 30px;
-	margin-right: 30px;
-	font-size: 18px;
-	border-radius: 10px;
-}
-
-.teacherMyPage_deleteCancelBtn {
-	background-color: black !important;
-}
-
-.teacherMyPage_deleteOkBtn:hover {
-	background-color: #EE2560;
-	cursor: pointer;
-}
-
-.teacherMyPage_deleteCancelBtn:hover {
-	background-color: #8e8e8e !important;
-	cursor: pointer;
-}
-
-.edit:hover {
-	color: #EE2560
-;
-	cursor: pointer;
-}
-
-@media ( max-width :570px) {
-	.container {
-		min-width: 100% !important;
-	}
-	.teacherMyPage_teacherTable th {
-		padding: 10px 10px;
-		width: 100px;
-	}
-	.teacherMyPage_teacherTable td {
-		width: 350px;
-	}
-	.teacherMyPage_deleteBtn {
-		width: 80px;
-		margin-left: 115px;
-		font-size: 15px;
-		height: 35px;
-	}
-}
-</style>
 </head>
 <body>
-
+	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div class="container">
-		<h1 class="teacherMyPage_title">마이 페이지</h1>
-		<hr>
+	
+		<h3 class="teacherMyPage_title">마이 페이지</h3>
 		<div class="teacherMyPage_teacherInfo">
 			<form id="teacherMyPage_myForm">
 				<table class="teacherMyPage_teacherTable">
 					<tr id="teacherMyPage_teacherIdTr">
 						<th>회원아이디</th>
 						<td><input type="text" name="id" id="teacherMyPage_id"
-							value="${DTO.id }" readonly></td>
+							value="${DTO.id }" readonly disabled="disabled"></td>
 					</tr>
 					<tr>
 						<th>이름</th>
 						<td><input type="text" name="name" id="teacherMyPage_name"
 							value="${DTO.name }" readonly>
-							<p id="edit_name" class="edit"
-								style="float: right; font-size: 18px; margin-top: 10px; margin-right: 30px;"
+							<p id="edit_name" class="edit name_edit"
 								onclick="edit('name')">수정하기</p>
 							<p id="errorName"
 								style="display: none; margin-left: 70px; color: #6A60A9
@@ -173,8 +38,7 @@ style>.teacherMyPage_teacherInfo {
 						<th>비밀번호</th>
 						<td><input type="text" name="password" id="teacherMyPage_pw"
 							value="**********" readonly>
-							<p id="edit_pw" class="edit"
-								style="float: right; font-size: 18px; margin-top: 10px; margin-right: 30px;"
+							<p id="edit_pw" class="edit pwd_edit"
 								onclick="edit('pw')">수정하기</p>
 							<p id="errorPassword"
 								style="display: none; margin-left: 70px; color: red; font-size: 15px; margin-bottom: 0px;"></p></td>
@@ -183,8 +47,7 @@ style>.teacherMyPage_teacherInfo {
 						<th>핸드폰번호</th>
 						<td><input type="text" name="phone" id="teacherMyPage_phone"
 							value="${DTO.phone }" readonly>
-							<p id="edit_phone" class="edit"
-								style="float: right; font-size: 18px; margin-top: 10px; margin-right: 30px;"
+							<p id="edit_phone" class="edit phone_edit"
 								onclick="edit('phone')">수정하기</p>
 							<p id="errorPhone"
 								style="display: none; margin-left: 70px; color: red; font-size: 15px; margin-bottom: 0px;"></p></td>
@@ -193,8 +56,7 @@ style>.teacherMyPage_teacherInfo {
 						<th>주소</th>
 						<td><input type="text" name="address"
 							id="teacherMyPage_address" value="${DTO.address }" readonly>
-							<p id="edit_address" class="edit"
-								style="float: right; font-size: 18px; margin-top: 10px; margin-right: 30px;"
+							<p id="edit_address" class="edit address_edit"
 								onclick="edit('address')">수정하기</p>
 							<p id="errorAddress"
 								style="display: none; margin-left: 70px; color: red; font-size: 15px; margin-bottom: 0px;"></p></td>
@@ -202,15 +64,13 @@ style>.teacherMyPage_teacherInfo {
 					<tr>
 						<th>회원이메일</th>
 						<td><input type="text" name="email" id="teacherMyPage_email"
-							value="${DTO.email}" readonly></td>
-					</tr>
-					<tr>
-						<th>회원정보관리</th>
-						<td class="teacherMyPage_btnTd"><input type="button"
-							id="teacherMyPage_deleteBtn" value="탈퇴"
-							class="teacherMyPage_deleteBtn"></td>
+							value="${DTO.email}" readonly disabled="disabled"></td>
 					</tr>
 				</table>
+				<div class="deleteBtn"><input type="button"
+						id="teacherMyPage_deleteBtn" value="탈퇴하기"
+						class="teacherMyPage_deleteBtn">
+				</div>
 			</form>
 
 
@@ -218,16 +78,17 @@ style>.teacherMyPage_teacherInfo {
 
 		<!-- 삭제 모달창 -->
 		<div id="teacherMyPage_deleteModal" class="teacherMyPage_deleteModal">
-			<div class="teacherMyPage_deleteDiv">
+			<div id="teacherMyPage_deleteDiv">
 				<p>정말 탈퇴하시겠습니까?</p>
 				<input type="button" id="teacherMyPage_deleteOkBtn"
-					class="teacherMyPage_deleteOkBtn" value="탈퇴하기"> <input
-					type="button" id="teacherMyPage_deleteCancelBtn"
+					class="teacherMyPage_deleteOkBtn" value="탈퇴하기"> 
+				<input type="button" id="teacherMyPage_deleteCancelBtn"
 					class="teacherMyPage_deleteCancelBtn" value="취소하기">
 			</div>
 		</div>
 
 	</div>
+		<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 <script>
 $(document).ready(function(){

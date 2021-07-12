@@ -1,0 +1,177 @@
+@charset "UTF-8";
+
+.teacherMyPage_teacherInfo {
+    margin: 50px 0px 0px 0px;
+	position: relative;
+}
+
+.teacherMyPage_teacherTable {
+	border-top: 1px solid #222;
+}
+
+.teacherMyPage_teacherTable th {
+    color: black;
+    width: 234px;
+    height: 52px;
+    font-size: 15px;
+    border-bottom: 1px solid #DEDCEE;
+    background: #f2f5f9;
+}
+
+.teacherMyPage_teacherTable td {
+	width: 1000px;
+    color: black;
+    border-bottom: 1px solid #dae0e9;
+    padding: 9px 0 9px 20px;
+}
+
+div.deleteBtn {
+	text-align: center;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.teacherMyPage_teacherTable input[type=text] {
+	width: 315px;
+    height: 36px;
+    border: 1px solid #dae0e9;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+.teacherMyPage_title {
+	font-size: 28px;
+	color: black;
+    font-weight: bold;
+}
+
+.teacherMyPage_deleteBtn {
+	width: 100px;
+    height: 35;
+    font-size: 14px;
+    background-color: white;
+    border-bottom: 2px solid red;
+    font-weight: bold;
+    border-right: none;
+    border-top: none;
+    border-left: none;
+}
+
+.teacherMyPage_deleteBtn:hover {
+	background-color: red;
+	color: white;
+	cursor: pointer;
+	border-bottom-left-radius: 50px;
+	border-bottom-right-radius: 50px;
+	border-top-left-radius: 50px;
+	border-top-right-radius: 50px;
+	border-right-left-radius: 50px;
+	border-right-right-radius: 50px;
+	border-left-left-radius: 50px;
+	border-let-right-radius: 50px;
+}
+
+.teacherMyPage_deleteModal {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	z-index: 1;
+	background-color: rgba(0, 0, 0, 0.4);
+	display: none;
+}
+
+#teacherMyPage_deleteDiv {
+	position: absolute;
+    top: 40%;
+    left: 38%;
+    width: 500px;
+    height: 220px;
+    background-color: #eee;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#teacherMyPage_deleteDiv p {
+	margin-top: 50px;
+    margin-bottom: 45px;
+    font-size: 25px;
+}
+
+.teacherMyPage_deleteOkBtn, .teacherMyPage_deleteCancelBtn {
+	background-color: #eee;
+	width: 130px;
+	height: 50px;
+	color: balck;
+	margin-left: 30px;
+	margin-right: 30px;
+	font-size: 18px;
+	border: 2px solid balck;
+	border-radius: 10px;
+}
+
+
+input.teacherMyPage_deleteOkBtn:hover {
+	background-color: red;
+	cursor: pointer;
+	color: white;
+	border: none;
+}
+
+input.teacherMyPage_deleteCancelBtn:hover {
+	background-color: #8e8e8e ;
+	cursor: pointer;
+	color: white;
+	border: none;
+}
+
+p.edit {
+	font-size: 14px;
+	font-weight: bold;
+    margin-top: 10px;
+    border: 2px solid #6A60A9;
+    width: 65px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    border-radius: 50px;
+}
+.name_edit {
+    position: absolute;
+    top: 60px;
+    left: 590px;
+}
+
+.pwd_edit {
+	position: absolute;
+    top: 117px;
+    left: 590px;
+}
+
+.phone_edit {
+	position: absolute;
+    top: 174px;
+    left: 590px;
+}
+
+.address_edit {
+	position: absolute;
+    top: 231px;
+    left: 590px;
+}
+
+.edit:hover {
+	color: white;
+	background-color: #6A60A9;
+	cursor: pointer;
+}
+
+.container {
+    width: 1300px;
+    margin: 0 auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    line-height: 1.4;
+    letter-spacing: -0.05em;
+}
