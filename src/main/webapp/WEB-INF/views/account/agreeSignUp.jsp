@@ -10,110 +10,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="<c:url value="resources/css/account/agreeSignUp.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-<title>회원가입약관</title>
-<style>
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box
-}
-
-body {
-	background-color: #f7f7f7;
-}
-
-ul>li {
-	list-style: none
-}
-
-a {
-	text-decoration: none;
-}
-
-.clearfix::after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
-div {
-	width: 600px;
-	margin: 0 auto;
-}
-
-ul.join_box {
-	border: 1px solid #ddd;
-	background-color: #fff;
-}
-
-.checkBox, .checkBox>ul {
-	position: relative;
-}
-
-.checkBox>ul>li {
-	float: left;
-}
-
-.checkBox>ul>li:first-child {
-	width: 85%;
-	padding: 15px;
-	font-weight: 600;
-	color: #888;
-}
-
-.checkBox>ul>li:nth-child(2) {
-	position: absolute;
-	top: 50%;
-	right: 30px;
-	margin-top: -12px;
-}
-
-.checkBox textarea {
-	width: 96%;
-	height: 90px;
-	margin: 0 2%;
-	background-color: #f7f7f7;
-	color: #888;
-	border: none;
-}
-
-.footBtwrap {
-	margin-top: 15px;
-}
-
-.footBtwrap>li {
-	float: left;
-	width: 50%;
-	height: 60px;
-}
-
-.footBtwrap>li>button {
-	display: block;
-	width: 100%;
-	height: 100%;
-	font-size: 20px;
-	text-align: center;
-	line-height: 60px;
-}
-
-.agreeBtn1 {
-	background-color: #fff;
-	color: #888
-}
-
-.agreeBtn2 {
-	background-color: #6A60A9;
-	color: #fff
-}
-</style>
+<title>회원가입 약관</title>
 </head>
 
 <body>
 	<div>
+	<div id="logo_position">
 		<a href="<%=request.getContextPath()%>/jdHome?command=main"><img
-			class="logo" src="resources/images/logo4.png"></a> <br> <br>
+			class="logo" src="resources/images/logo4.png"></a> </div>
 		<ul class="join_box">
 			<li class="checkBox check01">
 				<ul class="clearfix">
