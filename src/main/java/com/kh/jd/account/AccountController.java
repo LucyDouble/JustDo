@@ -45,7 +45,12 @@ public class AccountController {
 			result = sService.loginCheck(sDto, session);
 		} else if(check =="teacher" || check.equals("teacher")){
 			result = tService.loginCheck(tDto, session);
+			if(result == true) {
 			accept = tService.acceptCheck(teacher_id);
+			}else {
+				model.addAttribute("msg", "실패");
+				return "account/login";
+			}
 		}
 		if (result == true) {
 			System.out.println(result);
