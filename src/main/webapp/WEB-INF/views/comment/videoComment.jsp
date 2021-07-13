@@ -26,7 +26,7 @@ float : right;
     		<label for="writeComment" style ="float: left">댓글 입력</label>
     		<textarea class="form-control md-textarea" id="writeComment" rows="1" style = "min-height : 100px; font-size : 12px;"></textarea>
     	<div class="text-center my-4">
-    		<button id="commentSubmit" style="float:right" class="btn btn-default btn-sm btn-rounded">입력</button>
+    		<button id="commentSubmit" style="float:right; " class="btn btn-default btn-sm btn-rounded">입력</button>
     	</div>
     	</div>
 </body>
