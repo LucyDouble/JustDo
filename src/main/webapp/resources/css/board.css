@@ -90,6 +90,7 @@ body {
 	-o-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
 	-ms-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
 	padding-top: 500px;
+	cursor: context-menu;
 }
 
 .an_label, .en_label {
@@ -541,6 +542,7 @@ ol,.cd-buttons {
 	display:inline-block;
 	margin:0;
 	padding:0;
+	vertical-align: top;
 }
 #viewCS:hover {
 	font-weight: bold;
@@ -696,7 +698,9 @@ i{
     d: path("M2,2 C21,17 46,25 74,25 C102,25 118,25 120,25");
   }
 }
-
+.vn_filelist{
+	display: inline-block;
+}
 
 .file_label{
 	float:left;

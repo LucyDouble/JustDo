@@ -36,7 +36,7 @@
             </tr>
               <tr>
                 <td class="vn_cont"><p class="vn_cont_p">첨부파일</p>&nbsp;&nbsp;<div class="vn_filelist">
-                	<c:forEach items="${listFile }" var="i"><a class="vn_filelist" href="fileDownload?n_no=${notice.notice_no }&notice_filename=${i.notice_filename }">${i.notice_filename }</a><br></c:forEach>
+                	<c:forEach items="${listFile }" var="i"><a class="vn_filelist" href="fileDownload?n_no=${notice.notice_no }&notice_filename=${i.notice_filename }">${i.notice_filename }</a>&nbsp;&nbsp;</c:forEach>
                 	</div>
                 </td>
             </tr>
@@ -47,10 +47,14 @@
 	
         </tbody>
         </table>
+        
     <button class="button" onclick="location.href='listNotice'"><span>목록</span></button>
+    <c:if test="${sessionScope.student_number == null}">
+     <c:if test="${sessionScope.teacher_number == notice.teacher_number || sessionScope.manager_number == notice.managerA_number }">
     <button id="btnUpdate" class="button" onclick="location.href='editNoticeForm?n_no=${notice.notice_no}'"><span>수정</span></button>
     <button id="btnRemove" class="button"><span>삭제</span></button>
-   
+   	</c:if>
+   	</c:if>
     </div>
     <div class="comment_Wrapper"><jsp:include page="../comment/noticeComment.jsp"></jsp:include></div>
     

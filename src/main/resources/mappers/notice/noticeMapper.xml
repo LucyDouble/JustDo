@@ -62,9 +62,9 @@
 		</select>
 		
 		<!-- 파일삭제 -->
-		<select id="delFile" parameterType="int">
+		<select id="delFile" parameterType="string">
 			delete from filelist 
-			where  notice_no = #{notice_no}
+			where  notice_filename = #{notice_filename}
 		</select>
 		
 		<!-- 글수정 -->

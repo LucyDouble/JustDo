@@ -108,7 +108,15 @@
 	<br>
 	<jsp:include page="../counseling/addCS.jsp"></jsp:include>
 	<script>
-
+	
+	
+		/* $('#inp').click(function(){
+			  if ($("input").val() == "") {
+					swal("","검색 입력값이 없습니다.","warning");
+					return false;
+				}
+		}); */
+	
 		$("#checkall").change(function() {
 			if ($("#checkall").is(":checked")) {
 				//alert("체크박스 체크했음!");

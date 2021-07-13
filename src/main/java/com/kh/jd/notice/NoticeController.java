@@ -249,6 +249,22 @@ public class NoticeController {
 		int notice_no = Integer.parseInt(n_no);
 		n_sub = request.getParameter("n_sub");
 		n_con = request.getParameter("editor1");
+		String chk = request.getParameter("allcount");
+		System.out.println("chk="+chk);
+		if (chk != null) {
+
+			int count = Integer.parseInt(request.getParameter("allcount"));
+			List<String> list = new ArrayList<String>();
+			for (int i = 1; i <= count; i++) {
+				String aaa = request.getParameter(String.valueOf(i));
+				list.add(aaa);
+			}
+
+			for (int i = 0; i < list.size(); i++) {
+				delFile(list.get(i), request); // DB삭제
+			}
+
+		}
 		List<Notice> listFile = noticeService.listFile(notice_no);
 		System.out.println("listFile = "+ listFile);
 		System.out.println("notice_no ="+notice_no);
@@ -269,14 +285,14 @@ public class NoticeController {
 		
 		try {
 			if (multiFile[0].getOriginalFilename().length() != 0) {
-				noticeService.delFile(notice_no); 
+//				noticeService.delFile(notice_no); 
 			for(int i=0; i<multiFile.length; i++) {
 
 					if (!filePath.exists()) {
 						filePath.mkdirs();
 					}
 					File files = new File(path, multiFile[i].getOriginalFilename()); // 파일생성
-					System.out.println("권용휘"+ multiFile[i].getOriginalFilename());
+					System.out.println(multiFile[i].getOriginalFilename());
 					FileCopyUtils.copy(multiFile[i].getBytes(), files);					// 파일복사
 					map.put("notice_filename", multiFile[i].getOriginalFilename());
 					System.out.println("컨트롤러 수정 map ="+map);
@@ -299,33 +315,27 @@ public class NoticeController {
 		return mv;
 	}
 		
-	// 첨부파일 삭제
-	@RequestMapping(value = "/delFile", method = RequestMethod.POST)
-	@ResponseBody
-	public void delFile(HttpServletRequest req, HttpServletResponse res, @RequestParam(name = "no") int notice_no,
-			Notice vo) {
+//	// 첨부파일 삭제
+//	@RequestMapping(value = "/delFile", method = RequestMethod.POST)
+//	@ResponseBody
+//	public String delFile(HttpServletRequest req, HttpServletResponse res, @RequestParam(name = "filename") String notice_filename,
+//			Notice vo) {
+	public void delFile(String name, HttpServletRequest request) {
 		System.out.println("들어왔나영?");
 		
 		try {
-			System.out.println("notice_no =" + notice_no);
-			vo.setNotice_no(notice_no);
-			System.out.println("no =" + vo);
-			noticeService.delFile(notice_no); // 디비에서 삭제하기
-			System.out.println("vo =" + vo);
-			String filepath = vo.getNotice_filepath();
-			String filename = vo.getNotice_filename();
-			String fileFull = filepath + filename;
-
+			noticeService.delFile(name); // 디비에서 삭제하기
+			String path = request.getServletContext().getRealPath("fileUpload/");
+			String fileFull = path + name;
 			System.out.println("fileFull=" + fileFull);
-
 			File file = new File(fileFull);
-
 			if (file.exists() == true) {
 				file.delete();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+//		return "";
 	}
 
 	// 글삭제

@@ -47,6 +47,10 @@
       }
 
 	function editCS(){
+		if ($(".ec_label_input").val() == "" ) {
+			swal("","정보를 모두 입력해주세요","warning");
+			return false;
+		}
 		var frm = document.getElementById("editCS");
 		frm.action = "editCS";
 		frm.method = "POST";

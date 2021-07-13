@@ -58,7 +58,7 @@ public class NoticeDao {
 		return sqlSession.selectList("Notice.listFile", notice_no);
 	}
 	//첨부파일삭제
-	public void delFile(int notice) {
-		sqlSession.delete("Notice.delFile", notice);
+	public void delFile(String notice_filename) {
+		sqlSession.delete("Notice.delFile", notice_filename);
 	}
 }

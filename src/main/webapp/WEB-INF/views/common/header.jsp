@@ -112,7 +112,7 @@
 			<li class="aboutJD"><a href="#">상담센터</a>
 				<div id="drop_content">
 					<c:if
-						test="${sessionScope.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
+						test="${sessionScope.student_id !=  null || sessionScope.teacher_id != null || sessionScope.manager_id != null}">
 						<a href="listNotice">공지사항</a>
 						<a href="listCS">상담신청</a>
 						<a href="http://pf.kakao.com/_xjxmxcws">카카오톡채널</a>

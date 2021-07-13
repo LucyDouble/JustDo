@@ -56,9 +56,11 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<c:if test="${sessionScope.student_number == null}">
 			<button class="button" onclick="location.href='addNoticeForm'">
 				<span>글쓰기</span>
 			</button>
+			</c:if>
 
 		<div class="ln_paging">
 			<c:if test="${startPage != 1 }">

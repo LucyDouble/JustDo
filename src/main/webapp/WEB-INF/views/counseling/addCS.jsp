@@ -29,9 +29,19 @@
 					</tr>
 				</tbody>
 			</table>
-			<button class="button" ><span>등록</span></button>
+			<button id="ac_add_Btn" class="button" ><span>등록</span></button>
 		</form>
 		<br> <br>
 	</div>
 </body>
+<script>
+	$('#ac_add_Btn').click(function(){
+		  if ($(".lc_form-control").val() == "") {
+				swal("","정보를 모두 입력해주세요","warning");
+				return false;
+			} else {
+				return true;
+			}
+	});
+</script>
 </html>

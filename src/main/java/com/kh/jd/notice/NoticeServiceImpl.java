@@ -64,7 +64,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDao.listFile(notice_no);
 	}
 	@Override
-	public void delFile(int notice_no) {
-		noticeDao.delFile(notice_no);
+	public void delFile(String notice_filename) {
+		noticeDao.delFile(notice_filename);
 	}
 }
