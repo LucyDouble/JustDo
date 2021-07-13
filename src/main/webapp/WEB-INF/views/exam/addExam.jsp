@@ -32,7 +32,7 @@
         <input type="text" class="work_form-control form-control" id="exam_subject" name="exam_subject" placeholder="제목을 입력하세요.">
     </div>
     <br>
-    <div class="choice_form" >
+    <div class="choice_form_work" >
     	강의 선택 :
 		<div class="selectbox3">
 			<label for="lecture_no">강의를 선택하세요</label>  
@@ -43,14 +43,16 @@
     		</c:forEach>
     	</select>
     	</div>
-    	<br>
+    <div class="date_work">
       시험 날짜 : 
 	<input type="date" name="exam_date" id="exam_date" min="${nowdate }" class="selectbox2"> 
-	<br>
+	</div>
+	<div class="date_work">
 	시험 시작 : 
 	<input type="time" name="exam_start" id="exam_start" class="selectbox4">
 	시험 종료 : 
 	<input type="time" name="exam_end" id="exam_end" class="selectbox4">
+    </div>
     </div>
     <br>
     <div id="editor" class="form-group">

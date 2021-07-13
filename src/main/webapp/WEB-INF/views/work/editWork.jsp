@@ -36,7 +36,7 @@
         <input type="text" class="work_form-control form-control" id="work_subject" name="work_subject" placeholder="제목을 입력하세요." value="${workDto.work_subject }">
     </div>
     <br>
-    <div class="choice_form">
+    <div class="choice_form_work">
     	강의 선택 :
 		<div class="selectbox3">
 		<label for="lecture_no">${workDto.lecture_title }</label>  
@@ -47,12 +47,14 @@
     		</c:forEach>
     	</select>
     	</div>
-    	<br>
+    <div class="date_work">
           과제 시작 : 
 	<input type="date" name="work_start"  id="work_start" value="${workDto.work_start }"  class="selectbox2"> 
-	<br>
+	</div>
+	<div class="date_work">
 	마감 날짜 : 
 	<input type="date" name="work_end" id="work_end"  value="${workDto.work_end }"  class="selectbox2">
+    </div>
     </div>
     <br>
     <div id="editor" class="form-group">

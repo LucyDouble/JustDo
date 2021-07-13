@@ -27,12 +27,13 @@
     <p class="an_title">과제 등록</p>
     <br>
 <form  class="addForm" id="frm" >
+<div class="work_top">
     <div class="work_form-group">
         <label class="work_an_label" for="work_subject">&nbsp;&nbsp;제목</label>
         <input type="text" class="work_form-control form-control" id="work_subject" name="work_subject" placeholder="제목을 입력하세요.">
     </div>
     <br>
-    <div class="choice_form">
+    <div class="choice_form_work">
     	강의 선택 :
 		<div class="selectbox3">
 			<label for="lecture_no">강의를 선택하세요</label>  
@@ -43,13 +44,17 @@
     		</c:forEach>
     	</select>
     	</div>
-    	<br>
-          과제 시작 : 
-	<input type="date" name="work_start" id="work_start" class="selectbox2" > 
-	<br>
-	마감 날짜 : 
-	<input type="date" name="work_end" id="work_end" class="selectbox2">
+      
+	    <div class="date_work">
+		      과제 시작 : 
+			<input type="date" name="work_start" id="work_start" class="selectbox2" > 
+		</div> 
+		<div class="date_work">
+			마감 날짜 : 
+			<input type="date" name="work_end" id="work_end" class="selectbox2">
+	    </div>
     </div>
+</div>
     <br>
     <div id="editor" class="form-group">
       <label class="an_label" for="work_content">&nbsp;&nbsp;내용</label>
