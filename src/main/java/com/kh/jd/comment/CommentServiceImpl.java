@@ -28,8 +28,8 @@ CommentDAO dao;
 		return result;
 	}
 	@Override
-	public int updateNoticeComment(int comment_number, String comment_con) {
-		int result = dao.updateNoticeComment(comment_number, comment_con);
+	public int updateNoticeComment(String comment_con, int comment_number) {
+		int result = dao.updateNoticeComment(comment_con, comment_number);
 		return result;
 	}
 

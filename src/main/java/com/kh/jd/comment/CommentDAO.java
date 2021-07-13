@@ -38,10 +38,12 @@ public class CommentDAO {
 		return result;
 	}
 // 공지 사항 댓글 수정
-	public int updateNoticeComment(int comment_number, String comment_con) {
+	public int updateNoticeComment(String comment_con,int comment_number) {
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("comment_number", Integer.toString(comment_number));
 		map.put("comment_con", comment_con);
+		map.put("comment_number", Integer.toString(comment_number)); 
+		 
+
 		int result = sqlSession.update("Comment.noticeCommentUpdate", map);
 		return result;
 	}

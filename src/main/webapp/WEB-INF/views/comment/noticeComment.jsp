@@ -35,7 +35,6 @@ float : left;
  
 var notice_no = '${notice.notice_no}';
 var comment_con = ' ';
-var comment_number
 function getCommentList() {
 	$.ajax({
 		type : 'get',
@@ -67,14 +66,14 @@ function getCommentList() {
 					if("${sessionScope.student_number}" != ""){
 						if ("${sessionScope.student_number}" == item.student_number)  {
 							comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="comment_btn" >삭제</button>';
-							comment_con += '<button id="commentUpdateBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="comment_btn" >수정</button>';							
+							comment_con += '<button id="commentUpdateBtn' + item.comment_number + '" onclick="modifyComment(' + item.comment_number +')" type ="button" class="comment_btn" >수정</button>';							
 						}
 					}
 					
 					if("${sessionScope.teacher_number}" != ""){
 						if("${sessionScope.teacher_number}" == item.teacher_number){
 							comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="comment_btn" >삭제</button>';
-							comment_con += '<button id="commentUpdateBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="comment_btn" >수정</button>';
+							comment_con += '<button id="commentUpdateBtn' + item.comment_number + '" onclick="modifyComment(' + item.comment_number +')" type ="button" class="comment_btn" >수정</button>';
 						/* 	comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="commentDeleteBtn('+ item.comment_number + ')" type="button" class="btn btn-danger px-3 float-right"><i class="fa fa-trash" aria-hidden="true"></i></button>';
 							comment_con += '<button id="commentEditBtn'	+ item.comment_number + '" onclick="commentEditBtn(' + item.comment_number + ')" type="button" class="btn btn-primary px-3 float-right"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>';  */
 
@@ -82,7 +81,7 @@ function getCommentList() {
 					}
 					if("${sessionScope.manager_number}" != ""){
 						comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="comment_btn" >삭제</button>';
-						comment_con += '<button id="commentUpdateBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="comment_btn" >수정</button>';
+						comment_con += '<button id="commentUpdateBtn' + item.comment_number + '" onclick="modifyComment(' + item.comment_number +')" type ="button" class="comment_btn" >수정</button>';
 
 					}
 					if(item.student_name != null){
@@ -159,26 +158,31 @@ function deleteComment(comment_number){
 };
 function updateComment(comment_number){
 	if(confirm("수정하시겠습니까?") == true){
+		var comment_con = $('#commentInput' + comment_number).val();
+		alert(comment_con + "fff");
+		alert(comment_number + "ddasdsa");
 		$.ajax({
-			type:'put',
-			url : '${pageContext.request.contextPath}"/listNotice/updateComment/' + comment_number,
-			header : {
-				"content-Type" : "application/json",
-				"X-HTTP-Method-Override" : "put"
+			type:'GET',
+			url : '${pageContext.request.contextPath}/listNotice/updateComment',
+			data : {
+				comment_con : comment_con,
+				comment_number : comment_number
 			},
-			data : JSON.stringify({
-				comment_con : comment_con
-			}),
+				
 			success : function(data){
 				console.log('수정 성공');
+				console.log(comment_con);
 				getCommentList();
-				$('#writeComment').val('');
+				$('#commentInput').val('');
 			}
 		})
 	}
 }
-function updateComment(id){
-	$('')
+function modifyComment(comment_number){
+	$('#commentInput' + comment_number).attr("readonly", false);
+	$('#commentInput' + comment_number).focus();
+	$('#commentUpdateBtn' + comment_number).attr("onclick", "updateComment(" + comment_number + ")");
+
 }
 
 </script>

@@ -42,6 +42,6 @@
 	</delete>
 	<update id="noticeCommentUpdate" parameterType="HashMap">
 		UPDATE COMMENTS
-		SET COMMENT_CON WHERE COMMENT_NUMBER = #{comment_number}
+		SET COMMENT_CON = #{comment_con} WHERE COMMENT_NUMBER = #{comment_number}
 	</update>
 </mapper>

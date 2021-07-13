@@ -15,5 +15,5 @@ public interface CommentService {
 //	공지사항 댓글 삭제
 	public int deleteNoticeComment(int comment_number);
 // 공지 사항 댓글 수정
-	public int updateNoticeComment(int comment_number, String comment_con);
+	public int updateNoticeComment(String comment_con, int comment_number);
 }

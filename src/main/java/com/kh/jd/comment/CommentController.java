@@ -57,10 +57,14 @@ public class CommentController {
 	}
 
 	// 댓글 수정
-	@RequestMapping(value = "/listNotice/updateComment/{comment_number}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/listNotice/updateComment", method = RequestMethod.GET)
 	@ResponseBody
-	public int updateStudentComment(@PathVariable("comment_number") int comment_number, String comment_con) {
-		return cService.updateNoticeComment(comment_number, comment_con);
+	public int updateStudentComment(Comment vo) {
+		String comment_con = vo.getComment_con();
+		System.out.println(vo.getComment_con() + "dff");
+		System.out.println(vo.getComment_number() + "ddd");
+		int comment_number = vo.getComment_number();
+		return cService.updateNoticeComment(comment_con, comment_number);
 	}
 
 	// 댓글 삭제
