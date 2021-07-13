@@ -44,6 +44,7 @@ div {
 ul.join_box {
 	border: 1px solid #ddd;
 	background-color: #fff;
+	font-size: 13px;
 }
 
 .checkBox, .checkBox>ul {

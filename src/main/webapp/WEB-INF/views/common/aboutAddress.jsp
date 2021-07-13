@@ -20,11 +20,11 @@
 	<div class="ln_page">
 		<p class="an_title">오시는 길</p>
 		<p class="an_sub">JD교육원 오시는 길 입니다.</p>
-		<input type="button" class="buttonAdr" id="btn1" value="종로지점">
+		<input type="button" class="buttonAdr" id="btn1" value="종로 교육원">
 		&nbsp;&nbsp; 
-		<input type="button" class="buttonAdr" id="btn2" value="강남지점">
+		<input type="button" class="buttonAdr" id="btn2" value="강남 교육원">
 		&nbsp;&nbsp; 
-		<input type="button" class="buttonAdr" id="btn3" value="부평지점">
+		<input type="button" class="buttonAdr" id="btn3" value="부평 교육원">
 		<br><br><br>
 		<table class="table">
 			<tbody>
