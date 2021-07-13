@@ -30,4 +30,5 @@ public interface ExamService {
 	public Exam timeSubmitExam(Exam vo) ;
 	public void submitExam(Exam vo) ;
 	public void removeSubmitExam(Exam vo) ;
+	public Exam viewExamResult(Exam vo) ;
 }

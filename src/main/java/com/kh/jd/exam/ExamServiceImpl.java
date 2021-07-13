@@ -125,5 +125,10 @@ public class ExamServiceImpl implements ExamService{
 		examDao.removeSubmitExam(vo);
 	}
 
+	@Override
+	public Exam viewExamResult(Exam vo) {
+		return examDao.viewExamResult(vo);
+	}
+
 	
 }

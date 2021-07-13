@@ -54,6 +54,9 @@ public class ExamDao {
 		RowBounds row = new RowBounds(startRow, limit);
 		return sqlSession.selectList("exam.listExamResult", map, row);
 	}
+	public Exam viewExamResult(Exam vo) {
+		return sqlSession.selectOne("exam.viewExamResult",vo);
+	}
 	public void editExamGrade(Exam vo) {
 		sqlSession.update("exam.editExamGrade",vo);
 	}

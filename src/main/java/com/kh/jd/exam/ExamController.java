@@ -215,7 +215,7 @@ public class ExamController {
 		
 		int listCount = examService.getlistExamResultCount(map);
 		
-		int pageCnt = (listCount / LIMIT2) + (listCount % LIMIT2 == 0 ? 0 : 1);
+		int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
 		int currentPage = page;
 		
 		int startPage = 1; 
@@ -231,7 +231,7 @@ public class ExamController {
 			endPage = pageCnt;
 		// 페이지 값 처리용
 		// 한 페이지당 출력할 목록 갯수
-		int maxPage = (int) ((double) listCount / LIMIT2 + 0.9);
+		int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 		mv.addObject("pageCnt", pageCnt);
 		mv.addObject("startPage", startPage);
 		mv.addObject("endPage", endPage);
@@ -250,7 +250,7 @@ public class ExamController {
 		mv.addObject("classTwo", classTwo);
 		mv.addObject("total", total);
 		
-		List<Exam> listExam = examService.listExamResult(currentPage, LIMIT2,map);
+		List<Exam> listExam = examService.listExamResult(currentPage, LIMIT,map);
 		System.out.println(listExam);
 		mv.addObject("listExam", listExam);
 		mv.setViewName("examResult/listExamResult");
@@ -300,7 +300,7 @@ public class ExamController {
 		
 		int listCount = examService.getlistExamResultCount(map);
 		
-		int pageCnt = (listCount / LIMIT2) + (listCount % LIMIT2 == 0 ? 0 : 1);
+		int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
 		int currentPage = page;
 		
 		int startPage = 1; 
@@ -316,7 +316,7 @@ public class ExamController {
 			endPage = pageCnt;
 		// 페이지 값 처리용
 		// 한 페이지당 출력할 목록 갯수
-		int maxPage = (int) ((double) listCount / LIMIT2 + 0.9);
+		int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 		mv.addObject("pageCnt", pageCnt);
 		mv.addObject("startPage", startPage);
 		mv.addObject("endPage", endPage);
@@ -335,7 +335,7 @@ public class ExamController {
 		mv.addObject("classTwo", classTwo);
 		mv.addObject("total", total);
 		
-		List<Exam> listExam = examService.listExamResult(currentPage, LIMIT2,map);
+		List<Exam> listExam = examService.listExamResult(currentPage, LIMIT,map);
 		System.out.println(listExam);
 		mv.addObject("listExam", listExam);
 		mv.setViewName("examResult/listExamResult");
@@ -348,6 +348,10 @@ public class ExamController {
 	public ModelAndView viewExamResult(Exam vo, ModelAndView mv )  {
 		mv.addObject("examDto", vo);
 		System.out.println("안나온=면ㅇ 죽인다"+vo);
+		Exam vo2=examService.viewExamResult(vo);
+		vo.setExam_content(vo2.getExam_content());
+		vo.setExam_answer(vo2.getExam_answer());
+		vo.setExam_submit(vo.getExam_submit());
 		mv.setViewName("examResult/viewExamResult");
 		return mv;
 	}

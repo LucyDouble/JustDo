@@ -201,7 +201,7 @@ public class WorkController {
 		
 		int listCount = workService.getlistWorkResultCount(map);
 		
-		int pageCnt = (listCount / LIMIT2) + (listCount % LIMIT2 == 0 ? 0 : 1);
+		int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
 		int currentPage = page;
 		
 		int startPage = 1; 
@@ -217,7 +217,7 @@ public class WorkController {
 			endPage = pageCnt;
 		// 페이지 값 처리용
 		// 한 페이지당 출력할 목록 갯수
-		int maxPage = (int) ((double) listCount / LIMIT2 + 0.9);
+		int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 		mv.addObject("pageCnt", pageCnt);
 		mv.addObject("startPage", startPage);
 		mv.addObject("endPage", endPage);
@@ -235,7 +235,7 @@ public class WorkController {
 		mv.addObject("classTwo", classTwo);
 		mv.addObject("total", total);
 		
-		List<Work> listWork = workService.listWorkResult(currentPage, LIMIT2,map);
+		List<Work> listWork = workService.listWorkResult(currentPage, LIMIT,map);
 		System.out.println(listWork);
 
 		mv.addObject("listWork", listWork);
@@ -272,7 +272,7 @@ public class WorkController {
 		
 		int listCount = workService.getlistWorkResultCount(map);
 		
-		int pageCnt = (listCount / LIMIT2) + (listCount % LIMIT2 == 0 ? 0 : 1);
+		int pageCnt = (listCount / LIMIT) + (listCount % LIMIT == 0 ? 0 : 1);
 		int currentPage = page;
 		
 		int startPage = 1; 
@@ -288,7 +288,7 @@ public class WorkController {
 			endPage = pageCnt;
 		// 페이지 값 처리용
 		// 한 페이지당 출력할 목록 갯수
-		int maxPage = (int) ((double) listCount / LIMIT2 + 0.9);
+		int maxPage = (int) ((double) listCount / LIMIT + 0.9);
 		mv.addObject("pageCnt", pageCnt);
 		mv.addObject("startPage", startPage);
 		mv.addObject("endPage", endPage);
@@ -306,7 +306,7 @@ public class WorkController {
 		mv.addObject("classTwo", classTwo);
 		mv.addObject("total", total);
 		
-		List<Work> listWork = workService.listWorkResult(currentPage, LIMIT2,map);
+		List<Work> listWork = workService.listWorkResult(currentPage, LIMIT,map);
 		System.out.println(listWork);
 
 		mv.addObject("listWork", listWork);
@@ -323,6 +323,8 @@ public class WorkController {
 		System.out.println(vo);
 		System.out.println(vo.getRegistration_no());
 		System.out.println(vo.getWork_no());
+		Work vo2 = workService.viewWork(vo.getWork_no());
+		vo.setWork_content(vo2.getWork_content());
 		model.addAttribute("workDto", vo);
 		/*
 		 * Calendar time = Calendar.getInstance(); String format_time1 =

@@ -77,9 +77,9 @@
 		<input type="hidden" name="exam_date" value="${examDto.exam_date}">
 		<input type="hidden" name="exam_start" value="${examDto.exam_start }">
 		<input type="hidden" name="exam_end" value="${examDto.exam_end }">
-		<input type="hidden" name="exam_content" value="${examDto.exam_content }">
+<%-- 		<input type="hidden" name="exam_content" value="${examDto.exam_content }">
 		<input type="hidden" name="exam_submit" value="${examDto.exam_submit }">
-		<input type="hidden" name="exam_answer" value="${examDto.exam_answer }">
+		<input type="hidden" name="exam_answer" value="${examDto.exam_answer }"> --%>
 		<input type="hidden" name="lectureclass_class" value="${examDto.lectureclass_class }">
 		<input type="hidden" name="name" value="${examDto.name}">
 		<input type="hidden" name="registration_no" value="${examDto.registration_no}" >

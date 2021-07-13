@@ -75,13 +75,13 @@
 								<input type="hidden" name="work_no" value="${work_no }" >
 								<input type="hidden" name="work_start" value="${i.work_start }">
 								<input type="hidden" name="work_end" value="${i.work_end }">
-								<input type="hidden" name="work_content" value="${i.work_content }">
+								<%-- <input type="hidden" name="work_content" value="${i.work_content }"> --%>
 								<input type="hidden" name="work_submit" value="${i.work_submit }">
 								<input type="hidden" name="lecture_class" value="${i.lecture_class }">
 								<input type="hidden" name="name" value="${i.name}">
 								<input type="hidden" name="registration_no" value="${i.registration_no}" >
-									<c:if test="${i.work_submit ==null }"><input type="submit" id ="ResultBtn" value="x"></c:if>
-									<c:if test="${i.work_submit !=null }"><input type="submit" id ="ResultBtn" value="제출"></c:if>
+									<c:if test="${empty i.work_submit }"><input type="submit" id ="ResultBtn" value="x"></c:if>
+									<c:if test="${not empty i.work_submit  }"><input type="submit" id ="ResultBtn" value="제출"></c:if>
 								</td>
 							</form>
 						</tr>

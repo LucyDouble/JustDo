@@ -81,9 +81,9 @@
 									<input type="hidden" name="exam_date" value="${i.exam_date}">
 									<input type="hidden" name="exam_start" value="${i.exam_start }">
 									<input type="hidden" name="exam_end" value="${i.exam_end }">
-									<input type="hidden" name="exam_content" value="${i.exam_content }">
-									<input type="hidden" name="exam_submit" value="${i.exam_submit }">
-									<input type="hidden" name="exam_answer" value="${i.exam_answer }">
+									<%-- <input type="hidden" name="exam_content" value="${i.exam_content }"> --%>
+									<%-- <input type="hidden" name="exam_submit" value="${i.exam_submit }"> --%>
+									<%-- <input type="hidden" name="exam_answer" value="${i.exam_answer }"> --%>
 									<input type="hidden" name="lectureclass_class" value="${i.lectureclass_class }">
 									<input type="hidden" name="name" value="${i.name}">
 									<input type="hidden" name="registration_no" value="${i.registration_no}" >
@@ -91,7 +91,7 @@
 									<input type="hidden" name="lecture_title" value="${lecture_title}" >
 									<input type="hidden" name="exam_subject" value="${exam_subject}" >
 									<button type="submit" id ="ResultBtn">
-										<c:if test="${i.exam_grade==0}">0</c:if>
+										<c:if test="${i.exam_grade==0}">0[채점]</c:if>
 										<c:if test="${i.exam_grade!=0}">${i.exam_grade}</c:if>
 									</button>
 								</td>

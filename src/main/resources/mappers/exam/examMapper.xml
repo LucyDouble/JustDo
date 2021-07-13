@@ -76,6 +76,12 @@
 		where er.exam_no=#{exam_no} and name like '%'||#{keyword}||'%'
 		order by rnum asc
 	</select>
+	<select id="viewExamResult" parameterType="Exam" resultType="Exam">
+	select exam_content,exam_submit ,exam_answer
+	from exam join exam_result 
+	using(exam_no) where exam_no=#{exam_no}  and registration_no=#{registration_no}	
+	
+	</select>
 	<select id="getlistExamResultCount" resultType="int" parameterType="Map">
 		select count(*)
 		from(select el.*,s.name as name 
