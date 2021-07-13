@@ -24,4 +24,10 @@ public interface ExamService {
 	public int getCountClass2(int exam_no) ;
 	public List<Integer> getGradeExam1(int exam_no) ;
 	public List<Integer> getGradeExam2(int exam_no) ; 
+	public List<Exam> listSubmitExam(int startPage, int limit,Map<String, Object> map) ;
+	public int getlistSubmitCount(Map<String, Object> map) ;
+	public Exam viewSubmitExam(Exam vo) ;
+	public Exam timeSubmitExam(Exam vo) ;
+	public void submitExam(Exam vo) ;
+	public void removeSubmitExam(Exam vo) ;
 }

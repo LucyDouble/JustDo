@@ -1,9 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="management">
-	<select id="listManagemenr" parameterType="management"
-		resultType="Management">
-		select *
+	<select id="listManagement" parameterType="Management" resultType="Management">
+select*
+from (select *
+		from (select * 
+		from(select rownum rnum,student_number,registration_no,att,lectureclass_class,name
+		        from (select student_number,registration_no,att,lectureclass_class,name
+		              from (select student_number,registration_no,round((late+late2+solate+attend-trunc((late+late2)/3)-trunc(solate*2/3))*100/replace(total,0,1)) as att,lectureclass_class
+		                    from(select student_number,registration_no,count(attend_no) as total,count(case when attend_progress='1' then 1 end) as late
+		                            ,count(case when attend_progress='2' then 1 end) as late2,count(case when attend_progress='3' then 1 end) as solate
+		                            ,count(case when attend_progress='4' then 1 end) as attend,lectureclass_class
+		                          from (select * 
+		                                from registration l left outer join lectureclass lc 
+		                                using(lectureclass_no) 
+		                                where lc.lecture_no=#{lecture_no}) le join attend a 
+		                          using(lectureclass_no,student_number)
+		                          group by student_number,registration_no,lectureclass_class)) attend left outer join student stu 
+		                          using(student_number)
+		                          order by name asc)
+		        order by rnum) reatt left outer join (select registration_no,round(avg(exam_grade)) as avg_grade,lecture_no
+		                                    from (select * 
+		                                          from lecture l join exam e 
+		                                          using(lecture_no) 
+		                                          where lecture_no=#{lecture_no}) le left outer join exam_result er 
+		                                    using(exam_no)
+		                                    group by registration_no,lecture_no ) regr using(registration_no)) yong left outer join (select registration_no,  round(count(work_submit)*100/count(work_no)) as work_progress
+		                                                                                                                    from (select * 
+		                                                                                                                          from lecture l join works w 
+		                                                                                                                          using(lecture_no) 
+		                                                                                                                          where lecture_no=#{lecture_no}) lw left outer join works_result wr using(work_no)
+		                                                                                                                    group by registration_no) hwi 
+		using(registration_no)
+		order by name asc) jan left outer join (select round(progress*100/video_alltime) as video_progress  ,name from lecture lec 
+																join video vi on lec.lecture_no = vi.lecture_no 
+																join progress pro on vi.video_no = pro.video_no 
+																join student stu on stu.student_number = pro.student_number where lec.lecture_no = #{lecture_no} order by stu.name) di 
+using(name)	
+<!-- select *
+from (select * 
+from(select rownum rnum,student_number,registration_no,att,lectureclass_class,name
+        from (select student_number,registration_no,att,lectureclass_class,name
+              from (select student_number,registration_no,round((late+late2+solate+attend-trunc((late+late2)/3)-trunc(solate*2/3))*100/replace(total,0,1)) as att,lectureclass_class
+                    from(select student_number,registration_no,count(attend_no) as total,count(case when attend_progress='1' then 1 end) as late
+                            ,count(case when attend_progress='2' then 1 end) as late2,count(case when attend_progress='3' then 1 end) as solate
+                            ,count(case when attend_progress='4' then 1 end) as attend,lectureclass_class
+                          from (select * 
+                                from registration l left outer join lectureclass lc 
+                                using(lectureclass_no) 
+                                where lc.lecture_no=#{lecture_no}) le join attend a 
+                          using(lectureclass_no,student_number)
+                          group by student_number,registration_no,lectureclass_class)) attend left outer join student stu 
+                          using(student_number)
+                          order by name asc)
+        order by rnum) reatt left outer join (select registration_no,round(avg(exam_grade)) as avg_grade,lecture_no
+                                    from (select * 
+                                          from lecture l join exam e 
+                                          using(lecture_no) 
+                                          where lecture_no=#{lecture_no}) le left outer join exam_result er 
+                                    using(exam_no)
+                                    group by registration_no,lecture_no ) regr using(registration_no)) yong left outer join (select registration_no,  round(count(work_submit)*100/count(work_no)) as work_progress
+                                                                                                                    from (select * 
+                                                                                                                          from lecture l join works w 
+                                                                                                                          using(lecture_no) 
+                                                                                                                          where lecture_no=#{lecture_no}) lw left outer join works_result wr using(work_no)
+                                                                                                                    group by registration_no) hwi 
+using(registration_no)
+order by name asc -->
+<!-- 		select *
 		from (select *
 		from(select rownum
 		rnum,student_number,registration_no,att,lectureclass_class,name
@@ -40,8 +104,101 @@
 		using(lecture_no)
 		where lecture_no=#{lecture_no}) lw join works_result wr using(work_no)
 		group by registration_no) hwi
-		using(registration_no
+		using(registration_no) -->
 
+	</select>
+	<select id="getlistManagementCount" parameterType="Management" resultType="int">
+		select count(*) 
+		from (select registration_no
+				from (select * 
+		      			from lecture l join exam e 
+		      			using(lecture_no) 
+		      			where lecture_no=#{lecture_no}) le join exam_result er 
+		      	using(exam_no)
+				group by registration_no,lecture_no)	
+	</select>
+	<select id="allGrade" parameterType="int" resultType="int">
+		select nvl(round(avg(exam_grade)),0) as all_grade,lecture_no,lectureclass_no,lectureclass_class
+		from (select lecture_no,lectureclass_no,registration_no,lectureclass_class
+		        from(select * 
+		             from lecture l join lectureclass lc 
+		             using(lecture_no) 
+		             where lecture_no=#{lecture_no}) yong left outer join registration hwi 
+		             using(lectureclass_no)) aa left outer join (select exam_no,registration_no,exam_grade from exam e join exam_result er using(exam_no)) bb using(registration_no)
+		group by lecture_no,lectureclass_no,lectureclass_class
+		order by lectureclass_class	
+<!-- 		select all_grade,lectureclass_class
+		from (select round(avg(exam_grade)) as all_grade,lecture_no,lectureclass_no
+		      from exam e inner join exam_result er 
+		      using(exam_no) inner join registration r
+		      using(registration_no)
+		      where lecture_no=#{lecture_no}
+		      group by lecture_no,lectureclass_no) yong join lectureclass hwi 
+		using(lectureclass_no)
+		group by all_grade,lectureclass_class
+		order by lectureclass_class	 -->
+	</select>
+	<select id="workAllProgress" parameterType="int" resultType="int">
+	
+select round(count(work_submit)*100/replace(count(work_no),0,1)) as work_all_progress,lecture_no,lectureclass_no,lectureclass_class
+from (select lecture_no,lectureclass_no,registration_no,lectureclass_class
+        from(select * 
+             from lecture l join lectureclass lc 
+             using(lecture_no) 
+             where lecture_no=#{lecture_no}) yong left outer join registration hwi 
+             using(lectureclass_no)) aa left outer join (select work_no,registration_no,work_submit from works e join works_result er using(work_no)) bb using(registration_no)
+group by lecture_no,lectureclass_no,lectureclass_class
+order by lectureclass_class
+<!-- 		select work_all_progress,lectureclass_class
+		from (select round(count(work_submit)*100/replace(count(work_no),0,1)) as work_all_progress,lecture_no,lectureclass_no
+		      from works w inner join works_result er 
+		      using(work_no) inner join registration r
+		      using(registration_no)
+		      where lecture_no=#{lecture_no}
+		      group by lecture_no,lectureclass_no) yong join lectureclass hwi 
+		using(lectureclass_no)
+		group by work_all_progress,lectureclass_class
+		order by lectureclass_class	 -->
+	</select>
+	<select id="allAttend" parameterType="int" resultType="int">
+        select round(avg(att)) as all_attend,lectureclass_class
+        from(
+             select round((late+late2+solate+attend-trunc((late+late2)/3)-trunc(solate*2/3))*100/replace(total,0,1)) as att,lectureclass_class
+             from(select registration_no,count(attend_no) as total,count(case when attend_progress='1' then 1 end) as late
+		                    ,count(case when attend_progress='2' then 1 end) as late2,count(case when attend_progress='3' then 1 end) as solate
+		                    ,count(case when attend_progress='4' then 1 end) as attend,lectureclass_class 
+                 from lecture l join lectureclass lc 
+                 using(lecture_no) left outer join registration 
+                 using(lectureclass_no) left outer join attend a 
+                 using(student_number,lectureclass_no)
+                 where lecture_no=#{lecture_no}
+                 group by registration_no,lectureclass_class)
+            order by lectureclass_class asc)
+        group by lectureclass_class
+
+
+<!-- 		select avg(att) as all_attend,lectureclass_class from                  
+		(select registration_no,round((late+late2+solate+attend-trunc((late+late2)/3)-trunc(solate*2/3))*100/replace(total,0,1)) as att,lectureclass_class
+		            from(select registration_no,count(attend_no) as total,count(case when attend_progress='1' then 1 end) as late
+		                    ,count(case when attend_progress='2' then 1 end) as late2,count(case when attend_progress='3' then 1 end) as solate
+		                    ,count(case when attend_progress='4' then 1 end) as attend,lectureclass_class
+		                  from (select * 
+		                        from registration l join lectureclass lc 
+		                        using(lectureclass_no) 
+		                        where lc.lecture_no=#{lecture_no}) le join attend a 
+		                  using(student_number)
+		                  group by registration_no,lectureclass_class))
+		group by lectureclass_class
+		order by lectureclass_class	 -->
+	</select>
+	<select id="infoStudent" parameterType="int" resultType="Student">
+		select * from student where student_number=#{student_number}
+	</select>
+	<select parameterType="Management" id="infoLecture" resultType="Lecture">
+		select lecture_start,lecture_end,to_char(lectureclass_start,'hh24:mi') as lectureclass_start,to_char(lectureclass_end,'hh24:mi') as lectureclass_end 
+		from lecture l join lectureclass lc 
+		using(lecture_no) 
+		where lecture_no =#{lecture_no} and lectureclass_class=#{lectureclass_class}
 	</select>
 
 </mapper>

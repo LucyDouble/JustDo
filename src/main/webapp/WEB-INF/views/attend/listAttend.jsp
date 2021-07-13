@@ -22,32 +22,6 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/common/header.css"/>">
 <script type="text/javascript" src="<c:url value="/resources/js/header.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
-<style type="text/css">
-.graph_liAttend { margin: 0; padding: 0; text-align: left;}
-.graphAttend  { width: 450px; list-style: none;margin: 0; padding: 0; clear: both; }
-.graphAttend li   { position: relative; padding: 1px 0; white-space:nowrap; }
-.graphAttend li span  { display: inline-block; position: relative; height: 30px; line-height: 30px; background: #DEDCEE;}
-.graphAttend li em    { position: absolute; top: 0px; right: -40px; font-family: arial; color: #000; font-size: 14px;}
-.graph_titleAttend{
-	font :bold;
-	text-align: center;
-	display: inline-block;
-	font-size: 16px;
-	float : left; 
-}
-.ln_title_end {
-	font-size: 25px;
-	font-weight: bold;
-	clear: both;
-}
-.an_sub {
-	font-size: 12px;
-	font-weight: bold;
-	clear: both;
-	margin-bottom: 20px;
-	color: #5b5b5b;
-}
-</style>
 </head>
 <body>
 
@@ -57,10 +31,10 @@
 			<p class="ln_title">출석하기</p>
 		</c:if>
 		<c:if test="${not empty attendList }">
-			<c:if test="${lecture_state ==1 }">
+			<c:if test="${lecture_state <=1 }">
 				<p class="ln_title">${lecture_title }</p>
 			</c:if>
-			<c:if test="${lecture_state !=1 }">
+			<c:if test="${lecture_state >1 }">
 				<p class="ln_title_end">${lecture_title }</p>
 				<p class="an_sub">종료된 강의입니다.</p>
 			</c:if>

@@ -45,11 +45,11 @@
 			<form class="lc_search" action="listWorkResult" method="POST">
 				<input class="lc_search_input" type="text" name="keyword" placeholder="학생이름"
 				onmouseout="document.search.keyword.value = ''">
-				<input type="hidden" name="work_no" value="${work_no }">
+				<input type="hidden" name="work_no"  value="${work_no }">
 				<input type="hidden" name="work_subject" value="${work_subject }">
 				<input type="hidden" name="lecture_class" value="${lecture_class }">
 				<input type="hidden" name="lecture_title" value="${lecture_title }">
-				<input type="hidden" name="work_start" value="${work_start }">
+				<input type="hidden" name="work_start"  value="${work_start }">
 				<input type="hidden" name="work_end" value="${work_end }">				
 			</form>
 			 <i class="fas fa-search i"></i>
@@ -109,17 +109,24 @@
 		<button style="clear:both;" class="button" onclick="location.href='listWork'">
 				<span>과제목록</span>
 		</button>
-<%-- 		<c:if test="${keyword !='' }">
-		<button class="button" onclick="location.href='listWork'">
+ 		<c:if test="${keyword !='' }">
+		<button class="button" onclick="location.href='listWorkResult'">
 				<span>목록</span>
 		</button>
-		</c:if> --%>
+		</c:if>
 	<br><br><br>
 
-
+<form id="pageFrm">
+				<input type="hidden" name="work_no" id="work_no" value="${work_no }">
+				<input type="hidden" name="work_subject" id="work_subject" value="${work_subject }">
+				<input type="hidden" name="lecture_class" id="lecture_class" value="${lecture_class }">
+				<input type="hidden" name="lecture_title" id="lecture_title" value="${lecture_title }">
+				<input type="hidden" name="work_start" id="work_start" value="${work_start }">
+				<input type="hidden" name="work_end" id="work_end" value="${work_end }">	
+				<input type="hidden" name="page" id="page" value="${atartPage}">	
+				<input type="hidden" name="keyword" id="keyword" value="${keyword}">	
 	<c:if test="${startPage != 1 }">
-	   <a
-		  href="<%=request.getContextPath() %>/listWorkResult?page=${startPage-1}&keyword=${keyword}">이전</a>
+	   <a  href="<%=request.getContextPath() %>/listWorkResult?page=${startPage-1}&keyword=${keyword}">이전</a>
 	</c:if>
 	<c:forEach var="p" begin="${startPage}" end="${endPage}" step="1">
 	 	<c:if test="${p eq currentPage}">
@@ -129,23 +136,18 @@
 	 		<c:url var="listWorkChk" value="listWorkResult?keyword=${keyword}">
 	 			<c:param name="page" value="${p}" />
 	 		</c:url>
-	 		<a href="${listWorkChk}">${p}</a>
+	 		<a href="${listWorkChk}">${p}</a> 
 	 	</c:if>
 	 </c:forEach>
 	<c:if test="${endPage < pageCnt }">
-	   <a
-		  href="<%=request.getContextPath() %>/listWorkResult?page=${endPage+1}&keyword=${keyword}">다음</a>
+	   <a href="<%=request.getContextPath() %>/listWorkResult?page=${startPage+1}&keyword=${keyword}">다음</a>
 	</c:if>
+</form>
 	</div>	 
 		<sciprt src="js/jqurey-3.1.1.js"></sciprt>
 		<sciprt src="js/bootstrap.js"></sciprt>
 	</div>
 	
-	
-	
-	
-
-
   
 
 
@@ -172,9 +174,13 @@
 	            var timer = null;
 
 	            timer = setInterval(function() {
-	                if(current_value < gage_width) {
+	                if(current_value <= gage_width) {
 	                    current_value += Math.ceil((gage_width - current_value) / 15);
-	                    gage_object.style.width = current_value + "%";
+	                    if(current_value==0){
+	                    	gage_object.style.width = 8 + "%";
+	                    }else{
+	                    gage_object.style.width = current_value+8 + "%";
+	                    }
 	                    gage_value.innerHTML = current_value + "%";
 	                } else {
 	                    clearInterval(timer);

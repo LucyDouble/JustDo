@@ -177,13 +177,19 @@ public class WorkController {
 	@RequestMapping(value = "/listWorkResult", method = RequestMethod.POST)
 	public ModelAndView listWorkResult(Work vo,ModelAndView mv
 			, @RequestParam(name = "page", defaultValue = "1") int page
-			, @RequestParam(name = "keyword", defaultValue = "") String keyword)  {
+			, @RequestParam(name = "keyword", defaultValue = "") String keyword,HttpServletRequest re)  {
 		
 		
 		double class1_mo= workService.getCountClass1(vo.getWork_no());
 		double class1_ch= workService.getCountWorkSubmit1(vo.getWork_no())*100;
 		double class2_mo= workService.getCountClass2(vo.getWork_no());
 		double class2_ch= workService.getCountWorkSubmit2(vo.getWork_no())*100;
+		if(class1_mo==0) {
+			class1_mo=1;
+		}
+		if(class2_mo==0) {
+			class2_mo=1;
+		}
 		String classOne=String.format("%.0f", class1_ch/class1_mo);
 		String classTwo=String.format("%.0f", class2_ch/class2_mo);
 		String total =String.format("%.0f", (class2_ch+class1_ch)/(class2_mo+class1_mo));
@@ -235,10 +241,82 @@ public class WorkController {
 		mv.addObject("listWork", listWork);
 		mv.setViewName("workResult/listWorkResult");
 		
-		
+		re.getSession().setAttribute("workResult", vo);
 		
 		return mv;
 	}
+	@RequestMapping(value = "/listWorkResult", method = RequestMethod.GET)
+	public ModelAndView listWorkResult2(ModelAndView mv
+			, @RequestParam(name = "page", defaultValue = "1") int page
+			, @RequestParam(name = "keyword", defaultValue = "") String keyword,HttpServletRequest re)  {
+		Work vo = (Work)re.getSession().getAttribute("workResult");
+		
+		double class1_mo= workService.getCountClass1(vo.getWork_no());
+		double class1_ch= workService.getCountWorkSubmit1(vo.getWork_no())*100;
+		double class2_mo= workService.getCountClass2(vo.getWork_no());
+		double class2_ch= workService.getCountWorkSubmit2(vo.getWork_no())*100;
+		if(class1_mo==0) {
+			class1_mo=1;
+		}
+		if(class2_mo==0) {
+			class2_mo=1;
+		}
+		String classOne=String.format("%.0f", class1_ch/class1_mo);
+		String classTwo=String.format("%.0f", class2_ch/class2_mo);
+		String total =String.format("%.0f", (class2_ch+class1_ch)/(class2_mo+class1_mo));
+		//TODO
+		Map<String,Object>map = new HashMap<String,Object>();
+		map.put("keyword", keyword);
+		map.put("work_no", vo.getWork_no());
+		
+		
+		int listCount = workService.getlistWorkResultCount(map);
+		
+		int pageCnt = (listCount / LIMIT2) + (listCount % LIMIT2 == 0 ? 0 : 1);
+		int currentPage = page;
+		
+		int startPage = 1; 
+		int endPage = 5;
+		if(currentPage % pageBlock == 0)   { 
+			startPage = ((currentPage/pageBlock)-1) * pageBlock + 1;	
+		}else {
+			startPage = (currentPage/pageBlock) * pageBlock + 1;  
+		}		
+		endPage = startPage + pageBlock - 1;
+	
+		if(endPage > pageCnt)
+			endPage = pageCnt;
+		// 페이지 값 처리용
+		// 한 페이지당 출력할 목록 갯수
+		int maxPage = (int) ((double) listCount / LIMIT2 + 0.9);
+		mv.addObject("pageCnt", pageCnt);
+		mv.addObject("startPage", startPage);
+		mv.addObject("endPage", endPage);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("maxPage", maxPage);
+		mv.addObject("keyword", keyword);
+		mv.addObject("listCount", listCount);
+		mv.addObject("lecture_title",vo.getLecture_title() );
+		mv.addObject("lecture_class",vo.getLecture_class() );
+		mv.addObject("work_subject",vo.getWork_subject() );
+		mv.addObject("work_start",vo.getWork_start() );
+		mv.addObject("work_end",vo.getWork_end() );
+		mv.addObject("work_no", vo.getWork_no() );
+		mv.addObject("classOne", classOne);
+		mv.addObject("classTwo", classTwo);
+		mv.addObject("total", total);
+		
+		List<Work> listWork = workService.listWorkResult(currentPage, LIMIT2,map);
+		System.out.println(listWork);
+
+		mv.addObject("listWork", listWork);
+		mv.setViewName("workResult/listWorkResult");
+		
+		re.getSession().setAttribute("workResult", vo);
+		
+		return mv;
+	}
+	
 	@RequestMapping(value = "/viewWorkResult")
 	public String viewWorkResult(Work vo, Model model )  {
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");

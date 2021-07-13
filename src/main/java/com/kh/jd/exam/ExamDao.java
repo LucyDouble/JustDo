@@ -69,4 +69,24 @@ public class ExamDao {
 	public List<Integer> getGradeExam2(int exam_no) {
 		return sqlSession.selectList("exam.getGradeExam2", exam_no);
 	}
+	public List<Exam> listSubmitExam(int startPage, int limit,Map<String, Object> map) {
+		int startRow = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(startRow, limit);
+		return sqlSession.selectList("exam.listSubmitExam", map, row);
+	}
+	public int getlistSubmitCount(Map<String, Object> map) {
+		return sqlSession.selectOne("exam.getlistSubmitCount",map);
+	}
+	public Exam viewSubmitExam(Exam vo) {
+		return sqlSession.selectOne("exam.viewSubmitExam", vo);
+	}
+	public Exam timeSubmitExam(Exam vo) {
+		return sqlSession.selectOne("exam.timeSubmitExam", vo);
+	}
+	public void submitExam(Exam vo) {
+		sqlSession.update("exam.submitExam",vo);
+	}
+	public void removeSubmitExam(Exam vo) {
+		sqlSession.delete("exam.removeSubmitExam",vo);
+	}
 }

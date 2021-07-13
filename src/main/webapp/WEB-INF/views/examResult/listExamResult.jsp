@@ -121,11 +121,11 @@
 		<button style="clear:both;" class="button" onclick="location.href='listExam'">
 				<span>시험목록</span>
 		</button>
-<%-- 		<c:if test="${keyword !='' }">
-		<button class="button" onclick="location.href='listWork'">
+		<c:if test="${keyword !='' }">
+		<button class="button" onclick="location.href='listExamResult'">
 				<span>목록</span>
 		</button>
-		</c:if> --%>
+		</c:if> 
 	<br><br><br>
 
 
@@ -183,9 +183,13 @@
 	            var timer = null;
 
 	            timer = setInterval(function() {
-	                if(current_value < gage_width) {
+	                if(current_value <= gage_width) {
 	                    current_value += Math.ceil((gage_width - current_value) / 15);
-	                    gage_object.style.width = current_value + "%";
+	                    if(current_value==0){
+	                    	gage_object.style.width = 8 + "%";
+	                    }else{
+	                    gage_object.style.width = current_value+8 + "%";
+	                    }
 	                    gage_value.innerHTML = current_value + "점";
 	                } else {
 	                    clearInterval(timer);

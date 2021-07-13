@@ -59,7 +59,7 @@
 			</table>
 
 		<c:if test="${keyword !='' }">
-		<button class="button" onclick="location.href='listWork'">
+		<button class="button" onclick="location.href='listSubmitWork'">
 				<span>목록</span>
 		</button>
 		</c:if>

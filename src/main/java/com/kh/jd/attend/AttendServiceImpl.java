@@ -16,14 +16,14 @@ public class AttendServiceImpl implements AttendService {
 		return attendDao.checkLecture(student_number);
 	}
 	@Override
-	@Scheduled(cron = "0 9 0 * * 1,2,3,4,5") // 0~6 일~토
+	@Scheduled(cron = "0 1 0 * * 1,2,3,4,5") // 0~6 일~토
 	public void scheduleAttend() {
 		System.out.println("출석 날짜 삽입==권용휘 컴퓨터서만 실행");
-//		 attendDao.scheduleAttend(); 
+		 attendDao.scheduleAttend(); 
 	}
 	@Override
-	public List<Attend> listAttend(Attend vo) {
-		return attendDao.listAttend(vo);
+	public List<Attend> listAttend(int startPage, int limit,Attend vo) {
+		return attendDao.listAttend(startPage,limit,vo);
 	}
 	@Override
 	public void editAttend(Attend vo) {
@@ -46,10 +46,10 @@ public class AttendServiceImpl implements AttendService {
 		return attendDao.endCheck(vo);
 	}
 	@Override
-	@Scheduled(cron = "0 30 22 * * 1,2,3,4,5") // 0~6 일~토
+	@Scheduled(cron = "0 10 23 * * 1,2,3,4,5") // 0~6 일~토
 	public void attendprogress() {
 		System.out.println("출석상태 삽입==권용휘 컴퓨터서만 실행");
-//		attendDao.attendprogress(); 
+		attendDao.attendprogress(); 
 	}
 	@Override
 	public int progressTotal(Attend vo) {

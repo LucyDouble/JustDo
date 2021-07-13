@@ -514,7 +514,7 @@ input::placeholder { /* Chrome, Safari, Firefox */
 
 
 .graph_li { margin: 0; padding: 0; text-align: left;}
-.graph  { width: 450px; list-style: none;margin: 0; padding: 0; float : left; }
+.graph  { width: 380px; list-style: none;margin: 0; padding: 0; float : left; }
 .graph li   { position: relative; padding: 1px 0; white-space:nowrap; }
 .graph li span  { display: inline-block; position: relative; height: 40px; line-height: 40px; background: #DEDCEE;}
 .graph li em    { position: absolute; top: 0px; right: -65px; font-family: arial; color: #000; font-size: 20px;}

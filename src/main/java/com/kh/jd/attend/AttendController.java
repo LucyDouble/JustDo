@@ -49,7 +49,6 @@ public class AttendController {
 		
 		if(re.getSession().getAttribute("lecture_no") !=null) {
 			vo.setLecture_no((int)re.getSession().getAttribute("lecture_no"));
-			re.getSession().removeAttribute("lecture_no");
 			System.out.println("성공한건뎅,,,?");
 		}
 		
@@ -86,8 +85,9 @@ public class AttendController {
 			
 			
 			
+			System.out.println("ddddd"+vo.getLecture_no()+"fff"+vo.getStudent_number());
+			List<Attend> attendList= attendService.listAttend(currentPage,LIMIT,vo);
 			
-			List<Attend> attendList= attendService.listAttend(vo);
 			mv.addObject("attendList", attendList);
 			System.out.println(attendList);
 			int lecture_no=attendList.get(0).getLecture_no();
@@ -130,7 +130,9 @@ public class AttendController {
 			int proAttend = attendService.progressAttend(vo);
 			int proLate = attendService.progressLate(vo);
 			int proSoLate = attendService.progressSoLate(vo);
-			
+			if(proTotal==0) {
+				proTotal=1;
+			}
 			System.out.println("총 :"+proTotal+"출석 :"+proAttend+"지각+조퇴"+proLate+"제일 나쁜넘"+proSoLate);
 			int myPro = ((proAttend+proLate+proSoLate)-(proLate/3+proSoLate*2/3))*100/proTotal;
 			
@@ -138,7 +140,9 @@ public class AttendController {
 			int proClassAttend = attendService.progressClassAttend(vo);
 			int proClassLate = attendService.progressClassLate(vo);
 			int proClassSoLate = attendService.progressClassSoLate(vo);
-			
+			if(proClassTotal==0) {
+				proClassTotal=1;
+			}
 			System.out.println("19나와야 함"+vo.getLectureclass_no());
 			System.out.println("총 :"+proClassTotal+"출석 :"+proClassAttend+"지각+조퇴"+proClassLate+"제일 나쁜넘"+proClassSoLate);
 			

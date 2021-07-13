@@ -29,6 +29,7 @@ public class Exam {
 	private String name;
 	private String exam_submit;
 	private int exam_grade;
+	private int examDate;
 	
 	
 	
@@ -46,7 +47,13 @@ public class Exam {
 				+ ", lectureclass_start=" + lectureclass_start + ", lectureclass_end=" + lectureclass_end
 				+ ", examdate=" + examdate + ", registration_no=" + registration_no + ", examStart=" + examStart
 				+ ", examEnd=" + examEnd + ", name=" + name + ", exam_submit=" + exam_submit + ", exam_grade="
-				+ exam_grade + "]";
+				+ exam_grade + ", examDate=" + examDate + "]";
+	}
+	public int getExamDate() {
+		return examDate;
+	}
+	public void setExamDate(int examDate) {
+		this.examDate = examDate;
 	}
 	public String getExam_submit() {
 		return exam_submit;

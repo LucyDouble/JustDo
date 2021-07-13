@@ -2,6 +2,7 @@ package com.kh.jd.attend;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,8 +18,10 @@ public class AttendDao {
 	public void scheduleAttend() {
 		sqlSession.selectOne("attend.scheduleAttend");
 	}
-	public List<Attend> listAttend(Attend vo){
-		return sqlSession.selectList("attend.listAttend", vo);
+	public List<Attend> listAttend(int startPage, int limit,Attend vo){
+		int startRow = (startPage - 1) * limit;
+		RowBounds row = new RowBounds(startRow, limit);
+		return sqlSession.selectList("attend.listAttend", vo,row);
 	}
 	public void editAttend(Attend vo) {
 		sqlSession.update("attend.editAttend",vo);

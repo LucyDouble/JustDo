@@ -47,7 +47,7 @@
     	</div>
     	<br>
           과제 시작 : 
-	<input type="date" name="work_start" id="work_start" class="selectbox2"> 
+	<input type="date" name="work_start" id="work_start" class="selectbox2" > 
 	<br>
 	마감 날짜 : 
 	<input type="date" name="work_end" id="work_end" class="selectbox2">
@@ -72,6 +72,14 @@
     <button type="submit" class="button" id="add"><span>등록</span></button>
   </form>
   <script type="text/javascript">
+  
+  
+  document.getElementById('work_start').min = new Date();
+
+
+  
+  
+  
   $(document).ready(function() { 
 		var selectTarget = $('.selectbox3 select'); 
 		selectTarget.change(function(){ 
@@ -112,6 +120,18 @@
 	  	var work_end = document.getElementById("work_end");
 	  	var work_content = document.getElementById("work_content");
 	  	
+	  	var today = new Date();
+	  	var dd = today.getDate();
+	  	var mm = today.getMonth()+1;
+	  	var yyyy = today.getFullYear();
+	  	 if(dd<10){
+	         dd='0'+dd
+	     } 
+	     if(mm<10){
+	         mm='0'+mm
+	     }
+	  	today = yyyy+'-'+mm+'-'+dd;
+	  	
 	  	if(work_subject.value==""){
 	  		swal("EMPTY TITLE","제목을 입력해 주세요.","warning");
 	  		return false;
@@ -124,6 +144,11 @@
 	  		swal("EMPTY DATE","체출기간을 선택해 주세요.","warning");
 	  		return false;
 	  	}
+	  	else if(work_start.value<today){
+	  		swal("DATE ERROR","시작날짜는 최소"+today+"(오늘)로 설정 해 주시길 바랍니다.","warning");
+	  		return false;
+	  	}
+	  	
 	  	else if(work_start.value>work_end.value){
 	  		swal("DATE ERROR","마감날짜는 "+work_start.value+"(시작날짜) 이후로 설정 해 주시길 바랍니다.","warning");
 	  		return false;

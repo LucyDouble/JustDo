@@ -9,7 +9,7 @@
 			from (select *
 				     from (SELECT * 
 							  FROM exam e join  lecture  l 
-							  using (lecture_no)order by exam_no asc))  
+							  using (lecture_no)order by exam_date asc))  
 			 where teacher_number=#{teacher_number}
 				   	   and (exam_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
 			 order by rnum desc
@@ -130,4 +130,82 @@
 		using(lectureclass_no) 
 		where lectureclass_class=2
 	</select>
+	<select id="listSubmitExam" parameterType="Map" resultType="Exam">
+ select yong.*,hwi.exam_grade
+ from  (select rownum rnum,lecture_no,exam_no,exam_subject,exam_date,lecture_title,name,exam_content,lectureclass_no,to_char(exam_date,'yyyyMMdd') as examDate,
+		        lectureclass_class,student_number,registration_no,exam_start,exam_end,to_char(exam_starts,'hh24mi') as examstart,to_char(exam_ends,'hh24mi') as examend
+		from (select wltlc.lecture_no,wltlc.exam_no,exam_subject,wltlc.exam_date,wltlc.lecture_title,
+				        wltlc.name,wltlc.exam_content,wltlc.lectureclass_no,wltlc.lectureclass_class,r.student_number,r.registration_no,
+				        to_char(exam_start,'hh24:mi') as exam_start ,to_char(exam_end,'hh24:mi') as exam_end, exam_start as exam_starts ,exam_end as exam_ends
+		      from (select wlt.lecture_no,wlt.exam_no,exam_subject,wlt.exam_start,wlt.exam_end,wlt.exam_date,wlt.lecture_title,wlt.name,wlt.exam_content,lc.lectureclass_no,lc.lectureclass_class
+		            from (select wl.*,t.name
+		                  from (SELECT * 
+		                        FROM exam w join  lecture  l 
+		                        using (lecture_no)order by exam_no asc) wl join teacher t 
+		                  on wl.teacher_number=t.teacher_number
+		                  where (exam_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%') ) wlt join lectureclass lc 
+		            on wlt.lecture_no=lc.lecture_no ) wltlc join registration r 
+		      on wltlc.lectureclass_no=r.lectureclass_no
+		      where student_number=#{student_number}
+		      order by exam_date asc)
+		order by rnum desc) yong inner join exam_result hwi 
+on yong.registration_no=hwi.registration_no and yong.exam_no=hwi.exam_no	
+order by rnum desc	
+	
+<!--         select rownum rnum,lecture_no,exam_no,exam_subject,exam_date,lecture_title,name,exam_content,lectureclass_no,to_char(exam_date,'yyyyMMdd') as examDate,
+		        lectureclass_class,student_number,registration_no,exam_start,exam_end,to_char(exam_starts,'hh24mi') as examstart,to_char(exam_ends,'hh24mi') as examend
+		from (select wltlc.lecture_no,wltlc.exam_no,exam_subject,wltlc.exam_date,wltlc.lecture_title,
+				        wltlc.name,wltlc.exam_content,wltlc.lectureclass_no,wltlc.lectureclass_class,r.student_number,r.registration_no,
+				        to_char(exam_start,'hh24:mi') as exam_start ,to_char(exam_end,'hh24:mi') as exam_end, exam_start as exam_starts ,exam_end as exam_ends
+		      from (select wlt.lecture_no,wlt.exam_no,exam_subject,wlt.exam_start,wlt.exam_end,wlt.exam_date,wlt.lecture_title,wlt.name,wlt.exam_content,lc.lectureclass_no,lc.lectureclass_class
+		            from (select wl.*,t.name
+		                  from (SELECT * 
+		                        FROM exam w join  lecture  l 
+		                        using (lecture_no)order by exam_no asc) wl join teacher t 
+		                  on wl.teacher_number=t.teacher_number
+		                  where (exam_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%') ) wlt join lectureclass lc 
+		            on wlt.lecture_no=lc.lecture_no ) wltlc join registration r 
+		      on wltlc.lectureclass_no=r.lectureclass_no
+		      where student_number=#{student_number}
+		      order by exam_date asc)
+		order by rnum desc -->
+
+	</select>
+	<select id="getlistSubmitCount" resultType="int" parameterType="Map">
+		select count(*)
+		from (select *
+		        from (select wl.*,t.name
+		                from (SELECT * 
+		                      FROM exam w join  lecture  l 
+		                      using (lecture_no)order by exam_no asc) wl join teacher t 
+		                on wl.teacher_number=t.teacher_number) wlt join lectureclass lc 
+		        on wlt.lecture_no=lc.lecture_no) wltlc join registration r 
+		on wltlc.lectureclass_no=r.lectureclass_no
+		where student_number=#{student_number}
+			 and (exam_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
+		
+	</select>
+	<select id="viewSubmitExam" resultType="Exam">
+		select *
+		from (select *       
+		        from (select * 
+		                from registration r join exam_result ws using(registration_no)  
+		                where exam_no=#{exam_no} and registration_no=#{registration_no}) r_ws join exam w 
+		                using(exam_no)) ww join lecture l using(lecture_no)
+	</select>
+	<select id="timeSubmitExam" resultType="Exam">
+		select to_char(exam_date,'yyyymmdd') as examdate , to_char(exam_start,'hh24:mi') as exam_start,to_char(exam_end,'hh24:mi') as exam_end,
+                 to_char(exam_start,'hh24mi') as examStart, to_char(exam_end,'hh24mi') as examEnd
+		from (select *       
+		        from (select * 
+		                from registration r join exam_result ws using(registration_no)  
+		                where exam_no=#{exam_no} and registration_no=#{registration_no}) r_ws join exam w 
+		                using(exam_no)) ww join lecture l using(lecture_no)
+	</select>
+	<update id="submitExam" parameterType="Exam">
+		update exam_result set exam_submit=#{exam_submit} where exam_no = #{exam_no} and registration_no=#{registration_no}
+	</update>
+	<update id="removeSubmitExam" parameterType="Exam">
+		update exam_result set exam_submit=null where exam_no=#{exam_no} and registration_no=#{registration_no}
+	</update>
 </mapper>

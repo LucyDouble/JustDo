@@ -95,5 +95,35 @@ public class ExamServiceImpl implements ExamService{
 		return examDao.getGradeExam2(exam_no);
 	}
 
+	@Override
+	public List<Exam> listSubmitExam(int startPage, int limit, Map<String, Object> map) {
+		return examDao.listSubmitExam(startPage, limit, map);
+	}
+
+	@Override
+	public int getlistSubmitCount(Map<String, Object> map) {
+		return examDao.getlistSubmitCount(map);
+	}
+
+	@Override
+	public Exam viewSubmitExam(Exam vo) {
+		return examDao.viewSubmitExam(vo);
+	}
+
+	@Override
+	public Exam timeSubmitExam(Exam vo) {
+		return examDao.timeSubmitExam(vo);
+	}
+
+	@Override
+	public void submitExam(Exam vo) {
+		examDao.submitExam(vo);
+	}
+
+	@Override
+	public void removeSubmitExam(Exam vo) {
+		examDao.removeSubmitExam(vo);
+	}
+
 	
 }

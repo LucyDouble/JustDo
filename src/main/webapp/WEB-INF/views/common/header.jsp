@@ -43,7 +43,7 @@
 				</c:if>
 				<c:if
 					test="${sessionScope.student_id !=null && sessionScope.teacher_id == null && sessionScope.manager_id == null && sessionScope.manager_id == null}">
-					<a href="#">시험 조회</a>
+					<a href="listSubmitExam">시험 조회</a>
 				</c:if>
 				<c:if
 					test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">

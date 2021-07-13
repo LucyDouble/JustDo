@@ -12,10 +12,9 @@
 							,to_char(work_end,'yyyymmdd') as endday  ,teacher_number
 				  from (SELECT * 
 						FROM works w join  lecture  l 
-						using (lecture_no)order by work_no asc)) 
-			
+						using (lecture_no)order by work_end asc)) 
 			 where teacher_number=#{teacher_number}
-				and (work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
+						and (work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
 			 order by rnum desc
 	</select>
 	<select id="getlistCount" resultType="int" parameterType="Map">
@@ -52,7 +51,7 @@
 		DELETE from works where work_no=#{work_no}
 	</delete>
 	<select id="lecturechk" resultType="lecture" parameterType="int">
-		select lecture_no,lecture_title from lecture where teacher_number = #{teacher_number}
+		select lecture_no,lecture_title from lecture where teacher_number = #{teacher_number} and lecture_state=1
 	</select>
 	<update id="editWork" parameterType="Work">
 		update works 
@@ -70,9 +69,7 @@
 		                where w.work_no=#{work_no} )wl join student s 
 		        on wl.student_number=s.student_number order by name asc
 		        )
-		<if test='keyword !=null || !keyword.equals("")'>
 			 where name like '%'||#{keyword}||'%'
-		</if>
 		
 	</select>
 	<select id="getlistWorkResultCount" resultType="int" parameterType="Map">
@@ -139,7 +136,7 @@
 		            on wlt.lecture_no=lc.lecture_no ) wltlc join registration r 
 		      on wltlc.lectureclass_no=r.lectureclass_no
 		      where student_number=#{student_number}
-		      order by work_no asc)
+		      order by work_end asc)
 		order by rnum desc
 	</select>
 	<select id="getlistSubmitCount" resultType="int" parameterType="Map">
