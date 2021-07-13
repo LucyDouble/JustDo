@@ -35,11 +35,7 @@
 						<th>이름</th>
 						<td><input type="text" name="name" id="studentMyPage_name"
 							value="${DTO.name }" readonly>
-							<!-- <p id="edit_name" class="edit"
-								style="float: right; font-size: 18px; margin-top: 10px; margin-right: 30px;"
-								onclick="edit('name')">수정하기</p> -->
-							<p id="errorName"
-								style="display: none; margin-left: 70px; color: #6A60A9; font-size: 15px; margin-bottom: 0px;"></p></td>
+					
 					</tr>
 					<tr>
 						<th>비밀번호</th>

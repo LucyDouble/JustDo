@@ -731,3 +731,14 @@ i{
 	margin:auto;
 	
 }
+#countComment{
+	font-weight : bold;
+	margin-bottom : 10px;
+	width : 1000px;
+}
+.name_float{
+	float : left;
+	margin-left:12px;
+	margin-bottom:10px;
+	font-size:15px;
+}

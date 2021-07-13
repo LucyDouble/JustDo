@@ -15,7 +15,7 @@ float : left;
     <!-- 댓글  -->
     	<section class = "comments my-5">
     	<!-- 댓글 카운트  -->
-    	<div id="countComment" class="card-header font-weight-bold" style="font-weight : bold; margin-bottom : 10px;"></div>
+    	<div id="countComment" class="card-header font-weight-bold 0" style="font-weight : bold; margin-bottom : 10px;"></div>
     	<div id="commentAll"></div>
     	</section>
     	<!-- 댓글 출력 -->
@@ -27,6 +27,7 @@ float : left;
     	</div>
     	</div>
 </body>
+
 <script>
  $(function(){
 	getCommentList();
@@ -34,7 +35,7 @@ float : left;
  
 var notice_no = '${notice.notice_no}';
 var comment_con = ' ';
-
+var comment_number
 function getCommentList() {
 	$.ajax({
 		type : 'get',
@@ -57,32 +58,32 @@ function getCommentList() {
 				
 				console.log( item.student_number + "aaa");
 				console.log( item.teacher_number + "bbb");
+				console.log("${sessionScope.student_number}" == item.student_number);
 				
 				
 				
 				
 					//수정삭제버튼
-					if("${sessionScope.student_number}" != "" && "${sessionScope.managerNumber}" != ""){
+					if("${sessionScope.student_number}" != ""){
 						if ("${sessionScope.student_number}" == item.student_number)  {
-							comment_con += '<button type="button" >ㅇㅇㅇ</button>';
-							
+							comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="comment_btn" >삭제</button>';
+							comment_con += '<button id="commentUpdateBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="comment_btn" >수정</button>';							
 						}
 					}
 					
-					if("${sessionScope.teacher_number}" != "" && "${sessionScope.managerNumber}" != ""){
+					if("${sessionScope.teacher_number}" != ""){
 						if("${sessionScope.teacher_number}" == item.teacher_number){
-							comment_con += '<button type="button" >ㄴㄴㄴ</button>';
+							comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="comment_btn" >삭제</button>';
+							comment_con += '<button id="commentUpdateBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="comment_btn" >수정</button>';
 						/* 	comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="commentDeleteBtn('+ item.comment_number + ')" type="button" class="btn btn-danger px-3 float-right"><i class="fa fa-trash" aria-hidden="true"></i></button>';
 							comment_con += '<button id="commentEditBtn'	+ item.comment_number + '" onclick="commentEditBtn(' + item.comment_number + ')" type="button" class="btn btn-primary px-3 float-right"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>';  */
 
 						}
 					}
 					if("${sessionScope.manager_number}" != ""){
-						if("${sessionScope.manager_number}" == item.manager_number){
-							comment_con += '<button type="button">ㄷㄷㄷ</button>';
-							
+						comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="comment_btn" >삭제</button>';
+						comment_con += '<button id="commentUpdateBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="comment_btn" >수정</button>';
 
-						}
 					}
 					if(item.student_name != null){
 					comment_con += '<div class="text-default name_float">'	+ item.student_name+ '</div>';
@@ -92,7 +93,7 @@ function getCommentList() {
 						comment_con += '<div class="text-default name_float">'	+item.manager_name + '[운영자]' +'</div>';
 					}
 					
-					comment_con += '</a></h5><input id="commentInput' + item.comment_num +'" class="form-control " value="'+ item.comment_con +'" style="width : 1000px; border: 0px; background: white;" readonly="true"></input><hr /></div></div>';
+					comment_con += '</a></h5><input id="commentInput' + item.comment_number +'" class="form-control " value="'+ item.comment_con +'" style="width : 1000px; border: 0px; background: white;" readonly="true"></input><hr /></div></div>';
 			$('#commentAll').html(comment_con);
 									});
 			comment_con = '';
@@ -147,8 +148,8 @@ $('#commentSubmit').click(function(){
 function deleteComment(comment_number){
 	if(confirm("삭제하시겠습니까?") == true){
 		$.ajax({
-			type :'delete',
-			url : '/listNotice/deleteComment/' + comment_number,
+			type :'DELETE',
+			url : '${pageContext.request.contextPath}/listNotice/deleteComment/' + comment_number,
 			success : function(data){
 				console.log('삭제 성공');
 				getCommentList();
@@ -156,7 +157,7 @@ function deleteComment(comment_number){
 		});
 	}
 };
-function updateCommentCheck(comment_number){
+function updateComment(comment_number){
 	if(confirm("수정하시겠습니까?") == true){
 		$.ajax({
 			type:'put',

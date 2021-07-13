@@ -1,6 +1,8 @@
 package com.kh.jd.account;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -114,9 +116,10 @@ public class EditController {
 
 	// 수강생 탈퇴
 	@RequestMapping(value = "account/studentDelete", method = RequestMethod.POST)
-	public String studentDelete(Student studentVO) {
+	public String studentDelete(Student studentVO, HttpSession session) {
 		String student_id = studentVO.getId();
 		sService.deleteStudent(student_id);
+		sService.logout(session);
 		return "common/main";
 	}
 	

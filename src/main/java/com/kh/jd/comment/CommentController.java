@@ -57,16 +57,17 @@ public class CommentController {
 	}
 
 	// 댓글 수정
-	@RequestMapping(value = "/listNotice/updateComment/{comment_number}", method = RequestMethod.POST)
+	@RequestMapping(value = "/listNotice/updateComment/{comment_number}", method = RequestMethod.PUT)
 	@ResponseBody
 	public int updateStudentComment(@PathVariable("comment_number") int comment_number, String comment_con) {
 		return cService.updateNoticeComment(comment_number, comment_con);
 	}
 
 	// 댓글 삭제
-	@RequestMapping(value = "/listNotice/deleteComment/{comment_number}", method = RequestMethod.POST)
+	@RequestMapping(value = "/listNotice/deleteComment/{comment_number}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public int deleteStudentComment(int comment_number) {
+	public int deleteStudentComment(@PathVariable("comment_number") int comment_number) {
+		System.out.println(comment_number);
 		return cService.deleteNoticeComment(comment_number);
 	}
 
