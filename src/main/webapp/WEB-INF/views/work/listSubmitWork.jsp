@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>과제리스트-학생</title>
+<script src ="https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script> 
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/listWork.css"/>">
@@ -46,7 +47,15 @@
 							<td>${i.rnum }</td>
 							<td >${i.lecture_title }</td>
 							<td>${i.name }</td>
-							<td class="ln_cont" onclick="location.href='viewSubmitWork?work_no=${i.work_no }&registration_no=${i.registration_no }'">${i.work_subject }</td>
+							<c:choose>
+								<c:when test="${time>=i.startday}">
+									<td class="ln_cont" onclick="location.href='viewSubmitWork?work_no=${i.work_no }&registration_no=${i.registration_no }'">${i.work_subject }</td>
+								</c:when>
+								<c:otherwise>
+									<td class="ln_cont" onclick="noStart();">${i.work_subject }</td>
+								</c:otherwise>
+							</c:choose>
+							<%-- <td class="ln_cont" onclick="location.href='viewSubmitWork?work_no=${i.work_no }&registration_no=${i.registration_no }'">${i.work_subject }</td> --%>
 							<td>${i.work_start }~ ${i.work_end }</td>
 							<td>
 								<c:if test="${time<i.startday}">x</c:if> 
@@ -92,5 +101,11 @@
 	</div>
 	<br> <br> <br>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+	<script type="text/javascript">
+function noStart(){
+	swal("Fail","활성화 되지 않았습니다.","warning");
+}
+
+</script>
 </body>
 </html>
