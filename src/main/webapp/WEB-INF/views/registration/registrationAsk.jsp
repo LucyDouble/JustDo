@@ -180,7 +180,7 @@
 	    					}else{
 	    						events.push({
 		    						title: element.lecture_title+' ('+starttime+' ~ '+endtime+')',
-		    						color: "#FFFCF0",
+		    						color: "#08182B",
 		    						start: startdate,
 		    						end: enddate
 		    					});

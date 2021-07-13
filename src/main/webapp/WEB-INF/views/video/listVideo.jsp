@@ -21,16 +21,21 @@
 	<div class="ln_page">
 			<div class="selectLc">
 				<p class="ln_title">학습동영상</p>
-				<p>수강과목</p>
-				<select name="title" onchange="goTitle()" id="listTitle">
-					<option>강의목록</option>
-					<c:forEach var="vo" items="${list}">
-					<option value="${vo.lecture_no}">${vo.lecture_title}</option>
-					</c:forEach>
-				</select>
-				<p id="lecTitle"></p>
+				<div class="video_cont2">
+					<p id="lecTitle"></p>
+				</div>
+				<div class="video_cont1">
+					<p>수강과목</p>
+					<select name="title" onchange="goTitle()" id="listTitle">
+						<option>강의목록</option>
+						<c:forEach var="vo" items="${list}">
+						<option value="${vo.lecture_no}">${vo.lecture_title}</option>
+						</c:forEach>
+					</select>
+				</div>
+				
 				<c:if test="${100000 > user}">
-				<div class="graph_title"><p>진도율 현황</p>
+				<div class="graph_title">
 					<ul id="g1" class="graph">
 					</ul>
 				</div>
