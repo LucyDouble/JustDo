@@ -60,6 +60,7 @@ body {
 	-o-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
 	-ms-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
 	padding-top: 500px;
+	cursor: context-menu;
 }
 /* 버튼 공통 */
 .button {

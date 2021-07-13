@@ -12,6 +12,32 @@
 <link rel="stylesheet" href="resources/css/fonts.css"/>
 <link rel="stylesheet" href="resources/css/lectureList.css"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+	#class1{
+		box-shadow: none;
+		margin-top: 5px;
+	}
+	#class2{
+		box-shadow: none;
+		margin-top: 5px;
+	}
+	#time1{
+		box-shadow: none;
+		margin-top: 5px;
+	}
+	#time2{
+		box-shadow: none;
+		margin-top: 5px;
+	}
+	#time3{
+		box-shadow: none;
+		margin-top: 5px;
+	}
+	#time4{
+		box-shadow: none;
+		margin-top: 5px;
+	}
+</style>
 </head>
 <body>
 		<div>
@@ -21,10 +47,10 @@
 				<form id="classfrm">
 							<input type="hidden" name= "lecture_no" value="<%=request.getParameter("lecture_no")%>">
 							<input type="hidden" name= "lecture_no_1" value="<%=request.getParameter("lecture_no")%>">
-					Class  <input type="text" class="form-control" name="lectureclass_class" readonly value="1"><br>
+					Class  <input type="text" class="form-control" name="lectureclass_class" readonly value="1" id="class1"><br>
 					수업시작 <input type="time" class="form-control" name="lectureclass_start" id="time1" value="09:00" readonly>
 					수업종료  <input type="time" class="form-control" name="lectureclass_end" id="time2"><br>
-					Class  <input type="text" class="form-control" name="lectureclass_class_1" readonly value="2"><br>
+					Class  <input type="text" class="form-control" name="lectureclass_class_1" readonly value="2" id="class2"><br>
 					수업시작  <input type="time" class="form-control" name="lectureclass_start_2" id="time3"  >
 					수업종료  <input type="time" class="form-control" name="lectureclass_end_3" id="time4" value="23:00" readonly>
 				</form>
