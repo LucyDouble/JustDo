@@ -25,13 +25,16 @@
 					<p id="lecTitle"></p>
 				</div>
 				<div class="video_cont1">
-					<p>수강과목</p>
-					<select name="title" onchange="goTitle()" id="listTitle">
-						<option>강의목록</option>
-						<c:forEach var="vo" items="${list}">
-						<option value="${vo.lecture_no}">${vo.lecture_title}</option>
-						</c:forEach>
-					</select>
+					<p class="viTitle">수강과목</p>
+					<div class="selectbox3">
+						<label for="listTitle">강의목록</label>  
+						<select name="title" onchange="goTitle()" id="listTitle">
+							<option>강의목록</option>
+							<c:forEach var="vo" items="${list}">
+							<option value="${vo.lecture_no}">${vo.lecture_title}</option>
+							</c:forEach>
+						</select>
+					</div>
 				</div>
 				
 				<c:if test="${100000 > user}">
@@ -61,6 +64,36 @@
 		}
 		// 셀릭트 선택 시 과목 출력
 		function goTitle(){
+			$(document).ready(function() { 
+				var selectTarget = $('.selectbox3 select'); 
+				selectTarget.change(function(){ 
+					var select_name = $(this).children('option:selected').text(); 
+					$(this).siblings('label').text(select_name);
+					}); 
+				});
+			$(function() {
+				  var selectTarget = $('.selectbox3 select');
+
+				  // focus 가 되었을 때와 focus 를 잃었을 때
+				  selectTarget.on({
+				    'focus': function() {
+				      $(this).parent().addClass('focus');
+				    },
+				    'blur': function() {
+				      $(this).parent().removeClass('focus');
+				    }
+				  });
+
+				  selectTarget.change(function() {
+				    var select_name = $(this).children('option:selected').text();
+				    $(this).siblings('label').text(select_name);
+				    $(this).parent().removeClass('focus');
+				  });
+				});
+			
+			
+			
+			
 			var opt = document.getElementById("listTitle");
 			var optText = opt.options[opt.selectedIndex].text;
 			var optVal = opt.options[opt.selectedIndex].value; // lectureclass 번호 값
@@ -79,6 +112,10 @@
 					var listVideo = data.list;
 					var number = data.lecture_no;
 					console.log(number);
+					console.log(listVideo);
+					if(listVideo.length == 0){
+						ulClass.append("<p>등록한 동영상이 없습니다.</p>");
+					}
 					$.each(listVideo, function(i, item){
 						var format = toMMSS(item.video_alltime);
 						list += "<ul class='cover'><c:if test='${100000< user}'><label class='checkbox'><input type='radio' class='cheakVNo checkbox' name='cheakVNo' value='"

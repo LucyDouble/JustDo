@@ -47,7 +47,7 @@ import com.kh.jd.registration.RegistrationService;
 @Controller
 public class VideoController {
 	public static final int LIMIT = 6;
-	public static final int pageBlock = 5;
+	public static final int pageBlock = 3;
 	@Autowired
 	private RegistrationService RService;
 	@Autowired

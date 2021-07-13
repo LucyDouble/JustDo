@@ -23,9 +23,7 @@ body {
 	font-size: 25px;
 	font-weight: bold;
 	clear: both;
-	position: relative;
-	display: inline-block;
-	left: 40px;
+	margin-bottom: 50px;
 }
 
 .vn_title, .en_title, .an_title, .lc_title{
@@ -62,6 +60,7 @@ body {
 	-o-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
 	-ms-box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.15);
 	padding-top: 500px;
+	cursor: context-menu;
 }
 .ln_cont, .vn_cont {
 	text-align: left;
@@ -203,4 +202,17 @@ i{
 	float: left;
 	text-align: left;
 	margin-top: 30px;
+	cursor: context-menu;
+}
+#regiList{
+	float: left;
+	margin-left: 0;
+}
+.LC_content{
+	position: relative;
+	top: -50px;
+}
+#askBtn{
+	float: left;
+	margin-left: 0;
 }

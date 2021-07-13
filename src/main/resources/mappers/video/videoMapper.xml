@@ -16,7 +16,7 @@
 
 <!-- 페이징 처리 -->
 <select id="videoCount" resultType="int" parameterType="Map">
-	select count(*) from video where video_title like '%'||#{keyword}||'%' and lecture_no = #{lecture_no}
+	select count(*) from video where lecture_no = #{lecture_no}
 </select>
 
 <!-- 하나만 조회 -->

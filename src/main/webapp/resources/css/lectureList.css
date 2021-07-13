@@ -282,3 +282,33 @@ ol,.cd-buttons {
 	line-height: 60px;
 	margin-top: 20px;
 }
+#class1{
+		box-shadow: none;
+		margin-top: 5px;
+}
+#class2{
+	box-shadow: none;
+	margin-top: 5px;
+}
+#time1{
+	box-shadow: none;
+	margin-top: 5px;
+	margin-bottom: 20px;
+}
+#time2{
+	box-shadow: none;
+	margin-top: 5px;
+}
+#time3{
+	box-shadow: none;
+	margin-top: 5px;
+	margin-bottom: 20px;
+}
+#time4{
+	box-shadow: none;
+	margin-top: 5px;
+}
+#btnClass{
+	margin-right: 0;
+	margin-top: 10px;
+}

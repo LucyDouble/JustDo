@@ -68,5 +68,5 @@ public class LectureDao {
 	
 	public List<Lecture> listStudentVideo(int student_number) {
 		return sqlSession.selectList("Lecture.listStudentVideo", student_number);
-	}
+	} 
 }

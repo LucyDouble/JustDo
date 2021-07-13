@@ -103,4 +103,5 @@
 		join lectureclass b on a.lecture_no = b.lecture_no
 		join registration c on b.lectureclass_no = c.lectureclass_no where c.student_number = #{student_number}
 	</select>
+	
 </mapper>

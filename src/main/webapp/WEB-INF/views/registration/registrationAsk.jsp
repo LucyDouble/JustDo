@@ -25,8 +25,8 @@
 <div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 <div class="ln_page">
 			<p class="ln_title">수강신청</p>
-			<button class="button" onclick="location.href='listregistration';"><span>수강목록</span></button>
 			<div class="LC_content" id="LC_cont">
+			<button class="button" onclick="location.href='listregistration';" id="regiList"><span>수강목록</span></button>
 			<!-- 서치바 -->
 			<div class="lc_search_box">
 				<form class="lc_search" action="#" method="get">

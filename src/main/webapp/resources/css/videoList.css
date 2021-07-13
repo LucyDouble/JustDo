@@ -397,8 +397,10 @@ ol,.cd-buttons {
 	text-align: left;
 	font-size: 13px;
 	color: #ccc;
+	margin-top: 5px;
 }
 .videoTitle{
+	font-size: 18px;
 	margin: 0;
 	text-align: left;
 }
@@ -470,4 +472,58 @@ ol,.cd-buttons {
 	margin-left:12px;
 	margin-bottom:10px;
 	font-size:15px;
+}
+.viTitle{
+		font-size: 20px;
+	}
+.selectbox3 {
+	display: inline-block;
+	position: relative;
+	width: 380px;
+	height: 28px;
+	line-height: 28px;
+	background:
+		url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+		no-repeat 95% 50%;
+	border: 1px solid #DEDCEE;
+	z-index: 1;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.selectbox3 label {
+	position: absolute;
+	top: 0px;
+	left: 5px;
+	height: 28px;
+	line-height: 28px;
+	color: black;
+	z-index: -1;
+	border-radius: 3px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.selectbox3 select {
+	width: 100%;
+	height: 28px;
+	line-height: 28px;
+	font-family: inherit;
+	border: 0;
+	opacity: 0;
+	border-radius: 3px;
+	filter: alpha(opacity = 0);
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+}
+/* focus 효과 */
+.selectbox3.focus {
+  border-color: #66afe9;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
 }

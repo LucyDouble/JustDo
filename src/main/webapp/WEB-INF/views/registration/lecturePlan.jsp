@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>강의계획서</title>
+<title>JD 교육원</title>
 <link rel="stylesheet" href="resources/css/bootstrap/bootstrap.css">
 <link rel="stylesheet" href="resources/css/fonts.css">
 <link rel="stylesheet" href="resources/css/lecturePlan.css">
@@ -17,6 +17,7 @@
 		<div class="cont">
 				<p class="ln_title">강의계획서</p>
 		</div>
+		<div class="cont2">
 					<table class="table">
 							<tr>
 								<th>NO</th>
@@ -55,6 +56,7 @@
 								<td colspan="3">${view.lecture_reference}</td>
 							</tr>
 					</table>
+			</div>
 </div>
 </body>
 </html>

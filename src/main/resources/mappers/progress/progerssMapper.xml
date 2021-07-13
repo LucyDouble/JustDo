@@ -18,18 +18,20 @@
 <!-- 강의 전체 진도율 -->
 <select id="avgProgress" parameterType="int" resultType="int">
 	select nvl(b.video_alltime, 0) video_alltime from lecture a 
-	full outer join video b on a.lecture_no = b.lecture_no 
-	full outer join progress c on b.video_no = c.video_no
-	full outer join lectureclass d on b.lecture_no = d.lecture_no
-	where a.lecture_no = #{lecture_no}
+    join video b on a.lecture_no = b.lecture_no 
+    join progress c on b.video_no = c.video_no
+    join lectureclass d on b.lecture_no = d.lecture_no
+    join registration r using(student_number,lectureclass_no)
+    where a.lecture_no = #{lecture_no}
 </select>
 
 <select id="avgProgress1" parameterType="int" resultType="int">
-	select nvl(c.progress,0) progress from lecture a 
-	full outer join video b on a.lecture_no = b.lecture_no 
-	full outer join progress c on b.video_no = c.video_no
-	full outer join lectureclass d on b.lecture_no = d.lecture_no
-	where a.lecture_no = #{lecture_no}
+	select nvl(c.progress, 0) progress from lecture a 
+    join video b on a.lecture_no = b.lecture_no 
+    join progress c on b.video_no = c.video_no
+    join lectureclass d on b.lecture_no = d.lecture_no
+    join registration r using(student_number,lectureclass_no)
+    where a.lecture_no = #{lecture_no}
 </select>
 
 <!-- 나의 전체 진도율 -->
@@ -46,34 +48,38 @@
 <!-- 1반 평균 진도율 -->
 <select id="classProgress" parameterType="int" resultType="int">
 	select nvl(b.video_alltime, 0) video_alltime from lecture a 
-	full outer join video b on a.lecture_no = b.lecture_no 
-	full outer join progress c on b.video_no = c.video_no
-	full outer join lectureclass d on b.lecture_no = d.lecture_no
-	where a.lecture_no = #{lecture_no} and lectureclass_class = 1
+    join video b on a.lecture_no = b.lecture_no 
+    join progress c on b.video_no = c.video_no
+    join lectureclass d on b.lecture_no = d.lecture_no
+    join registration r using(student_number,lectureclass_no)
+    where a.lecture_no = #{lecture_no} and lectureclass_class=1
 </select>
 
 <select id="classProgress1" parameterType="int" resultType="int">
 	select nvl(c.progress,0) progress from lecture a 
-	full outer join video b on a.lecture_no = b.lecture_no 
-	full outer join progress c on b.video_no = c.video_no
-	full outer join lectureclass d on b.lecture_no = d.lecture_no
-	where a.lecture_no = #{lecture_no} and lectureclass_class = 1
+    join video b on a.lecture_no = b.lecture_no 
+    join progress c on b.video_no = c.video_no
+    join lectureclass d on b.lecture_no = d.lecture_no
+    join registration r using(student_number,lectureclass_no)
+    where a.lecture_no = #{lecture_no} and lectureclass_class=1
 </select>
 
 <!-- 2반 평균 진도율 -->
 <select id="class2Progress" parameterType="int" resultType="int">
 	select nvl(b.video_alltime, 0) video_alltime from lecture a 
-	full outer join video b on a.lecture_no = b.lecture_no 
-	full outer join progress c on b.video_no = c.video_no
-	full outer join lectureclass d on b.lecture_no = d.lecture_no
-	where a.lecture_no = #{lecture_no} and lectureclass_class = 2
+    join video b on a.lecture_no = b.lecture_no 
+    join progress c on b.video_no = c.video_no
+    join lectureclass d on b.lecture_no = d.lecture_no
+    join registration r using(student_number,lectureclass_no)
+    where a.lecture_no = #{lecture_no} and lectureclass_class=2
 </select>
 
 <select id="class2Progress1" parameterType="int" resultType="int">
 	select nvl(c.progress,0) progress from lecture a 
-	full outer join video b on a.lecture_no = b.lecture_no 
-	full outer join progress c on b.video_no = c.video_no
-	full outer join lectureclass d on b.lecture_no = d.lecture_no
-	where a.lecture_no = #{lecture_no} and lectureclass_class = 2
+    join video b on a.lecture_no = b.lecture_no 
+    join progress c on b.video_no = c.video_no
+    join lectureclass d on b.lecture_no = d.lecture_no
+    join registration r using(student_number,lectureclass_no)
+    where a.lecture_no = #{lecture_no} and lectureclass_class=2
 </select>
 </mapper>

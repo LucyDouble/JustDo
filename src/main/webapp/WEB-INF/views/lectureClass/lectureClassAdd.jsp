@@ -7,37 +7,11 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title>JD 교육원</title>
 <link rel="stylesheet" href="resources/css/bootstrap/bootstrap.css">
 <link rel="stylesheet" href="resources/css/fonts.css"/>
 <link rel="stylesheet" href="resources/css/lectureList.css"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style>
-	#class1{
-		box-shadow: none;
-		margin-top: 5px;
-	}
-	#class2{
-		box-shadow: none;
-		margin-top: 5px;
-	}
-	#time1{
-		box-shadow: none;
-		margin-top: 5px;
-	}
-	#time2{
-		box-shadow: none;
-		margin-top: 5px;
-	}
-	#time3{
-		box-shadow: none;
-		margin-top: 5px;
-	}
-	#time4{
-		box-shadow: none;
-		margin-top: 5px;
-	}
-</style>
 </head>
 <body>
 		<div>

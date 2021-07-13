@@ -25,8 +25,8 @@
 <div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 <div class="ln_page">
 			<p class="ln_title">수강목록</p>
-			<button class="button" onclick="location.href='registration';"><span>수강신청</span></button>
 			<div class="LC_content" id="LC_cont2">
+			<button class="button" onclick="location.href='registration';" id="askBtn"><span>수강신청</span></button>
 				<c:if test="${empty list2}">
 					<p class="warn">등록된 강의가 없습니다.</p>
 				</c:if>

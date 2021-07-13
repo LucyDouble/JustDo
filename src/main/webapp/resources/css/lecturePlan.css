@@ -10,7 +10,7 @@ body {
 	line-height: 1.5;
 }
 .ln_page, .vn_page, .en_page, .an_page {
-	margin-top:20px;
+	margin-top:75px;
 	width: 100%;
 }
 .table th {
@@ -42,5 +42,5 @@ body {
 .ln_title {
 	font-size: 25px;
 	font-weight: bold;
-	margin-bottom: 20px;
+	margin-bottom: 50px;
 }
