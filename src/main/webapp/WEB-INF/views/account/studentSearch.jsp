@@ -42,7 +42,7 @@
 		<div class="container" style = "height : 600px; width : 1000px;">
 			<div class="area_inputs wow fadeIn">
 				<div class="sub_title font-weight-bold text-black">
-					<h5>수강생 아이디/비밀번호 찾기</h5>
+					<h5>수강생 <br>아이디/비밀번호 찾기</h5>
 				</div>
 				<div style="margin-bottom: 10px;"
 					class="custom-control custom-radio custom-control-inline">

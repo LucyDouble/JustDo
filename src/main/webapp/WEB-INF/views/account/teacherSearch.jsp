@@ -81,7 +81,7 @@ body {
 		<div class="container">
 			<div class="area_inputs wow fadeIn">
 				<div class="sub_title font-weight-bold text-black">
-					<h5>교직원 아이디/비밀번호 찾기</h5>
+					<h5>교직원 <br>아이디/비밀번호 찾기</h5>
 				</div>
 				<div style="margin-bottom: 10px;"
 					class="custom-control custom-radio custom-control-inline">

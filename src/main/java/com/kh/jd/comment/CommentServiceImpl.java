@@ -32,5 +32,29 @@ CommentDAO dao;
 		int result = dao.updateNoticeComment(comment_con, comment_number);
 		return result;
 	}
+	@Override
+	public List<Comment> getVideoCommentList(int video_no) {
+		return dao.getVideoCommentList(video_no);
+	}
+	@Override
+	public int writeVideoComment(Comment comment) {
+		int result = dao.writeVideoComment(comment);
+		return result;
+	}
+	@Override
+	public int countVideoComment(int video_no) {
+		int result = dao.countVideoComment(video_no);
+		return result;
+	}
+	@Override
+	public int deleteVideoComment(int comment_number) {
+		int result = dao.deleteVideoComment(comment_number);
+		return result;
+	}
+	@Override
+	public int updateVideoComment(String comment_con, int comment_number) {
+		int result = dao.updateVideoComment(comment_con, comment_number);
+		return result;
+	}
 
 }

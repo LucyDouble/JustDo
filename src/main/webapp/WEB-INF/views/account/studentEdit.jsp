@@ -27,12 +27,12 @@
 					<tr id="studentMyPage_studentIdTr">
 						<th class="studentMyPage_studentIdTh">아이디</th>
 						<td><input type="text" name="id" id="studentMyPage_id"
-							value="${DTO.id }" readonly disabled="disabled"></td>
+							value="${DTO.id }" readonly></td>
 					</tr>
 					<tr>
 						<th>이름</th>
 						<td><input type="text" name="name" id="studentMyPage_name"
-							value="${DTO.name }"readonly disabled="disabled">
+							value="${DTO.name }"readonly>
 						</td>
 					</tr>
 					<tr>
@@ -69,7 +69,7 @@
 					<tr>
 						<th>이메일</th>
 						<td><input type="text" name="email" id="studentMyPage_email"
-							value="${DTO.email}" readonly disabled="disabled">
+							value="${DTO.email}" readonly>
 						</td>
 					</tr>
 				</table>

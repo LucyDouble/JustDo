@@ -97,6 +97,8 @@
 			location.href="listVideo";
 		});
 	</script>
+	    <div class="comment_Wrapper"><jsp:include page="../comment/videoComment.jsp"></jsp:include></div>
+	
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

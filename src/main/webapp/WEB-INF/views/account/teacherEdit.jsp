@@ -5,14 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JD 교육원</title>
-<link rel="stylesheet" href="<c:url value="resources/css/account/teacherEdit.css"/>">
+<link rel="stylesheet"
+	href="<c:url value="resources/css/account/teacherEdit.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
-<link rel="stylesheet" href="<c:url value="/resources/css/common/header.css"/>">
-<link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/common/header.css"/>">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/common/footer.css"/>">
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div class="container">
 		<h3 class="teacherMyPage_title">마이 페이지</h3>
 		<div class="teacherMyPage_teacherInfo">
@@ -21,26 +23,21 @@
 					<tr id="teacherMyPage_teacherIdTr">
 						<th>아이디</th>
 						<td><input type="text" name="id" id="teacherMyPage_id"
-							value="${DTO.id }" readonly disabled="disabled"></td>
+							value="${DTO.id }" readonly></td>
 					</tr>
 					<tr>
 						<th>이름</th>
 						<td><input type="text" name="name" id="teacherMyPage_name"
 							value="${DTO.name }" readonly>
-							<p id="edit_name" class="edit name_edit"
-								onclick="edit('name')">수정하기</p>
-							<p id="errorName"
-								style="display:none;color: red;font-size: 12px;position: absolute;top: 79px;left: 690px;
-"></p></td>
+							</td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
 						<td><input type="text" name="password" id="teacherMyPage_pw"
 							value="**********" readonly>
-							<p id="edit_pw" class="edit pwd_edit"
-								onclick="edit('pw')">수정하기</p>
+							<p id="edit_pw" class="edit pwd_edit" onclick="edit('pw')">수정하기</p>
 							<p id="errorPassword"
-								style="display: none;color: red;font-size: 12px;position: absolute;top: 135px;left: 690px;"></p></td>
+								style="display: none; color: red; font-size: 12px; position: absolute; top: 135px; left: 690px;"></p></td>
 					</tr>
 					<tr>
 						<th>핸드폰번호</th>
@@ -49,7 +46,7 @@
 							<p id="edit_phone" class="edit phone_edit"
 								onclick="edit('phone')">수정하기</p>
 							<p id="errorPhone"
-								style="display: none;color: red;font-size: 12px;position: absolute;top: 193px;left: 690px;"></p></td>
+								style="display: none; color: red; font-size: 12px; position: absolute; top: 193px; left: 690px;"></p></td>
 					</tr>
 					<tr>
 						<th>주소</th>
@@ -63,7 +60,7 @@
 					<tr>
 						<th>이메일</th>
 						<td><input type="text" name="email" id="teacherMyPage_email"
-							value="${DTO.email}" readonly disabled="disabled"></td>
+							value="${DTO.email}" readonly ></td>
 					</tr>
 				</table>
 				<div class="deleteBtn">
@@ -80,8 +77,8 @@
 			<div id="teacherMyPage_deleteDiv">
 				<p>정말 탈퇴하시겠습니까?</p>
 				<input type="button" id="teacherMyPage_deleteOkBtn"
-					class="teacherMyPage_deleteOkBtn" value="탈퇴하기"> 
-				<input type="button" id="teacherMyPage_deleteCancelBtn"
+					class="teacherMyPage_deleteOkBtn" value="탈퇴하기"> <input
+					type="button" id="teacherMyPage_deleteCancelBtn"
 					class="teacherMyPage_deleteCancelBtn" value="취소하기">
 			</div>
 		</div>
@@ -178,36 +175,36 @@ $(document).ready(function(){
                success : function(data){
                   alert("탈퇴처리 되었습니다.");
                   location.href = '<%=request.getContextPath()%>/jdHome'
-               }
-            });
-            $('#teacherMyPage_mainModal').hide();
-         });
-         
-         /////////모달창에서 취소버튼 클릭시 다시 마이페이지이동//////////
-         $('#teacherMyPage_deleteCancelBtn').click(function(){
-        	 
-        	 $('#teacherMyPage_deleteModal').hide();
-         
-         });
-         
-      	//////////모달창 밖의 영역을 누르면 띄워져 있는 모달창을 닫음//////////
-         $(window).on('click', function() {
-            //jquery는 dom 객체를 jquery 객체로 한 번 감싸 리턴하므로 dom 객체를 얻어와야 비교 가능
-            if (event.target == $('#teacherMyPage_mainModal').get(0)) {
-                $('#teacherMyPage_mainModal').hide();
-             }
-         });
-         $(window).on('click', function() {
-            //jquery는 dom 객체를 jquery 객체로 한 번 감싸 리턴하므로 dom 객체를 얻어와야 비교 가능
-            if (event.target == $('#teacherMyPage_deleteModal').get(0)) {
-                $('#teacherMyPage_deleteModal').hide();
-             }
-         });
-      	
-         //////////닫기버튼을 누르면 수정모달창 닫음//////////
-         $('#teacherMyPage_close').click(function(){
-            $('#teacherMyPage_mainModal').hide();
-         
-         });
-   </script>
+					}
+				});
+				$('#teacherMyPage_mainModal').hide();
+			});
+
+	/////////모달창에서 취소버튼 클릭시 다시 마이페이지이동//////////
+	$('#teacherMyPage_deleteCancelBtn').click(function() {
+
+		$('#teacherMyPage_deleteModal').hide();
+
+	});
+
+	//////////모달창 밖의 영역을 누르면 띄워져 있는 모달창을 닫음//////////
+	$(window).on('click', function() {
+		//jquery는 dom 객체를 jquery 객체로 한 번 감싸 리턴하므로 dom 객체를 얻어와야 비교 가능
+		if (event.target == $('#teacherMyPage_mainModal').get(0)) {
+			$('#teacherMyPage_mainModal').hide();
+		}
+	});
+	$(window).on('click', function() {
+		//jquery는 dom 객체를 jquery 객체로 한 번 감싸 리턴하므로 dom 객체를 얻어와야 비교 가능
+		if (event.target == $('#teacherMyPage_deleteModal').get(0)) {
+			$('#teacherMyPage_deleteModal').hide();
+		}
+	});
+
+	//////////닫기버튼을 누르면 수정모달창 닫음//////////
+	$('#teacherMyPage_close').click(function() {
+		$('#teacherMyPage_mainModal').hide();
+
+	});
+</script>
 </html>

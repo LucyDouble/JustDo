@@ -47,4 +47,34 @@ public class CommentDAO {
 		int result = sqlSession.update("Comment.noticeCommentUpdate", map);
 		return result;
 	}
+	
+//	비디오 댓글 리스트
+	public List<Comment> getVideoCommentList(int video_no){
+		return sqlSession.selectList("Comment.videoCommentList", video_no);
+	}
+//	비디오 댓글 작성
+	public int writeVideoComment(Comment comment) {
+		int result = sqlSession.insert("Comment.videoCommentInsert", comment);
+		return result;
+	}
+//	비디오 댓글 카운트
+	public int countVideoComment(int video_no) {
+		int result = sqlSession.selectOne("Comment.countVideoComment", video_no);
+			return result;
+	}
+//	비디오 댓글 삭제
+	public int deleteVideoComment(int comment_number) {
+		int result = sqlSession.delete("Comment.videoCommentDelete", comment_number);
+		return result;
+	}
+	// 비디오 댓글 수정
+		public int updateVideoComment(String comment_con,int comment_number) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("comment_con", comment_con);
+			map.put("comment_number", Integer.toString(comment_number)); 
+			 
+
+			int result = sqlSession.update("Comment.videoCommentUpdate", map);
+			return result;
+		}
 }

@@ -44,4 +44,33 @@
 		UPDATE COMMENTS
 		SET COMMENT_CON = #{comment_con} WHERE COMMENT_NUMBER = #{comment_number}
 	</update>
+	<select id="countVideoComment" parameterType="String"
+		resultType="int">
+		SELECT count(*) FROM COMMENTS WHERE VIDEO_NO =#{video_no}
+	</select>
+	<select id="videoCommentList" resultType="Comment">
+		SELECT c.*,s.name as student_name,t.name as teacher_name,m.name as
+		manager_name FROM COMMENTS c left outer join student s on
+		c.student_number=s.student_number left outer join teacher t on
+		c.teacher_number=t.teacher_number left outer join managers m on
+		c.manager_number=m.manager_number
+		WHERE VIDEO_NO = #{video_no} ORDER
+		BY WRITE_DATE
+	</select>
+	<insert id="videoCommentInsert" parameterType="Comment">
+		insert
+		into comments (COMMENT_NUMBER,MANAGER_NUMBER,STUDENT_NUMBER,TEACHER_NUMBER,VIDEO_NO,WRITE_DATE,COMMENT_CON) values
+		((SELECT nvl(max(COMMENT_NUMBER), 0) + 1 FROM
+		COMMENTS) ,#{manager_number}, #{student_number},#{teacher_number},
+		#{video_no}, sysdate, #{comment_con})
+
+	</insert>
+	<delete id="videoCommentDelete" parameterType="int">
+		DELETE FROM
+		COMMENTS WHERE COMMENT_NUMBER = #{comment_number}
+	</delete>
+	<update id="videoCommentUpdate" parameterType="HashMap">
+		UPDATE COMMENTS
+		SET COMMENT_CON = #{comment_con} WHERE COMMENT_NUMBER = #{comment_number}
+	</update>
 </mapper>
