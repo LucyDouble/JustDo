@@ -69,16 +69,17 @@
 	      editorplaceholder: '내용을 입력하세요.'
 	    });
     </script>
+    </div>
    		<input type="submit" class="button"  value="등록"></input>
    		<input type="button" class="button" onclick="history.back();" value="취소"></input>
     
     
     
     </form>
-    </div>
 	<br><br><br>
 	<sciprt src="js/jqurey-3.1.1.js"></sciprt>
 	<sciprt src="js/bootstrap.js"></sciprt>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
+    </div>
 </body>
 </html>

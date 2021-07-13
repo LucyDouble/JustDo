@@ -91,9 +91,10 @@
 									<input type="hidden" name="lecture_title" value="${lecture_title}" >
 									<input type="hidden" name="exam_subject" value="${exam_subject}" >
 									<button type="submit" id ="ResultBtn">
-										<c:if test="${i.exam_grade==0}">0[채점]</c:if>
+										<c:if test="${i.exam_grade==0  && i.exam_submit !=null }">0[채점]</c:if>
 										<c:if test="${i.exam_grade!=0}">${i.exam_grade}</c:if>
 									</button>
+										<c:if test="${i.exam_grade==0  && i.exam_submit ==null }">-</c:if>
 								</td>
 							</form>
 						</tr>

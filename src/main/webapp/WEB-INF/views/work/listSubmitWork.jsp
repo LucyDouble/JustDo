@@ -34,7 +34,7 @@
 				<thead>
 					<tr>
 						<th>No.</th>
-						<th class="work_title">수업명</th>
+						<th class="work_title">강의명</th>
 						<th>강사 명</th>
 						<th class="work_title">제목</th>
 						<th class="work_date">제출기간</th>
@@ -58,8 +58,8 @@
 							<%-- <td class="ln_cont" onclick="location.href='viewSubmitWork?work_no=${i.work_no }&registration_no=${i.registration_no }'">${i.work_subject }</td> --%>
 							<td>${i.work_start }~ ${i.work_end }</td>
 							<td>
-								<c:if test="${time<i.startday}">x</c:if> 
-								<c:if test="${time>=i.startday && time<=i.endday}">진행중</c:if> 
+								<c:if test="${time<i.startday}">진행전</c:if> 
+								<c:if test="${time>=i.startday && time<=i.endday}"><strong style="color: #6A60A9;">진행중</strong></c:if> 
 								<c:if test="${time>i.endday}">완료</c:if>
 							</td>
 						</tr>

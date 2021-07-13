@@ -10,6 +10,7 @@
     }
 
 body {
+	cursor: context-menu;
 	margin: 0px;
 	padding: 0px;
 	text-align: center;

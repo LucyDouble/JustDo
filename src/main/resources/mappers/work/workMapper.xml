@@ -132,7 +132,7 @@
 		                        FROM works w join  lecture  l 
 		                        using (lecture_no)order by work_no asc) wl join teacher t 
 		                  on wl.teacher_number=t.teacher_number
-		                  where (work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%') ) wlt join lectureclass lc 
+		                  where (work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%' or name like '%'||#{keyword}||'%') ) wlt join lectureclass lc 
 		            on wlt.lecture_no=lc.lecture_no ) wltlc join registration r 
 		      on wltlc.lectureclass_no=r.lectureclass_no
 		      where student_number=#{student_number}
@@ -150,7 +150,7 @@
 		        on wlt.lecture_no=lc.lecture_no) wltlc join registration r 
 		on wltlc.lectureclass_no=r.lectureclass_no
 		where student_number=#{student_number}
-			 and (work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
+			 and (work_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%' or name like '%'||#{keyword}||'%')
 		
 	</select>
 	<select id="viewSubmitWork" resultType="Work">

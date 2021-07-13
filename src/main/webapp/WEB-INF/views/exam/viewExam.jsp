@@ -23,7 +23,7 @@
 	<input type="hidden" name="exam_no" value="${examDto.exam_no }">
     <p class="vn_title">시험 조회</p>
     <br>
-    <div style="float: right;">시험 시간 : ${examDto.exam_date} [${examDto.exam_start }~ ${examDto.exam_end }]</div>
+    <div style="float: right; margin-bottom: 10px">시험 시간 : ${examDto.exam_date} [${examDto.exam_start }~ ${examDto.exam_end }]</div>
     <br>
  <table class="table">
         <thead>

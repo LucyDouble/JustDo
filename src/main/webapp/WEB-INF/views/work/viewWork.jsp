@@ -40,7 +40,7 @@
         </tbody>
     </table>
     <button type="button" class="button" onclick="location.href='listWork'"><span>목록</span></button>
-    <c:if test="${time<=workDto.endday}">
+    <c:if test="${time<workDto.startday}">
 	    <button type="button" class="button" id="edit" ><span>수정</span></button>
 	    <button type="button" class="button"  id="btnRemove"><span>삭제</span></button>
     </c:if>

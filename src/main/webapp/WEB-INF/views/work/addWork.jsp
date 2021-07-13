@@ -9,7 +9,6 @@
 <script src="https://cdn.ckeditor.com/4.16.1/standard-all/ckeditor.js"></script>
 <!-- 클래식 -->
 <!-- <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script> -->
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src ="https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script> 
@@ -21,7 +20,6 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/header.js"/>"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/common/footer.css"/>">
-
 </head>
 <body>
 <div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
@@ -153,7 +151,11 @@
 	  		swal("DATE ERROR","마감날짜는 "+work_start.value+"(시작날짜) 이후로 설정 해 주시길 바랍니다.","warning");
 	  		return false;
 	  	}
-	  	
+	  	else if(CKEDITOR.instances.work_content.getData() =='' || CKEDITOR.instances.work_content.getData().length ==0){
+            swal("EMPTY CONTENT","내용을 입력해주세요.","warning");
+               $("#work_content").focus();
+            return false;
+        }
 	  	frm.action="addWork";
 	    frm.method="POST";
 	    frm.submit();

@@ -34,7 +34,7 @@
 				<thead>
 					<tr>
 						<th>No.</th>
-						<th class="work_title">수업명</th>
+						<th class="work_title">강의명</th>
 						<th>강사 명</th>
 						<th class="work_title">제목</th>
 						<th class="work_date">시험시간</th>
@@ -61,10 +61,10 @@
 							</c:choose>
 							<td>${i.exam_date } [${i.exam_start }~ ${i.exam_end }]</td>
 							<td>
-								<c:if test="${time2<i.examdate}">x</c:if>
+								<c:if test="${time2<i.examdate}">진행전</c:if>
 								<c:if test="${time2==i.examdate}">
-									<c:if test="${time<i.examStart}">x</c:if> 
-								    <c:if test="${time<=i.examEnd && time>=i.examStart}">진행중</c:if> 
+									<c:if test="${time<i.examStart}">진행전</c:if> 
+								    <c:if test="${time<=i.examEnd && time>=i.examStart}"><strong style="color: #6A60A9;">진행중</strong></c:if> 
 									<c:if test="${time>i.examEnd}">완료</c:if>
 								</c:if>
 								<c:if test="${time2>i.examdate}">완료</c:if> 

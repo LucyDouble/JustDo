@@ -351,7 +351,7 @@ public class ExamController {
 		Exam vo2=examService.viewExamResult(vo);
 		vo.setExam_content(vo2.getExam_content());
 		vo.setExam_answer(vo2.getExam_answer());
-		vo.setExam_submit(vo.getExam_submit());
+		vo.setExam_submit(vo2.getExam_submit());
 		mv.setViewName("examResult/viewExamResult");
 		return mv;
 	}

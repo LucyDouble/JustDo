@@ -36,7 +36,7 @@
     <div class="choice_form">
     	강의 선택 :
 		<div class="selectbox3">
-		<label for="lecture_no">${workDto.lecture_title }</label> 
+		<label for="lecture_no">${examDto.lecture_title }</label> 
     	<select name="lecture_no" id="lecture_no">
     		<option value="${examDto.lecture_no} " >${examDto.lecture_title }</option>
     		<c:forEach items="${lecturechk }" var="i">
@@ -45,7 +45,7 @@
     	</select>
     	</div>
     	<br>
-      시험 날 : 
+      시험 날짜 : 
 	<input type="date" name="exam_date" id="exam_date" value="${examDto.exam_date }" class="selectbox2"> 
 	<br>
 	시험 시작 : 
@@ -58,7 +58,7 @@
       <label class="an_label" for="exam_content">&nbsp;&nbsp;내용</label>
     <textarea cols="10" id="exam_content" name="exam_content" rows="10">${examDto.exam_content }</textarea>
     	
-    	
+    	<br>
    <script>
     CKEDITOR.replace('exam_content', { height: '400px',
       extraPlugins: 'editorplaceholder',
@@ -115,10 +115,23 @@
 		  var frm=document.getElementById("frm");
 		  	var exam_subject=document.getElementById("exam_subject");
 		  	var lecture_no = document.getElementById("lecture_no");
-		  	var exam_date= document.getElementById("exam_start");
+		  	var exam_date= document.getElementById("exam_date");
 		  	var exam_start = document.getElementById("exam_start");
 		  	var exam_end = document.getElementById("exam_end");
 		  	var exam_content = document.getElementById("exam_content");
+		  	
+		  	var today = new Date();
+		  	var dd = today.getDate();
+		  	var mm = today.getMonth()+1;
+		  	var yyyy = today.getFullYear();
+		  	 if(dd<10){
+		         dd='0'+dd
+		     } 
+		     if(mm<10){
+		         mm='0'+mm
+		     }
+		  	today = yyyy+'-'+mm+'-'+dd;
+		  	
 		  	if(exam_subject.value==""){
 		  		swal("EMPTY TITLE","제목을 입력해 주세요.","warning");
 		  		return false;
@@ -131,10 +144,24 @@
 		  		swal("EMPTY DATE","시험기간을 선택해 주세요.","warning");
 		  		return false;
 		  	}
+		  	else if(exam_date.value<today){
+		  		swal("DATE ERROR","시험 날짜는 최소"+today+"(오늘)로 설정 해 주시길 바랍니다.","warning");
+		  		return false;
+		  	}
 		  	else if(exam_start.value>exam_end.value){
 		  		swal("TIMR ERROR","종료 시간은 시작 시작 이후로 설정 해 주시길 바랍니다.","warning");
 		  		return false;
 		  	}
+		  	else if(CKEDITOR.instances.exam_content.getData() =='' || CKEDITOR.instances.exam_content.getData().length ==0){
+	            swal("EMPTY CONTENT","내용을 입력해주세요.","warning");
+	               $("#exam_content").focus();
+	            return false;
+	        }
+		  	else if(CKEDITOR.instances.exam_answer.getData() =='' || CKEDITOR.instances.exam_answer.getData().length ==0){
+	            swal("EMPTY CONTENT","내용을 입력해주세요.","warning");
+	               $("#exam_answer").focus();
+	            return false;
+	        }
 	  	frm.action="editExam";
 	      frm.method="POST";
 	      frm.submit();

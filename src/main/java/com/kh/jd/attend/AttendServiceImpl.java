@@ -19,7 +19,7 @@ public class AttendServiceImpl implements AttendService {
 	@Scheduled(cron = "0 1 0 * * 1,2,3,4,5") // 0~6 일~토
 	public void scheduleAttend() {
 		System.out.println("출석 날짜 삽입==권용휘 컴퓨터서만 실행");
-		 attendDao.scheduleAttend(); 
+//		 attendDao.scheduleAttend(); 
 	}
 	@Override
 	public List<Attend> listAttend(int startPage, int limit,Attend vo) {

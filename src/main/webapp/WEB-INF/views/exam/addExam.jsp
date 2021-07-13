@@ -56,7 +56,7 @@
     <div id="editor" class="form-group">
     <label class="an_label" for="exam_content">&nbsp;&nbsp;시험 문제</label>
     <textarea cols="10" id="exam_content" name="exam_content" rows="10"></textarea>
-
+<br>
     	
    <script>
     CKEDITOR.replace('exam_content', { height: '400px',
@@ -155,6 +155,16 @@
 	  		swal("TIMR ERROR","종료 시간은 시작 시작 이후로 설정 해 주시길 바랍니다.","warning");
 	  		return false;
 	  	}
+	  	else if(CKEDITOR.instances.exam_content.getData() =='' || CKEDITOR.instances.exam_content.getData().length ==0){
+            swal("EMPTY CONTENT","내용을 입력해주세요.","warning");
+               $("#exam_content").focus();
+            return false;
+        }
+	  	else if(CKEDITOR.instances.exam_answer.getData() =='' || CKEDITOR.instances.exam_answer.getData().length ==0){
+            swal("EMPTY CONTENT","내용을 입력해주세요.","warning");
+               $("#exam_answer").focus();
+            return false;
+        }
 	  	
 	  	frm.action="addExam";
 	    frm.method="POST";

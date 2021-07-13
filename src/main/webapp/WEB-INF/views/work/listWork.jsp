@@ -51,7 +51,7 @@
 							<td>${i.work_start }~ ${i.work_end }</td>
 							<td>
 								<c:if test="${time<i.startday}">진행전</c:if> 
-								<c:if test="${time>=i.startday && time<=i.endday}">진행중</c:if> 
+								<c:if test="${time>=i.startday && time<=i.endday}"><strong style="color: #6A60A9;">진행중</strong></c:if> 
 								<c:if test="${time>i.endday}">완료</c:if>
 							</td>
 		<form id ="ResultFrm" action="listWorkResult" method="post">

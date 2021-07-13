@@ -9,7 +9,7 @@
 			from (select *
 				     from (SELECT * 
 							  FROM exam e join  lecture  l 
-							  using (lecture_no)order by exam_date asc))  
+							  using (lecture_no)order by exam_date asc,exam_end asc))  
 			 where teacher_number=#{teacher_number}
 				   	   and (exam_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
 			 order by rnum desc
@@ -149,11 +149,11 @@
 		                        FROM exam w join  lecture  l 
 		                        using (lecture_no)order by exam_no asc) wl join teacher t 
 		                  on wl.teacher_number=t.teacher_number
-		                  where (exam_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%') ) wlt join lectureclass lc 
+		                  where (exam_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%' or name like '%'||#{keyword}||'%') ) wlt join lectureclass lc 
 		            on wlt.lecture_no=lc.lecture_no ) wltlc join registration r 
 		      on wltlc.lectureclass_no=r.lectureclass_no
 		      where student_number=#{student_number}
-		      order by exam_date asc)
+		      order by exam_date asc,exam_end asc)
 		order by rnum desc) yong inner join exam_result hwi 
 on yong.registration_no=hwi.registration_no and yong.exam_no=hwi.exam_no	
 order by rnum desc	
@@ -188,7 +188,7 @@ order by rnum desc
 		        on wlt.lecture_no=lc.lecture_no) wltlc join registration r 
 		on wltlc.lectureclass_no=r.lectureclass_no
 		where student_number=#{student_number}
-			 and (exam_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%')
+			 and (exam_subject like '%'||#{keyword}||'%' or lecture_title like '%'||#{keyword}||'%' or name like '%'||#{keyword}||'%')
 		
 	</select>
 	<select id="viewSubmitExam" resultType="Exam">
