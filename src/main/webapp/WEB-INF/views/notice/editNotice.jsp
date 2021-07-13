@@ -30,16 +30,13 @@
 	<div class="en_page">
 		<p class="en_title">게시글 수정</p>
 		<br>
-		<form id="editForm" method="post" class="editForm"
-			enctype="multipart/form-data" accept-charset="UTF-8">
-			<input type="hidden" id="n_no" name="n_no"
-				value="${notice.notice_no }" /> <input type="hidden"
-				id="n_filepath" value="${notice.notice_filepath }" /> <input
-				type="hidden" id="n_filename" value="${notice.notice_filename }" />
+		<form id="editForm" method="post" class="editForm" enctype="multipart/form-data" accept-charset="UTF-8">
+			<input type="hidden" id="n_no" name="n_no" value="${notice.notice_no }" /> 
+			<input type="hidden" id="n_filepath" value="${notice.notice_filepath }" /> 
+			<input type="hidden" id="n_filename" value="${notice.notice_filename }" />
 			<div class="form-group">
-				<label class="en_label" for="subject">제목</label> <input type="text"
-					class="form-control" id="subject" name="n_sub"
-					placeholder="제목을 입력하세요." value="${notice.notice_sub }">
+				<label class="en_label" for="subject">제목</label> 
+				<input type="text" class="form-control" id="subject" name="n_sub" placeholder="제목을 입력하세요." value="${notice.notice_sub }">
 			</div>
 			<br>
 			<div id="editor" class="form-group">
@@ -68,26 +65,33 @@
 
 			<div id="sampel1" class="en_file_input">
 				<label for="input-file" class="file_label"><span>파일</span></label>
-				<input type="file" id="input-file" class="input-file"
-					name="notice_filepath" multiple="multiple">
-			</div>
-
-			<div id="sample2">
-				<c:if test="${empty listFile }">
+				<input type="file" id="input-file" class="input-file" name="notice_filepath" multiple="multiple">
+				<p id="fileName" class="fileName"></p><c:if test="${empty listFile }">
 					<label id="file_name" class="reg_file"></label>
 					<input type="hidden" id="val0" value="0">
 				</c:if>
 				<c:if test="${not empty listFile }">
 					<c:forEach items="${listFile }" var="i">
-						<label id="${i.notice_filename }" class="reg_file">${i.notice_filename }<img
-							class="file_del_btn" onclick="delFile('${i.notice_filename }');"
-							src="resources/images/cross.png"><br>
+						<label id="${i.notice_filename }" class="reg_file">${i.notice_filename }<img	class="file_del_btn" onclick="delFile('${i.notice_filename }');" src="resources/images/cross.png">
 						</label>
-						<br>
 					</c:forEach>
 					<input type="hidden" id="val0" value="1">
-				</c:if>
+				</c:if> 
 			</div>
+
+			<!-- <div id="sample2"> -->
+				<%-- <c:if test="${empty listFile }">
+					<label id="file_name" class="reg_file"></label>
+					<input type="hidden" id="val0" value="0">
+				</c:if>
+				<c:if test="${not empty listFile }">
+					<c:forEach items="${listFile }" var="i">
+						<label id="${i.notice_filename }" class="reg_file">${i.notice_filename }<img	class="file_del_btn" onclick="delFile('${i.notice_filename }');" src="resources/images/cross.png">
+						</label>
+					</c:forEach>
+					<input type="hidden" id="val0" value="1">
+				</c:if>  --%>
+			<!-- </div> -->
 			<div class="cnt"></div>
 			<div class="cnt2"></div>
 		</form>
@@ -109,18 +113,18 @@
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 <script>
-	$('.file_label').click(function() {
+	/* $('.file_label').click(function() {
 		var fn = $("#val0").val();
 		console.log(fn);
 		if (fn == 1) {
-			var result = confirm("등록된 첨부파일을 변경하시겠습니까?");
+			var result = confirm("첨부파일을 추가 하시겠습니까?");
 		} else if (fn == 0) {
 			return true;
 		}
 		if (!result) {
 			return false;
 		}
-	});
+	}); */
 
 	/* $('.file_label').click(function() {
 	var fn = $("#file_name").val();
@@ -218,7 +222,7 @@
 			for (i = 0; i < target.files.length; i++) {
 			fileList += target.files[i].name + '&nbsp;&nbsp;';
 			}
-			target2 = document.getElementById(${i.notice_filename });
+			target2 = document.getElementById('fileName');
 			target2.innerHTML = fileList;
 		});
 	}

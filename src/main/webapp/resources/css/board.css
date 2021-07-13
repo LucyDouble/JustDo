@@ -243,6 +243,7 @@ body {
 .file_del_btn{
 	width: 18px;
     margin-left: 5px;
+    margin-right: 7px;
 }
 
 
@@ -709,13 +710,22 @@ i{
 	visibility: hidden;
 	margin: 10px;
 	float:left;
+	position:absolute;
 }
 .fileName, .reg_file{
-	display:block;
+ 	display:block;
+	/* position:absolute; */
+	/* margin:10px; */
+	 float:left;
+	 /* margin-left: 5px; */
+	 margin-top : 10px;
+}
+.reg_file {
+	/* display:block;
 	position:absolute;
 	margin:10px;
 	float:left;
-	margin-left: 90px;
+	margin-left: 90px; */
 }
 /* .writer_name{
 	float:left;
