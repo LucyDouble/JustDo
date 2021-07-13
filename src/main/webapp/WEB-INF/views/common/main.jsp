@@ -15,7 +15,6 @@
 <script type="text/javascript" src="<c:url value="/resources/js/header.js"/>"></script>
 </head>
 <body>
-
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div id="section">
 		<!-- 슬라이드  배너 -->
@@ -208,5 +207,6 @@
 			setTimeout(showSlides, 4000);
 		}
 		</script>
+		<jsp:include page="../counseling/chatCS.jsp"></jsp:include>
 </body>
 </html>
