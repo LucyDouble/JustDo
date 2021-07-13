@@ -1,68 +1,74 @@
 @charset "UTF-8";
 
-.studentMyPage_title{
-		text-align: center;
-	
-	
-}
 .studentMyPage_studentInfo {
-	margin: 30px 20px;
+    margin: 50px 0px 0px 0px;
 	position: relative;
 }
 
-.studentMyPage_studentTable th {
-	color : #fff;
-	width: 240px;
-	height: 80px;
-	font-size: 25px;
-	padding: 10px 40px;
-	background-color: #6A60A9;
+.studentMyPage_studentTable {
+	border-top: 1px solid #222;
 }
 
-table{
-	margin-left : auto;
-	margin-right : auto;
-	
+.studentMyPage_studentTable th {
+    color: black;
+    width: 234px;
+    height: 52px;
+    font-size: 15px;
+    border-bottom: 1px solid #DEDCEE;
+    background: #f2f5f9;
 }
+
 .studentMyPage_studentTable td {
-	width: 600px;
-	color: black;
-	background-color: #white;
+	width: 1000px;
+    color: black;
+    border-bottom: 1px solid #dae0e9;
+    padding: 9px 0 9px 20px;
+}
+
+div.deleteBtn {
+	text-align: center;
+    width: 100%;
+    padding-top: 20px;
 }
 
 .studentMyPage_studentTable input[type=text] {
-	width: 400px;
-	height: 50px;
-	margin-left: 70px;
-	border-radius: 7px;
-	border: 1px solid ivory;
-	background-color: #fff;
-	padding-left: 20px;
-	font-size: 20px;
+	width: 315px;
+    height: 36px;
+    border: 1px solid #dae0e9;
+    padding-left: 10px;
+    font-size: 14px;
 }
-.studentMyPage_studentIdTh{
-	border-radius : 20px 0 0 0;
-	
-}
+
 .studentMyPage_title {
-	margin-top: 30px;
+	font-size: 28px;
+	color: black;
+    font-weight: bold;
 }
 
 .studentMyPage_deleteBtn {
-	border: none;
-	background-color: #212121;
-	width: 130px;
-	height: 50px;
-	color: white;
-	margin-left: 190px;
-	font-size: 20px;
-	border-radius: 10px;
-	background-color: red;
+	width: 100px;
+    height: 35px;
+    font-size: 14px;
+    background-color: white;
+    border-bottom: 2px solid red;
+    font-weight: bold;
+    border-right: none;
+    border-top: none;
+    border-left: none;
 }
 
 .studentMyPage_deleteBtn:hover {
-	background-color: palevioletred;
+	background-color: red;
+	color: white;
 	cursor: pointer;
+	border-bottom-left-radius: 50px;
+	border-bottom-right-radius: 50px;
+	border-top-left-radius: 50px;
+	border-top-right-radius: 50px;
+	border-right-left-radius: 50px;
+	border-right-right-radius: 50px;
+	border-left-left-radius: 50px;
+	border-let-right-radius: 50px;
 }
 
 .studentMyPage_deleteModal {
@@ -76,69 +82,91 @@ table{
 	display: none;
 }
 
-.studentMyPage_deleteDiv {
+#studentMyPage_deleteDiv {
 	position: absolute;
-	top: 20%;
-	left: 35%;
-	width: 500px;
-	height: 200px;
-	background-color: #eee;
-	text-align: center;
-	border-radius: 10px;
+    top: 40%;
+    left: 38%;
+    width: 500px;
+    height: 220px;
+    background-color: #eee;
+    text-align: center;
+    border-radius: 10px;
 }
 
-.studentMyPage_deleteDiv p {
-	margin-top: 30px;
-	margin-bottom: 30px;
-	font-size: 35px;
+#studentMyPage_deleteDiv p {
+	margin-top: 50px;
+    margin-bottom: 45px;
+    font-size: 25px;
 }
 
 .studentMyPage_deleteOkBtn, .studentMyPage_deleteCancelBtn {
-	background-color: red;
-	border: none;
+	background-color: #eee;
 	width: 130px;
 	height: 50px;
-	color: white;
+	color: balck;
 	margin-left: 30px;
 	margin-right: 30px;
 	font-size: 18px;
+	border: 2px solid balck;
 	border-radius: 10px;
 }
 
-.studentMyPage_deleteCancelBtn {
-	background-color: black !important;
+
+input.studentMyPage_deleteCancelBtn:hover {
+	background-color: red;
+	cursor: pointer;
+	color: white;
+	border: none;
 }
 
-.studentMyPage_deleteOkBtn:hover {
-	background-color: #EE2560;
+input.studentMyPage_deleteOkBtn:hover {
+	background-color: #8e8e8e ;
 	cursor: pointer;
+	color: white;
+	border: none;
 }
 
-.studentMyPage_deleteCancelBtn:hover {
-	background-color: #8e8e8e !important;
-	cursor: pointer;
+p.edit {
+	font-size: 14px;
+	font-weight: bold;
+    margin-top: 10px;
+    border: 2px solid #6A60A9;
+    width: 65px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    border-radius: 50px;
+}
+
+.pwd_edit {
+	position: absolute;
+   	top: 123px;
+    left: 610px;
+}
+
+.phone_edit {
+	position: absolute;
+    top: 182px;
+    left: 610px;
+}
+
+.address_edit {
+	position: absolute;
+    top: 240px;
+    left: 610px;
 }
 
 .edit:hover {
-	color: #EE2560;
+	color: white;
+	background-color: #6A60A9;
 	cursor: pointer;
 }
 
-@media ( max-width :570px) {
-	.container {
-		min-width: 100% !important;
-	}
-	.studentMyPage_studentTable th {
-		padding: 10px 10px;
-		width: 100px;
-	}
-	.studentMyPage_studentTable td {
-		width: 350px;
-	}
-	.studentMyPage_deleteBtn {
-		width: 80px;
-		margin-left: 115px;
-		font-size: 15px;
-		height: 35px;
-	}
+.container {
+    width: 1300px;
+    margin: 0 auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    line-height: 1.4;
+    letter-spacing: -0.05em;
 }

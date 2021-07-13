@@ -19,7 +19,7 @@
 			<form id="teacherMyPage_myForm">
 				<table class="teacherMyPage_teacherTable">
 					<tr id="teacherMyPage_teacherIdTr">
-						<th>회원아이디</th>
+						<th>아이디</th>
 						<td><input type="text" name="id" id="teacherMyPage_id"
 							value="${DTO.id }" readonly disabled="disabled"></td>
 					</tr>
@@ -30,8 +30,8 @@
 							<p id="edit_name" class="edit name_edit"
 								onclick="edit('name')">수정하기</p>
 							<p id="errorName"
-								style="display: none; margin-left: 70px; color: #6A60A9
-; font-size: 15px; margin-bottom: 0px;"></p></td>
+								style="display:none;color: red;font-size: 12px;position: absolute;top: 79px;left: 690px;
+"></p></td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
@@ -40,7 +40,7 @@
 							<p id="edit_pw" class="edit pwd_edit"
 								onclick="edit('pw')">수정하기</p>
 							<p id="errorPassword"
-								style="display: none; margin-left: 70px; color: red; font-size: 15px; margin-bottom: 0px;"></p></td>
+								style="display: none;color: red;font-size: 12px;position: absolute;top: 135px;left: 690px;"></p></td>
 					</tr>
 					<tr>
 						<th>핸드폰번호</th>
@@ -49,7 +49,7 @@
 							<p id="edit_phone" class="edit phone_edit"
 								onclick="edit('phone')">수정하기</p>
 							<p id="errorPhone"
-								style="display: none; margin-left: 70px; color: red; font-size: 15px; margin-bottom: 0px;"></p></td>
+								style="display: none;color: red;font-size: 12px;position: absolute;top: 193px;left: 690px;"></p></td>
 					</tr>
 					<tr>
 						<th>주소</th>
@@ -61,13 +61,13 @@
 								style="display: none; margin-left: 70px; color: red; font-size: 15px; margin-bottom: 0px;"></p></td>
 					</tr>
 					<tr>
-						<th>회원이메일</th>
+						<th>이메일</th>
 						<td><input type="text" name="email" id="teacherMyPage_email"
 							value="${DTO.email}" readonly disabled="disabled"></td>
 					</tr>
 				</table>
-				<div class="deleteBtn"><input type="button"
-						id="teacherMyPage_deleteBtn" value="탈퇴하기"
+				<div class="deleteBtn">
+					<input type="button" id="teacherMyPage_deleteBtn" value="탈퇴하기"
 						class="teacherMyPage_deleteBtn">
 				</div>
 			</form>

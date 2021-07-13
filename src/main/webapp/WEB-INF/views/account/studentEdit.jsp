@@ -20,65 +20,63 @@
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 	<div class="container">
 		<h1 class="studentMyPage_title">마이 페이지</h1>
-		ㅇㅇㅇ ${sessionScope.DTO.getEmail()}
-		ㄷㄷㄷ
 		<br>
 		<div class="studentMyPage_studentInfo">
 			<form id="studentMyPage_myForm">
 				<table class="studentMyPage_studentTable">
 					<tr id="studentMyPage_studentIdTr">
-						<th class="studentMyPage_studentIdTh">회원아이디</th>
+						<th class="studentMyPage_studentIdTh">아이디</th>
 						<td><input type="text" name="id" id="studentMyPage_id"
-							value="${DTO.id }" readonly></td>
+							value="${DTO.id }" readonly disabled="disabled"></td>
 					</tr>
 					<tr>
 						<th>이름</th>
 						<td><input type="text" name="name" id="studentMyPage_name"
-							value="${DTO.name }" readonly>
-					
+							value="${DTO.name }"readonly disabled="disabled">
+						</td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>
 						<td><input type="text" name="password" id="studentMyPage_pw"
 							value="**********" readonly>
-							<p id="edit_pw" class="edit"
+							<p id="edit_pw" class="edit pwd_edit"
 								style="float: right; font-size: 18px; margin-top: 10px; margin-right: 30px;"
 								onclick="edit('pw')">수정하기</p>
-							<p id="errorPassword"
-								style="display: none; margin-left: 70px; color: red; font-size: 15px; margin-bottom: 0px;"></p></td>
+							<p id="errorPassword" 
+								style="display: none;color: red;font-size: 12px;position: absolute;top: 141px;left: 710px;"></p>
+						</td>
 					</tr>
 					<tr>
 						<th>핸드폰번호</th>
 						<td><input type="text" name="phone" id="studentMyPage_phone"
 							value="${DTO.phone }" readonly>
-							<p id="edit_phone" class="edit"
+							<p id="edit_phone" class="edit phone_edit"
 								style="float: right; font-size: 18px; margin-top: 10px; margin-right: 30px;"
 								onclick="edit('phone')">수정하기</p>
 							<p id="errorPhone"
-								style="display: none; margin-left: 70px; color: red; font-size: 15px; margin-bottom: 0px;"></p></td>
+								style="display: none;color: red;font-size: 12px;position: absolute;top: 203px;left: 710px;"></p></td>
 					</tr>
 					<tr>
 						<th>주소</th>
 						<td><input type="text" name="address"
 							id="studentMyPage_address" value="${DTO.address }" readonly>
-							<p id="edit_address" class="edit"
+							<p id="edit_address" class="edit address_edit"
 								style="float: right; font-size: 18px; margin-top: 10px; margin-right: 30px;"
 								onclick="edit('address')">수정하기</p>
 							<p id="errorAddress"
 								style="display: none; margin-left: 70px; color: red; font-size: 15px; margin-bottom: 0px;"></p></td>
 					</tr>
 					<tr>
-						<th>회원이메일</th>
+						<th>이메일</th>
 						<td><input type="text" name="email" id="studentMyPage_email"
-							value="${DTO.email}" readonly></td>
-					</tr>
-					<tr>
-						<th>회원정보관리</th>
-						<td class="studentMyPage_btnTd"><input type="button"
-							id="studentMyPage_deleteBtn" value="탈퇴"
-							class="studentMyPage_deleteBtn"></td>
+							value="${DTO.email}" readonly disabled="disabled">
+						</td>
 					</tr>
 				</table>
+				<div class="deleteBtn">
+					<input type="button" id="studentMyPage_deleteBtn" value="탈퇴하기"
+						class="studentMyPage_deleteBtn">
+				</div>
 			</form>
 
 
@@ -86,11 +84,11 @@
 
 		<!-- 삭제 모달창 -->
 		<div id="studentMyPage_deleteModal" class="studentMyPage_deleteModal">
-			<div class="studentMyPage_deleteDiv">
+			<div id="studentMyPage_deleteDiv">
 				<p>정말 탈퇴하시겠습니까?</p>
 				<input type="button" id="studentMyPage_deleteOkBtn"
-					class="studentMyPage_deleteOkBtn" value="탈퇴하기"> <input
-					type="button" id="studentMyPage_deleteCancelBtn"
+					class="studentMyPage_deleteOkBtn" value="탈퇴하기"> 
+				<input type="button" id="studentMyPage_deleteCancelBtn"
 					class="studentMyPage_deleteCancelBtn" value="취소하기">
 			</div>
 		</div>
