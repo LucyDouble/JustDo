@@ -10,8 +10,10 @@
             <a href="aboutJD"><span class="footer_m1">JD 소개</span></a> |
             <a href="knowhow"><span class="footer_m1">이용 안내</span></a> |
             <a href="aboutAddress"><span class="footer_m1">오시는 길</span></a> |
+            <c:if	test="${sessionScope.student_id !=  null || sessionScope.teacher_id != null || sessionScope.manager_id != null}">
             <a href="listNotice"><span class="footer_m1">공지 사항</span></a> |
             <a href="listCS"><span class="footer_m1">상담 신청</span></a>
+            </c:if>
         </section>
     </div>
     <hr class="hr">
