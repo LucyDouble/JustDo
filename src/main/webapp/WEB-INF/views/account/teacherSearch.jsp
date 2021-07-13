@@ -7,77 +7,27 @@
 <meta charset="UTF-8">
 <title>JD 교육원</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.13/css/mdb.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Righteous&amp;subset=latin-ext" rel="stylesheet">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.13/js/mdb.min.js"></script>
 
-<style>
-*{
-	font-size: 20px;
-	font-family: 'BMHANNAPro';
-}
-input{
-	font-family: sans-serif;
-}
-html, body {
-	height: 100%;
-}
-body {
-	margin: 0;
-}
-.container {
-	height: 50%;
-	position: relative;
-}
-.full {
-	background-color: white;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	height: 100%;
-}
-.area_inputs {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin: auto;
-	width: 30%;
-	height: 30%;
-}
-.sub_title {
-	padding-bottom: 2px;
-	margin-bottom: 15px;
-	font-size: 23px;
-	border-bottom: 1px solid #cecece;
-}
-.select_pick{
-	display:inline;
-    width: 70%;
-    height: 40px;
-    padding: 6px 12px;
-    font-size: 17px;
-    line-height: 1.0;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-}
-.layout_search{
-	mar
-}
-</style>
+<link rel="stylesheet" href="resources/css/fonts.css" />
+<link rel="stylesheet" href="resources/css/common/header.css" />
+<link rel="stylesheet" href="resources/css/common/footer.css" />
+<link rel="stylesheet"
+	href="<c:url value="resources/css/account/teacherSearch.css"/>">
+<script type="text/javascript" src="resources/js/header.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.13/css/mdb.min.css"
+	rel="stylesheet">
+
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/account/studentIdSearchModal.jsp" %>
-	<div class="full">
+		<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
+	
 		<div class="container">
 			<div class="area_inputs wow fadeIn">
 				<div class="sub_title font-weight-bold text-black">
@@ -108,7 +58,7 @@ body {
 		
 					<div class="form-group">
 						<button id="searchBtn" type="button" onclick="idSearch_click()" class="btn btn-primary btn-block">확인</button>
-					<a class="btn btn-danger btn-block"	href="${pageContext.request.contextPath}">취소</a>
+					<a class="btn btn-danger btn-block"	href="${pageContext.request.contextPath}/jdHome">취소</a>
 					</div>
 				</div>
 				<div id="searchP" style="display: none;">
@@ -124,19 +74,19 @@ body {
 							<input type="email" class="form-control" id="inputEmail_2"	name="inputEmail_2">
 						</div>
 					</div>
-			
 					<div class="form-group">
 						<button id="searchBtn2" type="button" class="btn btn-primary btn-block">확인</button>
-					<a class="btn btn-danger btn-block"	href="${pageContext.request.contextPath}">취소</a>
+					<a class="btn btn-danger btn-block"	href="${pageContext.request.contextPath}/jdHome">취소</a>
 				</div>
 				</div>
 			</div>
 		</div>
-	</div>
+		<jsp:include page="../common/footer.jsp"></jsp:include>
+	
 </body>
+	
 <script>
 	
-	//체크 버튼에 따라 아이디/비밀번호 기능이 달라진다
 	function search_check(num) {
 		if (num == '1') {
 			document.getElementById("searchP").style.display = "none";
@@ -169,10 +119,7 @@ body {
 		
 	});
 	
-	// 아이디 & 스토어 값 저장하기 위한 변수
 	var idV = "";
-	/* var storeV = ""; */
-	// 아이디 값 받고 출력하는 ajax
 	var idSearch_click = function(){
 		console.log($('#inputName_1').val());
 		
@@ -190,7 +137,6 @@ body {
 					$('#id_value').text(data);
 					// 아이디값 별도로 저장
 					idV = data;
-					/* storeV = $("#store_id1 option:selected").val(); */
 				}
 			}
 		});
@@ -213,26 +159,16 @@ body {
 		
 	});
 	
-	// 비밀번호 찾기 눌렀을 때
-	// 1 패스워드 찾기 창으로 이어진 후 2 패스워드 창에 아이디가 적힘
-	// 3 모달창 종료
 	$('#pwSearch_btn').click(function(){		
 		
-		/* var idV = $('#id_value').val(); // 오류 뜸 */
 		console.log(idV);
-		/* console.log(storeV); */
 		
-		// 1. 패스워드 찾기 창으로 이어지고
 		$('#search_2').prop("checked", true);
 		
-		// 메서드 호출
 		search_check(2);
 		
-		// 2.아이디 & 매장 자동 저장
 		$('#inputId').attr("value", idV);
-		/* $('#store_id2').val(storeV).prop("selected", true); */
 		
-		// 마지막으로 모달창 종료
 		$('#background_modal').hide();
 	});
 	

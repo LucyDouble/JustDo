@@ -40,7 +40,7 @@
 						<td><input type="text" name="password" id="studentMyPage_pw"
 							value="**********" readonly>
 							<p id="edit_pw" class="edit pwd_edit"
-								style="float: right; font-size: 18px; margin-top: 10px; margin-right: 30px;"
+								style="float: right; font-size: 15px; margin-top: 10px; margin-right: 30px;"
 								onclick="edit('pw')">수정하기</p>
 							<p id="errorPassword" 
 								style="display: none;color: red;font-size: 12px;position: absolute;top: 141px;left: 710px;"></p>
@@ -51,7 +51,7 @@
 						<td><input type="text" name="phone" id="studentMyPage_phone"
 							value="${DTO.phone }" readonly>
 							<p id="edit_phone" class="edit phone_edit"
-								style="float: right; font-size: 18px; margin-top: 10px; margin-right: 30px;"
+								style="float: right; font-size: 15px; margin-top: 10px; margin-right: 30px;"
 								onclick="edit('phone')">수정하기</p>
 							<p id="errorPhone"
 								style="display: none;color: red;font-size: 12px;position: absolute;top: 203px;left: 710px;"></p></td>
@@ -61,7 +61,7 @@
 						<td><input type="text" name="address"
 							id="studentMyPage_address" value="${DTO.address }" readonly>
 							<p id="edit_address" class="edit address_edit"
-								style="float: right; font-size: 18px; margin-top: 10px; margin-right: 30px;"
+								style="float: right; font-size: 15px; margin-top: 10px; margin-right: 30px;"
 								onclick="edit('address')">수정하기</p>
 							<p id="errorAddress"
 								style="display: none; margin-left: 70px; color: red; font-size: 15px; margin-bottom: 0px;"></p></td>

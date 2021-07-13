@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,23 +21,13 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.13/css/mdb.min.css"
 	rel="stylesheet">
-<style>
-.form-group{
-
-}
-</style>
-<!-- <script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.13/js/mdb.min.js"></script> -->
 
 
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/account/studentIdSearchModal.jsp"%>
 	<div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
-
-		<div class="container" style = "height : 600px; width : 1000px;">
+		<div class="container" >
 			<div class="area_inputs wow fadeIn">
 				<div class="sub_title font-weight-bold text-black">
 					<h5>수강생 <br>아이디/비밀번호 찾기</h5>
@@ -77,7 +65,7 @@
 						<button id="searchBtn" type="button" onclick="idSearch_click()"
 							class="btn btn-primary btn-block">확인</button>
 						<a class="btn btn-danger btn-block"
-							href="${pageContext.request.contextPath}">취소</a>
+							href="${pageContext.request.contextPath}/jdHome">취소</a>
 					</div>
 				</div>
 				<div id="searchP" style="display: none;">
@@ -95,12 +83,11 @@
 								name="inputEmail_2">
 						</div>
 					</div>
-
 					<div class="form-group">
 						<button id="searchBtn2" type="button"
 							class="btn btn-primary btn-block">확인</button>
 						<a class="btn btn-danger btn-block"
-							href="${pageContext.request.contextPath}">취소</a>
+							href="${pageContext.request.contextPath}/jdHome">취소</a>
 					</div>
 				</div>
 			</div>
@@ -109,7 +96,6 @@
 
 </body>
 <script>
-	//체크 버튼에 따라 아이디/비밀번호 기능이 달라진다
 	function search_check(num) {
 		if (num == '1') {
 			document.getElementById("searchP").style.display = "none";
@@ -140,10 +126,7 @@
 
 	});
 
-	// 아이디 & 스토어 값 저장하기 위한 변수
 	var idV = "";
-	/* var storeV = ""; */
-	// 아이디 값 받고 출력하는 ajax
 	var idSearch_click = function() {
 		console.log($('#inputName_1').val());
 
@@ -162,7 +145,6 @@
 					$('#id_value').text(data);
 					// 아이디값 별도로 저장
 					idV = data;
-					/* storeV = $("#store_id1 option:selected").val(); */
 				}
 			}
 		});
@@ -189,27 +171,15 @@
 								});
 
 					});
-
-	// 비밀번호 찾기 눌렀을 때
-	// 1 패스워드 찾기 창으로 이어진 후 2 패스워드 창에 아이디가 적힘
-	// 3 모달창 종료
 	$('#pwSearch_btn').click(function() {
 
-		/* var idV = $('#id_value').val(); // 오류 뜸 */
 		console.log(idV);
-		/* console.log(storeV); */
 
-		// 1. 패스워드 찾기 창으로 이어지고
 		$('#search_2').prop("checked", true);
 
-		// 메서드 호출
 		search_check(2);
 
-		// 2.아이디 & 매장 자동 저장
 		$('#inputId').attr("value", idV);
-		/* $('#store_id2').val(storeV).prop("selected", true); */
-
-		// 마지막으로 모달창 종료
 		$('#background_modal').hide();
 	});
 </script>

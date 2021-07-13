@@ -8,6 +8,10 @@
 .name_float{
 float : left;
 }
+.btn{
+float : right;
+}
+
 </style>
 </head> 
  <body> 
@@ -20,8 +24,8 @@ float : left;
     	</section>
     	<!-- 댓글 출력 -->
     	<div id="md-form mt-4">
-    		<label for="writeComment" style ="float: left">댓글 입력</label>
-    		<textarea class="form-control md-textarea" id="writeComment" rows="1"></textarea>
+    		<label for="writeComment" style ="float: left;">댓글 입력</label>
+    		<textarea class="form-control md-textarea" id="writeComment" rows="1" style = "min-height : 100px; font-size : 12px;"></textarea>
     	<div class="text-center my-4">
     		<button id="commentSubmit" style="float:right" class="btn btn-default btn-sm btn-rounded">입력</button>
     	</div>
@@ -65,15 +69,15 @@ function getCommentList() {
 					//수정삭제버튼
 					if("${sessionScope.student_number}" != ""){
 						if ("${sessionScope.student_number}" == item.student_number)  {
-							comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="comment_btn" >삭제</button>';
-							comment_con += '<button id="commentUpdateBtn' + item.comment_number + '" onclick="modifyComment(' + item.comment_number +')" type ="button" class="comment_btn" >수정</button>';							
+							comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="btn btn-default btn-sm btn-rounded" >삭제</button>';
+							comment_con += '<button id="commentUpdateBtn' + item.comment_number + '" onclick="modifyComment(' + item.comment_number +')" type ="button" class="btn btn-default btn-sm btn-rounded" >수정</button>';							
 						}
 					}
 					
 					if("${sessionScope.teacher_number}" != ""){
 						if("${sessionScope.teacher_number}" == item.teacher_number){
-							comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="comment_btn" >삭제</button>';
-							comment_con += '<button id="commentUpdateBtn' + item.comment_number + '" onclick="modifyComment(' + item.comment_number +')" type ="button" class="comment_btn" >수정</button>';
+							comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="deleteComment(' + item.comment_number +')" type ="button" class="btn btn-default btn-sm btn-rounded" >삭제</button>';
+							comment_con += '<button id="commentUpdateBtn' + item.comment_number + '" onclick="modifyComment(' + item.comment_number +')" type ="button" class="btn btn-default btn-sm btn-rounded" >수정</button>';
 						/* 	comment_con += '<button id="commentDeleteBtn' + item.comment_number + '" onclick="commentDeleteBtn('+ item.comment_number + ')" type="button" class="btn btn-danger px-3 float-right"><i class="fa fa-trash" aria-hidden="true"></i></button>';
 							comment_con += '<button id="commentEditBtn'	+ item.comment_number + '" onclick="commentEditBtn(' + item.comment_number + ')" type="button" class="btn btn-primary px-3 float-right"><i class="fa fa-paint-brush" aria-hidden="true"></i></button>';  */
 
@@ -92,7 +96,7 @@ function getCommentList() {
 						comment_con += '<div class="text-default name_float">'	+item.manager_name + '[운영자]' +'</div>';
 					}
 					
-					comment_con += '</a></h5><input id="commentInput' + item.comment_number +'" class="form-control " value="'+ item.comment_con +'" style="width : 1000px; border: 0px; background: white;" readonly="true"></input><hr /></div></div>';
+					comment_con += '</a></h5><input id="commentInput' + item.comment_number +'" class="form-control " value="'+ item.comment_con +'" style="width : 1000px; min-height : 30px;border: 0px; background: white; font-size : 12px;" readonly="true"></input><hr /></div></div>';
 			$('#commentAll').html(comment_con);
 									});
 			comment_con = '';
@@ -159,8 +163,6 @@ function deleteComment(comment_number){
 function updateComment(comment_number){
 	if(confirm("수정하시겠습니까?") == true){
 		var comment_con = $('#commentInput' + comment_number).val();
-		alert(comment_con + "fff");
-		alert(comment_number + "ddasdsa");
 		$.ajax({
 			type:'GET',
 			url : '${pageContext.request.contextPath}/listNotice/updateComment',

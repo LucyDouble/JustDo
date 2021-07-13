@@ -14,7 +14,7 @@
 <title>회원 가입</title>
 </head>
 <body>
-	<form id="form" class="form" action="signUp" method="POST">
+	<form id="form" class="form" method="POST">
 		<div id="logo_position">
 			<a href="<%=request.getContextPath()%>/jdHome?command=main">
 				<img class="logo" src="resources/images/logo4.png">
@@ -33,7 +33,7 @@
 		<!-- 아이디 -->
 		<div class="id-group">
 			<label for="id">아이디</label> <br> 
-			<input type="text" style="width: 350px;height: 30px;margin-top: 10px;" class="form-control" id="id"
+			<input type="text" style="width: 350px;height: 30px;margin-top: 12px;" class="form-control" id="id"
 				name="id" placeholder="아이디" required>
 			<div class="check_font" id="id_check"></div>
 			<br>
@@ -41,7 +41,7 @@
 		<!-- 비밀번호 -->
 		<div class="password-group">
 			<label for="password">비밀번호</label> <br> <input type="password"
-				style="width: 350px;height: 30px;margin-top: 10px;" class="form-control"
+				style="width: 350px;height: 30px;margin-top: 12px;" class="form-control"
 				id="password" name="password" placeholder=" 숫자, 문자, 특수문자 모두포함 8~16자리 " required>
 			<div class="check_font" id="pw_check"></div>
 			<br>
@@ -50,7 +50,7 @@
 		<div class="passwordCheck-group">
 			<label for="password2">비밀번호 확인</label> <br> <input
 				type="password" class="form-control" id="password2" name="password2"
-				style="width: 350px;height: 30px;margin-top: 10px;" placeholder="비밀번호 확인"
+				style="width: 350px;height: 30px;margin-top: 12px;" placeholder="비밀번호 확인"
 				required>
 			<div class="check_font" id="pw2_check"></div>
 			<br>
@@ -58,14 +58,14 @@
 		<!-- 이름 -->
 		<div class="name-group">
 			<label for="name">이름</label><br> <input type="text"
-				style="width: 350px;height: 30px;margin-top: 10px;" class="form-control" id="name"
+				style="width: 350px;height: 30px;margin-top: 12px;" class="form-control" id="name"
 				name="name" placeholder="이름" required>
 			<div class="check_font" id="name_check"></div>
 		</div>
 		<br>
 		<div class="address_group">
 			<label for="address">주소</label><br>
-			<input type="text" style="width: 350px;height: 30px;margin-top: 10px;" id="address"
+			<input type="text" style="width: 350px;height: 30px;margin-top: 12px;" id="address"
 				name="address" placeholder="주소"><br> <span
 				id="guide" style="color: #999; display: none"></span>
 		</div>
@@ -82,7 +82,7 @@
 			</div>
 			<div class="mail_input_box">
 				<input class="email" name="email" id="email"
-					style="width: 350px;height: 30px;margin-top: 10px;" placeholder="이메일">
+					style="width: 350px;height: 30px;margin-top: 12px;" placeholder="이메일">
 			</div>
 			<div class="mail_check_button">
 				<!-- <button class="btn email_submit" id="email_submit">인증번호전송</button> -->
@@ -97,8 +97,8 @@
 					<label for="email">인증번호</label>
 				</div>
 				<div class="mail_check_input_box">
-					<input class="mail_check_input" style="width: 350px;height: 30px;margin-top: 10px;"
-						disabled="disabled">
+					<input class="mail_check_input" style="width: 350px;height: 30px;margin-top: 12px;"
+						disabled="disabled" required>
 				</div>
 				<div class="clearfix"></div>
 				<span id="mail_check_input_box_warn"></span>
@@ -108,8 +108,8 @@
 		<!-- 휴대전화 -->
 		<div class="phone-group">
 			<label for="phone">휴대전화</label><br> <input type="text"
-				style="width: 350px;height: 30px;margin-top: 10px;" class="form-control" id="phone"
-				name="phone" placeholder="휴대전화" required>
+				style="width: 350px;height: 30px;margin-top: 12px;" class="form-control" id="phone"
+				name="phone" placeholder="-를 빼고 입력해주세요." required>
 			<div class="check_font" id="phone_check"></div>
 		</div>
 		<br><br>
@@ -182,7 +182,7 @@
 								// 1 : 아이디가 중복되는 문구
 								$("#id_check").text("사용중인 아이디입니다 :(");
 								$("#id_check").css("color", "red");
-								$("#id_check").css("font-size", "15px");
+								$("#id_check").css("font-size", "12px");
 								$("#reg_submit").attr("disabled", true);
 							} else {
 
@@ -190,14 +190,14 @@
 									// 0 : 아이디 길이 / 문자열 검사
 									$("#id_check").text("사용 가능한 아이디입니다 :)");
 									$("#id_check").css("color", "blue");
-									$("#id_check").css("font-size", "15px");
+									$("#id_check").css("font-size", "12px");
 									$("#reg_submit").attr("disabled", false);
 
 								} else if (id == "") {
 
 									$('#id_check').text('아이디를 입력해주세요');
 									$('#id_check').css('color', 'red');
-									$("#id_check").css("font-size", "15px");
+									$("#id_check").css("font-size", "12px");
 									$("#reg_submit").attr("disabled", true);
 
 								} else {
@@ -206,7 +206,7 @@
 											"아이디는 영어와 숫자 4~12자리만 가능합니다.");
 									$('#id').val("");
 									$('#id_check').css('color', 'red');
-									$('#id_check').css('font-size', '15px')
+									$('#id_check').css('font-size', '12px')
 									$("#reg_submit").attr("disabled", true);
 								}
 
@@ -223,7 +223,7 @@
 						} else {
 							$('#name_check').text('이름은 한글 2~8자리만 입력 가능합니다.');
 							$('#name_check').css('color', 'red');
-							$('#name_check').css('font-size', '15px');
+							$('#name_check').css('font-size', '12px');
 						}
 					});
 				});
@@ -233,12 +233,14 @@
 			var password = $('#password').val();
 
 			if (pwCheck.test($('#password').val())) {
-				console.log('true');
 				$('#pw_check').text('');
+				$('#pw_check').css('color', 'blue');
+				$("#pw_check").css('font-size', '12px');
+
 			} else if (password == "") {
 				$('#pw_check').text('비밀번호를 입력해주세요');
 				$('#pw_check').css('color', 'red');
-				$("#pw_check").css('font-size', '15px');
+				$("#pw_check").css('font-size', '12px');
 				$("#reg_submit").attr("disabled", true);
 
 			} else {
@@ -246,7 +248,7 @@
 
 				$('#pw_check').text('비밀번호는 숫자, 문자, 특수문자 조합 8~16자리만 가능합니다. :(')
 				$('#pw_check').css('color', 'red');
-				$('#pw_check').css('font-size', '10px');
+				$('#pw_check').css('font-size', '12px');
 				$('#pw_check').css('font-weight', 'bold');
 				$('#password').val("");
 			}
@@ -259,11 +261,12 @@
 			if ($('#password').val() != $(this).val()) {
 				$('#pw2_check').text('비밀번호가 일치하지 않습니다 :(');
 				$('#pw2_check').css('color', 'red');
-				$('#pw2_check').css('font-size', '15px')
-				console.log(password2);
-
+				$('#pw2_check').css('font-size', '12px')
+				$('#password2').val("");
 			} else {
-				$('#pw2_check').text('');
+				$('#pw2_check').text('비밀번호가 일치합니다.');
+				$('#pw2_check').css('color', 'blue');
+				$('#pw2_check').css('font-size', '12px')
 			}
 		});
 
@@ -292,7 +295,7 @@
 												$("#email_check").css("color",
 														"red");
 												$("#email_check").css(
-														'font-size', '15px');
+														'font-size', '12px');
 												$("#reg_submit").attr(
 														"disabled", true);
 												$("#email_submit").hide();
@@ -308,7 +311,7 @@
 													$('#email_check').css(
 															'color', 'blue');
 													$("#email_check").css(
-															'font-size', '15px');
+															'font-size', '12px');
 													$("#email_submit").show();
 												} else {
 													$('#email_check').text(
@@ -316,7 +319,7 @@
 													$('#email_check').css(
 															'color', 'red');
 													$("#email_check").css(
-															'font-size', '15px');
+															'font-size', '12px');
 													$("#reg_submit").attr(
 															"disabled", true);
 													$("#email_submit").hide();
@@ -358,12 +361,12 @@
 			if (inputCode == code) {
 				checkResult.html("인증번호가 일치합니다.");
 				checkResult.attr("class", "correct");
-				$(".correct").css('font-size', '15px');
+				$(".correct").css('font-size', '12px');
 				$(".correct").css('color', 'blue');
 			} else {
 				checkResult.html("인증번호를 다시 확인해주세요.");
 				checkResult.attr("class", "incorrect");
-				$(".incorrect").css('font-size', '15px');
+				$(".incorrect").css('font-size', '12px');
 				$(".incorrect").css('color', 'red');
 			}
 		});
@@ -394,7 +397,7 @@
 												$("#phone_check").css("color",
 														"red");
 												$("#phone_check").css(
-														'font-size', '15px');
+														'font-size', '12px');
 												$("#reg_submit").attr(
 														"disabled", true);
 												$("#phone").val("");
@@ -410,12 +413,14 @@
 													$('#phone_check').css(
 															'color', 'blue');
 													$("#phone_check").css(
-															'font-size', '15px');
+															'font-size', '12px');
 												} else {
 													$('#phone_check').text(
-															'번호를 입력해주세요');
+															'잘못된 번호입니다. 다시 입력해주세요');
 													$("#phone_check").css(
-															'font-size', '15px');
+															'font-size', '12px');
+													$("#phone_check").css(
+															'color', 'red');
 													$("#reg_submit").attr(
 															"disabled", true);
 												}
@@ -463,16 +468,22 @@
 						inval_Arr[3] = false;
 					}
 					var validAll = true;
+					alert("asdjkyhasjkdhqwjkdhas");
 					for (var i = 0; i < inval_Arr.length; i++) {
 						if (inval_Arr[i] == false) {
 							validAll = false;
+						}else{
+							validAll = true;
 						}
 					}
-					if (validAll) {
-							alert('회원가입을 축하합니다.');
-
-					} else {
-						alert('입력한 정보들을 다시 확인해주세요.');
+					if(validAll){ // 유효성 모두 통과
+						alert('회원가입을 축하합니다!');
+						/* confirm_email(); */
+						/* location.href("${pageContext.request.contextPath}"); */
+						/* return false; */
+					} else{
+						alert('입력한 정보들을 다시 한번 확인해주세요 :)')
+						/* return false; */
 					}
 
 				});
