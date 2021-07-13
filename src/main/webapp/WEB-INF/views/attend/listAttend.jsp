@@ -115,7 +115,7 @@
 	<div class="graph_titleAttend">&nbsp;&nbsp;&nbsp;평균 출석률</div>
 	<br>
 	<ul id="g1Attend" class="graphAttend">
-        <li class="graph_liAttend">&nbsp;&nbsp;&nbsp;<span class="grape_span" style="width: ${myPro}%" >나<em>${myPro}%</em></span></li>
+        <li class="graph_liAttend">&nbsp;&nbsp;&nbsp;<span class="grape_span" style="width: ${myPro}%" >${name }<em>${myPro}%</em></span></li>
         <li class="graph_liAttend">&nbsp;&nbsp;&nbsp;<span class="grape_span" style="width: ${classPro}%">우리반<em>${classPro}%</em></span></li>
     </ul>
 		<!--<hr>-->

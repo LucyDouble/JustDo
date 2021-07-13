@@ -148,7 +148,10 @@ public class AttendController {
 			
 			int classPro = ((proClassAttend+proClassLate+proClassSoLate)-(proClassLate/3+proClassSoLate*2/3))*100/proClassTotal;
 					
+			String name=st.getName();
 			
+			
+			mv.addObject("name", name);
 			mv.addObject("lecture_state", lecture_state);
 			mv.addObject("classPro", classPro);
 			mv.addObject("myPro", myPro);

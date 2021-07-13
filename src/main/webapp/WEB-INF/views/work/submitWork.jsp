@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src ="https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script> 
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
@@ -20,7 +21,7 @@
 <body>
 <div class="wrapper"><jsp:include page="../common/header.jsp"></jsp:include></div>
 <div class="vn_page">
-	<form id="frm" action="submitWork" method="POST">
+	<form id="frm" >
 
     <p class="vn_title">과제 제출</p>
     <table class="table">
@@ -70,12 +71,25 @@
 	    });
     </script>
     </div>
-   		<input type="submit" class="button"  value="등록"></input>
+   		<input type="submit" class="button"  id="add" value="등록"></input>
    		<input type="button" class="button" onclick="history.back();" value="취소"></input>
     
     
     
     </form>
+  	<script type="text/javascript">
+	$("#add").click(function(){
+		var frm=document.getElementById("frm");
+		if(CKEDITOR.instances.work_content.getData() =='' || CKEDITOR.instances.work_content.getData().length ==0){
+            swal("EMPTY CONTENT","내용을 입력해주세요.","warning");
+               $("#work_content").focus();
+            return false;
+        }
+		frm.action="submitWork";
+	    frm.method="POST";
+	    frm.submit();
+	});
+	</script>
     </div>
     <br> <br> <br>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
