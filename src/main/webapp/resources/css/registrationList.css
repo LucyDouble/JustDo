@@ -23,6 +23,9 @@ body {
 	font-size: 25px;
 	font-weight: bold;
 	clear: both;
+	position: relative;
+	display: inline-block;
+	left: 40px;
 }
 
 .vn_title, .en_title, .an_title, .lc_title{

@@ -97,10 +97,63 @@
 		// 등록 버튼
 		$("#addVideo").click(function(){
 			var frm = document.getElementById("addForm");
+			var check1 = $("#subject").val();
+			var check3 = $("#input-file").val();
+			
+			if(!check1){
+				alert("제목을 입력하지 않았습니다.");
+				$("#subject").focus();
+				return false;
+			}
+			if(CKEDITOR.instances.editor1.getData() =='' || CKEDITOR.instances.editor1.getData().length ==0){
+		    	alert("내용을 입력해주세요.");
+		   		$("#editor1").focus();
+		    	return false;
+			}
+			if(!check3){
+				alert("파일을 선택하지 않았습니다.");
+				return false;
+			}
+			
+			LoadingWithMask();
 			frm.action="addVideo";
 			frm.method="POST";
 			frm.submit();
 		});
+		
+		function LoadingWithMask() {
+		    //화면의 높이와 너비를 구합니다.
+		    var maskHeight = $(document).height();
+		    var maskWidth  = window.document.body.clientWidth;
+		     
+		    //화면에 출력할 마스크를 설정해줍니다.
+		    var mask       ="<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
+		    var loadingImg ='';
+		    loadingImg +="<div id='loadingImg' style='position:absolute; left:50%; top:40%; display:none; z-index:10000;'>"; 
+		    loadingImg +=" <img src='resources/images/Spinner.gif'/>";
+		    loadingImg +="</div>";
+		 
+		    //화면에 레이어 추가
+		    $('body')
+		        .append(mask)
+		        .append(loadingImg)
+		 
+		    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
+		    $('#mask').css({
+		            'width' : maskWidth,
+		            'height': maskHeight,
+		            'opacity' :'0.3'
+		    });
+		  
+		    //마스크 표시
+		    $('#mask').show();
+		  
+		    //로딩중 이미지 표시
+		    $('#loadingImg').show();
+		    
+		}
+
+
 	</script>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>

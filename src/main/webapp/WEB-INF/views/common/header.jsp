@@ -87,8 +87,16 @@
 								<a href="registration">수강신청</a>
 							</c:if>
 							<c:if
+								test="${sessionScope.student_id !=null && sessionScope.teacher_id == null && sessionScope.manager_id == null && sessionScope.manager_id == null}">
+								<a href="listVideo">학습동영상</a>
+							</c:if>
+							<c:if
 								test="${sessionScope.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
 								<a href="lecture">강의등록</a>
+							</c:if>
+							<c:if
+								test="${sessionScope.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
+								<a href="listVideo">학습동영상</a>
 							</c:if>
 							<c:if
 								test="${sessionScope.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">

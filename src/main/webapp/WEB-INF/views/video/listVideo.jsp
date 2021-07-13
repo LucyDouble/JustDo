@@ -42,12 +42,12 @@
 				<button class="button" id="editVideo"><span>수정</span></button>
 				<button class="button" id="removeVideo"><span>삭제</span></button>
 				</c:if>
-			</div>
 			<form id="frm">
 			<div class="studio">
 				<p>강의를 선택해주세요.</p>
 			</div>
 			</form>
+			</div>
 	</div>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 	<script>

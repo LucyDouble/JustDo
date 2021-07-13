@@ -60,6 +60,7 @@
 			</div>
 			<div class="viewVideo_cont">${view.video_content}
 			</div>
+			<button class="button" id="listBtn"><span>목록</span></button>
 		</div>
 	<script>
 		var video = document.getElementById("LVideo");
@@ -91,6 +92,10 @@
 				});
 			}, false);
 		}
+		
+		$("#listBtn").click(function(){
+			location.href="listVideo";
+		});
 	</script>
 	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
