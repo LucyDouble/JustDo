@@ -76,6 +76,8 @@
 <script>
 	/* 수강취소 기능 */
 	function lectureRemove(num){
+		var result = confirm('삭제하시겠습니까?');
+		if(result){
 		$.ajax({
 			url:"registrationRemove",
 			type:"post",
@@ -87,6 +89,9 @@
 				
 			}
 		});
+		} else{
+			return false;
+		}
 	}
 	
    	  /* 캘린더 출력 */
