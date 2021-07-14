@@ -32,10 +32,13 @@ from (select *
 		                                                                                                                          where lecture_no=#{lecture_no}) lw left outer join works_result wr using(work_no)
 		                                                                                                                    group by registration_no) hwi 
 		using(registration_no)
-		order by name asc) jan left outer join (select round(progress*100/video_alltime) as video_progress  ,name from lecture lec 
+		order by name asc) jan left outer join (select round(progress*100/video_alltime) as video_progress  ,name from(
+                                                                select name,avg(progress) as progress,avg(video_alltime)as video_alltime from lecture lec 
 																join video vi on lec.lecture_no = vi.lecture_no 
-																join progress pro on vi.video_no = pro.video_no 
-																join student stu on stu.student_number = pro.student_number where lec.lecture_no = #{lecture_no} order by stu.name) di 
+																join progress pro on vi.video_no = pro.video_no
+                                                                join student stu using(student_number)
+                                                                where lec.lecture_no = #{lecture_no}
+                                                                group by name)) di 
 using(name)	
 <!-- select *
 from (select * 
