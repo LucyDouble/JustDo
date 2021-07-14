@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상담신청 목록조회</title>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">

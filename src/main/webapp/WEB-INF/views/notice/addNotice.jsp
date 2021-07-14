@@ -12,7 +12,7 @@
 <!-- <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script> -->
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항 작성</title>
 
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
