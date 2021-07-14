@@ -134,6 +134,7 @@ public class VideoController {
 			System.out.println("저장 경로 : "+savePath);
 			
 			filePath = folder + "\\" + videoName;
+			
 			multipartFile.transferTo(new File(filePath)); // 파일 저장
 			
 			imgName = getMovieThumbnail(filePath, videoName); // 추출한 썸네일 이름
@@ -160,7 +161,12 @@ public class VideoController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 			System.out.println("파일 업로드 실패~~~~~~~~~~~~~~~~~~~");
+		} finally {
+			if(!folder.exists()) {
+				folder.delete();
+			}
 		}
 //		video.setVideo_file(videoName);
 		video.setVideo_file(videoName);
@@ -280,6 +286,10 @@ public class VideoController {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("파일 업로드 실패~~~~~~~~~~~~~~~~~~~");
+			} finally {
+				if(!folder.exists()) {
+					folder.delete();
+				}
 			}
 	//			video.setVideo_file(videoName);
 				video.setVideo_file(videoName);
