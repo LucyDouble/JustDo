@@ -104,7 +104,7 @@
  		var exam_no = $("#exam_no").val();
  		var registration_no = $("#registration_no").val();
  		if(isNaN(exam_grade)){
- 			alert("숫자가 아님요");
+ 			alert("숫자를 입력해 주세요.");
  			return false;
  		}
  		 if(exam_grade!=100 && exam_grade.length==3){
