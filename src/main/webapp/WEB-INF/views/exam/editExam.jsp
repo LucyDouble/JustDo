@@ -10,7 +10,7 @@
 <!-- 클래식 -->
 <!-- <script src="https://cdn.ckeditor.com/ckeditor5/26.0.0/classic/ckeditor.js"></script> -->
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>시험수정-교직원</title>
 <script src ="https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>과제확인-교직원</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
 <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">

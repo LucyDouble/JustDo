@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>시험제출-학생</title>
 <script src ="https://unpkg.com/sweetalert/dist/sweetalert.min.js " > </script> 
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.css"/>"> 
 <link rel="stylesheet" href="<c:url value="/resources/css/fonts.css"/>">
