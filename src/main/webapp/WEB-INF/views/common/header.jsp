@@ -22,8 +22,8 @@
 		<ul>
 			<li class="aboutJD"><a id="aboutJD" href="#">JD안내</a>
 				<div id="drop_content">
-					<a href="aboutJD">JD 소개</a> <a href="knowhow">이용방법</a> <a
-						href="aboutAddress">오시는 길</a>
+					<a href="aboutJD">JD 소개</a> <a href="knowhow">이용방법</a> <a href="aboutAddress">오시는
+						길</a>
 				</div></li>
 			<li class=""><a href="aboutTeacher">강사소개</a>
 				<div id="drop_content">
@@ -32,32 +32,33 @@
 				</div></li>
 
 			<li class="aboutJD"><a href="#">강의</a>
-				<div id="drop_content">
-					<c:if
-						test="${sessionScope.student_id !=null && sessionScope.teacher_id == null && sessionScope.manager_id == null && sessionScope.manager_id == null}">
-						<a href="listAttend">출석하기</a>
-					</c:if>
-					<c:if
-						test="${sessionScope.student_id !=null && sessionScope.teacher_id == null && sessionScope.manager_id == null && sessionScope.manager_id == null}">
-						<a href="listSubmitWork">과제 조회</a>
-					</c:if>
-					<c:if
-						test="${sessionScope.student_id !=null && sessionScope.teacher_id == null && sessionScope.manager_id == null && sessionScope.manager_id == null}">
-						<a href="listSubmitExam">시험 조회</a>
-					</c:if>
-					<c:if
-						test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
-						<a href="listWork">과제 조회</a>
-					</c:if>
-					<c:if
-						test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
-						<a href="listExam">시험 조회</a>
-					</c:if>
-					<c:if
-						test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
-						<a href="listManagement">학생 관리</a>
-					</c:if>
-				</div></li>
+			<div id="drop_content">
+				<c:if
+					test="${sessionScope.student_id !=null && sessionScope.teacher_id == null && sessionScope.manager_id == null && sessionScope.manager_id == null}">
+					<a href="listAttend">출석하기</a>
+				</c:if>
+				<c:if
+					test="${sessionScope.student_id !=null && sessionScope.teacher_id == null && sessionScope.manager_id == null && sessionScope.manager_id == null}">
+					<a href="listSubmitWork">과제 조회</a>
+				</c:if>
+				<c:if
+					test="${sessionScope.student_id !=null && sessionScope.teacher_id == null && sessionScope.manager_id == null && sessionScope.manager_id == null}">
+					<a href="listSubmitExam">시험 조회</a>
+				</c:if>
+				<c:if
+					test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
+					<a href="listWork">과제 조회</a>
+				</c:if>
+				<c:if
+					test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
+					<a href="listExam">시험 조회</a>
+				</c:if>
+				<c:if
+					test="${sessionScpoe.student_id == null && sessionScope.teacher_id != null && sessionScope.manager_id == null}">
+					<a href="listManagement">학생 관리</a>
+				</c:if>
+				</div>
+			</li>
 
 			<li class="aboutJD"><a href="#">마이페이지</a>
 				<div id="drop_content">
@@ -70,7 +71,8 @@
 							<div class="find">
 								<a href="#" id="find">아이디 | 패스워드 찾기</a>
 								<div id="drop_content2">
-									<a href="studentSearch">학생</a> <a href="teacherSearch">교직원</a>
+									<a href="studentSearch">학생</a>
+									<a href="teacherSearch">교직원</a>
 								</div>
 							</div>
 						</c:when>
@@ -107,21 +109,26 @@
 						</c:otherwise>
 					</c:choose>
 				</div></li>
-			<li class=""><c:if
-					test="${sessionScope.student_id !=  null || sessionScope.teacher_id != null || sessionScope.manager_id != null}">
-					<a href="listNotice">공지사항</a>
-				</c:if></li>
 			<li class="aboutJD"><a href="#">상담센터</a>
 				<div id="drop_content">
-					<c:if
+					<%-- <c:if
+						test="${sessionScope.student_id !=  null || sessionScope.teacher_id != null || sessionScope.manager_id != null}">
+						<a href="listNotice">공지사항</a>
+						</c:if> --%>
+						<c:if
 						test="${sessionScope.teacher_id != null || sessionScope.manager_id != null}">
 						<a href="listCS">상담신청</a>
 					</c:if>
 					<c:if
 						test="${sessionScope.student_id ==  null || sessionScope.teacher_id != null || sessionScope.manager_id != null}">
 						<a href="http://pf.kakao.com/_xjxmxcws">카카오톡채널</a>
-					</c:if>
+						</c:if>
 				</div></li>
+				<li class="aboutJD"><c:if
+						test="${sessionScope.student_id !=  null || sessionScope.teacher_id != null || sessionScope.manager_id != null}">
+						<a href="listNotice">공지사항</a>
+						</c:if>
+				</li>
 		</ul>
 	</nav>
 	<a href=""><img class="logo3" src="resources/images/logo3.jpg"></a>
