@@ -125,7 +125,7 @@
 				$("#in3").focus();
 				return false;
 			}
-			if(start<dateString){
+			if(start<=dateString){
 				alert("설정한 시작기간은 현재시간보다 늦을 수 없습니다.");
 				$("#in3").focus();
 				return false;
