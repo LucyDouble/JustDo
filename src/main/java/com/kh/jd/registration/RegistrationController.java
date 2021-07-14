@@ -100,7 +100,7 @@ public class RegistrationController {
 		mv.addObject("maxPage", maxPage);
 		mv.addObject("keyword", keyword);
 		mv.addObject("listCount", listCount);
-		List<LectureClass> list = LCService.listJoinClass(startPage, LIMIT, map);
+		List<LectureClass> list = LCService.listJoinClass(currentPage, LIMIT, map);
 		mv.addObject("list", list);
 		mv.setViewName("registration/registrationAsk");
 		return mv;
