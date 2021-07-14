@@ -114,6 +114,9 @@
 					<c:if
 						test="${sessionScope.student_id !=  null || sessionScope.teacher_id != null || sessionScope.manager_id != null}">
 						<a href="listNotice">공지사항</a>
+						</c:if>
+						<c:if
+						test="${sessionScope.teacher_id != null || sessionScope.manager_id != null}">
 						<a href="listCS">상담신청</a>
 					</c:if>
 					<c:if

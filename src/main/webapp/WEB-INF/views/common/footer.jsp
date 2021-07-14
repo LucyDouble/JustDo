@@ -12,7 +12,10 @@
             <a href="aboutAddress"><span class="footer_m1">오시는 길</span></a> |
             <c:if	test="${sessionScope.student_id !=  null || sessionScope.teacher_id != null || sessionScope.manager_id != null}">
             <a href="listNotice"><span class="footer_m1">공지 사항</span></a> |
+            <c:if
+						test="${sessionScope.teacher_id != null || sessionScope.manager_id != null}">
             <a href="listCS"><span class="footer_m1">상담 신청</span></a>
+            </c:if>
             </c:if>
         </section>
     </div>
