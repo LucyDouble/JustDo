@@ -124,6 +124,9 @@ public class NoticeController {
 		String n_sub =  request.getParameter("notice_sub");
 		String n_con = request.getParameter("notice_con");
 		
+		System.out.println("티처넘버 = " + t_no);
+		System.out.println("매니저넘버 = " + m_no);
+		
 		map.put("teacher_number", t_no);
 		map.put("manager_number", m_no);
 		map.put("notice_sub", n_sub);

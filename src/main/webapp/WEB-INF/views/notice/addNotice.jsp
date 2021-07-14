@@ -30,10 +30,9 @@
 	<div class="an_page">
 		<p class="an_title">공지사항 작성</p>
 		<br>
-		<form id="addForm" method="post" class="addForm"
-			enctype="multipart/form-data" accept-charset="UTF-8">
-			<input type="hidden" name="manager_number" value="null"> <input
-				type="hidden" name="teacher_number" value="${DTO.teacher_number}">
+		<form id="addForm" method="post" class="addForm" enctype="multipart/form-data" accept-charset="UTF-8">
+			<c:if test="${sessionScope.manager_number != null}"><input type="hidden" name="manager_number" value="${sessionScope.manager_number}"></c:if>
+			<c:if test="${sessionScope.teacher_number != null}"><input type="hidden" name="teacher_number" value="${DTO.teacher_number}"></c:if>
 			<div class="form-group">
 				<label class="an_label" for="notice_sub">제목</label> <input
 					type="text" class="form-control" id="subject" name="notice_sub"

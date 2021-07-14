@@ -17,7 +17,8 @@
 		<!-- 목록조회 -->
 		<select id="listNotice" resultType="Notice">
 		<![CDATA[
-			select * from (select  rownum rnum, nm.*,t.name as teacher_name from (select n.*,m.name as manager_name from notice n left outer join managers m on n.manager_number = m.manager_number order by notice_no asc) nm left outer join teacher t on nm.teacher_number = t.teacher_number
+			select * from (select  rownum rnum, nm.*,t.name as teacher_name from (select n.*,m.name as manager_name 
+			from notice n left outer join managers m on n.manager_number = m.manager_number order by notice_no asc) nm left outer join teacher t on nm.teacher_number = t.teacher_number
 			) order by rnum desc
 		]]>
 		</select>
@@ -31,8 +32,9 @@
 		<!-- 글조회 -->
 		<select id="viewNotice" resultType="Notice">
 		<![CDATA[
-			select nm.*,t.name as teacher_name from (select n.*,m.name as manager_name from notice n left outer join managers m on n.manager_number = m.manager_number) nm left outer join teacher t on nm.teacher_number = t.teacher_number
-			where notice_no = #{notice_no}
+			select nm.*,t.name as teacher_name from (select n.*,m.name as manager_name 
+            from notice n left outer join managers m on n.manager_number = m.manager_number) nm left outer join teacher t on nm.teacher_number = t.teacher_number
+            where notice_no = #{notice_no}
 		]]>
 		</select>
 		
@@ -42,7 +44,7 @@
 		  		select nvl(max(notice_no),0)+1 cnt from notice
 			</selectKey>
 	        insert into notice values(	        
-	        	${numbc}, ${manager_number}, ${teacher_number}, #{notice_sub}, #{notice_con}, sysdate, #{notice_filepath}, default, null )
+	        	${numbc}, #{manager_number}, #{teacher_number}, #{notice_sub}, #{notice_con}, sysdate, #{notice_filepath}, default, null )
 		</insert>
 		
 		<!-- 파일업로드 -->

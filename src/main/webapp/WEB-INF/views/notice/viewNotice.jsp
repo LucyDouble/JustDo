@@ -50,7 +50,7 @@
         
     <button class="button" onclick="location.href='listNotice'"><span>목록</span></button>
     <c:if test="${sessionScope.student_number == null}">
-     <c:if test="${sessionScope.teacher_number == notice.teacher_number || sessionScope.manager_number == notice.managerA_number }">
+     <c:if test="${sessionScope.teacher_number == notice.teacher_number || sessionScope.manager_number == notice.manager_number }">
     <button id="btnUpdate" class="button" onclick="location.href='editNoticeForm?n_no=${notice.notice_no}'"><span>수정</span></button>
     <button id="btnRemove" class="button"><span>삭제</span></button>
    	</c:if>
